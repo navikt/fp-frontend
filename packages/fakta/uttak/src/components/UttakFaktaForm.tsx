@@ -31,6 +31,8 @@ import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } fr
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
 
+import type messages from '../../i18n/nb_NO.json';
+
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter.filter(erAksjonspunktÅpent).map(ap => {
     const førsteUttaksdato = ytelsefordeling.førsteUttaksdato;
@@ -41,7 +43,7 @@ const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling
     return (
       <FormattedMessage
         key={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
-        id={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
+        id={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}` as keyof typeof messages}
         values={førsteUttak}
       />
     );

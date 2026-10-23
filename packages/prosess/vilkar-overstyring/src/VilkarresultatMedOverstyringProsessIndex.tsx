@@ -9,11 +9,12 @@ import { VilkarresultatMedOverstyringForm } from './components/VilkarresultatMed
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
+type MessageId = keyof typeof messages;
 
 interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
   vilkår: Vilkår | undefined;
-  panelTekstKode: string;
+  panelTekstKode: MessageId;
   status: VilkårUtfallType;
 }
 

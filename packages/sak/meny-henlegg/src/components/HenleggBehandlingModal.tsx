@@ -17,6 +17,8 @@ import type {
   KodeverkMedNavnTilbakekreving,
 } from '@navikt/fp-types';
 
+import type messages from '../../i18n/nb_NO.json';
+
 const maxLength1500 = maxLength(1500);
 
 export type ForhåndsvisHenleggParams = {
@@ -98,7 +100,7 @@ export const HenleggBehandlingModal = ({
                 validate={[required]}
                 selectValues={henleggArsaker.map(arsak => (
                   <option value={arsak.kode} key={arsak.kode}>
-                    {intl.formatMessage({ id: arsak.kode })}
+                    {intl.formatMessage({ id: arsak.kode as keyof typeof messages })}
                   </option>
                 ))}
               />

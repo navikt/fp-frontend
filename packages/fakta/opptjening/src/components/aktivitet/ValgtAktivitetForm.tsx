@@ -52,7 +52,7 @@ const finnBegrunnelseLabel = (
   erEndret: boolean,
   readOnly: boolean,
   hasAksjonspunkt: boolean,
-): string =>
+) =>
   readOnly || skalIkkeKunneEditere(hasAksjonspunkt, erGodkjent, erEndret)
     ? 'ActivityPanel.Begrunnelse'
     : 'ActivityPanel.BegrunnEndringene';

@@ -17,7 +17,7 @@ const OMGJOER_TEKST_MAP = {
   UGUNST_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortUgunst',
   DELVIS_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortDelvis',
   '-': '',
-};
+} as const;
 
 export type VedtakKlageForhandsvisData = {
   gjelderVedtak: boolean;

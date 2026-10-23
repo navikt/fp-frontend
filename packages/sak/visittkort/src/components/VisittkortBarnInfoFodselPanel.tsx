@@ -6,11 +6,23 @@ import dayjs from 'dayjs';
 
 import type { FagsakHendelse } from '@navikt/fp-types';
 
-const finnFodselsdatoTekstkode = (antallBarn: number): string => {
+import type { SakVisittkortMessageId } from '../../i18n/messageIds';
+
+const finnFodselsdatoTekstkode = (antallBarn: number) => {
   if (antallBarn === 1) {
     return 'VisittkortBarnInfoFodselPanel.Fodt';
   }
   return antallBarn === 2 ? 'VisittkortBarnInfoFodselPanel.Tvillinger' : 'VisittkortBarnInfoFodselPanel.Flerlinger';
+};
+
+const finnAlderTekstkode = (ar: number, maneder: number, dager: number): SakVisittkortMessageId => {
+  if (ar > 0) {
+    return 'VisittkortBarnInfoFodselPanel.Ar.Fodt';
+  }
+  if (maneder > 0) {
+    return 'VisittkortBarnInfoFodselPanel.Maned.Fodt';
+  }
+  return dager === 1 ? 'VisittkortBarnInfoFodselPanel.Dag.Fodt' : 'VisittkortBarnInfoFodselPanel.Dager.Fodt';
 };
 
 const finnAlderTekstProps = (fødselsdato: string) => {
@@ -22,22 +34,8 @@ const finnAlderTekstProps = (fødselsdato: string) => {
     throw new Error('Fødselsdato kan ikke være i fremtiden');
   }
 
-  let tekstkode;
-  if (ar > 0) {
-    tekstkode = 'VisittkortBarnInfoFodselPanel.Ar.Fodt';
-  } else if (maneder > 0) {
-    tekstkode = 'VisittkortBarnInfoFodselPanel.Maned.Fodt';
-  } else if (dager >= 0) {
-    if (dager === 1) {
-      tekstkode = 'VisittkortBarnInfoFodselPanel.Dag.Fodt';
-    }
-    if (dager === 0 || dager > 1) {
-      tekstkode = 'VisittkortBarnInfoFodselPanel.Dager.Fodt';
-    }
-  }
-
   return {
-    id: tekstkode,
+    id: finnAlderTekstkode(ar, maneder, dager),
     values: {
       value: ar || maneder || dager,
     },

@@ -5,7 +5,9 @@ import { Alert, Label, List } from '@navikt/ds-react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
-const helpTextMap: Record<string, string> = {
+import type messages from '../../../i18n/nb_NO.json';
+
+const helpTextMap: Record<string, keyof typeof messages> = {
   [AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK]: 'VedtakForm.VurderAnnenYtelse',
   [AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK]: 'VedtakForm.VurderDokument',
   [AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK]: 'VedtakForm.VurderInntektsmeldingKlage',

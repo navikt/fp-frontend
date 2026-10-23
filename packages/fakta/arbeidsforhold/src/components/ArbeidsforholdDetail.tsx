@@ -102,7 +102,7 @@ const finnOverstyrtTom = (arbeidsforhold: Arbeidsforhold): string | undefined =>
   return undefined;
 };
 
-const utledAktivtArbeidsforholdLabel = (arbeidsforhold: Arbeidsforhold): string => {
+const utledAktivtArbeidsforholdLabel = (arbeidsforhold: Arbeidsforhold) => {
   if (arbeidsforhold.permisjonOgMangel) {
     return 'ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon';
   }

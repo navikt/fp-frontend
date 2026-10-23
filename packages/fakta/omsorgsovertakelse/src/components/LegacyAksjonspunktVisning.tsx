@@ -6,6 +6,8 @@ import { FaktaBoks, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import type messages from '../../i18n/nb_NO.json';
+
 export const LegacyAksjonspunktVisning = () => {
   const intl = useIntl();
 
@@ -24,7 +26,11 @@ export const LegacyAksjonspunktVisning = () => {
           <LabeledValue
             key={ap.definisjon}
             size="medium"
-            label={<FormattedMessage id={`LegacyAksjonspunktVisning.Aksjonspunkt.${ap.definisjon}`} />}
+            label={
+              <FormattedMessage
+                id={`LegacyAksjonspunktVisning.Aksjonspunkt.${ap.definisjon}` as keyof typeof messages}
+              />
+            }
             value={ap.begrunnelse ?? ''}
           />
         ))}

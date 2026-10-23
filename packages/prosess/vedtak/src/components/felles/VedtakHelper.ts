@@ -1,5 +1,7 @@
 import type { SimuleringResultat, TilbakekrevingValg, TilbakekrevingVidereBehandling, Vilkår } from '@navikt/fp-types';
 
+import type messages from '../../../i18n/nb_NO.json';
+
 const tilbakekrevingMedInntrekk = (
   tilbakekrevingKode: TilbakekrevingVidereBehandling,
   simuleringResultat: SimuleringResultat,
@@ -10,7 +12,7 @@ const tilbakekrevingMedInntrekk = (
 export const getTilbakekrevingText = (
   simuleringResultat?: SimuleringResultat,
   tilbakekrevingvalg?: TilbakekrevingValg,
-): string | undefined => {
+): keyof typeof messages | undefined => {
   return tilbakekrevingvalg !== undefined &&
     simuleringResultat &&
     tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling, simuleringResultat)

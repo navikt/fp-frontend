@@ -10,6 +10,8 @@ import type { Behandlingsresultat } from '@navikt/fp-types';
 
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
 
+import type messages from '../../../i18n/nb_NO.json';
+
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
@@ -17,7 +19,7 @@ interface Props {
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
   isReadOnly: boolean;
-  labelTextCode: string;
+  labelTextCode: keyof typeof messages;
 }
 
 export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnly, labelTextCode }: Props) => {

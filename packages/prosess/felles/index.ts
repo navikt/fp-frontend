@@ -7,3 +7,5 @@ export { VilkarResultPicker, type VilkarResultPickerFormValues } from './src/vil
 export { ProsessPanelTemplate } from './src/vilkar/ProsessPanelTemplate';
 export { OverstyringPanel } from './src/vilkar/OverstyringPanel';
 export { validerApKodeOgHentApEnum } from './src/validerApKodeOgHentApEnum';
+
+export type { ProsessFellesMessageId } from './i18n/messageIds';

@@ -31,6 +31,8 @@ import {
   type UttakPeriodeType,
 } from '@navikt/fp-types';
 
+import type messages from '../../../i18n/nb_NO.json';
+
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
   periode: PeriodeSoker | AnnenforelderUttakEøsPeriode;
@@ -53,7 +55,7 @@ const PERIODE_TYPE_IKON_MAP: Partial<Record<UttakPeriodeType, ReactNode>> = {
   FORELDREPENGER_FØR_FØDSEL: <PersonPregnantIcon />,
 };
 
-const PERIODE_TYPE_LABEL_MAP: Partial<Record<UttakPeriodeType, string>> = {
+const PERIODE_TYPE_LABEL_MAP: Partial<Record<UttakPeriodeType, keyof typeof messages>> = {
   MØDREKVOTE: 'UttakTidslinje.Modrekvote',
   FEDREKVOTE: 'UttakTidslinje.Fedrekvote',
   FELLESPERIODE: 'UttakTidslinje.Fellesperiode',
@@ -166,7 +168,7 @@ const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
 type PinData = {
   dato: string;
   datoITidslinjen: string;
-  tekstIder: string[];
+  tekstIder: (keyof typeof messages)[];
 };
 
 const finnSisteDato = (familiehendelseDato: string, førstePeriodeFom: dayjs.Dayjs): string =>
