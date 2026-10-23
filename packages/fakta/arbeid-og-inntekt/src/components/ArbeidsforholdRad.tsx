@@ -221,7 +221,7 @@ export const ArbeidsforholdRad = ({
   );
 };
 
-const finnKildekode = (erManueltOpprettet: boolean, harArbeidsforhold: boolean): string => {
+const finnKildekode = (erManueltOpprettet: boolean, harArbeidsforhold: boolean) => {
   if (erManueltOpprettet) {
     return 'ArbeidsforholdRad.Saksbehandler';
   }

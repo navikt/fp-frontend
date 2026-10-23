@@ -18,6 +18,8 @@ import { CollapseButton } from './CollapseButton';
 
 import styles from './simuleringTable.module.css';
 
+import type messages from '../../i18n/nb_NO.json';
+
 const simuleringCodes = {
   DIFFERANSE: 'differanse',
   INNTREKK: 'inntrekk',
@@ -83,7 +85,7 @@ export const SimuleringTable = ({
                     className={isNextPeriod(monthAndYear, nesteMåned) ? styles['nextPeriod'] : styles['normalPeriod']}
                     key={`${monthAndYear.month}-${monthAndYear.year}`}
                   >
-                    <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />
+                    <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}` as keyof typeof messages} />
                   </Table.HeaderCell>
                 ))}
               </Table.Row>
@@ -111,7 +113,9 @@ export const SimuleringTable = ({
                               : { borderBottom }
                           }
                         >
-                          <FormattedMessage id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
+                          <FormattedMessage
+                            id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}` as keyof typeof messages}
+                          />
                         </Table.DataCell>
                         {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned, borderBottom)}
                       </Table.Row>
@@ -123,7 +127,7 @@ export const SimuleringTable = ({
                   <Table.DataCell
                     style={resultat.feltnavn === simuleringCodes.INNTREKKNESTEMÅNED ? {} : { fontWeight: 'bold' }}
                   >
-                    <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
+                    <FormattedMessage id={`Simulering.${resultat.feltnavn}` as keyof typeof messages} />
                   </Table.DataCell>
                   {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
                 </Table.Row>

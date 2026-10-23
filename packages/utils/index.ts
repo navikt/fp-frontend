@@ -26,3 +26,5 @@ export { harAksjonspunkt, erAksjonspunktÅpent } from './src/aksjonspunktUtils';
 export { erTilbakekrevingBehandling } from './src/tilbakekrevingUtils';
 
 export * from './src/behandlingResultatUtils';
+
+export type { UtilsMessageId } from './i18n/messageIds';

@@ -52,7 +52,7 @@ const getKlagBareVedtak = (
   );
 };
 
-const getLovHjemmeler = (aksjonspunktCode: string): string =>
+const getLovHjemmeler = (aksjonspunktCode: string) =>
   aksjonspunktCode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
 
 const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefined => {

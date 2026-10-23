@@ -255,7 +255,7 @@ export const Messages = ({
   );
 };
 
-const getFritekstMessage = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake): string =>
+const getFritekstMessage = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake) =>
   brevmalkode === 'INNHEN' ? 'Messages.DocumentList' : 'Messages.Fritekst';
 
 // TODO (TOR) Bør erstattast av ein markør fra backend

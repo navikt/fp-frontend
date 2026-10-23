@@ -46,7 +46,7 @@ export const SøknadsfristDetaljer = ({ søknad, gjeldendeFamiliehendelse }: Pro
   );
 };
 
-const findTextCode = (familiehendelse: FamilieHendelse): string => {
+const findTextCode = (familiehendelse: FamilieHendelse) => {
   if (familiehendelse.fødselTermin) {
     return familiehendelse.fødselTermin.fødselsdato
       ? 'ErSoknadsfristVilkaretOppfyltForm.Fodselsdato'

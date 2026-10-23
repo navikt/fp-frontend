@@ -12,6 +12,8 @@ import type { AlleKodeverk, Inntektspost } from '@navikt/fp-types';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
 
+import type messages from '../../../i18n/nb_NO.json';
+
 type ForenkletInntektspost = {
   beløp: number;
   fom: string;
@@ -59,7 +61,9 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
                       <HStack gap="space-4" justify="space-between" className="w-18" as="span">
                         <FormattedMessage
                           tagName="span"
-                          id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`}
+                          id={
+                            `ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}` as keyof typeof messages
+                          }
                         />
                         <span>{dayjs(inntekt.fom).year()}</span>
                       </HStack>

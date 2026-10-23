@@ -167,7 +167,7 @@ const getPreviewCallback =
     previewCallback(data);
   };
 
-const findResultTypeMessage = (resultat: InnsynResultatType): string => {
+const findResultTypeMessage = (resultat: InnsynResultatType) => {
   if (resultat === 'AVVIST') {
     return 'InnsynVedtakForm.Avslatt';
   }

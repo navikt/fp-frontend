@@ -57,8 +57,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
 };
 
 const sjekkOmUtbetalingsgradEr0OmAvslått =
-  (intl: IntlShape, erOppfylt: boolean, utsettelseType?: string) =>
-  (utbetalingsgrad: string): string | null => {
+  (intl: IntlShape, erOppfylt: boolean, utsettelseType?: string) => (utbetalingsgrad: string) => {
     const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
     if (harUtsettelse && Number.parseFloat(utbetalingsgrad) > 0) {
       return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
@@ -74,7 +73,7 @@ const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
     erOppfylt: boolean,
     erTilknyttetStortinget: boolean,
   ) =>
-  (utbetalingsgrad: string): string | null => {
+  (utbetalingsgrad: string) => {
     const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
     const erUttak = valgtPeriode.utsettelseType === '-' && !kontoIkkeSatt;
     if (
@@ -90,8 +89,7 @@ const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
   };
 
 const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent =
-  (intl: IntlShape, getValues: UseFormGetValues<UttakAktivitetType>) =>
-  (utbetalingsgrad: string): string | null => {
+  (intl: IntlShape, getValues: UseFormGetValues<UttakAktivitetType>) => (utbetalingsgrad: string) => {
     const samtidigUttak = getValues('samtidigUttak');
     const samtidigUttaksprosent = getValues('samtidigUttaksprosent');
     if (samtidigUttak && samtidigUttaksprosent && samtidigUttaksprosent < utbetalingsgrad) {
@@ -103,8 +101,7 @@ const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent =
   };
 
 const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 =
-  (intl: IntlShape, getValues: UseFormGetValues<UttakAktivitetType>, index: number) =>
-  (utbetalingsgrad: string): string | null => {
+  (intl: IntlShape, getValues: UseFormGetValues<UttakAktivitetType>, index: number) => (utbetalingsgrad: string) => {
     const aktiviteter = getValues('aktiviteter');
     const aktivitet = aktiviteter[index];
     if (!aktivitet) {

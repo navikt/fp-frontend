@@ -24,9 +24,14 @@ import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';
 
+import type messages from '../../../i18n/nb_NO.json';
+
 const kanSendesTilGodkjenning = (behandlingStatusKode: BehandlingStatus): boolean => behandlingStatusKode === 'UTRED';
 
-const finnKnappetekstkode = (aksjonspunkterForPanel: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
+const finnKnappetekstkode = (
+  aksjonspunkterForPanel: Aksjonspunkt[],
+  skalBrukeManueltBrev: boolean,
+): keyof typeof messages =>
   aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.FORESLÅ_VEDTAK) || skalBrukeManueltBrev
     ? 'VedtakForm.TilGodkjenning'
     : 'VedtakForm.FattVedtak';
@@ -58,7 +63,7 @@ interface Props {
   ) => ReactNode;
   previewAutomatiskBrev: (e: MouseEvent) => void;
   previewCallback: (data: VedtakForhåndsvisData) => void;
-  tilbakekrevingtekst?: string;
+  tilbakekrevingtekst?: keyof typeof messages;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;

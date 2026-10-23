@@ -34,7 +34,7 @@ import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import { VedtakAvslagPanel } from './VedtakAvslagPanel';
 import { VedtakInnvilgetPanel } from './VedtakInnvilgetPanel';
 
-const finnAvslagResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string): string => {
+const finnAvslagResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string) => {
   if (behandlingResultatTypeKode === 'KLAGE_YTELSESVEDTAK_OPPHEVET') {
     return 'VedtakForm.ResultatKlageYtelsesvedtakOpphevet';
   }
@@ -53,7 +53,7 @@ const finnAvslagResultatText = (behandlingResultatTypeKode: BehandlingResultatTy
   return 'VedtakForm.ForeldrepengerIkkeInnvilget';
 };
 
-const finnInnvilgetResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string): string => {
+const finnInnvilgetResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string) => {
   if (behandlingResultatTypeKode === 'KLAGE_YTELSESVEDTAK_STADFESTET') {
     return 'VedtakForm.ResultatOpprettholdVedtak';
   }

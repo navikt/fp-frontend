@@ -27,6 +27,8 @@ import type {
 import { erAlleAndelerAvslått } from '../utils/tilkjentYtelseUtils';
 import { TilkjentYtelseTimelineData } from './TilkjentYtelseTimelineData';
 
+import type messages from '../../i18n/nb_NO.json';
+
 type Periode = {
   id: number;
   start: Date;
@@ -224,7 +226,7 @@ const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
   return graderteAndeler.length > 0;
 };
 
-const getFamiliehendelseData = (familieHendelse: FamilieHendelse): { dato?: string; textId: string } => {
+const getFamiliehendelseData = (familieHendelse: FamilieHendelse): { dato?: string; textId: keyof typeof messages } => {
   if (familieHendelse.adopsjon?.omsorgsovertakelseDato) {
     return { dato: familieHendelse.adopsjon.omsorgsovertakelseDato, textId: 'TilkjentYtelse.Omsorgsovertakelsesdato' };
   }

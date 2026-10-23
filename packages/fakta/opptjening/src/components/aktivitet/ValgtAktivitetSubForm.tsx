@@ -19,7 +19,7 @@ const erAvType = (
   ...opptjeningAktivitetType: OpptjeningAktivitetType[]
 ): boolean => !!valgtAktivitetstype && opptjeningAktivitetType.includes(valgtAktivitetstype);
 
-const getOppdragsgiverIntlId = (valgtAktivitetstype?: OpptjeningAktivitetType): string =>
+const getOppdragsgiverIntlId = (valgtAktivitetstype?: OpptjeningAktivitetType) =>
   erAvType(valgtAktivitetstype, 'FRILANS') ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver';
 
 const finnArbeidsgivertekst = (
@@ -37,7 +37,7 @@ const finnArbeidsgivertekst = (
   return formaterArbeidsgiver(arbeidsgiverOpplysninger);
 };
 
-const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
+const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]) =>
   ferdiglignetNæring.length > 0 ? 'ActivityPanel.FerdiglignetNæring' : 'ActivityPanel.IngenFerdiglignetNæring';
 
 interface Props {

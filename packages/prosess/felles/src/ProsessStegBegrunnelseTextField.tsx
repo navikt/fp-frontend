@@ -15,7 +15,7 @@ const intl = createIntl(messages);
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(2000);
 
-const getBegrunnelseTextCode = (readOnly: boolean): string =>
+const getBegrunnelseTextCode = (readOnly: boolean) =>
   readOnly
     ? 'ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly'
     : 'ProsessStegBegrunnelseTextField.ExplanationRequired';

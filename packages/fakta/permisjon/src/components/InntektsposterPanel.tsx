@@ -9,6 +9,8 @@ import dayjs from 'dayjs';
 
 import type { Inntektspost } from '@navikt/fp-types';
 
+import type messages from '../../i18n/nb_NO.json';
+
 interface Props {
   inntektsposter: Inntektspost[];
   skjæringstidspunkt: string;
@@ -38,7 +40,10 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
                 <HStack justify="space-between" asChild key={inntekt.fom}>
                   <BodyShort size="small">
                     <HStack gap="space-4" justify="space-between" className="w-18">
-                      <FormattedMessage tagName="span" id={`InntektsposterPanel.${dayjs(inntekt.fom).month() + 1}`} />
+                      <FormattedMessage
+                        tagName="span"
+                        id={`InntektsposterPanel.${dayjs(inntekt.fom).month() + 1}` as keyof typeof messages}
+                      />
                       <span>{dayjs(inntekt.fom).year()}</span>
                     </HStack>
                     <BeløpLabel beløp={inntekt.beløp} kr />

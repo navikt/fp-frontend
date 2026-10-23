@@ -97,7 +97,7 @@ const finnTagProps = (statusKode: FagsakStatus): TagProps | null => {
   }
 };
 
-const finnFamilieHendelseTekstKode = (hendelseType: FamilieHendelseType): string => {
+const finnFamilieHendelseTekstKode = (hendelseType: FamilieHendelseType) => {
   switch (hendelseType) {
     case 'ADPSJN': {
       return 'Journal.Sak.FamAdopsjon';

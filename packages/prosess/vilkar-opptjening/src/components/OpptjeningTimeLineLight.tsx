@@ -41,7 +41,7 @@ const lagTidslinjePerioder = (opptjeningsperioder: FastsattOpptjeningAktivitet[]
     opptjeningsperiode,
   }));
 
-const finnTitle = (status: 'success' | 'danger' | 'info'): string => {
+const finnTitle = (status: 'success' | 'danger' | 'info') => {
   if (status === 'info') {
     return 'OpptjeningTimeLineLight.MellomliggendePeriode';
   }
