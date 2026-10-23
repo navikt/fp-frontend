@@ -21,7 +21,7 @@ export const ArbeidsforholdFieldArray = ({
   readOnly,
   uttakArbeidTyper,
 }: Props) => {
-  const { control, watch } = useFormContext<TilretteleggingFormValues>();
+  const { control, watch, getValues } = useFormContext<TilretteleggingFormValues>();
   const { fields, replace } = useFieldArray({
     control,
     name: 'arbeidsforhold',
@@ -48,7 +48,13 @@ export const ArbeidsforholdFieldArray = ({
             uttakArbeidTyper={uttakArbeidTyper}
             aoiArbeidsforhold={aoiArbeidsforhold}
             arbeidsgiverOpplysning={arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse ?? '']}
-            faisu={getFAISUProps(field, fields, aoiArbeidsforhold, replace, arbeidsgiverOpplysningerPerId)}
+            faisu={getFAISUProps(
+              index,
+              () => getValues('arbeidsforhold'),
+              aoiArbeidsforhold,
+              replace,
+              arbeidsgiverOpplysningerPerId,
+            )}
           />
         );
       })}
