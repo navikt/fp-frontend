@@ -11030,19 +11030,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"seroval-plugins@npm:~1.5.4":
-  version: 1.5.6
-  resolution: "seroval-plugins@npm:1.5.6"
+"seroval-plugins@npm:~1.6.8":
+  version: 1.6.11
+  resolution: "seroval-plugins@npm:1.6.11"
   peerDependencies:
     seroval: ^1.0
-  checksum: 10/1254a565f3e630143e6eb0a51a1487dfcf3b05159d1586bbbbc4aaf541eede9f2c69a81ba338bda5625a177f44d1b54ee0f3a8978481e191e76d23cd341bdf07
+  checksum: 10/8a721a876d597caf7e8163b73e8501acf7478d1f9c640f98bfa7374bb4dcd98a1710e0ccb54e43f5536858542d9d26d90e1e4a0915c34aa55ea18d65311c19e2
   languageName: node
   linkType: hard
 
-"seroval@npm:~1.5.4":
-  version: 1.5.6
-  resolution: "seroval@npm:1.5.6"
-  checksum: 10/4d685bfdfd69b30c432f05b05a576d44ce50bbb80979988fcd29ebd8adb49598c597835b8c348cebb3559180e1b12643e29a6ecc913903a2105c651f13813646
+"seroval@npm:~1.6.8":
+  version: 1.6.11
+  resolution: "seroval@npm:1.6.11"
+  checksum: 10/5982d6cf57429880a11c2f02006bbb12dcf19a3cc2d73fe22eae4dceb170127fc759a3d9472a33767075b2e8eccbe8d4381483cebe9dc2cf241479aae5aeb56b
   languageName: node
   linkType: hard
 
@@ -11109,13 +11109,13 @@ __metadata:
   linkType: hard
 
 "solid-js@npm:^1.9.15":
-  version: 1.9.15
-  resolution: "solid-js@npm:1.9.15"
+  version: 1.9.17
+  resolution: "solid-js@npm:1.9.17"
   dependencies:
     csstype: "npm:^3.1.0"
-    seroval: "npm:~1.5.4"
-    seroval-plugins: "npm:~1.5.4"
-  checksum: 10/1a72e6e85b8db7912dd8c6b3525c4073e8b3fe27bd5b9170ffd1d23a109beaaa9463eb7e789b7b1867b556c18b0ca2c11c6d62bc233edf2ac8199e3881da76f2
+    seroval: "npm:~1.6.8"
+    seroval-plugins: "npm:~1.6.8"
+  checksum: 10/e977eb4e4c2073dee6973e846a79344c04a12b767fe1ceea1ae61b81ecc1f8b97ed0eb4992571babc8feb1a361dbb1306b3d6e3939a7a68b09301dd1eed9e167
   languageName: node
   linkType: hard
 
