@@ -4,53 +4,29 @@
 }
 
 .thechats {
-  min-height: 250px;
+  max-height: 50vh;
+  min-height: 150px;
   overflow-y: auto;
-  padding-left: 25px;
-}
-
-.bubble {
-  background-color: var(--ax-neutral-100);
-  width: 600px;
-}
-
-.bubbleSelf {
-  background-color: var(--ax-accent-100);
-  width: 600px;
-}
-
-@media all and (max-width: 1569px) {
-  .bubble {
-    margin-right: 25px;
-    width: 480px;
-  }
-
-  .bubbleSelf {
-    margin-right: 25px;
-    width: 480px;
-  }
+  padding: 16px;
 }
 
 .form {
-  background-color: var(--ax-neutral-100);
-  border-top: 2px solid var(--ax-neutral-400A);
+  background-color: var(--ax-bg-neutral-soft);
+  border-top: 1px solid var(--ax-border-neutral-subtle);
+  flex-shrink: 0;
   margin-top: auto;
   padding: 16px;
 }
 
-.alert {
-  margin-top: auto;
-  padding-bottom: 16px;
-}
+@media all and (min-width: 1409px) {
+  .container {
+    height: 100%;
+    min-height: 0;
+  }
 
-.marginTop {
-  margin-top: 16px;
-}
-
-.ingen {
-  color: var(--ax-neutral-700);
-}
-
-.textAlign {
-  margin: auto;
+  .thechats {
+    flex: 1;
+    max-height: none;
+    min-height: 0;
+  }
 }

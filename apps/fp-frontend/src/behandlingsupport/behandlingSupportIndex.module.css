@@ -1,25 +1,30 @@
-.tab {
-  width: 100%;
-}
+@media all and (min-width: 1409px) {
+  .tabs:has(> [data-notat-panel]:not([hidden])) {
+    display: flex;
+    flex-direction: column;
+    height: var(--support-height, auto);
+  }
 
-.tabContainer {
-  flex-grow: 1;
-  padding-left: 40px;
-  padding-right: 40px;
-}
+  .tabs > :has(> .tabList) {
+    flex-shrink: 0;
+  }
 
-.ulesteNotater {
-  background-color: var(--ax-bg-danger-moderateA);
-  border-radius: var(--ax-radius-full);
-  font-size: 0.875rem;
-  height: 1.25rem;
-  left: calc(50% + 7px);
-  line-height: 1.25rem;
-  position: absolute;
-  top: -0.4375rem;
-  width: 1.25rem;
-}
+  .tabs > [data-notat-panel]:not([hidden]) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
 
-.pencilSvgContainer {
-  position: relative;
+  .tabs > [data-notat-panel]:not([hidden]) .panel {
+    display: grid;
+    flex: 1;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .tabs > [data-notat-panel]:not([hidden]) .content {
+    min-height: 0;
+    overflow: auto;
+  }
 }

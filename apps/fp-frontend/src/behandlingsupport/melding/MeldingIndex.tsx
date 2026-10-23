@@ -2,7 +2,7 @@ import { type ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
 
-import { Alert, VStack } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -142,13 +142,13 @@ export const MeldingIndex = ({
         tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}
         toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
       >
-        <VStack gap="space-16">
+        <VStack gap="space-16" className="p-4 min-h-32">
           {!kanSendeMelding && (
-            <Alert variant="info">
+            <BodyShort textColor="subtle" className="m-auto">
               <FormattedMessage
                 id={finnKanIkkeLagreMeldingTekst(kanVeilede, behandlingTillatteOperasjoner?.behandlingKanSendeMelding)}
               />
-            </Alert>
+            </BodyShort>
           )}
           {kanSendeMelding && (
             <MeldingerSakIndex

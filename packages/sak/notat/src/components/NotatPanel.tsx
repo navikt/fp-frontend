@@ -1,23 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, Button, Chat, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Chat, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
-import dayjs from 'dayjs';
+import { dateTimeFormat, sortPeriodsBy } from '@navikt/ft-utils';
 
 import type { Saksnotat } from '@navikt/fp-types';
 
 import styles from './notatPanel.module.css';
 
 const maxLength1000 = maxLength(1000);
-
-const formatTimestamp = (intl: IntlShape, opprettetTidspunkt: string): string => {
-  const dato = intl.formatDate(opprettetTidspunkt, { day: '2-digit', month: 'long', year: 'numeric' });
-  const tid = intl.formatTime(opprettetTidspunkt);
-  return `${dato} kl. ${tid}`;
-};
 
 type FormValues = {
   notat: string;
@@ -34,8 +28,7 @@ interface Props {
 export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn, kanSaksbehandle }: Props) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
-
-  const sorterteNotater = [...notater].sort((a, b) => dayjs(a.opprettetTidspunkt).diff(dayjs(b.opprettetTidspunkt)));
+  const sorterteNotater = notater.toSorted(sortPeriodsBy('opprettetTidspunkt'));
 
   const lagre = ({ notat }: FormValues) => {
     lagreNotat({ saksnummer, notat });
@@ -44,110 +37,75 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
   };
 
   const bottomElRef = useRef<HTMLDivElement | null>(null);
-  const [top, setTop] = useState<number>();
 
-  // Denne for å scrolle innerste scrollbar ved bytte til notat-fane
-  const isInitialMountRef = useRef(0);
   useEffect(() => {
-    const lastChildElement = bottomElRef.current?.lastElementChild;
-    isInitialMountRef.current += 1;
-    if (isInitialMountRef.current === 2 && lastChildElement?.scrollIntoView) {
-      lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const chats = bottomElRef.current;
+    if (chats) {
+      chats.scrollTop = chats.scrollHeight;
     }
-  }, [top]);
-
-  // Denne for å scrolle innerste scrollbar når en legger til notat
-  const isInitialMount2Ref = useRef(true);
-  useEffect(() => {
-    const lastChildElement = bottomElRef.current?.lastElementChild;
-    if (isInitialMount2Ref.current) {
-      isInitialMount2Ref.current = false;
-    } else if (lastChildElement?.scrollIntoView) {
-      lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }, [sorterteNotater]);
-
-  // Denne er kun her for å få komponent-repaint ved scrolling
-  const scrollReset = () => setTop(0);
-  useEffect(() => {
-    addEventListener('scroll', scrollReset);
-    return () => {
-      removeEventListener('scroll', scrollReset);
-    };
-  }, []);
+  }, [sorterteNotater.length]);
 
   return (
-    <div
-      className={styles['container']}
-      style={{ height: `calc(100vh - ${top}px)` }}
-      ref={el => {
-        if (el) {
-          setTop(el.getBoundingClientRect().top);
-        }
-      }}
-    >
-      {sorterteNotater.length > 0 && (
-        <div className={styles['thechats']} ref={bottomElRef}>
-          <VStack gap="space-8">
-            {sorterteNotater.map((notat, index) => (
-              <div key={notat.opprettetTidspunkt} className={index === 0 ? styles['marginTop'] : undefined}>
-                <Chat
-                  className={styles['chat']}
-                  name={
-                    saksbehandlerNavn === notat.opprettetAv
-                      ? intl.formatMessage({ id: 'NotatPanel.Du' })
-                      : notat.opprettetAv
-                  }
-                  timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
-                  position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
-                >
-                  <Chat.Bubble
-                    className={saksbehandlerNavn === notat.opprettetAv ? styles['bubbleSelf'] : styles['bubble']}
-                  >
-                    {notat.notat}
-                  </Chat.Bubble>
-                </Chat>
-              </div>
-            ))}
-          </VStack>
-        </div>
-      )}
+    <div className={styles['container']}>
       {sorterteNotater.length === 0 && (
-        <BodyShort textColor="subtle" className="m-auto">
+        <BodyShort className="m-auto py-10" textColor="subtle">
           <FormattedMessage id="NotatPanel.Ingen" />
         </BodyShort>
       )}
-      {kanSaksbehandle && (
-        <div className={styles['form']}>
+      {sorterteNotater.length > 0 && (
+        <VStack gap="space-8" asChild>
+          <div className={styles['thechats']} ref={bottomElRef}>
+            {sorterteNotater.map(notat => {
+              const erSaksbehandler = saksbehandlerNavn === notat.opprettetAv;
+              return (
+                <Chat
+                  className="max-w-full"
+                  key={notat.opprettetTidspunkt}
+                  name={erSaksbehandler ? intl.formatMessage({ id: 'NotatPanel.Du' }) : notat.opprettetAv}
+                  timestamp={dateTimeFormat(notat.opprettetTidspunkt, {
+                    day: 'numeric',
+                    month: 'long',
+                    separator: 'kl',
+                  })}
+                  position={erSaksbehandler ? 'right' : 'left'}
+                  toptextPosition={erSaksbehandler ? 'right' : 'left'}
+                  data-color={erSaksbehandler ? 'accent' : 'neutral'}
+                >
+                  <Chat.Bubble className="whitespace-pre-wrap max-w-3xl">{notat.notat}</Chat.Bubble>
+                </Chat>
+              );
+            })}
+          </div>
+        </VStack>
+      )}
+
+      <div className={styles['form']}>
+        {kanSaksbehandle && (
           <RhfForm formMethods={formMethods} onSubmit={lagre}>
-            <VStack gap="space-16">
-              <RhfTextarea
-                name="notat"
-                control={formMethods.control}
-                label={<FormattedMessage id="NotatPanel.Notat" />}
-                hideLabel
-                maxLength={1000}
-                validate={[required, maxLength1000, hasValidText]}
-              />
-              <HStack justify="space-between">
-                <BodyShort>
-                  <FormattedMessage id="NotatPanel.KunForSaksbehandler" />
-                </BodyShort>
-                <Button size="small">
-                  <FormattedMessage id="NotatPanel.Send" />
-                </Button>
-              </HStack>
-            </VStack>
+            <RhfTextarea
+              name="notat"
+              control={formMethods.control}
+              label={<FormattedMessage id="NotatPanel.Notat" />}
+              hideLabel
+              maxLength={1000}
+              validate={[required, maxLength1000, hasValidText]}
+            />
+            <HStack justify="space-between" align="end">
+              <BodyShort textColor="subtle">
+                <FormattedMessage id="NotatPanel.KunForSaksbehandler" />
+              </BodyShort>
+              <Button size="small">
+                <FormattedMessage id="NotatPanel.Send" />
+              </Button>
+            </HStack>
           </RhfForm>
-        </div>
-      )}
-      {!kanSaksbehandle && (
-        <div className={styles['alert']}>
-          <Alert variant="info">
+        )}
+        {!kanSaksbehandle && (
+          <BodyShort textColor="subtle">
             <FormattedMessage id="NotatPanel.KunSaksbehandler" />
-          </Alert>
-        </div>
-      )}
+          </BodyShort>
+        )}
+      </div>
     </div>
   );
 };

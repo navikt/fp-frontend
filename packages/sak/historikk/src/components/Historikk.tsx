@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { type Location } from 'react-router';
 
-import { VStack } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 
 import type {
   AlleKodeverk,
@@ -14,8 +14,6 @@ import type {
 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
 import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
-
-import styles from './historikk.module.css';
 
 interface Props {
   historikkFpSak: Historikkinnslag[];
@@ -46,48 +44,32 @@ export const Historikk = ({
 }: Props) => {
   const alleHistorikkInnslag = sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake);
 
-  const [top, setTop] = useState<number>();
-
-  const scrollReset = () => setTop(0);
-
-  useEffect(() => {
-    addEventListener('scroll', scrollReset);
-    return () => {
-      removeEventListener('scroll', scrollReset);
-    };
-  }, []);
-
   return (
-    <div
-      style={{ height: `calc(100vh - ${top}px)` }}
-      className={styles['overflow']}
-      ref={el => {
-        if (el) {
-          setTop(el.getBoundingClientRect().top);
-        }
-      }}
-    >
-      <VStack gap="space-8" padding="space-16">
-        {alleHistorikkInnslag.map(historikkinnslag => {
-          const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
+    <VStack gap="space-8" padding="space-16" className="min-h-32">
+      {alleHistorikkInnslag.length === 0 && (
+        <BodyShort textColor="subtle" className="m-auto py-4">
+          <FormattedMessage id="History.IngenHistorikk" />
+        </BodyShort>
+      )}
+      {alleHistorikkInnslag.map(historikkinnslag => {
+        const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 
-          if (!alleKodeverk) {
-            return null;
-          }
-          return (
-            <HistorikkInnslag
-              key={historikkinnslag.opprettetTidspunkt}
-              saksnummer={saksnummer}
-              historikkInnslag={historikkinnslag}
-              createLocationForSkjermlenke={createLocationForSkjermlenke}
-              alleKodeverk={alleKodeverk}
-              behandlingLocation={
-                historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
-              }
-            />
-          );
-        })}
-      </VStack>
-    </div>
+        if (!alleKodeverk) {
+          return null;
+        }
+        return (
+          <HistorikkInnslag
+            key={historikkinnslag.opprettetTidspunkt}
+            saksnummer={saksnummer}
+            historikkInnslag={historikkinnslag}
+            createLocationForSkjermlenke={createLocationForSkjermlenke}
+            alleKodeverk={alleKodeverk}
+            behandlingLocation={
+              historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
+            }
+          />
+        );
+      })}
+    </VStack>
   );
 };
