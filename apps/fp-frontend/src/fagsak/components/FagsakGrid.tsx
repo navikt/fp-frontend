@@ -77,11 +77,9 @@ const VisittkortMedKnapp = ({
     return visittkortContent;
   }
   return (
-    <>
-      <span className={styles['floatRight']}>
-        <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
-      </span>
-      {visittkortContent}
-    </>
+    <div className={styles['visittkortWithButton']}>
+      <div className={styles['visittkortContent']}>{visittkortContent}</div>
+      <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
+    </div>
   );
 };
