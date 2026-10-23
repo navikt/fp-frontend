@@ -25,8 +25,14 @@
   width: 0;
 }
 
-.floatRight {
-  float: right;
+.visittkortWithButton {
+  align-items: flex-start;
+  display: flex;
+}
+
+.visittkortContent {
+  flex: 1;
+  min-width: 0;
 }
 
 @media all and (max-width: 1701px) {
