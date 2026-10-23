@@ -1,11 +1,9 @@
-import type { UtilsMessageId } from '@navikt/fp-utils';
-
-import type nb from './nb_NO.json';
+import type { ProsessAnkeTrygderettsbehandlingMessageId } from './messageIds';
 
 declare global {
   namespace FormatjsIntl {
     interface Message {
-      ids: keyof typeof nb | UtilsMessageId;
+      ids: ProsessAnkeTrygderettsbehandlingMessageId;
     }
   }
 }

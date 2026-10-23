@@ -1,9 +1,9 @@
-import type nb from './nb_NO.json';
+import type { ProsessBeregningsresultatMessageId } from './messageIds';
 
 declare global {
   namespace FormatjsIntl {
     interface Message {
-      ids: keyof typeof nb;
+      ids: ProsessBeregningsresultatMessageId;
     }
   }
 }

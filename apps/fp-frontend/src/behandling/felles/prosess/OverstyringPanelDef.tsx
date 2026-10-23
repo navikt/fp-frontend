@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
 import type { Medlemskap, VilkårType } from '@navikt/fp-types';
 import { usePanelOverstyring } from '@navikt/fp-utils';
@@ -8,7 +10,7 @@ import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 interface Props {
   vilkårKoder: VilkårType[];
   medlemskap?: Medlemskap;
-  panelTekstKode: string;
+  panelTekstKode: ComponentProps<typeof VilkarresultatMedOverstyringProsessIndex>['panelTekstKode'];
 }
 
 export const OverstyringPanelDef = ({ vilkårKoder, panelTekstKode, medlemskap }: Props) => {

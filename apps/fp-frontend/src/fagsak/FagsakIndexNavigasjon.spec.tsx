@@ -1,7 +1,8 @@
 import type { ComponentProps } from 'react';
-import { IntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 
+import { createIntl } from '@navikt/ft-utils';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -63,11 +64,11 @@ describe('FagsakIndexNavigasjon', () => {
         {
           path: '/fagsak/:saksnummer/*',
           element: (
-            <IntlProvider locale="nb" messages={messages}>
+            <RawIntlProvider value={createIntl(messages)}>
               <RequestPendingProvider>
                 <FagsakIndex />
               </RequestPendingProvider>
-            </IntlProvider>
+            </RawIntlProvider>
           ),
         },
       ],

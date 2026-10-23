@@ -1,0 +1,6 @@
+import type { FaktaFellesMessageId } from '@navikt/fp-fakta-felles';
+import type { UtilsMessageId } from '@navikt/fp-utils';
+
+import type nb from './nb_NO.json';
+
+export type FaktaOmsorgsovertakelseMessageId = keyof typeof nb | FaktaFellesMessageId | UtilsMessageId;

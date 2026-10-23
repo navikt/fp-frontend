@@ -6,3 +6,5 @@ export type { ForeldrepengerValues } from './src/foreldrepenger/components/Forel
 export type { ForeldrepengerEndringssøknadValues } from './src/foreldrepenger/components/ForeldrepengerEndringssøknadForm';
 export type { SvangerskapsValues } from './src/svangerskapspenger/components/SvangerskapspengerForm';
 export type { PapirsøknadAp, PapirsøknadKode } from './src/PapirsøknadAp';
+
+export type { PapirsoknadMessageId } from './i18n/messageIds';

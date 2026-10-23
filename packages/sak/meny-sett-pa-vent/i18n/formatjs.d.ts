@@ -1,12 +1,9 @@
-import type { ModalSettPaVentMessageId } from '@navikt/fp-modal-sett-pa-vent';
-import type { UtilsMessageId } from '@navikt/fp-utils';
-
-import type nb from './nb_NO.json';
+import type { SakMenySettPaVentMessageId } from './messageIds';
 
 declare global {
   namespace FormatjsIntl {
     interface Message {
-      ids: keyof typeof nb | ModalSettPaVentMessageId | UtilsMessageId;
+      ids: SakMenySettPaVentMessageId;
     }
   }
 }
