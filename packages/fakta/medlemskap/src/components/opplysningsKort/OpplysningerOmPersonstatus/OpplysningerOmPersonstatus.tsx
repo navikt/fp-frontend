@@ -38,31 +38,47 @@ export const OpplysningerOmPersonstatus = ({
           <FormattedMessage id="OpplysningerOmPersonstatus.Beskrivelse" />
         </Detail>
         <HGrid columns={{ xs: 1, lg: annenpart ? 2 : 1 }} gap="space-16">
-          <Box background="neutral-moderate" padding="space-16" borderRadius="8">
-            <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>
-              <Label>
-                <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
-              </Label>
+          <Box
+            background="neutral-moderate"
+            padding="space-16"
+            borderRadius="8"
+            className="row-span-3 grid grid-rows-subgrid"
+            aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}
+          >
+            <Label>
+              <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
+            </Label>
+            <div>
               <PersonstatusVisning personstatuser={personstatuser} alleKodeverk={alleKodeverk} />
+            </div>
+            <div>
               <RegionVisning regioner={regioner} alleKodeverk={alleKodeverk} />
-            </VStack>
+            </div>
           </Box>
           {annenpart && (
-            <Box background="neutral-moderate" padding="space-16" borderRadius="8">
-              <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}>
-                <Label>
-                  <FormattedMessage
-                    id="OpplysningerOmPersonstatus.Annenpart"
-                    values={{ navn: annenpartNavn ?? 'none' }}
-                  />
-                </Label>
+            <Box
+              background="neutral-moderate"
+              padding="space-16"
+              borderRadius="8"
+              className="row-span-3 grid grid-rows-subgrid"
+              aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}
+            >
+              <Label>
+                <FormattedMessage
+                  id="OpplysningerOmPersonstatus.Annenpart"
+                  values={{ navn: annenpartNavn ?? 'none' }}
+                />
+              </Label>
+              <div>
                 <PersonstatusVisning
                   personstatuser={annenpart.personstatuser}
                   alleKodeverk={alleKodeverk}
                   erAnnenpart
                 />
+              </div>
+              <div>
                 <RegionVisning regioner={annenpart.regioner} alleKodeverk={alleKodeverk} erAnnenpart />
-              </VStack>
+              </div>
             </Box>
           )}
         </HGrid>
