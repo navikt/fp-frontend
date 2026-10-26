@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
 import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import type { AlleKodeverk, KodeverkType, RegionPeriode } from '@navikt/fp-types';
@@ -57,7 +56,7 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
           <Table.Row key={`${r.fom}-${r.tom}-${r.type}`}>
             <Table.DataCell>{getRegion(r)}</Table.DataCell>
             <Table.DataCell>
-              <PeriodLabel dateStringFom={r.fom} dateStringTom={r.tom === TIDENES_ENDE ? undefined : r.tom} />
+              <PeriodLabel dateStringFom={r.fom} dateStringTom={r.tom} />
             </Table.DataCell>
           </Table.Row>
         ))}

@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
 import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import type { AlleKodeverk, PersonstatusPeriode } from '@navikt/fp-types';
@@ -55,7 +54,7 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
           <Table.Row key={`${ps.fom}-${ps.tom}-${ps.type}`}>
             <Table.DataCell>{getPersonstatus(ps)}</Table.DataCell>
             <Table.DataCell>
-              <PeriodLabel dateStringFom={ps.fom} dateStringTom={ps.tom === TIDENES_ENDE ? undefined : ps.tom} />
+              <PeriodLabel dateStringFom={ps.fom} dateStringTom={ps.tom} />
             </Table.DataCell>
           </Table.Row>
         ))}

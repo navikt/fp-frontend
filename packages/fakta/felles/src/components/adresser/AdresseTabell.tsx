@@ -52,17 +52,15 @@ export const AdresseTabell = ({
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {adresser.toSorted(sorterPerioder).map(adresse => {
-              return (
-                <Table.Row key={adresse.adresseType + adresse.fom + adresse.tom}>
-                  <Table.DataCell>
-                    <PeriodLabel dateStringFom={adresse.fom} dateStringTom={adresse.tom} />
-                  </Table.DataCell>
-                  <Table.DataCell className="text-pretty">{formaterAdresse(adresse)}</Table.DataCell>
-                  <Table.DataCell>{adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn}</Table.DataCell>
-                </Table.Row>
-              );
-            })}
+            {adresser.toSorted(sorterPerioder).map(adresse => (
+              <Table.Row key={adresse.adresseType + adresse.fom + adresse.tom}>
+                <Table.DataCell>
+                  <PeriodLabel dateStringFom={adresse.fom} dateStringTom={adresse.tom} />
+                </Table.DataCell>
+                <Table.DataCell>{formaterAdresse(adresse)}</Table.DataCell>
+                <Table.DataCell>{adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn}</Table.DataCell>
+              </Table.Row>
+            ))}
           </Table.Body>
         </Table>
       )}
