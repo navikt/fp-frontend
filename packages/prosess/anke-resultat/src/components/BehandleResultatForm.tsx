@@ -120,7 +120,7 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
   </VStack>
 );
 
-const hentSpråkkode = (ankeVurderingOmgjør: string | null | undefined): string => {
+const hentSpråkkode = (ankeVurderingOmgjør: string | null | undefined) => {
   switch (ankeVurderingOmgjør) {
     case 'ANKE_TIL_UGUNST': {
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
@@ -132,7 +132,7 @@ const hentSpråkkode = (ankeVurderingOmgjør: string | null | undefined): string
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.Delvis';
     }
     default: {
-      return '';
+      return undefined;
     }
   }
 };
@@ -143,7 +143,9 @@ const ResultatOmgjores = ({
 }: Props & { alleKodeverk: AlleKodeverk }): ReactElement => (
   <VStack gap="space-16">
     <Detail>
-      <FormattedMessage id={hentSpråkkode(ankeVurderingResultat?.ankeVurderingOmgjør)} />
+      {hentSpråkkode(ankeVurderingResultat?.ankeVurderingOmgjør) && (
+        <FormattedMessage id={hentSpråkkode(ankeVurderingResultat?.ankeVurderingOmgjør)} />
+      )}
     </Detail>
     {ankeVurderingResultat?.ankeOmgjørÅrsak && (
       <>

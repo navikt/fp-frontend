@@ -3,9 +3,11 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack } from '@navikt/ds-react';
 
+import type messages from '../../i18n/nb_NO.json';
+
 interface IconLabelProps {
   icon: React.ReactElement;
-  formattedMessageId: string;
+  formattedMessageId: keyof typeof messages;
 }
 
 export const IconLabel = ({ icon, formattedMessageId }: IconLabelProps) => (

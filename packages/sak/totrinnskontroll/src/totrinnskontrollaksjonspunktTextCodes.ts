@@ -1,6 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-export const totrinnskontrollaksjonspunktTextCodes = {
+import type messages from '../i18n/nb_NO.json';
+
+export const totrinnskontrollaksjonspunktTextCodes: Record<string, keyof typeof messages> = {
   [AksjonspunktKode.AUTO_VENT_PÅ_FØDSELREGISTRERING]: 'ToTrinnsForm.Fødsel.VurderSokersRelasjon',
   [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: 'ToTrinnsForm.Fødsel.SjekkTerminbekreftelse',
   [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: 'ToTrinnsForm.Fødsel.SjekkManglendeFødsel',
@@ -59,4 +61,4 @@ export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING]: 'ToTrinnsForm.ArbeidOgInntekt.ManueltOpprettet',
 };
 
-export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes: Record<string, string> = {};
+export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes: Record<string, keyof typeof messages> = {};

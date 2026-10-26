@@ -35,7 +35,7 @@ const HEADER_TEXT_CODES = [
   'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagArbeid',
   'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagStillingsprosent',
   'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagPermisjon',
-];
+] as const;
 
 const MorsStillingsprosentField = ({
   control,

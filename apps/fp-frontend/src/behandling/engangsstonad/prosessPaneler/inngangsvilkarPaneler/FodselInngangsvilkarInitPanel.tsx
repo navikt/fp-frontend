@@ -11,6 +11,8 @@ import {
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
+import type messages from '../../../../../i18n/nb_NO.json';
+
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE];
 
 const VILKAR_KODER = ['FP_VK_1'] satisfies VilkårType[];
@@ -44,7 +46,7 @@ export const FodselInngangsvilkarInitPanel = () => {
   );
 };
 
-const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
+const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, keyof typeof messages> = {
   [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE]: 'SRBVilkarForm.VurderSammeBarn',
 };
 

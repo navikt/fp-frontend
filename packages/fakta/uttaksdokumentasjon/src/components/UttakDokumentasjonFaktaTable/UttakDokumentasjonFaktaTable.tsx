@@ -29,7 +29,7 @@ const HEADER_TEXT_CODES = [
   'UttakDokumentasjonFaktaTable.AvklaringBehov',
   'UttakDokumentasjonFaktaTable.Arsak',
   'UttakDokumentasjonFaktaTable.Vurdering',
-];
+] as const;
 
 interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];

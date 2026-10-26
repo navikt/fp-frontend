@@ -41,7 +41,7 @@ const ÅRSAKSTYPE_TEKST_KODER = {
   [Årsakstype.OVERFØRING]: 'UttakFaktaDetailForm.Overføring',
   [Årsakstype.UTSETTELSE]: 'UttakFaktaDetailForm.Utsettelse',
   [Årsakstype.OPPHOLD]: 'UttakFaktaDetailForm.Opphold',
-};
+} as const;
 
 export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarkering): Årsakstype => {
   if (valgtPeriode.utsettelseÅrsak) {

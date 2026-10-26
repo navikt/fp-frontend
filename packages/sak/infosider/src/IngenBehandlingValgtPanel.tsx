@@ -9,7 +9,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const getMessage = (numBehandlinger: number): string =>
+const getMessage = (numBehandlinger: number) =>
   numBehandlinger === 0
     ? 'IngenBehandlingValgtPanel.ZeroBehandlinger'
     : 'IngenBehandlingValgtPanel.PleaseSelectBehandling';

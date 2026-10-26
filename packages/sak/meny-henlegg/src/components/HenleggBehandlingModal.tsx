@@ -17,6 +17,8 @@ import type {
   KodeverkMedNavnTilbakekreving,
 } from '@navikt/fp-types';
 
+import type messages from '../../i18n/nb_NO.json';
+
 const maxLength1500 = maxLength(1500);
 
 export type ForhåndsvisHenleggParams = {
@@ -25,7 +27,9 @@ export type ForhåndsvisHenleggParams = {
   fritekst?: string;
 };
 
-const henleggArsakerPerBehandlingType: Record<string, BehandlingResultatType[] | BehandlingResultatTypeFpTilbake[]> = {
+type HenleggÅrsak = Extract<BehandlingResultatType | BehandlingResultatTypeFpTilbake, keyof typeof messages>;
+
+const henleggArsakerPerBehandlingType: Record<string, HenleggÅrsak[]> = {
   ['BT-003']: ['HENLAGT_KLAGE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-008']: ['HENLAGT_ANKE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-006']: ['HENLAGT_INNSYN_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
@@ -97,8 +101,8 @@ export const HenleggBehandlingModal = ({
                 label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
                 validate={[required]}
                 selectValues={henleggArsaker.map(arsak => (
-                  <option value={arsak.kode} key={arsak.kode}>
-                    {intl.formatMessage({ id: arsak.kode })}
+                  <option value={arsak} key={arsak}>
+                    {intl.formatMessage({ id: arsak })}
                   </option>
                 ))}
               />
@@ -206,15 +210,12 @@ const getHenleggÅrsaker = (
     KodeverkMedNavn<'BehandlingResultatType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[],
   behandlingType: BehandlingType,
   ytelseType: FagsakYtelseType,
-): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {
+): HenleggÅrsak[] => {
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
 
   return (
     typerForBehandlingType
       ?.filter(type => ytelseType !== 'ES' || type !== 'HENLAGT_SØKNAD_MANGLER')
-      .flatMap(type => {
-        const typer = behandlingResultatTyper.find(brt => brt.kode === type);
-        return typer ? [typer] : [];
-      }) || []
+      .filter(type => behandlingResultatTyper.some(brt => brt.kode === type)) || []
   );
 };

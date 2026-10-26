@@ -18,6 +18,8 @@ import { CollapseButton } from './CollapseButton';
 
 import styles from './simuleringTable.module.css';
 
+import messages from '../../i18n/nb_NO.json';
+
 const simuleringCodes = {
   DIFFERANSE: 'differanse',
   INNTREKK: 'inntrekk',
@@ -39,6 +41,27 @@ interface Props {
   ingenPerioderMedAvvik: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
+
+const erMeldingId = (id: string): id is keyof typeof messages => Object.hasOwn(messages, id);
+
+const Tekst = ({ id }: { id: string }) => (erMeldingId(id) ? <FormattedMessage id={id} /> : id);
+
+type MånedOgÅr = { month: string; månedIndeks: number; year: string };
+
+const MÅNED_IDER = [
+  'Simulering.headerText.januar',
+  'Simulering.headerText.februar',
+  'Simulering.headerText.mars',
+  'Simulering.headerText.april',
+  'Simulering.headerText.mai',
+  'Simulering.headerText.juni',
+  'Simulering.headerText.juli',
+  'Simulering.headerText.august',
+  'Simulering.headerText.september',
+  'Simulering.headerText.oktober',
+  'Simulering.headerText.november',
+  'Simulering.headerText.desember',
+] as const;
 
 export const SimuleringTable = ({
   simuleringResultat,
@@ -83,7 +106,7 @@ export const SimuleringTable = ({
                     className={isNextPeriod(monthAndYear, nesteMåned) ? styles['nextPeriod'] : styles['normalPeriod']}
                     key={`${monthAndYear.month}-${monthAndYear.year}`}
                   >
-                    <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />
+                    <FormattedMessage id={MÅNED_IDER[monthAndYear.månedIndeks]} />
                   </Table.HeaderCell>
                 ))}
               </Table.Row>
@@ -111,7 +134,7 @@ export const SimuleringTable = ({
                               : { borderBottom }
                           }
                         >
-                          <FormattedMessage id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
+                          <Tekst id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
                         </Table.DataCell>
                         {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned, borderBottom)}
                       </Table.Row>
@@ -123,7 +146,7 @@ export const SimuleringTable = ({
                   <Table.DataCell
                     style={resultat.feltnavn === simuleringCodes.INNTREKKNESTEMÅNED ? {} : { fontWeight: 'bold' }}
                   >
-                    <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
+                    <Tekst id={`Simulering.${resultat.feltnavn}`} />
                   </Table.DataCell>
                   {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
                 </Table.Row>
@@ -136,7 +159,7 @@ export const SimuleringTable = ({
   </>
 );
 
-const isNextPeriod = (monthAndYear: { month: string; year: string }, nextPeriod: string): boolean =>
+const isNextPeriod = (monthAndYear: MånedOgÅr, nextPeriod: string): boolean =>
   `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod ? dayjs(nextPeriod).format('MMMMYY') : false);
 
 const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFagområde[]): boolean =>
@@ -151,7 +174,7 @@ const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => i
 
 const createColumns = (
   perioder: SimuleringResultatRad['resultaterPerMåned'],
-  rangeOfMonths: { month: string; year: string }[],
+  rangeOfMonths: MånedOgÅr[],
   nextPeriod: string,
   borderBottom?: string,
 ): ReactElement[] => {
@@ -216,24 +239,21 @@ const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: Mottaker[
 
 const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => periodeFom || nesteUtbPeriodeFom;
 
-const getPeriod = (
-  ingenPerioderMedAvvik: boolean,
-  periodeFom: string,
-  mottaker: Mottaker,
-): { month: string; year: string }[] => {
+const getPeriod = (ingenPerioderMedAvvik: boolean, periodeFom: string, mottaker: Mottaker): MånedOgÅr[] => {
   const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
     ? dayjs(mottaker.nesteUtbPeriode.tom).subtract(1, 'months').format()
     : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriode.fom);
   return getRangeOfMonths(fomDato, mottaker.nesteUtbPeriode.tom);
 };
 
-const getRangeOfMonths = (fom: string, tom: string): { month: string; year: string }[] => {
+const getRangeOfMonths = (fom: string, tom: string): MånedOgÅr[] => {
   const fraMåned = dayjs(fom).startOf('month');
   const tilMåned = dayjs(tom).startOf('month');
   let currentMonth = fraMåned;
   const range = [
     {
       month: currentMonth.format('MMMM'),
+      månedIndeks: currentMonth.month(),
       year: currentMonth.format('YY'),
     },
   ];
@@ -242,6 +262,7 @@ const getRangeOfMonths = (fom: string, tom: string): { month: string; year: stri
     currentMonth = currentMonth.add(1, 'month');
     range.push({
       month: currentMonth.format('MMMM'),
+      månedIndeks: currentMonth.month(),
       year: currentMonth.format('YY'),
     });
   }

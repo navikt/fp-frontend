@@ -8,6 +8,10 @@ import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validat
 
 import styles from './searchForm.module.css';
 
+import messages from '../../i18n/nb_NO.json';
+
+const erMeldingId = (id: string): id is keyof typeof messages => Object.hasOwn(messages, id);
+
 const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean =>
   !!(searchStarted || searchString === undefined || searchString.length === 0);
 
@@ -60,7 +64,11 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
           <HStack gap="space-8" align="end">
             <ExclamationmarkTriangleFillIcon className={styles['advarselIcon']} />
             <BodyShort size="small">
-              <FormattedMessage id={searchResultAccessDenied.feilmelding} />
+              {erMeldingId(searchResultAccessDenied.feilmelding) ? (
+                <FormattedMessage id={searchResultAccessDenied.feilmelding} />
+              ) : (
+                searchResultAccessDenied.feilmelding
+              )}
             </BodyShort>
           </HStack>
         )}

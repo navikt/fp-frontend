@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -18,6 +18,7 @@ import {
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
+  AksjonspunktDefinisjon,
   ArbeidsgiverOpplysningerPerId,
   Fagsak,
   FaktaArbeidsforhold,
@@ -31,6 +32,17 @@ import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } fr
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
 
+import type messages from '../../i18n/nb_NO.json';
+
+const TEKST_PER_AKSJONSPUNKT: Partial<Record<AksjonspunktDefinisjon, keyof typeof messages>> = {
+  [AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET]: 'UttakFaktaForm.Aksjonspunkt.5063',
+  [AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER]: 'UttakFaktaForm.Aksjonspunkt.5064',
+  [AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO]: 'UttakFaktaForm.Aksjonspunkt.5065',
+  [AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG]: 'UttakFaktaForm.Aksjonspunkt.5066',
+  [AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON]: 'UttakFaktaForm.Aksjonspunkt.5074',
+  [AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK]: 'UttakFaktaForm.Aksjonspunkt.6065',
+};
+
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter.filter(erAksjonspunktÅpent).map(ap => {
     const førsteUttaksdato = ytelsefordeling.førsteUttaksdato;
@@ -38,12 +50,11 @@ const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling
       value: dateFormat(førsteUttaksdato),
     };
 
-    return (
-      <FormattedMessage
-        key={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
-        id={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
-        values={førsteUttak}
-      />
+    const tekstId = TEKST_PER_AKSJONSPUNKT[ap.definisjon];
+    return tekstId ? (
+      <FormattedMessage key={ap.definisjon} id={tekstId} values={førsteUttak} />
+    ) : (
+      <Fragment key={ap.definisjon}>{ap.definisjon}</Fragment>
     );
   });
 

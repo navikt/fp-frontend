@@ -82,7 +82,7 @@ export const TimeLineData = ({
   );
 };
 
-const hentStatusTekst = (klasse: FastsattOpptjeningAktivitet['klasse']): string =>
+const hentStatusTekst = (klasse: FastsattOpptjeningAktivitet['klasse']) =>
   klasse === 'BEKREFTET_AVVIST' ? 'OpptjeningVilkarView.Avslatt' : 'OpptjeningVilkarView.Godkjent';
 
 const erPeriodeGodkjent = (klasse: FastsattOpptjeningAktivitet['klasse']): boolean =>

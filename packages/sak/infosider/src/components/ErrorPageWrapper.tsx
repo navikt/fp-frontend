@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   children: ReactNode | ReactNode[];
-  titleCode?: string;
+  titleCode?: keyof typeof messages;
 }
 
 /**

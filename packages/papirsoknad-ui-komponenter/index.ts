@@ -33,3 +33,5 @@ export { TerminOgFodselPanel } from './src/terminOgFodselPanel/TerminOgFodselPan
 export { TerminOgFodselPanelSvp } from './src/terminOgFodselPanelSvp/TerminOgFodselPanelSvp';
 
 export { BehovForTilretteleggingPanel } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';
+
+export type { PapirsoknadUiKomponenterMessageId } from './i18n/messageIds';

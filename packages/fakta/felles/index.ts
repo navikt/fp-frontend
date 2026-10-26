@@ -17,3 +17,5 @@ export { PersonopplysningerForFamilie } from './src/components/personer/Personop
 
 export { AdresseTabell } from './src/components/adresser/AdresseTabell';
 export { FaktaFraFReg, erBarnUlike } from './src/components/faktaFraFReg/FaktaFraFReg';
+
+export type { FaktaFellesMessageId } from './i18n/messageIds';

@@ -8,7 +8,7 @@ import { classNames } from '@navikt/fp-utils';
 
 import styles from './stonadsdagerTab.module.css';
 
-const finnKorrektLabelForKvote = (stonadtype: StønadskontoType): string => {
+const finnKorrektLabelForKvote = (stonadtype: StønadskontoType) => {
   switch (stonadtype) {
     case 'FEDREKVOTE': {
       return 'TimeLineTab.Stonadinfo.Fedrekvote';

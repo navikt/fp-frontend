@@ -58,7 +58,7 @@ const utledInfoTextCode = (
           harSammeResultatSomOriginalBehandling,
           behandlingsresultat,
         )
-      : '';
+      : undefined;
   }
   return 'FatterVedtakApprovalModal.VedtakReturneresTilSaksbehandler';
 };

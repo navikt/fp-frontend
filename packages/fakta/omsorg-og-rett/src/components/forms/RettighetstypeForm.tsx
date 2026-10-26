@@ -32,7 +32,7 @@ const RETTIGHETSTYPER = {
   BARE_MOR_RETT: 'Rettighetstype.BareMorRett',
   BARE_FAR_RETT: 'Rettighetstype.BareFarRett',
   BARE_FAR_RETT_MOR_UFØR: 'Rettighetstype.BareFarRettMorUfør',
-} satisfies Record<Rettighetstype, string>;
+} as const satisfies Record<Rettighetstype, string>;
 
 export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt }: Props) => {
   const intl = useIntl();

@@ -33,6 +33,8 @@ import {
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
 
+import type messages from '../../i18n/nb_NO.json';
+
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
 
@@ -66,7 +68,7 @@ interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
   vilkår: Vilkår | undefined;
   status: VilkårUtfallType;
-  panelTekstKode: string;
+  panelTekstKode: keyof typeof messages;
 }
 
 /**

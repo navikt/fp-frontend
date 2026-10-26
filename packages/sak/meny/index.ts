@@ -4,3 +4,5 @@ export {
   MenyEndreBehandlendeEnhetIndex,
   getMenytekst as getEndreEnhetMenytekst,
 } from './src/endreEnhet/MenyEndreBehandlendeEnhetIndex';
+
+export type { SakMenyMessageId } from './i18n/messageIds';

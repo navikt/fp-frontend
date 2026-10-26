@@ -19,6 +19,8 @@ import {
 } from '../../totrinnskontrollaksjonspunktTextCodes';
 import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';
 
+import type messages from '../../../i18n/nb_NO.json';
+
 const buildVarigEndringBeregningText = (
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> =>
@@ -35,7 +37,7 @@ const buildUttakText = (
     (uttakperiode, index): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
       const fom = dateFormat(uttakperiode.fom);
       const tom = dateFormat(uttakperiode.tom);
-      let id;
+      let id: keyof typeof messages;
 
       if (uttakperiode.typeEndring === 'SLETTET') {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
@@ -66,9 +68,7 @@ const buildOpptjeningText = (
 const getTextFromAksjonspunktkode = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt | TotrinnskontrollAksjonspunkterDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  const aksjonspunktTextId = (totrinnskontrollaksjonspunktTextCodes as Record<string, string>)[
-    aksjonspunkt.aksjonspunktKode
-  ];
+  const aksjonspunktTextId = totrinnskontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId && typeof aksjonspunktTextId === 'string'
     ? [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />]
     : [];
@@ -100,7 +100,7 @@ const getFaktaOmBeregningText = (
 const getTextForKlageHelper = (
   behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
-  let aksjonspunktTextId = '';
+  let aksjonspunktTextId: keyof typeof messages | undefined;
   switch (behandlingsresultat?.type) {
     case 'KLAGE_YTELSESVEDTAK_STADFESTET': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';

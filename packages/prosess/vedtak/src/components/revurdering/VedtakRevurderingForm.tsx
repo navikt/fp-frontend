@@ -133,7 +133,7 @@ const hentResultattekst = (
   erInnvilget: boolean,
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
-): string => {
+) => {
   if (erNyttBehandlingResult(!!beregningsresultat, originaltBeregningResultat)) {
     return beregningsresultat ? 'VedtakForm.Resultat.EndretTilInnvilget' : 'VedtakForm.Resultat.EndretTilAvslag';
   }

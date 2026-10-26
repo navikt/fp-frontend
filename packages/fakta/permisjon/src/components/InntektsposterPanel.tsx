@@ -14,6 +14,21 @@ interface Props {
   skjæringstidspunkt: string;
 }
 
+const MÅNED_IDER = [
+  'InntektsposterPanel.1',
+  'InntektsposterPanel.2',
+  'InntektsposterPanel.3',
+  'InntektsposterPanel.4',
+  'InntektsposterPanel.5',
+  'InntektsposterPanel.6',
+  'InntektsposterPanel.7',
+  'InntektsposterPanel.8',
+  'InntektsposterPanel.9',
+  'InntektsposterPanel.10',
+  'InntektsposterPanel.11',
+  'InntektsposterPanel.12',
+] as const;
+
 export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Props) => {
   const [visAlleMåneder, setVisAlleMåneder] = useState(false);
 
@@ -38,7 +53,7 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
                 <HStack justify="space-between" asChild key={inntekt.fom}>
                   <BodyShort size="small">
                     <HStack gap="space-4" justify="space-between" className="w-18">
-                      <FormattedMessage tagName="span" id={`InntektsposterPanel.${dayjs(inntekt.fom).month() + 1}`} />
+                      <FormattedMessage tagName="span" id={MÅNED_IDER[dayjs(inntekt.fom).month()]} />
                       <span>{dayjs(inntekt.fom).year()}</span>
                     </HStack>
                     <BeløpLabel beløp={inntekt.beløp} kr />
