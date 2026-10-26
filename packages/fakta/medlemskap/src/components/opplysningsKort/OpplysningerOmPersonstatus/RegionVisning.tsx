@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
-import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import type { AlleKodeverk, KodeverkType, RegionPeriode } from '@navikt/fp-types';
@@ -47,11 +46,8 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
           <Table.HeaderCell className="w-60">
             <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
           </Table.HeaderCell>
-          <Table.HeaderCell className="w-32">
-            <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
-          </Table.HeaderCell>
           <Table.HeaderCell>
-            <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
+            <FormattedMessage id="OpplysningerOmPersonstatus.Periode" />
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -60,9 +56,8 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
           <Table.Row key={`${r.fom}-${r.tom}-${r.type}`}>
             <Table.DataCell>{getRegion(r)}</Table.DataCell>
             <Table.DataCell>
-              <DateLabel dateString={r.fom} />
+              <PeriodLabel dateStringFom={r.fom} dateStringTom={r.tom} />
             </Table.DataCell>
-            <Table.DataCell>{r.tom !== TIDENES_ENDE && <DateLabel dateString={r.tom} />}</Table.DataCell>
           </Table.Row>
         ))}
       </Table.Body>

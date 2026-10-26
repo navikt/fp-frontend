@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
-import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import type { AlleKodeverk, PersonstatusPeriode } from '@navikt/fp-types';
@@ -45,11 +44,8 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
           <Table.HeaderCell className="w-60">
             <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
           </Table.HeaderCell>
-          <Table.HeaderCell className="w-32">
-            <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
-          </Table.HeaderCell>
           <Table.HeaderCell>
-            <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
+            <FormattedMessage id="OpplysningerOmPersonstatus.Periode" />
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -58,9 +54,8 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
           <Table.Row key={`${ps.fom}-${ps.tom}-${ps.type}`}>
             <Table.DataCell>{getPersonstatus(ps)}</Table.DataCell>
             <Table.DataCell>
-              <DateLabel dateString={ps.fom} />
+              <PeriodLabel dateStringFom={ps.fom} dateStringTom={ps.tom} />
             </Table.DataCell>
-            <Table.DataCell>{ps.tom !== TIDENES_ENDE && <DateLabel dateString={ps.tom} />}</Table.DataCell>
           </Table.Row>
         ))}
       </Table.Body>
