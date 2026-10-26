@@ -43,9 +43,9 @@ export const OpplysningerOmPersonstatus = ({
             padding="space-16"
             borderRadius="8"
             className="row-span-3 grid grid-rows-subgrid"
-            aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}
+            aria-labelledby="soker-personstatus"
           >
-            <Label>
+            <Label id="soker-personstatus">
               <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
             </Label>
             <div>
@@ -61,9 +61,9 @@ export const OpplysningerOmPersonstatus = ({
               padding="space-16"
               borderRadius="8"
               className="row-span-3 grid grid-rows-subgrid"
-              aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}
+              aria-labelledby="annenpart-personstatus"
             >
-              <Label>
+              <Label id="annenpart-personstatus">
                 <FormattedMessage
                   id="OpplysningerOmPersonstatus.Annenpart"
                   values={{ navn: annenpartNavn ?? 'none' }}

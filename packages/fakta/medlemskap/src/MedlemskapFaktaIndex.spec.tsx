@@ -91,8 +91,7 @@ describe('MedlemskapFaktaIndex', () => {
     const personstatus = within(screen.getByLabelText('Personstatus og statsborgerskap for søker og annen part'));
     await userEvent.click(personstatus.getByText('Vis mer'));
 
-    const bruker = within(screen.getByLabelText('Personstatus og statsborgerskap for Kari Nordmann'));
-    expect(bruker.getByText('Søker, Kari Nordmann')).toBeInTheDocument();
+    const bruker = within(screen.getByLabelText('Søker, Kari Nordmann'));
 
     const regionTabellBruker = within(bruker.getByLabelText('Region for bruker'));
     expect(regionTabellBruker.getByText('Region for statsborgerskap')).toBeInTheDocument();
@@ -110,8 +109,7 @@ describe('MedlemskapFaktaIndex', () => {
     expect(personstatusTabellBruker.getByText('Bosatt (f.reg)')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2019 - 01.01.2022')).toBeInTheDocument();
 
-    const annenpart = within(screen.getByLabelText('Personstatus og statsborgerskap for Ola Nordmann'));
-    expect(annenpart.getByText('Annen part, Ola Nordmann')).toBeInTheDocument();
+    const annenpart = within(screen.getByLabelText('Annen part, Ola Nordmann'));
 
     const regionTabellAnnenpart = within(annenpart.getByLabelText('Region for annenpart'));
 
