@@ -12,8 +12,6 @@ import type { AlleKodeverk, Inntektspost } from '@navikt/fp-types';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
 
-import type messages from '../../../i18n/nb_NO.json';
-
 type ForenkletInntektspost = {
   beløp: number;
   fom: string;
@@ -25,6 +23,21 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   radData: ArbeidsforholdOgInntektRadData;
 }
+
+const MÅNED_IDER = [
+  'ArbeidsforholdInformasjonPanel.1',
+  'ArbeidsforholdInformasjonPanel.2',
+  'ArbeidsforholdInformasjonPanel.3',
+  'ArbeidsforholdInformasjonPanel.4',
+  'ArbeidsforholdInformasjonPanel.5',
+  'ArbeidsforholdInformasjonPanel.6',
+  'ArbeidsforholdInformasjonPanel.7',
+  'ArbeidsforholdInformasjonPanel.8',
+  'ArbeidsforholdInformasjonPanel.9',
+  'ArbeidsforholdInformasjonPanel.10',
+  'ArbeidsforholdInformasjonPanel.11',
+  'ArbeidsforholdInformasjonPanel.12',
+] as const;
 
 export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt, alleKodeverk, radData }: Props) => {
   const [visAlleMåneder, setVisAlleMåneder] = useState(false);
@@ -59,12 +72,7 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
                   <HStack justify="space-between" asChild key={inntekt.fom} className="w-40">
                     <BodyShort size="small">
                       <HStack gap="space-4" justify="space-between" className="w-18" as="span">
-                        <FormattedMessage
-                          tagName="span"
-                          id={
-                            `ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}` as keyof typeof messages
-                          }
-                        />
+                        <FormattedMessage tagName="span" id={MÅNED_IDER[dayjs(inntekt.fom).month()]} />
                         <span>{dayjs(inntekt.fom).year()}</span>
                       </HStack>
                       <BeløpLabel beløp={inntekt.beløp} kr />
