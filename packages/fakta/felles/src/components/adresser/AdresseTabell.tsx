@@ -29,8 +29,6 @@ export const AdresseTabell = ({
     );
   }
 
-  const rowStyle = (index: number) => (index + 1 === adresser.length ? { border: '0px' } : {});
-
   return (
     <>
       {adresser.length === 0 && (
@@ -39,7 +37,7 @@ export const AdresseTabell = ({
         </BodyShort>
       )}
       {adresser.length > 0 && (
-        <Table>
+        <Table className="[&>tbody>tr:last-child>td]:border-0">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell className="w-54">
@@ -54,18 +52,14 @@ export const AdresseTabell = ({
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {adresser.toSorted(sorterPerioder).map((adresse, i) => {
+            {adresser.toSorted(sorterPerioder).map(adresse => {
               return (
                 <Table.Row key={adresse.adresseType + adresse.fom + adresse.tom}>
-                  <Table.DataCell style={rowStyle(i)}>
+                  <Table.DataCell>
                     <PeriodLabel dateStringFom={adresse.fom} dateStringTom={adresse.tom} />
                   </Table.DataCell>
-                  <Table.DataCell style={rowStyle(i)} className="text-pretty">
-                    {formaterAdresse(adresse)}
-                  </Table.DataCell>
-                  <Table.DataCell style={rowStyle(i)}>
-                    {adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn}
-                  </Table.DataCell>
+                  <Table.DataCell className="text-pretty">{formaterAdresse(adresse)}</Table.DataCell>
+                  <Table.DataCell>{adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn}</Table.DataCell>
                 </Table.Row>
               );
             })}
