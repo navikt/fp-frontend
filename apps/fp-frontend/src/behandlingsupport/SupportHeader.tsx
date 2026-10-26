@@ -1,17 +1,16 @@
 import type { ReactElement, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Heading, HStack, VStack } from '@navikt/ds-react';
+import { Badge, Box, Heading, HStack } from '@navikt/ds-react';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 
-import styles from './supportHeader.module.css';
+import styles from './behandlingSupportIndex.module.css';
 
 interface Props {
   tekst: string;
   antall?: number;
   children: ReactNode;
-  brukPadding?: boolean;
   toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
   headerHandlinger?: ReactNode;
 }
@@ -20,7 +19,6 @@ export const SupportHeaderAndContent = ({
   tekst,
   antall,
   children,
-  brukPadding = true,
   toggleVisUtvidetBehandlingDetaljerKnapp,
   headerHandlinger,
 }: Props) => {
@@ -28,8 +26,8 @@ export const SupportHeaderAndContent = ({
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   return (
-    <VStack gap="space-16">
-      <div className={styles['header']}>
+    <div className={styles['panel']}>
+      <Box background="neutral-soft" borderColor="neutral-subtle" borderWidth="0 0 1 0" padding="space-20">
         <HStack justify="space-between">
           <HStack gap="space-4" align="center">
             <Heading size="small" level="2">
@@ -39,11 +37,11 @@ export const SupportHeaderAndContent = ({
           </HStack>
           <HStack gap="space-32" align="center">
             {headerHandlinger}
-            {!!antall && antall > 0 && <div className={styles['circle']}>{antall}</div>}
+            {!!antall && antall > 0 && <Badge count={antall} data-color="neutral" />}
           </HStack>
         </HStack>
-      </div>
-      <div className={brukPadding ? styles['container'] : undefined}>
+      </Box>
+      <div className={styles['content']}>
         <ErrorBoundary
           errorMessageCallback={addErrorMessage}
           errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Support' })}
@@ -51,6 +49,6 @@ export const SupportHeaderAndContent = ({
           {children}
         </ErrorBoundary>
       </div>
-    </VStack>
+    </div>
   );
 };

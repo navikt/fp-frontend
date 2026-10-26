@@ -10,7 +10,7 @@ import {
   PaperplaneIcon,
   PersonCheckmarkFillIcon,
 } from '@navikt/aksel-icons';
-import { Tabs } from '@navikt/ds-react';
+import { Badge, Tabs } from '@navikt/ds-react';
 
 import { parseQueryString } from '@navikt/fp-app-felles';
 import type { MessagesFormValues } from '@navikt/fp-sak-meldinger';
@@ -113,46 +113,42 @@ export const BehandlingSupportIndex = ({
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.UTVID_DETALJER, toggleVisUtvidetBehandlingDetaljer);
 
   return (
-    <Tabs ref={tabsRef} value={aktivtSupportPanel} onChange={changeRouteCallback}>
-      <Tabs.List className={styles['tabContainer']}>
+    <Tabs ref={tabsRef} value={aktivtSupportPanel} onChange={changeRouteCallback} fill className={styles['tabs']}>
+      <Tabs.List className={styles['tabList']}>
         {skalViseFraBeslutter && (
           <Tabs.Tab
-            className={styles['tab']}
             value={SupportTabs.FRA_BESLUTTER}
-            icon={<ArrowUndoIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.FraBeslutter' })} />}
+            aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.FraBeslutter' })}
+            icon={<ArrowUndoIcon aria-hidden />}
           />
         )}
         {skalViseTilGodkjenning && (
           <Tabs.Tab
-            className={styles['tab']}
             value={SupportTabs.TIL_BESLUTTER}
-            icon={<PersonCheckmarkFillIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Godkjenning' })} />}
+            aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Godkjenning' })}
+            icon={<PersonCheckmarkFillIcon aria-hidden />}
           />
         )}
         <Tabs.Tab
-          className={styles['tab']}
           value={SupportTabs.HISTORIKK}
-          icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })} />}
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })}
+          icon={<ClockDashedIcon aria-hidden />}
         />
         <Tabs.Tab
-          className={styles['tab']}
           value={SupportTabs.MELDINGER}
-          icon={<PaperplaneIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Melding' })} />}
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Melding' })}
+          icon={<PaperplaneIcon aria-hidden />}
         />
         <Tabs.Tab
-          className={styles['tab']}
           value={SupportTabs.DOKUMENTER}
-          icon={<FolderIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Dokumenter' })} />}
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Dokumenter' })}
+          icon={<FolderIcon aria-hidden />}
         />
         <Tabs.Tab
-          className={styles['tab']}
           value={SupportTabs.NOTATER}
-          icon={
-            <div className={styles['pencilSvgContainer']}>
-              {fagsak.notater.length > 0 && <div className={styles['ulesteNotater']}>{fagsak.notater.length}</div>}
-              <DocPencilIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />
-            </div>
-          }
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })}
+          label={<Badge count={fagsak.notater.length} data-color="accent" />}
+          icon={<DocPencilIcon aria-hidden />}
         />
       </Tabs.List>
       <Tabs.Panel value={SupportTabs.TIL_BESLUTTER}>
@@ -206,7 +202,7 @@ export const BehandlingSupportIndex = ({
           toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
         />
       </Tabs.Panel>
-      <Tabs.Panel value={SupportTabs.NOTATER}>
+      <Tabs.Panel value={SupportTabs.NOTATER} data-notat-panel>
         <NotatIndex fagsak={fagsak} toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp} />
       </Tabs.Panel>
     </Tabs>

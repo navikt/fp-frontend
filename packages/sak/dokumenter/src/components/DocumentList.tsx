@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { StarFillIcon } from '@navikt/aksel-icons';
@@ -35,47 +35,6 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
 
   const [sort, setSort] = useState<SortConfig>({ orderBy: 'tidspunkt', direction: 'descending' });
 
-  const [top, setTop] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-
-  // Målar avstanden til toppen av vindauget på nytt ved scrolling, slik at høgda på
-  // scroll-containeren held seg riktig når sida elles scrollar. Oppdateringa er
-  // throttla til éin gong per animation frame, og set berre state når verdien faktisk endrar seg.
-  useEffect(() => {
-    let rafId: number | null = null;
-
-    const updateTop = () => {
-      rafId = null;
-      const element = scrollContainerRef.current;
-      if (!element) {
-        return;
-      }
-      const newTop = Math.round(element.getBoundingClientRect().top);
-      setTop(prevTop => (prevTop === newTop ? prevTop : newTop));
-    };
-
-    const onScroll = () => {
-      rafId ??= requestAnimationFrame(updateTop);
-    };
-
-    updateTop();
-    globalThis.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      globalThis.removeEventListener('scroll', onScroll);
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-      }
-    };
-  }, []);
-
-  if (documents.length === 0) {
-    return (
-      <BodyShort size="small" spacing textColor="subtle">
-        <FormattedMessage id="DocumentList.NoDocuments" />
-      </BodyShort>
-    );
-  }
-
   const visGjelderForKolonne = documents.some(d => d.gjelderFor !== undefined);
   const sortedDocuments = documents.toSorted(compareByOrder(sort));
 
@@ -84,25 +43,30 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
   };
 
   return (
-    <div ref={scrollContainerRef} className="min-h-64 overflow-y-auto" style={{ height: `calc(100vh - ${top}px)` }}>
-      <VStack gap="space-8">
-        {valgteDokumentKeys.length > 0 && (
-          <Button
-            size="small"
-            variant="primary"
-            className="self-start"
-            onClick={() => {
-              documents
-                .filter(d => valgteDokumentKeys.includes(getDokumentKey(d)))
-                .forEach(dokument => {
-                  åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
-                });
-            }}
-          >
-            <FormattedMessage id="DocumentList.LastNedKnapp" values={{ antall: valgteDokumentKeys.length }} />
-          </Button>
-        )}
+    <VStack gap="space-8" className="pb-4 min-h-32">
+      {sortedDocuments.length === 0 && (
+        <BodyShort textColor="subtle" className="m-auto">
+          <FormattedMessage id="DocumentList.NoDocuments" />
+        </BodyShort>
+      )}
+      {valgteDokumentKeys.length > 0 && (
+        <Button
+          size="small"
+          variant="primary"
+          className="self-start"
+          onClick={() => {
+            documents
+              .filter(d => valgteDokumentKeys.includes(getDokumentKey(d)))
+              .forEach(dokument => {
+                åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
+              });
+          }}
+        >
+          <FormattedMessage id="DocumentList.LastNedKnapp" values={{ antall: valgteDokumentKeys.length }} />
+        </Button>
+      )}
 
+      {sortedDocuments.length > 0 && (
         <Table size="small" sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
           <Table.Header>
             <Table.Row>
@@ -185,7 +149,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
             ))}
           </Table.Body>
         </Table>
-      </VStack>
-    </div>
+      )}
+    </VStack>
   );
 };

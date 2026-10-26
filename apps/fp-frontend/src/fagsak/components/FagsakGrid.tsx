@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { SidePanelKnapp } from './SidePanelKnapp';
+import { useSupportHeight } from './useSupportHeight';
 
 import styles from './fagsakGrid.module.css';
 
@@ -27,35 +28,27 @@ export const FagsakGrid = ({
   visSideMeny,
   toggleSideMeny,
 }: Props) => {
-  const isSmallScreen = useMediaQuery({ maxWidth: 1701 });
-  const isBigScreen = useMediaQuery({ minWidth: 1702 });
+  const isTwoColumns = useMediaQuery({ minWidth: 1409 });
   const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
+  const { profileRef, supportRef } = useSupportHeight(isTwoColumns && visSideMeny);
+
   return (
-    <>
-      {isSmallScreen && (
+    <div className={styles['gridContainer']}>
+      <div className={styles['visittkort']}>
         <VisittkortMedKnapp
           visittkortContent={visittkortContent}
           visSideMeny={visSideMeny}
           toggleSideMeny={toggleSideMeny}
         />
-      )}
-      <div className={styles['gridContainer']}>
-        <div className={styles['leftColumn']}>
-          {isBigScreen && (
-            <VisittkortMedKnapp
-              visittkortContent={visittkortContent}
-              visSideMeny={visSideMeny}
-              toggleSideMeny={toggleSideMeny}
-            />
-          )}
-          {behandlingContent}
-        </div>
-        <div className={visSideMeny || isWrappedUnder ? styles['rightColumn'] : styles['rightColumnHidden']}>
-          <div>{profileAndNavigationContent}</div>
-          <div>{supportContent}</div>
+      </div>
+      <div className={styles['leftColumn']}>{behandlingContent}</div>
+      <div className={styles['rightColumn']} data-hide={!visSideMeny && !isWrappedUnder}>
+        <div ref={profileRef}>{profileAndNavigationContent}</div>
+        <div ref={supportRef} className={styles['support']}>
+          {supportContent}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -73,11 +66,9 @@ const VisittkortMedKnapp = ({
     return visittkortContent;
   }
   return (
-    <>
-      <span className={styles['floatRight']}>
-        <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
-      </span>
-      {visittkortContent}
-    </>
+    <div className={styles['visittkortWithButton']}>
+      <div className={styles['visittkortContent']}>{visittkortContent}</div>
+      <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
+    </div>
   );
 };

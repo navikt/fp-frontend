@@ -1,22 +1,31 @@
 .gridContainer {
-  display: flex;
-  flex-flow: row nowrap;
+  display: grid;
+  grid-template-areas:
+    'visittkort right'
+    'left right';
+  grid-template-columns: minmax(0, 1fr) 45rem;
+  grid-template-rows: auto 1fr;
   min-height: calc(100vh - var(--header-height));
   overflow: hidden;
 }
 
+.visittkort {
+  grid-area: visittkort;
+  min-width: 0;
+}
+
 .leftColumn {
-  flex-grow: 1;
+  grid-area: left;
   overflow: hidden;
 }
 
 .rightColumn {
-  min-width: 45rem;
-  width: 45rem;
+  grid-area: right;
+  min-width: 0;
 }
 
-.rightColumnHidden {
-  min-width: 0;
+.rightColumn[data-hide='true'] {
+  border: 0;
   overflow: hidden;
   transition:
     opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19),
@@ -25,32 +34,62 @@
   width: 0;
 }
 
-.floatRight {
-  float: right;
+.gridContainer:has(> .rightColumn[data-hide='true']) {
+  grid-template-columns: minmax(0, 1fr) 0;
+}
+
+.visittkortWithButton {
+  align-items: flex-start;
+  display: flex;
+}
+
+.visittkortContent {
+  flex: 1;
+  min-width: 0;
 }
 
 @media all and (max-width: 1701px) {
-  .rightColumn {
-    min-width: 35rem;
-    width: 35rem;
+  .gridContainer {
+    grid-template-areas:
+      'visittkort visittkort'
+      'left right';
+    grid-template-columns: minmax(0, 1fr) 35rem;
   }
 }
 
 @media all and (max-width: 1408px) {
   .gridContainer {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  .rightColumn {
-    margin-left: 0;
-    width: 100%;
+    grid-template-areas:
+      'visittkort'
+      'left'
+      'right';
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
   }
 }
 
 @media all and (min-width: 1409px) {
+  .gridContainer {
+    overflow: visible;
+  }
+
+  .leftColumn {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    overflow: visible;
+  }
+
   .rightColumn {
     border-left: 1px solid var(--panel-border-color);
+  }
+
+  .support {
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    position: sticky;
+    top: var(--header-height);
   }
 }
 

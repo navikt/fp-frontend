@@ -45,7 +45,8 @@ describe('AppIndex', () => {
 
     expect(screen.getByText('Ingen faresignaler oppdaget')).toBeInTheDocument();
 
-    expect(screen.getAllByText('Historikk')).toHaveLength(2);
+    expect(screen.getByRole('tab', { name: 'Historikk', selected: true })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Historikk' })).toBeInTheDocument();
     expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
     expect(screen.getByText('Vedlegg er mottatt')).toBeInTheDocument();
     expect(screen.getByText('Behandling er startet')).toBeInTheDocument();
