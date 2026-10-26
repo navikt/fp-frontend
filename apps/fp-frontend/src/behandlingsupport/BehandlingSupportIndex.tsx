@@ -118,31 +118,37 @@ export const BehandlingSupportIndex = ({
         {skalViseFraBeslutter && (
           <Tabs.Tab
             value={SupportTabs.FRA_BESLUTTER}
-            icon={<ArrowUndoIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.FraBeslutter' })} />}
+            aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.FraBeslutter' })}
+            icon={<ArrowUndoIcon aria-hidden />}
           />
         )}
         {skalViseTilGodkjenning && (
           <Tabs.Tab
             value={SupportTabs.TIL_BESLUTTER}
-            icon={<PersonCheckmarkFillIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Godkjenning' })} />}
+            aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Godkjenning' })}
+            icon={<PersonCheckmarkFillIcon aria-hidden />}
           />
         )}
         <Tabs.Tab
           value={SupportTabs.HISTORIKK}
-          icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })} />}
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })}
+          icon={<ClockDashedIcon aria-hidden />}
         />
         <Tabs.Tab
           value={SupportTabs.MELDINGER}
-          icon={<PaperplaneIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Melding' })} />}
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Melding' })}
+          icon={<PaperplaneIcon aria-hidden />}
         />
         <Tabs.Tab
           value={SupportTabs.DOKUMENTER}
-          icon={<FolderIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Dokumenter' })} />}
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Dokumenter' })}
+          icon={<FolderIcon aria-hidden />}
         />
         <Tabs.Tab
           value={SupportTabs.NOTATER}
+          aria-label={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })}
           label={<Badge count={fagsak.notater.length} data-color="accent" />}
-          icon={<DocPencilIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />}
+          icon={<DocPencilIcon aria-hidden />}
         />
       </Tabs.List>
       <Tabs.Panel value={SupportTabs.TIL_BESLUTTER}>

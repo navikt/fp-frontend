@@ -33,33 +33,22 @@ export const FagsakGrid = ({
   const { profileRef, supportRef } = useSupportHeight(isTwoColumns && visSideMeny);
 
   return (
-    <>
-      {isWrappedUnder && (
+    <div className={styles['gridContainer']}>
+      <div className={styles['visittkort']}>
         <VisittkortMedKnapp
           visittkortContent={visittkortContent}
           visSideMeny={visSideMeny}
           toggleSideMeny={toggleSideMeny}
         />
-      )}
-      <div className={styles['gridContainer']}>
-        <div className={styles['leftColumn']}>
-          {isTwoColumns && (
-            <VisittkortMedKnapp
-              visittkortContent={visittkortContent}
-              visSideMeny={visSideMeny}
-              toggleSideMeny={toggleSideMeny}
-            />
-          )}
-          {behandlingContent}
-        </div>
-        <div className={visSideMeny || isWrappedUnder ? styles['rightColumn'] : styles['rightColumnHidden']}>
-          <div ref={profileRef}>{profileAndNavigationContent}</div>
-          <div ref={supportRef} className={styles['support']}>
-            {supportContent}
-          </div>
+      </div>
+      <div className={styles['leftColumn']}>{behandlingContent}</div>
+      <div className={styles['rightColumn']} data-hide={!visSideMeny && !isWrappedUnder}>
+        <div ref={profileRef}>{profileAndNavigationContent}</div>
+        <div ref={supportRef} className={styles['support']}>
+          {supportContent}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
