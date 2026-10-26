@@ -43,8 +43,6 @@ import { VedtakAvslagArsakOgBegrunnelsePanel } from './VedtakAvslagArsakOgBegrun
 import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPanel';
 import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
 
-import type messages from '../../../i18n/nb_NO.json';
-
 type RevurderingVedtakAksjonspunkter =
   | ForeslaVedtakAp
   | ForeslaVedtakManueltAp
@@ -145,8 +143,7 @@ const hentResultattekst = (
       : 'VedtakForm.Resultat.IngenEndring';
   }
   return erTilkjentYtelseEllerAntallBarnEndret(erInnvilget, beregningsresultat, originaltBeregningResultat)
-    ? // Nøkkelen finnes ikke i nb_NO.json; id-en vises som tekst.
-      ('VedtakForm.Resultat.EndretAntallBarn' as keyof typeof messages)
+    ? 'VedtakForm.Resultat.EndretAntallBarn'
     : 'VedtakForm.Resultat.IngenEndring';
 };
 
