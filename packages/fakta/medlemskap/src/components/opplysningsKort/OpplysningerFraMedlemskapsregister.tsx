@@ -91,19 +91,19 @@ export const OpplysningerFraMedlemskapsregister = ({
 
                     return (
                       <Table.Row key={fom + tom + medlemskapTypeString}>
-                        <Table.DataCell>
+                        <Table.DataCell className="w-px whitespace-nowrap">
                           <PeriodLabel dateStringFom={fom} dateStringTom={tom ?? undefined} />
                         </Table.DataCell>
-                        <Table.DataCell>
+                        <Table.DataCell className="w-px whitespace-nowrap">
                           <FormattedMessage
                             id="OpplysningerFraMedlemskapsregister.TabellCell.ErMedlem"
                             values={{ erMedlem }}
                           />
                         </Table.DataCell>
-                        {skalViseLovvalgtland && <Table.DataCell>{lovvalgsland}</Table.DataCell>}
-                        {skalViseStudieland && <Table.DataCell>{studieland}</Table.DataCell>}
-                        <Table.DataCell>{medlemskapTypeString}</Table.DataCell>
-                        <Table.DataCell>{dekningTypeString}</Table.DataCell>
+                        {skalViseLovvalgtland && <Table.DataCell className="w-px whitespace-nowrap">{lovvalgsland}</Table.DataCell>}
+                        {skalViseStudieland && <Table.DataCell className="w-px whitespace-nowrap">{studieland}</Table.DataCell>}
+                        <Table.DataCell className="w-px whitespace-nowrap">{medlemskapTypeString}</Table.DataCell>
+                        <Table.DataCell className="w-px whitespace-nowrap">{dekningTypeString}</Table.DataCell>
                         <Table.DataCell>
                           {beslutningsdato ? <DateLabel dateString={beslutningsdato} /> : null}
                         </Table.DataCell>

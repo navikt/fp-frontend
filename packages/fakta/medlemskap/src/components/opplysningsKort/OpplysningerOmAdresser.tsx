@@ -40,7 +40,7 @@ export const OpplysningerOmAdresser = ({
       kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForAdresser.includes(a))}
     >
-      <HGrid columns="repeat(auto-fit, minmax(min(100%, 36rem), 1fr))" gap="space-16">
+      <HGrid columns="repeat(auto-fit, minmax(min(100%, 40rem), 1fr))" gap="space-16">
         <Personopplysninger
           showIcon={false}
           alleKodeverk={alleKodeverk}
