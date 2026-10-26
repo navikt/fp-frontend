@@ -32,7 +32,7 @@ vi.mock('../fagsakprofile/FagsakProfileIndex', () => ({
   FagsakProfileIndex: ({ behandling, toggleSideMeny, visSideMeny }: ComponentProps<typeof FagsakProfileIndex>) => (
     <div>
       <span>{behandling ? `Meny for ${behandling.uuid}` : 'Ingen behandlingsmeny'}</span>
-      <button onClick={toggleSideMeny}>{visSideMeny ? 'Skjul sidepanel' : 'Vis sidepanel'}</button>
+      <button onClick={toggleSideMeny}>{visSideMeny ? 'Skjul profil sidepanel' : 'Vis profil sidepanel'}</button>
     </div>
   ),
 }));
@@ -138,7 +138,7 @@ describe('FagsakIndexNavigasjon', () => {
   it('skal tømme behandlingen ved bytte av fagsak og beholde valgt sidepanelvisning', async () => {
     const router = renderFagsak();
     act(() => forespørsler[0]!.svar(lagBehandling({ uuid: 'A', versjon: 1 })));
-    await userEvent.click(screen.getByRole('button', { name: 'Skjul sidepanel' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Skjul profil sidepanel' }));
 
     await act(() => router.navigate('/fagsak/456/behandling/B/'));
     act(() => forespørsler[0]!.svar(lagBehandling({ uuid: 'A', versjon: 2 })));
