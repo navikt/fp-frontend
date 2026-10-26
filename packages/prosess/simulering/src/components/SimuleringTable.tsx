@@ -18,7 +18,7 @@ import { CollapseButton } from './CollapseButton';
 
 import styles from './simuleringTable.module.css';
 
-import type messages from '../../i18n/nb_NO.json';
+import messages from '../../i18n/nb_NO.json';
 
 const simuleringCodes = {
   DIFFERANSE: 'differanse',
@@ -41,6 +41,10 @@ interface Props {
   ingenPerioderMedAvvik: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
+
+const erMeldingId = (id: string): id is keyof typeof messages => Object.hasOwn(messages, id);
+
+const Tekst = ({ id }: { id: string }) => (erMeldingId(id) ? <FormattedMessage id={id} /> : id);
 
 type MånedOgÅr = { month: string; månedIndeks: number; year: string };
 
@@ -130,9 +134,7 @@ export const SimuleringTable = ({
                               : { borderBottom }
                           }
                         >
-                          <FormattedMessage
-                            id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}` as keyof typeof messages}
-                          />
+                          <Tekst id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
                         </Table.DataCell>
                         {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned, borderBottom)}
                       </Table.Row>
@@ -144,7 +146,7 @@ export const SimuleringTable = ({
                   <Table.DataCell
                     style={resultat.feltnavn === simuleringCodes.INNTREKKNESTEMÅNED ? {} : { fontWeight: 'bold' }}
                   >
-                    <FormattedMessage id={`Simulering.${resultat.feltnavn}` as keyof typeof messages} />
+                    <Tekst id={`Simulering.${resultat.feltnavn}`} />
                   </Table.DataCell>
                   {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
                 </Table.Row>
