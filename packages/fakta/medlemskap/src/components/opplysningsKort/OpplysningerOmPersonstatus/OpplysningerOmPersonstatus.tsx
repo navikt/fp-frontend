@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { Detail, Label, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+import { Detail, HGrid, Label, VStack } from '@navikt/ds-react';
 
 import { type AlleKodeverk, type Medlemskap, type MedlemskapAvvik } from '@navikt/fp-types';
 
@@ -34,29 +33,32 @@ export const OpplysningerOmPersonstatus = ({
       kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForPersonstatus.includes(a))}
     >
-      <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>
-        <Label>
-          <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
-        </Label>
+      <VStack gap="space-16">
         <Detail>
           <FormattedMessage id="OpplysningerOmPersonstatus.Beskrivelse" />
         </Detail>
-        <PersonstatusVisning personstatuser={personstatuser} alleKodeverk={alleKodeverk} />
-        <RegionVisning regioner={regioner} alleKodeverk={alleKodeverk} />
-      </VStack>
-
-      {annenpart && (
-        <>
-          <AvsnittSkiller dividerParagraf />
-          <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}>
+        <HGrid columns={{ xs: 1, lg: annenpart ? 2 : 1 }} gap="space-32">
+          <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>
             <Label>
-              <FormattedMessage id="OpplysningerOmPersonstatus.Annenpart" values={{ navn: annenpartNavn ?? 'none' }} />
+              <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
             </Label>
-            <PersonstatusVisning personstatuser={annenpart.personstatuser} alleKodeverk={alleKodeverk} erAnnenpart />
-            <RegionVisning regioner={annenpart.regioner} alleKodeverk={alleKodeverk} erAnnenpart />
+            <PersonstatusVisning personstatuser={personstatuser} alleKodeverk={alleKodeverk} />
+            <RegionVisning regioner={regioner} alleKodeverk={alleKodeverk} />
           </VStack>
-        </>
-      )}
+          {annenpart && (
+            <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}>
+              <Label>
+                <FormattedMessage
+                  id="OpplysningerOmPersonstatus.Annenpart"
+                  values={{ navn: annenpartNavn ?? 'none' }}
+                />
+              </Label>
+              <PersonstatusVisning personstatuser={annenpart.personstatuser} alleKodeverk={alleKodeverk} erAnnenpart />
+              <RegionVisning regioner={annenpart.regioner} alleKodeverk={alleKodeverk} erAnnenpart />
+            </VStack>
+          )}
+        </HGrid>
+      </VStack>
     </EkspansjonsKort>
   );
 };
