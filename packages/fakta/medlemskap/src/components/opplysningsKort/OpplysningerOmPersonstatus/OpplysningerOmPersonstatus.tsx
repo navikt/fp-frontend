@@ -37,7 +37,7 @@ export const OpplysningerOmPersonstatus = ({
         <Detail>
           <FormattedMessage id="OpplysningerOmPersonstatus.Beskrivelse" />
         </Detail>
-        <HGrid columns={{ xs: 1, lg: annenpart ? 2 : 1 }} gap="space-32">
+        <HGrid columns={{ xs: 1, lg: annenpart ? 2 : 1 }} gap="space-16">
           <Box background="neutral-moderate" padding="space-16" borderRadius="8">
             <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>
               <Label>
