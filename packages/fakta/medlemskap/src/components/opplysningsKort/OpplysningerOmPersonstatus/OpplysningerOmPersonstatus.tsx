@@ -37,7 +37,7 @@ export const OpplysningerOmPersonstatus = ({
         <Detail>
           <FormattedMessage id="OpplysningerOmPersonstatus.Beskrivelse" />
         </Detail>
-        <HGrid columns={{ xs: 1, lg: annenpart ? 2 : 1 }} gap="space-16">
+        <HGrid columns="repeat(auto-fit, minmax(min(100%, 24rem), 1fr))" gap="space-16">
           <Box
             background="neutral-moderate"
             padding="space-16"
