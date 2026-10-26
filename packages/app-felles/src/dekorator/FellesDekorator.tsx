@@ -18,6 +18,8 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
+const erMeldingId = (kode: string): kode is keyof typeof messages => Object.hasOwn(messages, kode);
+
 export type QueryStrings = {
   errorcode?: string;
   errormessage?: string;
@@ -95,9 +97,10 @@ const formaterFeilmeldinger = (
 ): Feilmelding[] => {
   const feilmeldinger: Feilmelding[] = [];
 
-  if (queryStringFeilmeldinger.errorcode) {
+  const { errorcode } = queryStringFeilmeldinger;
+  if (errorcode) {
     addIfNotExists(feilmeldinger, {
-      melding: intl.formatMessage({ id: queryStringFeilmeldinger.errorcode as keyof typeof messages }),
+      melding: erMeldingId(errorcode) ? intl.formatMessage({ id: errorcode }) : errorcode,
     });
   }
   if (queryStringFeilmeldinger.errormessage) {
