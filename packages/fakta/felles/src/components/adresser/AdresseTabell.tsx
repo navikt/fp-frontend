@@ -60,7 +60,9 @@ export const AdresseTabell = ({
                   <Table.DataCell style={rowStyle(i)}>
                     <PeriodLabel dateStringFom={adresse.fom} dateStringTom={adresse.tom} />
                   </Table.DataCell>
-                  <Table.DataCell style={rowStyle(i)}>{formaterAdresse(adresse)}</Table.DataCell>
+                  <Table.DataCell style={rowStyle(i)} className="text-pretty">
+                    {formaterAdresse(adresse)}
+                  </Table.DataCell>
                   <Table.DataCell style={rowStyle(i)}>
                     {adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn}
                   </Table.DataCell>
