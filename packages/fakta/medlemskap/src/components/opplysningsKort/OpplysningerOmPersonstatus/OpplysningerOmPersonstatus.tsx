@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Detail, HGrid, Label, VStack } from '@navikt/ds-react';
@@ -26,6 +27,9 @@ export const OpplysningerOmPersonstatus = ({
   alleKodeverk,
   skalViseAvvik,
 }: Props) => {
+  const sokerLabelId = useId();
+  const annenpartLabelId = useId();
+
   return (
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
@@ -43,9 +47,9 @@ export const OpplysningerOmPersonstatus = ({
             padding="space-16"
             borderRadius="8"
             className="row-span-3 grid grid-rows-subgrid"
-            aria-labelledby="soker-personstatus"
+            aria-labelledby={sokerLabelId}
           >
-            <Label id="soker-personstatus">
+            <Label id={sokerLabelId}>
               <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
             </Label>
             <div>
@@ -61,9 +65,9 @@ export const OpplysningerOmPersonstatus = ({
               padding="space-16"
               borderRadius="8"
               className="row-span-3 grid grid-rows-subgrid"
-              aria-labelledby="annenpart-personstatus"
+              aria-labelledby={annenpartLabelId}
             >
-              <Label id="annenpart-personstatus">
+              <Label id={annenpartLabelId}>
                 <FormattedMessage
                   id="OpplysningerOmPersonstatus.Annenpart"
                   values={{ navn: annenpartNavn ?? 'none' }}
