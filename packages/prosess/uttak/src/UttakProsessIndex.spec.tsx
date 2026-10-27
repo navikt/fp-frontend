@@ -15,7 +15,16 @@ const {
   StønadskontoMedUgyldigForbruk,
   VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent,
   VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent,
+  VisOppholdsperiode,
 } = composeStories(stories);
+
+const settUtbetalingsgrader = async (verdier: string[]) => {
+  const inputFelter = screen.getAllByLabelText('Utbetalingsgrad (%)');
+  for (const [index, verdi] of verdier.entries()) {
+    await userEvent.clear(inputFelter[index]!);
+    await userEvent.type(inputFelter[index]!, verdi);
+  }
+};
 
 const UttakMedPanelbytte = (props: ComponentProps<typeof UttakProsessIndex>) => {
   const [visUttak, setVisUttak] = useState(true);
@@ -886,5 +895,48 @@ describe('UttakProsessIndex', () => {
     expect(
       screen.queryByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.'),
     ).not.toBeInTheDocument();
+  });
+
+  it.each([
+    { samtidigUttaksprosent: '50', utbetalingsgrad: '9', forventFeil: false },
+    { samtidigUttaksprosent: '20', utbetalingsgrad: '100', forventFeil: true },
+  ])(
+    'skal sammenligne utbetalingsgrad $utbetalingsgrad med samtidig uttaksprosent $samtidigUttaksprosent som tall',
+    async ({ samtidigUttaksprosent, utbetalingsgrad, forventFeil }) => {
+      render(<AksjonspunktDerValgtStønadskontoIkkeFinnes />);
+
+      await userEvent.click(screen.getByText('Oppfylt'));
+      await userEvent.click(screen.getByLabelText('Samtidig uttak'));
+      await userEvent.type(screen.getByLabelText('Uttak'), samtidigUttaksprosent);
+      await settUtbetalingsgrader([utbetalingsgrad, utbetalingsgrad]);
+      await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
+      await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+      const feilmeldinger = screen.queryAllByText('Feltet kan ikke være høyere enn samtidig uttaksprosent');
+      expect(feilmeldinger).toHaveLength(forventFeil ? 2 : 0);
+    },
+  );
+
+  it('skal ta med desimaler fra andre aktiviteter når utbetalingsgrad må være høyere enn 0', async () => {
+    render(<AksjonspunktDerValgtStønadskontoIkkeFinnes />);
+
+    await userEvent.click(screen.getByText('Oppfylt'));
+    await settUtbetalingsgrader(['0', '0,5']);
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+    expect(screen.queryByText('Feltet må være høyere enn 0')).not.toBeInTheDocument();
+  });
+
+  it('skal ikke vise valg av oppfylt eller ikke oppfylt for oppholdsperioder', async () => {
+    render(<VisOppholdsperiode />);
+
+    await userEvent.click(await screen.findByRole('button', { name: /fra 15.02.2021 til 05.05.2021/ }));
+
+    expect(screen.getByLabelText('Vurdering')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Oppdater' })).toBeInTheDocument();
+    expect(screen.queryByRole('radio', { name: 'Oppfylt' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('radio', { name: 'Ikke oppfylt' })).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Årsak til innvilgelse')).toBeInTheDocument();
   });
 });
