@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+import { HGrid } from '@navikt/ds-react';
 
 import { erPersonAdresserLike, Personopplysninger } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, type Medlemskap, type MedlemskapAvvik } from '@navikt/fp-types';
@@ -40,25 +40,25 @@ export const OpplysningerOmAdresser = ({
       kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForAdresser.includes(a))}
     >
-      <Personopplysninger
-        showIcon={false}
-        alleKodeverk={alleKodeverk}
-        rolle="BRUKER"
-        navn={brukerNavn}
-        adresser={adresser}
-      />
-
-      {annenpart && <AvsnittSkiller dividerParagraf />}
-      {annenpart && (
+      <HGrid columns="repeat(auto-fit, minmax(min(100%, 40rem), 1fr))" gap="space-16">
         <Personopplysninger
           showIcon={false}
-          navn={annenpartNavn}
           alleKodeverk={alleKodeverk}
-          adresser={annenpart.adresser}
-          rolle="ANNEN_PART"
-          harSammeAdresser={annenpart.adresser.length > 0 && erPersonAdresserLike(adresser, annenpart.adresser)}
+          rolle="BRUKER"
+          navn={brukerNavn}
+          adresser={adresser}
         />
-      )}
+        {annenpart && (
+          <Personopplysninger
+            showIcon={false}
+            navn={annenpartNavn}
+            alleKodeverk={alleKodeverk}
+            adresser={annenpart.adresser}
+            rolle="ANNEN_PART"
+            harSammeAdresser={annenpart.adresser.length > 0 && erPersonAdresserLike(adresser, annenpart.adresser)}
+          />
+        )}
+      </HGrid>
     </EkspansjonsKort>
   );
 };

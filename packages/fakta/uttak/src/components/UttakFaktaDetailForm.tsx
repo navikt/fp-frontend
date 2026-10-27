@@ -7,7 +7,6 @@ import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { LabeledValue, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
-import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type {
@@ -15,6 +14,7 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   Fagsak,
   FaktaArbeidsforhold,
+  FaktaUttakPeriode,
   UttakArbeidType,
 } from '@navikt/fp-types';
 import { sortKodeverkByNavn } from '@navikt/fp-utils';
@@ -56,6 +56,11 @@ export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarker
   return Årsakstype.UTTAK;
 };
 
+const skalViseMorsAktivitet = (fagsak: Fagsak, årsakstype: Årsakstype, stønadskonto?: string): boolean =>
+  fagsak.relasjonsRolleType !== 'MORA' &&
+  ((årsakstype === Årsakstype.UTTAK && (stønadskonto === 'FELLESPERIODE' || stønadskonto === 'FORELDREPENGER')) ||
+    årsakstype === Årsakstype.UTSETTELSE);
+
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null;
 
@@ -67,7 +72,7 @@ interface Props {
   slettPeriode?: () => void;
   avbrytEditering: () => void;
   readOnly: boolean;
-  oppdaterPeriode: (uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => void;
+  oppdaterPeriode: (uttaksperiode: FaktaUttakPeriode) => void;
   alleKodeverk: AlleKodeverk;
   defaultMonth?: Date;
 }
@@ -127,13 +132,9 @@ export const UttakFaktaDetailForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun avregistrere felt når årsakstype endrar seg; formMethods er stabil
   }, [årsakstype]);
 
-  const onSubmit = (values: FormValues) => oppdaterPeriode(transformValues(values));
+  const onSubmit = (values: FormValues) => oppdaterPeriode(transformValues(values, fagsak));
 
-  const erUttakOgFellesperiodeEllerForeldrepenger =
-    årsakstype === Årsakstype.UTTAK && (stønadskonto === 'FELLESPERIODE' || stønadskonto === 'FORELDREPENGER');
-  const visMorsAktivitet =
-    fagsak.relasjonsRolleType !== 'MORA' &&
-    (erUttakOgFellesperiodeEllerForeldrepenger || årsakstype === Årsakstype.UTSETTELSE);
+  const visMorsAktivitet = skalViseMorsAktivitet(fagsak, årsakstype, stønadskonto);
 
   return (
     <>
@@ -366,20 +367,36 @@ const buildInitialValues = (
   };
 };
 
-const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
-  ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
-  arbeidsforhold: values.arbeidsgiverId
-    ? {
-        arbeidsgiverReferanse:
-          values.arbeidsgiverId.split('-', 1)[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-', 1)[0],
-        arbeidType: values.arbeidsgiverId.split('-', 2)[1] as UttakArbeidType,
-      }
-    : undefined,
-  periodeKilde: 'SAKSBEHANDLER',
-  aksjonspunktType: undefined,
-  arbeidstidsprosent: parseOptionalNumber(values.arbeidstidsprosent),
-  samtidigUttaksprosent: parseOptionalNumber(values.samtidigUttaksprosent),
-});
+const transformValues = (values: FormValues, fagsak: Fagsak): FaktaUttakPeriode => {
+  const { arsakstype } = values;
+  const erUttak = arsakstype === Årsakstype.UTTAK;
+  const harStønadskonto = erUttak || arsakstype === Årsakstype.OVERFØRING;
+
+  return {
+    fom: values.fom,
+    tom: values.tom,
+    begrunnelse: values.begrunnelse,
+    periodeKilde: 'SAKSBEHANDLER',
+    uttakPeriodeType: harStønadskonto ? values.uttakPeriodeType : undefined,
+    overføringÅrsak: arsakstype === Årsakstype.OVERFØRING ? values.overføringÅrsak : undefined,
+    utsettelseÅrsak: arsakstype === Årsakstype.UTSETTELSE ? values.utsettelseÅrsak : undefined,
+    oppholdÅrsak: arsakstype === Årsakstype.OPPHOLD ? values.oppholdÅrsak : undefined,
+    morsAktivitet: skalViseMorsAktivitet(fagsak, arsakstype, values.uttakPeriodeType) ? values.morsAktivitet : undefined,
+    flerbarnsdager: erUttak ? values.flerbarnsdager : undefined,
+    arbeidsforhold:
+      erUttak && values.arbeidsgiverId
+        ? {
+            arbeidsgiverReferanse:
+              values.arbeidsgiverId.split('-', 1)[0] === 'undefined'
+                ? undefined
+                : values.arbeidsgiverId.split('-', 1)[0],
+            arbeidType: values.arbeidsgiverId.split('-', 2)[1] as UttakArbeidType,
+          }
+        : undefined,
+    arbeidstidsprosent: erUttak ? parseOptionalNumber(values.arbeidstidsprosent) : undefined,
+    samtidigUttaksprosent: erUttak ? parseOptionalNumber(values.samtidigUttaksprosent) : undefined,
+  };
+};
 
 const parseOptionalNumber = (value?: number | string) =>
   value === undefined || value === '' ? undefined : Number.parseFloat(String(value));

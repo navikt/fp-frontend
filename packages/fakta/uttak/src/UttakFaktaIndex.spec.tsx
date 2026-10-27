@@ -2,10 +2,10 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import type { FaktaUttakPeriode } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
 
-import type { KontrollerFaktaPeriodeMedApMarkering } from './typer/kontrollerFaktaPeriodeMedApMarkering';
 import * as stories from './UttakFaktaIndex.stories';
 
 const {
@@ -114,16 +114,14 @@ describe('UttakFaktaIndex', () => {
           {
             fom: '2022-01-31',
             tom: '2022-12-01',
-            originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
             samtidigUttaksprosent: 10,
             uttakPeriodeType: 'MØDREKVOTE',
-            aksjonspunktType: undefined,
             arbeidsforhold: undefined,
             arbeidstidsprosent: undefined,
             flerbarnsdager: false,
           },
-        ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
+        ] satisfies FaktaUttakPeriode[],
       },
     ]);
   });
@@ -163,7 +161,6 @@ describe('UttakFaktaIndex', () => {
           {
             fom: '2022-01-31',
             tom: '2022-12-01',
-            originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
             samtidigUttaksprosent: 80,
             uttakPeriodeType: 'MØDREKVOTE',
@@ -173,12 +170,10 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 10,
             flerbarnsdager: true,
-            aksjonspunktType: undefined,
           },
           {
             fom: '2022-12-02',
             tom: '2022-12-10',
-            originalFom: '2022-12-02',
             periodeKilde: 'SØKNAD',
             uttakPeriodeType: 'MØDREKVOTE',
             arbeidsforhold: {
@@ -191,7 +186,6 @@ describe('UttakFaktaIndex', () => {
           {
             fom: '2022-12-11',
             tom: '2022-12-20',
-            originalFom: '2022-12-11',
             periodeKilde: 'SØKNAD',
             uttakPeriodeType: 'MØDREKVOTE',
             arbeidsforhold: {
@@ -201,7 +195,7 @@ describe('UttakFaktaIndex', () => {
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
           },
-        ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
+        ] satisfies FaktaUttakPeriode[],
       },
     ]);
   });
@@ -252,7 +246,6 @@ describe('UttakFaktaIndex', () => {
             fom: '2022-01-31',
             tom: '2022-12-14',
             periodeKilde: 'SAKSBEHANDLER',
-            aksjonspunktType: undefined,
             arbeidsforhold: undefined,
             morsAktivitet: undefined,
             oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
@@ -260,6 +253,89 @@ describe('UttakFaktaIndex', () => {
         ],
       },
     ]);
+  });
+
+  it('skal kun slette valgt periode når flere nye perioder er lagt til', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<VisAksjonspunktDerIngenPerioderFinnes submitCallback={lagre} />);
+
+    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+
+    const leggTilOppholdsperiode = async (fom: string, tom: string) => {
+      await userEvent.click(screen.getByText('Legg til periode'));
+      const periodeFra = screen.getByLabelText('Periode fra');
+      await userEvent.type(periodeFra, fom);
+      fireEvent.blur(periodeFra);
+      const periodeTil = screen.getByLabelText('Periode til');
+      await userEvent.type(periodeTil, tom);
+      fireEvent.blur(periodeTil);
+      await userEvent.click(screen.getByText('Opphold'));
+      await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'UTTAK_FEDREKVOTE_ANNEN_FORELDER');
+      await userEvent.click(screen.getByText('Oppdater'));
+    };
+
+    await leggTilOppholdsperiode('31.01.2022', '28.02.2022');
+    await leggTilOppholdsperiode('01.03.2022', '31.03.2022');
+
+    expect(screen.getAllByTitle('Vis mer')).toHaveLength(2);
+
+    await userEvent.click(screen.getAllByTitle('Vis mer')[1]!);
+    await userEvent.click(screen.getByText('Slett periode'));
+    await userEvent.click(screen.getByText('OK'));
+
+    expect(screen.getAllByTitle('Vis mer')).toHaveLength(1);
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+
+    const [aksjonspunktSendtInn] = (lagre.mock.calls[0] as unknown as [BekreftUttaksperioderAp[]])[0];
+    const perioder = notEmpty(aksjonspunktSendtInn).perioder;
+    expect(perioder).toHaveLength(1);
+    expect(perioder[0]).toEqual(
+      expect.objectContaining({ fom: '2022-01-31', tom: '2022-02-28', oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER' }),
+    );
+    expect(perioder[0]).not.toHaveProperty('id');
+    expect(perioder[0]).not.toHaveProperty('originalFom');
+    expect(perioder[0]).not.toHaveProperty('aksjonspunktType');
+  });
+
+  it('skal ikke sende med utsettelsesårsak når periodetype endres fra utsettelse tilbake til uttak', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<VisUttaksperiodeUtenAksjonspunktKanOverstyre submitCallback={lagre} />);
+
+    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Rediger fakta om uttak' }));
+    await userEvent.click(screen.getByTitle('Vis mer'));
+
+    const periodeFra = screen.getByLabelText('Periode fra');
+    await userEvent.clear(periodeFra);
+    await userEvent.type(periodeFra, '31.01.2022');
+    fireEvent.blur(periodeFra);
+
+    await userEvent.click(screen.getByText('Utsettelse'));
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'ARBEID');
+
+    await userEvent.click(screen.getByText('Uttak'));
+    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), 'MØDREKVOTE');
+
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+
+    const [aksjonspunktSendtInn] = (lagre.mock.calls[0] as unknown as [BekreftUttaksperioderAp[]])[0];
+    const oppdatertPeriode = notEmpty(aksjonspunktSendtInn).perioder.find(periode => periode.fom === '2022-01-31');
+    expect(oppdatertPeriode).toEqual(expect.objectContaining({ uttakPeriodeType: 'MØDREKVOTE' }));
+    expect(oppdatertPeriode?.utsettelseÅrsak).toBeUndefined();
+    expect(oppdatertPeriode?.overføringÅrsak).toBeUndefined();
+    expect(oppdatertPeriode?.oppholdÅrsak).toBeUndefined();
   });
 
   it('skal få aksjonspunkt der arbeidsforholdet i periode er ukjent', async () => {
@@ -299,7 +375,6 @@ describe('UttakFaktaIndex', () => {
           {
             fom: '2022-01-31',
             tom: '2022-12-01',
-            originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
             samtidigUttaksprosent: undefined,
             uttakPeriodeType: 'MØDREKVOTE',
@@ -309,9 +384,8 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
-            aksjonspunktType: undefined,
           },
-        ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
+        ] satisfies FaktaUttakPeriode[],
       },
     ]);
   });
