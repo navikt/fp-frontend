@@ -5,7 +5,8 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './SaksbehandlereForSakslisteForm.stories';
 
 const { lagreSakslisteSaksbehandler } = vi.hoisted(() => ({
-  lagreSakslisteSaksbehandler: vi.fn(() => Promise.resolve()),
+  lagreSakslisteSaksbehandler:
+    vi.fn<(sakslisteId: number, brukerIdent: string, checked: boolean, avdelingEnhet: string) => Promise<void>>(),
 }));
 
 vi.mock('../../data/fplosAvdelingslederApi', async importOriginal => ({
@@ -17,7 +18,8 @@ const { IngenSaksbehandlere, ToSaksbehandlere, SaksbehandlereSomErGruppert } = c
 
 describe('SaksbehandlereForSakslisteForm', () => {
   beforeEach(() => {
-    lagreSakslisteSaksbehandler.mockClear();
+    lagreSakslisteSaksbehandler.mockReset();
+    lagreSakslisteSaksbehandler.mockImplementation(() => Promise.resolve());
   });
 
   it('skal lagre endrede saksbehandlere ved gruppevalg', async () => {
@@ -42,6 +44,41 @@ describe('SaksbehandlereForSakslisteForm', () => {
     gruppe1Identer.forEach(ident => {
       expect(lagreSakslisteSaksbehandler).toHaveBeenCalledWith(1, ident, false, 'Nav Vikafossen');
     });
+  });
+
+  it('skal sperre gruppevalg mens lagring pågår', async () => {
+    const ventendeLagringer: (() => void)[] = [];
+    lagreSakslisteSaksbehandler.mockImplementation(
+      () =>
+        new Promise<void>(resolve => {
+          ventendeLagringer.push(resolve);
+        }),
+    );
+    await SaksbehandlereSomErGruppert.run();
+
+    expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
+
+    const gruppeCheckbox = screen.getByRole('checkbox', { name: 'Velg alle i Drammen' });
+    await userEvent.click(gruppeCheckbox);
+    expect(gruppeCheckbox).toBeDisabled();
+
+    ventendeLagringer.forEach(fullførLagring => fullførLagring());
+    await waitFor(() => expect(gruppeCheckbox).toBeEnabled());
+  });
+
+  it('skal fjerne avhuking for saksbehandlere som ikke ble lagret', async () => {
+    lagreSakslisteSaksbehandler.mockImplementation((_sakslisteId: number, brukerIdent: string) =>
+      brukerIdent === 'M00002' ? Promise.reject(new Error('Lagring feilet')) : Promise.resolve(),
+    );
+    await SaksbehandlereSomErGruppert.run();
+
+    expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('checkbox', { name: 'Velg alle i Drammen' }));
+    await userEvent.click(screen.getByRole('cell', { name: 'Drammen' }));
+
+    await waitFor(() => expect(screen.getByRole('checkbox', { name: 'Marte' })).not.toBeChecked());
+    expect(screen.getByRole('checkbox', { name: 'Kari Kanari' })).toBeChecked();
   });
 
   it('skal vise tekst som viser at ingen saksbehandlere er tilknyttet', async () => {

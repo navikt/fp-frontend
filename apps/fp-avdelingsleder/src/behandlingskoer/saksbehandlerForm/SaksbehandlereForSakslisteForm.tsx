@@ -30,26 +30,6 @@ export const SaksbehandlereForSakslisteForm = ({
 
   const { data: grupper } = useQuery(grupperOptions(valgtAvdelingEnhet));
 
-  const queryClient = useQueryClient();
-  const { mutate: lagreSaksbehandlere } = useMutation({
-    mutationFn: async ({ brukerIdenter, checked }: { brukerIdenter: string[]; checked: boolean }) => {
-      const resultater = await Promise.allSettled(
-        brukerIdenter.map(brukerIdent =>
-          lagreSakslisteSaksbehandler(valgtSaksliste.sakslisteId, brukerIdent, checked, valgtAvdelingEnhet),
-        ),
-      );
-      const feil = resultater.find(resultat => resultat.status === 'rejected');
-      if (feil) {
-        throw feil.reason;
-      }
-    },
-    onSettled: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
-
   const defaultValues = valgtSaksliste.saksbehandlere
     .map(sb => sb.brukerIdent)
     .reduce((acc, brukerIdent) => ({ ...acc, [brukerIdent]: true }), {});
@@ -59,6 +39,29 @@ export const SaksbehandlereForSakslisteForm = ({
   });
 
   const formvalues = useWatch({ control: formMethods.control });
+
+  const queryClient = useQueryClient();
+  const { mutate: lagreSaksbehandlere, isPending: lagrerGruppevalg } = useMutation({
+    mutationFn: async ({ brukerIdenter, checked }: { brukerIdenter: string[]; checked: boolean }) => {
+      const resultater = await Promise.allSettled(
+        brukerIdenter.map(brukerIdent =>
+          lagreSakslisteSaksbehandler(valgtSaksliste.sakslisteId, brukerIdent, checked, valgtAvdelingEnhet),
+        ),
+      );
+      const feil = resultater.find(resultat => resultat.status === 'rejected');
+      if (feil) {
+        brukerIdenter
+          .filter((_, index) => resultater[index]?.status === 'rejected')
+          .forEach(brukerIdent => formMethods.setValue(brukerIdent, !checked));
+        throw feil.reason;
+      }
+    },
+    onSettled: () => {
+      void queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
+    },
+  });
 
   useEffect(() => {
     formMethods.reset(defaultValues);
@@ -111,6 +114,7 @@ export const SaksbehandlereForSakslisteForm = ({
                     <Table.DataCell width="44px">
                       <Checkbox
                         hideLabel
+                        disabled={lagrerGruppevalg}
                         indeterminate={
                           sg.saksbehandlere.some(saksbehandler => !formvalues[saksbehandler.brukerIdent]) &&
                           sg.saksbehandlere.some(saksbehandler => formvalues[saksbehandler.brukerIdent])
