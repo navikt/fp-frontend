@@ -24,6 +24,18 @@ describe('useFaktaPanelMenyData', () => {
     expect(setInfo).toHaveBeenLastCalledWith({ urlCode: 'a', text: 'Tekst a' });
   });
 
+  it('skal ignorere panel som ikke vises i menyen', () => {
+    const setInfo = vi.fn();
+    const { result } = renderHook(() => useFaktaPanelMenyData(setInfo));
+
+    act(() => {
+      result.current.settFaktaPanelMenyData({ ...lagPanel('skjult', true), skalVisesIMeny: false });
+      result.current.settFaktaPanelMenyData(lagPanel('synlig', true));
+    });
+
+    expect(setInfo).toHaveBeenLastCalledWith({ urlCode: 'synlig', text: 'Tekst synlig' });
+  });
+
   it('skal velge første panel i menyrekkefølge når flere har åpent aksjonspunkt', () => {
     const setInfo = vi.fn();
     const { result } = renderHook(() => useFaktaPanelMenyData(setInfo));

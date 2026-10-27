@@ -31,7 +31,7 @@ export const useFaktaPanelMenyData = (
     });
   };
 
-  const panelMedÅpentAp = faktaPanelMenyData.find(d => d.harÅpentAksjonspunkt);
+  const panelMedÅpentAp = faktaPanelMenyData.find(d => d.skalVisesIMeny && d.harÅpentAksjonspunkt);
   const åpentApUrlCode = panelMedÅpentAp?.id;
   const åpentApTekst = panelMedÅpentAp?.tekst;
 
