@@ -91,50 +91,40 @@ describe('MedlemskapFaktaIndex', () => {
     const personstatus = within(screen.getByLabelText('Personstatus og statsborgerskap for søker og annen part'));
     await userEvent.click(personstatus.getByText('Vis mer'));
 
-    const bruker = within(screen.getByLabelText('Personstatus og statsborgerskap for Kari Nordmann'));
-    expect(bruker.getByText('Søker, Kari Nordmann')).toBeInTheDocument();
+    const bruker = within(screen.getByLabelText('Søker, Kari Nordmann'));
 
     const regionTabellBruker = within(bruker.getByLabelText('Region for bruker'));
     expect(regionTabellBruker.getByText('Region for statsborgerskap')).toBeInTheDocument();
-    expect(regionTabellBruker.getByText('Fra og med')).toBeInTheDocument();
-    expect(regionTabellBruker.getByText('Til og med')).toBeInTheDocument();
+    expect(regionTabellBruker.getByText('Periode')).toBeInTheDocument();
 
     expect(regionTabellBruker.getByText('Nordisk')).toBeInTheDocument();
-    expect(regionTabellBruker.getByText('01.01.2019')).toBeInTheDocument();
-    expect(regionTabellBruker.getByText('01.01.2021')).toBeInTheDocument();
+    expect(regionTabellBruker.getByText('01.01.2019 - 01.01.2021')).toBeInTheDocument();
 
     const personstatusTabellBruker = within(bruker.getByLabelText('Personstatus for bruker'));
 
     expect(personstatusTabellBruker.getByText('Personstatus')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('Fra og med')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('Til og med')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('Periode')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('Utflyttet')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('01.01.2024')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('01.01.2024 -')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('Bosatt (f.reg)')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('01.01.2019')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('01.01.2022')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('01.01.2019 - 01.01.2022')).toBeInTheDocument();
 
-    const annenpart = within(screen.getByLabelText('Personstatus og statsborgerskap for Ola Nordmann'));
-    expect(annenpart.getByText('Annen part, Ola Nordmann')).toBeInTheDocument();
+    const annenpart = within(screen.getByLabelText('Annen part, Ola Nordmann'));
 
     const regionTabellAnnenpart = within(annenpart.getByLabelText('Region for annenpart'));
 
     expect(regionTabellAnnenpart.getByText('Region for statsborgerskap')).toBeInTheDocument();
-    expect(regionTabellAnnenpart.getByText('Fra og med')).toBeInTheDocument();
-    expect(regionTabellAnnenpart.getByText('Til og med')).toBeInTheDocument();
+    expect(regionTabellAnnenpart.getByText('Periode')).toBeInTheDocument();
 
     expect(regionTabellAnnenpart.getByText('3.landsborger')).toBeInTheDocument();
-    expect(regionTabellAnnenpart.getByText('01.01.2019')).toBeInTheDocument();
-    expect(regionTabellAnnenpart.getByText('01.01.2021')).toBeInTheDocument();
+    expect(regionTabellAnnenpart.getByText('01.01.2019 - 01.01.2021')).toBeInTheDocument();
 
     const personstatusTabellAnnenpart = within(annenpart.getByLabelText('Personstatus for annenpart'));
 
     expect(personstatusTabellAnnenpart.getByText('Personstatus')).toBeInTheDocument();
-    expect(personstatusTabellAnnenpart.getByText('Fra og med')).toBeInTheDocument();
-    expect(personstatusTabellAnnenpart.getByText('Til og med')).toBeInTheDocument();
+    expect(personstatusTabellAnnenpart.getByText('Periode')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('Bosatt (f.reg)')).toBeInTheDocument();
-    expect(personstatusTabellAnnenpart.getByText('01.01.2019')).toBeInTheDocument();
-    expect(personstatusTabellAnnenpart.getByText('01.01.2020')).toBeInTheDocument();
+    expect(personstatusTabellAnnenpart.getByText('01.01.2019 - 01.01.2020')).toBeInTheDocument();
 
     // OpplysningerFraMedlemskapsregister
     const medlPerioder = within(screen.getByLabelText('Medlemskapsperioder(2)'));
