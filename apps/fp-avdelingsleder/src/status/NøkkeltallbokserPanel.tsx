@@ -14,6 +14,7 @@ import { useLosKodeverk } from '../data/useLosKodeverk';
 
 const STATE_KEY = 'nokkeltallbokser';
 const fagsakYtelseTypeOrder = ['FP', 'ES', 'SVP', '-'] satisfies FagsakYtelseType[];
+const BEHANDLINGTYPER_MED_EGEN_BOKS: BehandlingType[] = ['BT-002', 'BT-004', 'BT-003', 'BT-007'];
 
 interface Props {
   valgtAvdelingEnhet: string;
@@ -74,10 +75,13 @@ export const NøkkeltallbokserPanel = ({ valgtAvdelingEnhet, children }: Props) 
           </Chips>
         </HStack>
         <HStack gap="space-16" maxWidth={{ xl: '1600px' }}>
-          <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType="BT-002" />
-          <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType="BT-004" />
-          <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType="BT-003" />
-          <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType="BT-007" />
+          {BEHANDLINGTYPER_MED_EGEN_BOKS.map(behandlingType => (
+            <NøkkeltallBoks
+              key={behandlingType}
+              oppgaverForAvdeling={oppgaverFiltrertPåYtelseType}
+              behandlingType={behandlingType}
+            />
+          ))}
           <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType={undefined} />
         </HStack>
       </VStack>
@@ -92,7 +96,11 @@ const NøkkeltallBoks = ({
   oppgaverForAvdeling: OppgaverForAvdeling[];
   behandlingType: BehandlingType | undefined;
 }) => {
-  const oppgaverFiltrertPåBehandlingType = oppgaverForAvdeling.filter(ofa => ofa.behandlingType === behandlingType);
+  const oppgaverFiltrertPåBehandlingType = oppgaverForAvdeling.filter(ofa =>
+    behandlingType
+      ? ofa.behandlingType === behandlingType
+      : !BEHANDLINGTYPER_MED_EGEN_BOKS.includes(ofa.behandlingType),
+  );
 
   const antall = oppgaverFiltrertPåBehandlingType.reduce((sum, ofa) => sum + ofa.antall, 0);
   const antallTilBeslutter = oppgaverFiltrertPåBehandlingType

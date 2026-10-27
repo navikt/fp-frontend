@@ -1,12 +1,49 @@
 import { composeStories } from '@storybook/react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './SaksbehandlereForSakslisteForm.stories';
 
+const { lagreSakslisteSaksbehandler } = vi.hoisted(() => ({
+  lagreSakslisteSaksbehandler: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock('../../data/fplosAvdelingslederApi', async importOriginal => ({
+  ...(await importOriginal<typeof import('../../data/fplosAvdelingslederApi')>()),
+  lagreSakslisteSaksbehandler,
+}));
+
 const { IngenSaksbehandlere, ToSaksbehandlere, SaksbehandlereSomErGruppert } = composeStories(stories);
 
 describe('SaksbehandlereForSakslisteForm', () => {
+  beforeEach(() => {
+    lagreSakslisteSaksbehandler.mockClear();
+  });
+
+  it('skal lagre endrede saksbehandlere ved gruppevalg', async () => {
+    await SaksbehandlereSomErGruppert.run();
+
+    expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
+
+    const gruppeCheckbox = screen.getByRole('checkbox', { name: 'Velg alle i Gruppe 1' });
+    await userEvent.click(gruppeCheckbox);
+
+    const gruppe1Identer = ['S34354', 'E23232', 'A123456', 'T123421', 'M00000', 'S00001', 'M00002', 'K123456'];
+    const endredeIdenter = gruppe1Identer.filter(ident => ident !== 'S34354');
+    await waitFor(() => expect(lagreSakslisteSaksbehandler).toHaveBeenCalledTimes(endredeIdenter.length));
+    endredeIdenter.forEach(ident => {
+      expect(lagreSakslisteSaksbehandler).toHaveBeenCalledWith(1, ident, true, 'Nav Vikafossen');
+    });
+
+    lagreSakslisteSaksbehandler.mockClear();
+    await userEvent.click(gruppeCheckbox);
+
+    await waitFor(() => expect(lagreSakslisteSaksbehandler).toHaveBeenCalledTimes(gruppe1Identer.length));
+    gruppe1Identer.forEach(ident => {
+      expect(lagreSakslisteSaksbehandler).toHaveBeenCalledWith(1, ident, false, 'Nav Vikafossen');
+    });
+  });
+
   it('skal vise tekst som viser at ingen saksbehandlere er tilknyttet', async () => {
     await IngenSaksbehandlere.run();
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();

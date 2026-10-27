@@ -4,11 +4,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Checkbox, ExpansionCard, Label, Table, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { type SaksbehandlerDto, type SaksbehandlerGruppeDto, type SakslisteDto } from '@navikt/fp-types';
 
-import { grupperOptions } from '../../data/fplosAvdelingslederApi';
+import { grupperOptions, lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { type FormValues, ValgAvSaksbehandlere } from './ValgAvSaksbehandlere';
 
 interface Props {
@@ -29,6 +29,26 @@ export const SaksbehandlereForSakslisteForm = ({
   );
 
   const { data: grupper } = useQuery(grupperOptions(valgtAvdelingEnhet));
+
+  const queryClient = useQueryClient();
+  const { mutate: lagreSaksbehandlere } = useMutation({
+    mutationFn: async ({ brukerIdenter, checked }: { brukerIdenter: string[]; checked: boolean }) => {
+      const resultater = await Promise.allSettled(
+        brukerIdenter.map(brukerIdent =>
+          lagreSakslisteSaksbehandler(valgtSaksliste.sakslisteId, brukerIdent, checked, valgtAvdelingEnhet),
+        ),
+      );
+      const feil = resultater.find(resultat => resultat.status === 'rejected');
+      if (feil) {
+        throw feil.reason;
+      }
+    },
+    onSettled: () => {
+      void queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
+    },
+  });
 
   const defaultValues = valgtSaksliste.saksbehandlere
     .map(sb => sb.brukerIdent)
@@ -97,9 +117,19 @@ export const SaksbehandlereForSakslisteForm = ({
                         }
                         checked={sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent])}
                         onChange={event => {
-                          sg.saksbehandlere.forEach(saksbehandler => {
-                            formMethods.setValue(saksbehandler.brukerIdent, event.target.checked);
+                          const checked = event.target.checked;
+                          const endredeSaksbehandlere = sg.saksbehandlere.filter(
+                            saksbehandler => !!formvalues[saksbehandler.brukerIdent] !== checked,
+                          );
+                          endredeSaksbehandlere.forEach(saksbehandler => {
+                            formMethods.setValue(saksbehandler.brukerIdent, checked);
                           });
+                          if (endredeSaksbehandlere.length > 0) {
+                            lagreSaksbehandlere({
+                              brukerIdenter: endredeSaksbehandlere.map(sb => sb.brukerIdent),
+                              checked,
+                            });
+                          }
                         }}
                       >
                         <FormattedMessage
