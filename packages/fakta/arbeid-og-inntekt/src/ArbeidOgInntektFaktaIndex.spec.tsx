@@ -648,6 +648,39 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     });
   });
 
+  it('skal skjule sett på vent så lenge en rad har ulagrede endringer selv om en annen rad avbrytes', async () => {
+    const lagreVurdering = vi.fn(() => Promise.resolve());
+
+    render(<FlereArbeidsforholdOgInntekstemeldinger lagreVurdering={lagreVurdering} />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+
+    await userEvent.click(
+      screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
+    );
+    await userEvent.type(screen.getAllByLabelText('Begrunn valget')[0]!, 'Dette er en begrunnelse');
+    await userEvent.click(screen.getAllByText('Lagre')[0]!);
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+
+    await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
+    await userEvent.type(screen.getAllByLabelText('Begrunn valget')[1]!, 'Dette er begrunnelse nr 2');
+    await userEvent.click(screen.getAllByText('Lagre')[1]!);
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(2));
+
+    expect(await screen.findByText('Sett på vent')).toBeInTheDocument();
+
+    await userEvent.click(within(screen.getByText(/Autoservice AS/).closest('tr')!).getByText('Vis mer'));
+    await userEvent.type(screen.getAllByLabelText('Begrunn valget')[0]!, ' endret');
+    await waitFor(() => expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument());
+
+    await userEvent.click(within(screen.getByText(/DNB/).closest('tr')!).getByText('Vis mer'));
+    await userEvent.type(screen.getAllByLabelText('Begrunn valget')[1]!, ' endret');
+    await userEvent.click(screen.getAllByText('Avbryt')[1]!);
+
+    expect(screen.getAllByLabelText('Begrunn valget')[1]).toHaveValue('Dette er begrunnelse nr 2');
+    expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
+  });
+
   it('skal bare oppdatere raden som matcher internArbeidsforholdId ved lagring av manglende arbeidsforhold', async () => {
     const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
 
