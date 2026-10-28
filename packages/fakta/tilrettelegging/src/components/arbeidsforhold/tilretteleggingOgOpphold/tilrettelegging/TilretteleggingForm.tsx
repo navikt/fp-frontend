@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -84,6 +84,39 @@ export const finnProsentSvangerskapspenger = (
   );
 };
 
+const finnOverstyrtUtbetalingsgrad = (
+  lagreFormValues: SvpTilretteleggingDatoDto,
+  opprinneligTilretteleggingDato: SvpTilretteleggingDatoDto,
+  gradErEndretAvSaksbehandler: boolean,
+  stillingsprosentArbeidsforhold: number,
+  velferdspermisjonprosent: number,
+): number | undefined => {
+  if (lagreFormValues.type === 'DELVIS_TILRETTELEGGING' && gradErEndretAvSaksbehandler) {
+    if (lagreFormValues.stillingsprosent === undefined) {
+      return lagreFormValues.overstyrtUtbetalingsgrad;
+    }
+    const automatiskUtbetalingsgrad = finnProsentSvangerskapspenger(
+      lagreFormValues,
+      stillingsprosentArbeidsforhold,
+      velferdspermisjonprosent,
+      false,
+    );
+    return lagreFormValues.overstyrtUtbetalingsgrad === automatiskUtbetalingsgrad
+      ? undefined
+      : lagreFormValues.overstyrtUtbetalingsgrad;
+  }
+
+  const grunnlagErUendret =
+    lagreFormValues.type === opprinneligTilretteleggingDato.type &&
+    lagreFormValues.stillingsprosent === opprinneligTilretteleggingDato.stillingsprosent &&
+    lagreFormValues.overstyrtUtbetalingsgrad === opprinneligTilretteleggingDato.overstyrtUtbetalingsgrad;
+
+  if (lagreFormValues.type === 'HEL_TILRETTELEGGING' || !grunnlagErUendret) {
+    return undefined;
+  }
+  return opprinneligTilretteleggingDato.overstyrtUtbetalingsgrad;
+};
+
 interface Props {
   tilretteleggingDato: SvpTilretteleggingDatoDto;
   termindato: string;
@@ -130,8 +163,11 @@ export const TilretteleggingForm = ({
     },
   });
 
+  const gradErEndretAvSaksbehandlerRef = useRef(false);
+
   useEffect(() => {
     // Denne er nødvendig i tilfelle der en endrer en permisjons gyldighet
+    gradErEndretAvSaksbehandlerRef.current = false;
     formMethods.reset({
       [index]: {
         ...tilretteleggingDato,
@@ -158,18 +194,23 @@ export const TilretteleggingForm = ({
 
     const v = {
       ...lagreFormValues,
-      overstyrtUtbetalingsgrad:
-        lagreFormValues.overstyrtUtbetalingsgrad === prosentSvangerskapspenger
-          ? undefined
-          : lagreFormValues.overstyrtUtbetalingsgrad,
+      overstyrtUtbetalingsgrad: finnOverstyrtUtbetalingsgrad(
+        lagreFormValues,
+        tilretteleggingDato,
+        gradErEndretAvSaksbehandlerRef.current,
+        stillingsprosentArbeidsforhold,
+        velferdspermisjonprosent,
+      ),
       kilde,
     } as const;
+    gradErEndretAvSaksbehandlerRef.current = false;
     oppdaterTilrettelegging(v);
     formMethods.reset({ [index]: v });
     return Promise.resolve();
   };
 
   const avbryt = () => {
+    gradErEndretAvSaksbehandlerRef.current = false;
     avbrytEditering();
     formMethods.reset();
   };
@@ -250,7 +291,9 @@ export const TilretteleggingForm = ({
                 description={<FormattedMessage id="TilretteleggingForm.ArbeidsprosentBeskrivelse" />}
                 validate={[required, minValue0, maxValue100, hasValidDecimal]}
                 forceTwoDecimalDigits
+                returnAsNumber
                 onChange={value => {
+                  gradErEndretAvSaksbehandlerRef.current = false;
                   const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
                     stillingsprosentArbeidsforhold,
                     velferdspermisjonprosent,
@@ -282,6 +325,10 @@ export const TilretteleggingForm = ({
                     : null,
               ]}
               forceTwoDecimalDigits
+              returnAsNumber
+              onChange={() => {
+                gradErEndretAvSaksbehandlerRef.current = true;
+              }}
             />
           </>
         )}
@@ -293,7 +340,7 @@ export const TilretteleggingForm = ({
               type="button"
               disabled={!formMethods.formState.isDirty}
               loading={false}
-              onClick={formMethods.handleSubmit(lagreIForm)}
+              onClick={event => formMethods.handleSubmit(lagreIForm)(event)}
             >
               {erNyPeriode ? (
                 <FormattedMessage id="TilretteleggingForm.LeggTil" />

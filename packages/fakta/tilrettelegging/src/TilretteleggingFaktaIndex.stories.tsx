@@ -582,3 +582,42 @@ export const KanSplittes: Story = {
     },
   },
 };
+
+export const TilretteleggingMedOverstyrtUtbetalingsgrad: Story = {
+  args: {
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
+    svangerskapspengerTilrettelegging: {
+      termindato: '2020-11-06',
+      arbeidsforholdListe: [
+        {
+          ...TILRETTELEGGING_PERMISJON.arbeidsforholdListe[0]!,
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'DELVIS_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+              stillingsprosent: 50,
+              overstyrtUtbetalingsgrad: 30,
+            },
+            {
+              fom: '2020-06-01',
+              type: 'DELVIS_TILRETTELEGGING',
+              kilde: 'REGISTRERT_AV_SAKSBEHANDLER',
+              stillingsprosent: 50,
+            },
+            {
+              fom: '2020-08-15',
+              type: 'HEL_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+            },
+          ],
+          velferdspermisjoner: [],
+        },
+      ],
+      saksbehandlet: true,
+    },
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
+  },
+};
