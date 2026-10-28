@@ -15,7 +15,16 @@ const {
   StønadskontoMedUgyldigForbruk,
   VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent,
   VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent,
+  VisOppholdsperiode,
 } = composeStories(stories);
+
+const settUtbetalingsgrader = async (verdier: string[]) => {
+  const inputFelter = screen.getAllByLabelText('Utbetalingsgrad (%)');
+  for (const [index, verdi] of verdier.entries()) {
+    await userEvent.clear(inputFelter[index]!);
+    await userEvent.type(inputFelter[index]!, verdi);
+  }
+};
 
 const UttakMedPanelbytte = (props: ComponentProps<typeof UttakProsessIndex>) => {
   const [visUttak, setVisUttak] = useState(true);
@@ -145,12 +154,12 @@ describe('UttakProsessIndex', () => {
     await oppdaterManuellPeriode();
     expect(screen.queryByRole('table')).not.toBeInTheDocument();
 
-    const konto = stories.uttakStonadskontoer.stønadskonti.MØDREKVOTE;
+    const konto = stories.default.args.uttakStonadskontoer.stønadskonti.MØDREKVOTE;
     await fullførForespørsel(() =>
       saldo.resolve({
-        ...stories.uttakStonadskontoer,
+        ...stories.default.args.uttakStonadskontoer,
         stønadskonti: {
-          ...stories.uttakStonadskontoer.stønadskonti,
+          ...stories.default.args.uttakStonadskontoer.stønadskonti,
           MØDREKVOTE: {
             ...konto,
             saldo: 30,
@@ -170,11 +179,11 @@ describe('UttakProsessIndex', () => {
     const nyttForsøk = Promise.withResolvers<UttakStonadskontoer>();
     const oppdaterStønadskontoer = vi.fn().mockReturnValueOnce(første.promise).mockReturnValueOnce(nyttForsøk.promise);
     const lagSaldo = (arbeidsgiverMedTomSaldo: string): UttakStonadskontoer => ({
-      ...stories.uttakStonadskontoer,
+      ...stories.default.args.uttakStonadskontoer,
       stønadskonti: {
-        ...stories.uttakStonadskontoer.stønadskonti,
+        ...stories.default.args.uttakStonadskontoer.stønadskonti,
         MØDREKVOTE: {
-          ...stories.uttakStonadskontoer.stønadskonti.MØDREKVOTE,
+          ...stories.default.args.uttakStonadskontoer.stønadskonti.MØDREKVOTE,
           aktivitetSaldoDtoList: ['910909088', '994884174'].map(arbeidsgiverReferanse => ({
             aktivitetIdentifikator: { uttakArbeidType: 'ORDINÆRT_ARBEID', arbeidsgiverReferanse },
             saldo: arbeidsgiverReferanse === arbeidsgiverMedTomSaldo ? 0 : 35,
@@ -235,7 +244,7 @@ describe('UttakProsessIndex', () => {
     const nyttForsøk = Promise.withResolvers<UttakStonadskontoer>();
     const oppdaterStønadskontoer = vi
       .fn()
-      .mockResolvedValueOnce(stories.uttakStonadskontoer)
+      .mockResolvedValueOnce(stories.default.args.uttakStonadskontoer)
       .mockReturnValueOnce(gjenåpning.promise)
       .mockReturnValueOnce(nyttForsøk.promise);
     const lagre = vi.fn().mockResolvedValue(undefined);
@@ -256,7 +265,7 @@ describe('UttakProsessIndex', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Prøv å oppdatere saldo på nytt' }));
     expect(oppdaterStønadskontoer.mock.calls[2]).toEqual(oppdaterStønadskontoer.mock.calls[0]);
-    await fullførForespørsel(() => nyttForsøk.resolve(stories.uttakStonadskontoer));
+    await fullførForespørsel(() => nyttForsøk.resolve(stories.default.args.uttakStonadskontoer));
 
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
     await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
@@ -285,7 +294,7 @@ describe('UttakProsessIndex', () => {
     expect(oppdaterStønadskontoer).toHaveBeenCalledTimes(2);
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
 
-    await fullførForespørsel(() => andre.resolve(stories.uttakStonadskontoer));
+    await fullførForespørsel(() => andre.resolve(stories.default.args.uttakStonadskontoer));
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
 
     await fullførForespørsel(() => {
@@ -293,11 +302,11 @@ describe('UttakProsessIndex', () => {
         første.reject(new Error('Saldokallet feilet'));
       } else {
         første.resolve({
-          ...stories.uttakStonadskontoer,
+          ...stories.default.args.uttakStonadskontoer,
           stønadskonti: {
-            ...stories.uttakStonadskontoer.stønadskonti,
+            ...stories.default.args.uttakStonadskontoer.stønadskonti,
             MØDREKVOTE: {
-              ...stories.uttakStonadskontoer.stønadskonti.MØDREKVOTE,
+              ...stories.default.args.uttakStonadskontoer.stønadskonti.MØDREKVOTE,
               saldo: 30,
               gyldigForbruk: false,
             },
@@ -328,7 +337,7 @@ describe('UttakProsessIndex', () => {
 
     await oppdaterManuellPeriode();
     await endrePeriodePåNytt();
-    await fullførForespørsel(() => første.resolve(stories.uttakStonadskontoer));
+    await fullførForespørsel(() => første.resolve(stories.default.args.uttakStonadskontoer));
 
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
     expect(screen.getByText('Oppdaterer saldo. Vent før du bekrefter uttaket.')).toBeInTheDocument();
@@ -336,7 +345,7 @@ describe('UttakProsessIndex', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
     expect(lagre).not.toHaveBeenCalled();
 
-    await fullførForespørsel(() => andre.resolve(stories.uttakStonadskontoer));
+    await fullførForespørsel(() => andre.resolve(stories.default.args.uttakStonadskontoer));
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
   });
 
@@ -361,7 +370,7 @@ describe('UttakProsessIndex', () => {
     await oppdaterManuellPeriode();
     await endrePeriodePåNytt();
     await fullførForespørsel(() => andre.reject(new Error('Saldokallet feilet')));
-    await fullførForespørsel(() => første.resolve(stories.uttakStonadskontoer));
+    await fullførForespørsel(() => første.resolve(stories.default.args.uttakStonadskontoer));
 
     expect(screen.getByText(/Kunne ikke oppdatere saldo/)).toBeInTheDocument();
     expect(screen.queryByText('Disponible stønadsdager (u/d)')).not.toBeInTheDocument();
@@ -373,7 +382,7 @@ describe('UttakProsessIndex', () => {
     expect(oppdaterStønadskontoer).toHaveBeenCalledTimes(3);
     expect(oppdaterStønadskontoer.mock.calls[2]).toEqual(oppdaterStønadskontoer.mock.calls[1]);
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
-    await fullførForespørsel(() => nyttForsøk.resolve(stories.uttakStonadskontoer));
+    await fullførForespørsel(() => nyttForsøk.resolve(stories.default.args.uttakStonadskontoer));
 
     expect(screen.queryByText(/Kunne ikke oppdatere saldo/)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
@@ -886,5 +895,48 @@ describe('UttakProsessIndex', () => {
     expect(
       screen.queryByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.'),
     ).not.toBeInTheDocument();
+  });
+
+  it.each([
+    { samtidigUttaksprosent: '50', utbetalingsgrad: '9', forventFeil: false },
+    { samtidigUttaksprosent: '20', utbetalingsgrad: '100', forventFeil: true },
+  ])(
+    'skal sammenligne utbetalingsgrad $utbetalingsgrad med samtidig uttaksprosent $samtidigUttaksprosent som tall',
+    async ({ samtidigUttaksprosent, utbetalingsgrad, forventFeil }) => {
+      render(<AksjonspunktDerValgtStønadskontoIkkeFinnes />);
+
+      await userEvent.click(screen.getByText('Oppfylt'));
+      await userEvent.click(screen.getByLabelText('Samtidig uttak'));
+      await userEvent.type(screen.getByLabelText('Uttak'), samtidigUttaksprosent);
+      await settUtbetalingsgrader([utbetalingsgrad, utbetalingsgrad]);
+      await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
+      await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+      const feilmeldinger = screen.queryAllByText('Feltet kan ikke være høyere enn samtidig uttaksprosent');
+      expect(feilmeldinger).toHaveLength(forventFeil ? 2 : 0);
+    },
+  );
+
+  it('skal ta med desimaler fra andre aktiviteter når utbetalingsgrad må være høyere enn 0', async () => {
+    render(<AksjonspunktDerValgtStønadskontoIkkeFinnes />);
+
+    await userEvent.click(screen.getByText('Oppfylt'));
+    await settUtbetalingsgrader(['0', '0,5']);
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+    expect(screen.queryByText('Feltet må være høyere enn 0')).not.toBeInTheDocument();
+  });
+
+  it('skal ikke vise valg av oppfylt eller ikke oppfylt for oppholdsperioder', async () => {
+    render(<VisOppholdsperiode />);
+
+    await userEvent.click(await screen.findByRole('button', { name: /fra 15.02.2021 til 05.05.2021/ }));
+
+    expect(screen.getByLabelText('Vurdering')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Oppdater' })).toBeInTheDocument();
+    expect(screen.queryByRole('radio', { name: 'Oppfylt' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('radio', { name: 'Ikke oppfylt' })).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Årsak til innvilgelse')).toBeInTheDocument();
   });
 });

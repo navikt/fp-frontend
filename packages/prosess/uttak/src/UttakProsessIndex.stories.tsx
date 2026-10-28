@@ -62,7 +62,7 @@ const behandling: BehandlingFpSak = {
   opprettet: '2020-01-01',
 };
 
-export const uttakStonadskontoer = {
+const uttakStonadskontoer = {
   tapteDagerFpff: 1,
   stønadskonti: {
     FEDREKVOTE: {
@@ -1194,8 +1194,8 @@ export const VisOppholdsperiode: Story = {
     uttaksresultat: {
       perioderSøker: [
         {
-          fom: '2023-02-15',
-          tom: '2023-05-05',
+          fom: '2021-02-15',
+          tom: '2021-05-05',
           aktiviteter: [],
           periodeResultatType: 'INNVILGET',
           begrunnelse: undefined,
@@ -1209,14 +1209,14 @@ export const VisOppholdsperiode: Story = {
           periodeType: '-',
           utsettelseType: '-',
           oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
-          mottattDato: '2023-01-18',
+          mottattDato: '2021-01-18',
           gradertAktivitet: undefined,
         },
       ],
       perioderAnnenpart: [
         {
-          fom: '2023-02-03',
-          tom: '2023-02-14',
+          fom: '2021-02-03',
+          tom: '2021-02-14',
           aktiviteter: [
             {
               stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
@@ -1267,12 +1267,12 @@ export const VisOppholdsperiode: Story = {
           periodeType: 'FEDREKVOTE',
           utsettelseType: '-',
           oppholdÅrsak: '-',
-          mottattDato: '2022-11-28',
+          mottattDato: '2020-11-28',
           gradertAktivitet: undefined,
         },
         {
-          fom: '2023-05-16',
-          tom: '2023-05-17',
+          fom: '2021-05-16',
+          tom: '2021-05-17',
           aktiviteter: [
             {
               stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
@@ -1323,13 +1323,13 @@ export const VisOppholdsperiode: Story = {
           periodeType: 'FEDREKVOTE',
           utsettelseType: '-',
           oppholdÅrsak: '-',
-          mottattDato: '2022-11-28',
+          mottattDato: '2020-11-28',
           gradertAktivitet: undefined,
         },
       ],
       muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
-      endringsdato: '2023-02-03',
+      endringsdato: '2021-02-03',
     },
   },
 };
