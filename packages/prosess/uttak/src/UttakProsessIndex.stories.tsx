@@ -62,7 +62,7 @@ const behandling: BehandlingFpSak = {
   opprettet: '2020-01-01',
 };
 
-export const uttakStonadskontoer = {
+const uttakStonadskontoer = {
   tapteDagerFpff: 1,
   stønadskonti: {
     FEDREKVOTE: {
