@@ -41,6 +41,24 @@ const OPPGAVER_FOR_AVDELING = [
     tilBehandling: false,
     antall: 6,
   },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-006',
+    tilBehandling: true,
+    antall: 3,
+  },
+  {
+    fagsakYtelseType: 'SVP',
+    behandlingType: 'BT-008',
+    tilBehandling: false,
+    antall: 2,
+  },
+  {
+    fagsakYtelseType: 'ES',
+    behandlingType: 'BT-009',
+    tilBehandling: true,
+    antall: 1,
+  },
 ];
 
 const withIntl = getIntlDecorator(messages);

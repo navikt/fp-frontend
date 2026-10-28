@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { FieldArrayWithId, UseFieldArrayReplace } from 'react-hook-form';
+import type { UseFieldArrayReplace } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { MinusIcon, PlusIcon } from '@navikt/aksel-icons';
@@ -7,6 +7,7 @@ import { Button, Tag } from '@navikt/ds-react';
 import { sortPeriodsBy } from '@navikt/ft-utils';
 
 import type { Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { alfabetiskArbeidsforhold, finnStillingsprosent } from '../arbeidsforholdUtils';
@@ -36,25 +37,71 @@ export type FAISUProps = {
 };
 
 export const getFAISUProps = (
-  arbeidsforhold: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>,
-  fields: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>[],
+  index: number,
+  hentTilrettelegginger: () => Tilrettelegging[],
   aoiArbeidsforhold: Arbeidsforhold[],
   replace: UseFieldArrayReplace<TilretteleggingFormValues, 'arbeidsforhold'>,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): FAISUProps | undefined => {
-  if (!arbeidsforhold.skalVurdereSplittAvArbeidsforholdet && !arbeidsforhold.arbeidsforholdetErSplittet) {
+  const alleTilrettelegginger = hentTilrettelegginger();
+  const tilrettelegging = alleTilrettelegginger[index];
+  if (
+    !tilrettelegging ||
+    (!tilrettelegging.skalVurdereSplittAvArbeidsforholdet && !tilrettelegging.arbeidsforholdetErSplittet)
+  ) {
     return undefined;
   }
 
   const alleArbeidsforholdHosSammeAG = aoiArbeidsforhold.filter(
-    iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse,
+    iaya => iaya.arbeidsgiverIdent === tilrettelegging.arbeidsgiverReferanse,
   );
+  const antallTilretteleggingerHosSammeAG = alleTilrettelegginger.filter(
+    af => af.arbeidsgiverReferanse === tilrettelegging.arbeidsgiverReferanse,
+  ).length;
+
+  const splittEllerReverter = () => {
+    const gjeldendeTilrettelegginger = hentTilrettelegginger();
+    replace(
+      lagNyeTilrettelegginger(
+        notEmpty(gjeldendeTilrettelegginger[index], `Fant ikke tilrettelegging for index ${index}`),
+        gjeldendeTilrettelegginger,
+        alleArbeidsforholdHosSammeAG,
+        arbeidsgiverOpplysningerPerId,
+      ),
+    );
+  };
 
   return {
-    action: getAction(arbeidsforhold, fields, alleArbeidsforholdHosSammeAG, replace, arbeidsgiverOpplysningerPerId),
+    action:
+      antallTilretteleggingerHosSammeAG > 1 ? (
+        <Button
+          size="small"
+          variant="secondary"
+          type="button"
+          data-color="accent"
+          icon={<MinusIcon aria-hidden />}
+          onClick={splittEllerReverter}
+        >
+          <FormattedMessage
+            id="FAISU.FjernSplittArbeidsforhold"
+            values={{ antall: antallTilretteleggingerHosSammeAG }}
+          />
+        </Button>
+      ) : (
+        <Button
+          size="small"
+          variant="secondary"
+          type="button"
+          data-color="accent"
+          icon={<PlusIcon aria-hidden />}
+          onClick={splittEllerReverter}
+        >
+          <FormattedMessage id="FAISU.SplittArbeidsforhold" values={{ antall: alleArbeidsforholdHosSammeAG.length }} />
+        </Button>
+      ),
     tag: (
       <Tag data-color="warning" size="xsmall">
-        {arbeidsforhold.arbeidsforholdetErSplittet ? (
+        {tilrettelegging.arbeidsforholdetErSplittet ? (
           <FormattedMessage id="FAISU.SplittTag" />
         ) : (
           <FormattedMessage id="FAISU.HarFlereArbeidsforhold" />
@@ -64,87 +111,27 @@ export const getFAISUProps = (
   };
 };
 
-const getAction = (
-  tilrettelegging: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>,
-  fields: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>[],
+const lagNyeTilrettelegginger = (
+  tilrettelegging: Tilrettelegging,
+  alleTilrettelegginger: Tilrettelegging[],
   alleArbeidsforholdHosSammeAG: Arbeidsforhold[],
-  replace: UseFieldArrayReplace<TilretteleggingFormValues, 'arbeidsforhold'>,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-) => {
-  const { tilretteleggingerSomSkalSlettes, tilretteleggingerHosSammeAG } = getTilretteleggingerSomPåvirkes(
-    tilrettelegging,
-    fields,
-  );
+): Tilrettelegging[] => {
+  const erHosSammeAG = (af: Tilrettelegging) => af.arbeidsgiverReferanse === tilrettelegging.arbeidsgiverReferanse;
+  const tilretteleggingerHosSammeAG = alleTilrettelegginger.filter(erHosSammeAG);
+  const uberørteTilrettelegginger = alleTilrettelegginger.filter(af => !erHosSammeAG(af)).map(tilTilretteleggingVerdi);
 
-  const uberørteArbeidsforhold = fields
-    .filter((_, index) => !tilretteleggingerSomSkalSlettes.includes(index))
-    .map(tilTilretteleggingVerdi);
+  const nyeTilretteleggingerHosSammeAG =
+    tilretteleggingerHosSammeAG.length > 1
+      ? [reverterSplitt(tilretteleggingerHosSammeAG, alleArbeidsforholdHosSammeAG)]
+      : kopierArbeidsforhold(tilrettelegging, alleArbeidsforholdHosSammeAG);
 
-  if (tilretteleggingerHosSammeAG.length > 1) {
-    const nyeTilrettelegginger = [
-      ...uberørteArbeidsforhold,
-      reverterSplitt(tilretteleggingerHosSammeAG, alleArbeidsforholdHosSammeAG),
-    ].sort(alfabetiskArbeidsforhold(arbeidsgiverOpplysningerPerId));
-    return (
-      <Button
-        size="small"
-        variant="secondary"
-        type="button"
-        data-color="accent"
-        icon={<MinusIcon aria-hidden />}
-        onClick={() => {
-          replace(nyeTilrettelegginger);
-        }}
-      >
-        <FormattedMessage
-          id="FAISU.FjernSplittArbeidsforhold"
-          values={{ antall: tilretteleggingerHosSammeAG.length }}
-        />
-      </Button>
-    );
-  }
-
-  const nyeTilrettelegginger = [
-    ...uberørteArbeidsforhold,
-    ...kopierArbeidsforhold(tilrettelegging, alleArbeidsforholdHosSammeAG),
-  ].sort(alfabetiskArbeidsforhold(arbeidsgiverOpplysningerPerId));
-
-  return (
-    <Button
-      size="small"
-      variant="secondary"
-      type="button"
-      data-color="accent"
-      icon={<PlusIcon aria-hidden />}
-      onClick={() => {
-        replace(nyeTilrettelegginger);
-      }}
-    >
-      <FormattedMessage id="FAISU.SplittArbeidsforhold" values={{ antall: alleArbeidsforholdHosSammeAG.length }} />
-    </Button>
+  return [...uberørteTilrettelegginger, ...nyeTilretteleggingerHosSammeAG].sort(
+    alfabetiskArbeidsforhold(arbeidsgiverOpplysningerPerId),
   );
 };
 
-const getTilretteleggingerSomPåvirkes = (
-  tilrettelegging: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>,
-  fields: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>[],
-) => {
-  const tilretteleggingerSomSkalSlettes: number[] = [];
-  const tilretteleggingerHosSammeAG: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>[] = [];
-
-  fields.forEach((af, index) => {
-    if (af.arbeidsgiverReferanse === tilrettelegging.arbeidsgiverReferanse) {
-      tilretteleggingerSomSkalSlettes.push(index);
-      tilretteleggingerHosSammeAG.push(af);
-    }
-  });
-  return { tilretteleggingerSomSkalSlettes, tilretteleggingerHosSammeAG };
-};
-
-const kopierArbeidsforhold = (
-  tilrettelegging: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>,
-  alleArbeidsforholdHosSammeAG: Arbeidsforhold[],
-) => {
+const kopierArbeidsforhold = (tilrettelegging: Tilrettelegging, alleArbeidsforholdHosSammeAG: Arbeidsforhold[]) => {
   return alleArbeidsforholdHosSammeAG.map<Tilrettelegging>(a => ({
     ...tilTilretteleggingVerdi(tilrettelegging),
     tilretteleggingId: undefined,
@@ -166,7 +153,7 @@ const kopierArbeidsforhold = (
 };
 
 const reverterSplitt = (
-  tilretteleggingerHosSammeAG: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>[],
+  tilretteleggingerHosSammeAG: Tilrettelegging[],
   alleArbeidsforholdHosSammeAG: Arbeidsforhold[],
 ) => {
   const alleVelferdspermisjoner = tilretteleggingerHosSammeAG.flatMap(af => af.velferdspermisjoner);
@@ -222,9 +209,7 @@ const fjernDuplikateOppholdPerioder = (
   );
 };
 
-const tilTilretteleggingVerdi = (
-  tilrettelegging: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>,
-): Tilrettelegging => ({
+const tilTilretteleggingVerdi = (tilrettelegging: Tilrettelegging): Tilrettelegging => ({
   arbeidsgiverReferanse: tilrettelegging.arbeidsgiverReferanse,
   avklarteOppholdPerioder: tilrettelegging.avklarteOppholdPerioder,
   begrunnelse: tilrettelegging.begrunnelse,

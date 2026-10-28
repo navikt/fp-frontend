@@ -1,4 +1,4 @@
-import { type ReactElement, useEffect, useMemo } from 'react';
+import { type ReactElement, type ReactNode, useEffect, useMemo } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -33,6 +33,9 @@ const erPeriodeOppfylt = (
   valgtPeriode: PeriodeSoker,
   utfallKoder: PeriodeResultatÅrsakMuligeÅrsaker[],
 ): boolean | undefined => {
+  if (valgtPeriode.oppholdÅrsak !== '-') {
+    return true;
+  }
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === 'INNVILGET') {
     return true;
   }
@@ -44,7 +47,7 @@ const erPeriodeOppfylt = (
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === 'MANUELL_BEHANDLING') {
     // Litt flaky. Bør sende med kodeverket og slå opp utfallType
     const kodeverkKode = utfallKoder.find(kodeItem => kodeItem.kode === valgtPeriode.periodeResultatÅrsak);
-    if (kodeverkKode?.utfallType === 'INNVILGET' || valgtPeriode.oppholdÅrsak !== '-') {
+    if (kodeverkKode?.utfallType === 'INNVILGET') {
       return true;
     }
     if (kodeverkKode?.utfallType === 'AVSLÅTT') {
@@ -187,6 +190,16 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
   return harMerEnn100 ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' }) : undefined;
 };
 
+const ResultatÅrsakBoks = ({
+  visPil,
+  alignOffset,
+  children,
+}: {
+  visPil: boolean;
+  alignOffset: number;
+  children: ReactNode;
+}) => (visPil ? <ArrowBox alignOffset={alignOffset}>{children}</ArrowBox> : children);
+
 const hentSorterAktiviteterFn =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId, intl: IntlShape) =>
   (aktivitet1: PeriodeSokerAktivitet, aktivitet2: PeriodeSokerAktivitet) => {
@@ -253,6 +266,7 @@ export const UttakPeriodeForm = ({
   const aktiviteter = useWatch({ control: formMethods.control, name: 'aktiviteter' });
 
   const stønadskontoType: UttakPeriodeType = aktiviteter[0]?.stønadskontoType ?? '-';
+  const erOppholdsperiode = valgtPeriode.oppholdÅrsak !== '-';
 
   const periodeÅrsakOptions = lagOptionsTilPeriodeÅrsakSelect(
     muligeÅrsaker,
@@ -299,7 +313,7 @@ export const UttakPeriodeForm = ({
           erOppfylt={erOppfylt}
           valgtInnvilgelsesÅrsak={valgtInnvilgelsesÅrsak}
         />
-        {valgtPeriode.oppholdÅrsak === '-' && (
+        {!erOppholdsperiode && (
           <UttakAktiviteterTabell
             isReadOnly={isReadOnly}
             periodeTyper={alleKodeverk['UttakPeriodeType']}
@@ -323,25 +337,27 @@ export const UttakPeriodeForm = ({
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
             <VStack gap="space-12">
-              <RhfRadioGroup
-                name="erOppfylt"
-                control={formMethods.control}
-                legend={<FormattedMessage id="UttakInfoPanel.FastsettResultat" />}
-                hideLegend
-                validate={[required]}
-                onClick={() => formMethods.setValue('periodeResultatÅrsak', '-')}
-              >
-                <HStack gap="space-16">
-                  <Radio value={true} size="small">
-                    <FormattedMessage id="UttakActivity.Oppfylt" />
-                  </Radio>
-                  <Radio value={false} size="small">
-                    <FormattedMessage id="UttakActivity.IkkeOppfylt" />
-                  </Radio>
-                </HStack>
-              </RhfRadioGroup>
+              {!erOppholdsperiode && (
+                <RhfRadioGroup
+                  name="erOppfylt"
+                  control={formMethods.control}
+                  legend={<FormattedMessage id="UttakInfoPanel.FastsettResultat" />}
+                  hideLegend
+                  validate={[required]}
+                  onClick={() => formMethods.setValue('periodeResultatÅrsak', '-')}
+                >
+                  <HStack gap="space-16">
+                    <Radio value={true} size="small">
+                      <FormattedMessage id="UttakActivity.Oppfylt" />
+                    </Radio>
+                    <Radio value={false} size="small">
+                      <FormattedMessage id="UttakActivity.IkkeOppfylt" />
+                    </Radio>
+                  </HStack>
+                </RhfRadioGroup>
+              )}
               {erOppfylt !== undefined && (
-                <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
+                <ResultatÅrsakBoks visPil={!erOppholdsperiode} alignOffset={erOppfylt ? 0 : 92}>
                   <VStack gap="space-16">
                     <RhfSelect
                       name="periodeResultatÅrsak"
@@ -381,7 +397,7 @@ export const UttakPeriodeForm = ({
                       </>
                     )}
                   </VStack>
-                </ArrowBox>
+                </ResultatÅrsakBoks>
               )}
             </VStack>
             {warning && (

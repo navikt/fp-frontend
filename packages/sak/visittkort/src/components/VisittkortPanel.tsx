@@ -66,7 +66,10 @@ export const VisittkortPanel = ({
             gender={utledKjonn(primærBruker.kjønn)}
             url={lenkeTilAnnenPart}
             renderLabelContent={() => (
-              <VisittkortLabels fagsakPerson={primærBruker} harVergeIÅpenBehandling={harVergeIÅpenBehandling} />
+              <VisittkortLabels
+                fagsakPerson={primærBruker}
+                harVergeIÅpenBehandling={primærBruker === bruker && harVergeIÅpenBehandling}
+              />
             )}
             isActive={erMor}
           />
@@ -80,7 +83,12 @@ export const VisittkortPanel = ({
               fodselsnummer={sekundærBruker.fødselsnummer}
               gender={utledKjonn(sekundærBruker.kjønn)}
               url={lenkeTilAnnenPart}
-              renderLabelContent={() => <VisittkortLabels fagsakPerson={sekundærBruker} />}
+              renderLabelContent={() => (
+                <VisittkortLabels
+                  fagsakPerson={sekundærBruker}
+                  harVergeIÅpenBehandling={sekundærBruker === bruker && harVergeIÅpenBehandling}
+                />
+              )}
               isActive={!erMor}
             />
           ) : (

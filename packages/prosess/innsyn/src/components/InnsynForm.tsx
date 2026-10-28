@@ -45,6 +45,14 @@ const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
   return filteredDocuments;
 };
 
+const erInnvilget = (innsynResultatType: FormValues['innsynResultatType']): boolean =>
+  innsynResultatType === 'INNV' || innsynResultatType === 'DELV';
+
+const skalSettesPåVent = (
+  innsynResultatType: FormValues['innsynResultatType'],
+  sattPaVent: FormValues['sattPaVent'],
+): boolean => erInnvilget(innsynResultatType) && !!sattPaVent;
+
 interface Props {
   innsyn?: Innsyn;
   alleDokumenter?: Dokument[];
@@ -124,7 +132,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
             </HStack>
           </RhfRadioGroup>
 
-          {(innsynResultatTypeKode === 'INNV' || innsynResultatTypeKode === 'DELV') && (
+          {erInnvilget(innsynResultatTypeKode) && (
             <ArrowBox alignOffset={innsynResultatTypeKode === 'INNV' ? 28 : 176}>
               <VStack gap="space-16">
                 <RhfRadioGroup
@@ -166,7 +174,11 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
           isSubmittable={isSubmittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
-          text={sattPaVent ? intl.formatMessage({ id: 'SubmitButton.SettPåVent' }) : undefined}
+          text={
+            skalSettesPåVent(innsynResultatTypeKode, sattPaVent)
+              ? intl.formatMessage({ id: 'SubmitButton.SettPåVent' })
+              : undefined
+          }
         />
       </VStack>
     </RhfForm>
@@ -186,12 +198,15 @@ const buildInitialValues = (
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
 
-const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
-  kode: AksjonspunktKode.VURDER_INNSYN,
-  innsynDokumenter: getDocumentsStatus(values, documents),
-  mottattDato: notEmpty(values.mottattDato),
-  innsynResultatType: notEmpty(values.innsynResultatType),
-  fristDato: values.fristDato,
-  sattPåVent: values.sattPaVent,
-  begrunnelse: values.begrunnelse,
-});
+const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => {
+  const sattPåVent = skalSettesPåVent(values.innsynResultatType, values.sattPaVent);
+  return {
+    kode: AksjonspunktKode.VURDER_INNSYN,
+    innsynDokumenter: getDocumentsStatus(values, documents),
+    mottattDato: notEmpty(values.mottattDato),
+    innsynResultatType: notEmpty(values.innsynResultatType),
+    ...(sattPåVent ? { fristDato: values.fristDato } : {}),
+    sattPåVent,
+    begrunnelse: values.begrunnelse,
+  };
+};
