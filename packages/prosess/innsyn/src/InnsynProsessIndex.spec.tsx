@@ -1,8 +1,6 @@
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import dayjs from 'dayjs';
 
 import * as stories from './InnsynProsessIndex.stories';
 
@@ -40,7 +38,6 @@ describe('InnsynProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      fristDato: dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
       innsynDokumenter: [
         {
           dokumentId: '3',
@@ -61,8 +58,43 @@ describe('InnsynProsessIndex', () => {
       innsynResultatType: 'AVVIST',
       kode: '5037',
       mottattDato: '2021-12-23',
-      sattPåVent: undefined,
+      sattPåVent: false,
     });
+    expect(lagre.mock.calls[0]![0]).not.toHaveProperty('fristDato');
+  });
+
+  it('skal ikke sende sett på vent eller frist når resultat endres fra innvilget til avslått', async () => {
+    const lagre = vi.fn();
+
+    render(<PanelForVurderingAvInnsyn submitCallback={lagre} />);
+
+    expect(await screen.findByText('Innsynsbehandling')).toBeInTheDocument();
+
+    const datoMottattKravInput = screen.getByLabelText('Dato for mottatt krav om innsyn');
+    await userEvent.clear(datoMottattKravInput);
+    await userEvent.type(datoMottattKravInput, '23.12.2021');
+    fireEvent.blur(datoMottattKravInput);
+
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
+
+    await userEvent.click(screen.getByText('Innvilget innsyn'));
+    await userEvent.click(screen.getByText('Sett behandling på vent i påvente av skanning'));
+    expect(screen.getByText('Sett behandling på vent')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Avslått innsyn'));
+    expect(screen.queryByText('Sett behandling på vent')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        innsynResultatType: 'AVVIST',
+        sattPåVent: false,
+      }),
+    );
+    expect(lagre.mock.calls[0]![0]).not.toHaveProperty('fristDato');
   });
 
   it('skal ekspandere liste med vedtaksdokumenter', async () => {

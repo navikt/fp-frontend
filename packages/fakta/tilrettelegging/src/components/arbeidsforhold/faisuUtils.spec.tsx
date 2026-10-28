@@ -1,4 +1,3 @@
-import type { FieldArrayWithId } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -7,17 +6,14 @@ import { vi } from 'vitest';
 import type { Arbeidsforhold } from '@navikt/fp-types';
 import { getIntlMock } from '@navikt/fp-utils-test';
 
-import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
+import type { Tilrettelegging } from '../../types/TilretteleggingFormValues';
 import { getFAISUProps } from './faisuUtils';
 
 import messages from '../../../i18n/nb_NO.json';
 
 const intl = getIntlMock(messages);
 
-type Felt = FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>;
-
-const lagTilrettelegging = (overrides: Partial<Tilrettelegging> = {}): Felt => ({
-  id: 'id',
+const lagTilrettelegging = (overrides: Partial<Tilrettelegging> = {}): Tilrettelegging => ({
   arbeidsgiverReferanse: '999999999',
   kanTilrettelegges: true,
   skalBrukes: true,
@@ -47,7 +43,7 @@ const klikkActionKnapp = (props: ReturnType<typeof getFAISUProps>) => {
 
 describe('faisuUtils', () => {
   it('skal returnere undefined når arbeidsforholdet verken skal vurderes splittet eller er splittet', () => {
-    const props = getFAISUProps(lagTilrettelegging(), [], [], vi.fn(), {});
+    const props = getFAISUProps(0, () => [lagTilrettelegging()], [], vi.fn(), {});
 
     expect(props).toBeUndefined();
   });
@@ -57,7 +53,7 @@ describe('faisuUtils', () => {
     const replace = vi.fn();
     const aoi = [lagAoiArbeidsforhold('a'), lagAoiArbeidsforhold('b')];
 
-    const props = getFAISUProps(arbeidsforhold, [arbeidsforhold], aoi, replace, {});
+    const props = getFAISUProps(0, () => [arbeidsforhold], aoi, replace, {});
 
     render(
       <RawIntlProvider value={intl}>
@@ -77,7 +73,7 @@ describe('faisuUtils', () => {
     const splittet2 = lagTilrettelegging({ arbeidsforholdetErSplittet: true });
     const replace = vi.fn();
 
-    const props = getFAISUProps(splittet1, [splittet1, splittet2], [lagAoiArbeidsforhold('a')], replace, {});
+    const props = getFAISUProps(0, () => [splittet1, splittet2], [lagAoiArbeidsforhold('a')], replace, {});
 
     render(
       <RawIntlProvider value={intl}>
@@ -109,21 +105,37 @@ describe('faisuUtils', () => {
       tilretteleggingDatoer: [],
       stillingsprosentStartTilrettelegging: 200,
     };
-    const originalFelt: Felt = { ...original, id: 'original' };
-
     const replaceSplitt = vi.fn();
-    klikkActionKnapp(getFAISUProps(originalFelt, [originalFelt], aoi, replaceSplitt, {}));
+    klikkActionKnapp(getFAISUProps(0, () => [original], aoi, replaceSplitt, {}));
 
-    const splittedeFelter: Felt[] = (replaceSplitt.mock.calls[0]![0] as Tilrettelegging[]).map((felt, index) => ({
-      ...felt,
-      id: `splitt-${index}`,
-    }));
+    const splittedeFelter = replaceSplitt.mock.calls[0]![0] as Tilrettelegging[];
     expect(splittedeFelter).toHaveLength(2);
     expect(splittedeFelter.every(felt => felt.arbeidsforholdetErSplittet)).toBe(true);
 
     const replaceRevert = vi.fn();
-    klikkActionKnapp(getFAISUProps(splittedeFelter[0]!, splittedeFelter, aoi, replaceRevert, {}));
+    klikkActionKnapp(getFAISUProps(0, () => splittedeFelter, aoi, replaceRevert, {}));
 
     expect(replaceRevert.mock.calls[0]![0]).toStrictEqual([original]);
+  });
+
+  it('skal bruke gjeldende skjemaverdier når knappen klikkes, ikke verdiene fra rendringen', () => {
+    const aoi = [lagAoiArbeidsforhold('a'), lagAoiArbeidsforhold('b')];
+    const annet = lagTilrettelegging({ arbeidsgiverReferanse: '111111111', skalBrukes: true });
+    let gjeldende = [lagTilrettelegging({ skalVurdereSplittAvArbeidsforholdet: true }), annet];
+    const replace = vi.fn();
+
+    const props = getFAISUProps(0, () => gjeldende, aoi, replace, {});
+    gjeldende = [
+      lagTilrettelegging({ skalVurdereSplittAvArbeidsforholdet: true, begrunnelse: 'Endret' }),
+      { ...annet, skalBrukes: false },
+    ];
+    klikkActionKnapp(props);
+
+    const nye = replace.mock.calls[0]![0] as Tilrettelegging[];
+    expect(nye.find(af => af.arbeidsgiverReferanse === '111111111')?.skalBrukes).toBe(false);
+    expect(nye.filter(af => af.arbeidsgiverReferanse === '999999999').map(af => af.begrunnelse)).toStrictEqual([
+      'Endret',
+      'Endret',
+    ]);
   });
 });

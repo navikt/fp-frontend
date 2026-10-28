@@ -10,6 +10,7 @@ const {
   ForAnnenPartDerAktørIdErUkjent,
   MedDiskresjonskodeOgDødAnnenpart,
   MedVergeOgBrukerUnder18,
+  FarSomSøkerMedVergeOgMorSomAnnenPart,
   FamilieMedDødfødtBarn,
   FamilieMedFødtBarn,
   FamilieMedTermin,
@@ -54,6 +55,17 @@ describe('VisittkortSakIndex', () => {
     expect(screen.getByText('656565 78787')).toBeInTheDocument();
     expect(await screen.findByText('Verge')).toBeInTheDocument();
     expect(screen.getByText('Under 18')).toBeInTheDocument();
+  });
+
+  it('skal vise verge-merke på søker og ikke på annen part når far søker', async () => {
+    render(<FarSomSøkerMedVergeOgMorSomAnnenPart />);
+
+    const verge = await screen.findByText('Verge');
+    const farKort = screen.getByText('Espen Utvikler').parentElement;
+    const morKort = screen.getByText('Klara Ku').parentElement;
+
+    expect(farKort).toContainElement(verge);
+    expect(morKort).not.toContainElement(verge);
   });
 
   it('skal vise visittkort for ukjent annen part', async () => {

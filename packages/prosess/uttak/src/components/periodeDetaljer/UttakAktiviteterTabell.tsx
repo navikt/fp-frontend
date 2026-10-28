@@ -56,6 +56,8 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   };
 };
 
+const tilTall = (verdi: string | null | undefined): number => Number.parseFloat((verdi ?? '').replace(',', '.'));
+
 const sjekkOmUtbetalingsgradEr0OmAvslått =
   (intl: IntlShape, erOppfylt: boolean, utsettelseType?: string) => (utbetalingsgrad: string) => {
     const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
@@ -92,7 +94,7 @@ const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent =
   (intl: IntlShape, getValues: UseFormGetValues<UttakAktivitetType>) => (utbetalingsgrad: string) => {
     const samtidigUttak = getValues('samtidigUttak');
     const samtidigUttaksprosent = getValues('samtidigUttaksprosent');
-    if (samtidigUttak && samtidigUttaksprosent && samtidigUttaksprosent < utbetalingsgrad) {
+    if (samtidigUttak && samtidigUttaksprosent && tilTall(samtidigUttaksprosent) < tilTall(utbetalingsgrad)) {
       return intl.formatMessage({
         id: 'ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent',
       });
@@ -230,7 +232,7 @@ export const UttakAktiviteterTabell = ({
           );
 
           const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
-            (sum, aktivitet, i) => (i === index ? sum : sum + Number.parseInt(aktivitet.utbetalingsgrad, 10)),
+            (sum, aktivitet, i) => (i === index ? sum : sum + tilTall(aktivitet.utbetalingsgrad)),
             0,
           );
 
@@ -290,7 +292,7 @@ export const UttakAktiviteterTabell = ({
                   control={control}
                   label={<FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />}
                   hideLabel
-                  className="justify-end"
+                  className="ml-auto max-w-48 justify-items-end text-left"
                   htmlSize={8}
                   validate={[
                     required,

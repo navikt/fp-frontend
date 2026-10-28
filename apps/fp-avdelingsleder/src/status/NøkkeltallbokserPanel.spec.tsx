@@ -36,8 +36,8 @@ describe('NøkkeltallbokserPanel', () => {
 
     const øvrigeBoks = within(screen.getByTestId('nokkeltallboks-resten'));
     expect(øvrigeBoks.getByText('Øvrige')).toBeInTheDocument();
-    expect(øvrigeBoks.getByText('0')).toBeInTheDocument();
-    expect(øvrigeBoks.getByText('0 til beslutter')).toBeInTheDocument();
+    expect(øvrigeBoks.getByText('6')).toBeInTheDocument();
+    expect(øvrigeBoks.getByText('2 til beslutter')).toBeInTheDocument();
   });
 
   it('skal velge bort foreldrepenger i filter', async () => {
@@ -69,7 +69,7 @@ describe('NøkkeltallbokserPanel', () => {
 
     const øvrigeBoks = within(screen.getByTestId('nokkeltallboks-resten'));
     expect(øvrigeBoks.getByText('Øvrige')).toBeInTheDocument();
-    expect(øvrigeBoks.getByText('0')).toBeInTheDocument();
-    expect(øvrigeBoks.getByText('0 til beslutter')).toBeInTheDocument();
+    expect(øvrigeBoks.getByText('3')).toBeInTheDocument();
+    expect(øvrigeBoks.getByText('2 til beslutter')).toBeInTheDocument();
   });
 });
