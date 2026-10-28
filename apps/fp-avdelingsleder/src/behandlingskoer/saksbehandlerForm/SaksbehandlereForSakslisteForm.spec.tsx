@@ -1,12 +1,86 @@
 import { composeStories } from '@storybook/react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './SaksbehandlereForSakslisteForm.stories';
 
+const { lagreSakslisteSaksbehandler } = vi.hoisted(() => ({
+  lagreSakslisteSaksbehandler:
+    vi.fn<(sakslisteId: number, brukerIdent: string, checked: boolean, avdelingEnhet: string) => Promise<void>>(),
+}));
+
+vi.mock('../../data/fplosAvdelingslederApi', async importOriginal => ({
+  ...(await importOriginal<typeof import('../../data/fplosAvdelingslederApi')>()),
+  lagreSakslisteSaksbehandler,
+}));
+
 const { IngenSaksbehandlere, ToSaksbehandlere, SaksbehandlereSomErGruppert } = composeStories(stories);
 
 describe('SaksbehandlereForSakslisteForm', () => {
+  beforeEach(() => {
+    lagreSakslisteSaksbehandler.mockReset();
+    lagreSakslisteSaksbehandler.mockImplementation(() => Promise.resolve());
+  });
+
+  it('skal lagre endrede saksbehandlere ved gruppevalg', async () => {
+    await SaksbehandlereSomErGruppert.run();
+
+    expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
+
+    const gruppeCheckbox = screen.getByRole('checkbox', { name: 'Velg alle i Gruppe 1' });
+    await userEvent.click(gruppeCheckbox);
+
+    const gruppe1Identer = ['S34354', 'E23232', 'A123456', 'T123421', 'M00000', 'S00001', 'M00002', 'K123456'];
+    const endredeIdenter = gruppe1Identer.filter(ident => ident !== 'S34354');
+    await waitFor(() => expect(lagreSakslisteSaksbehandler).toHaveBeenCalledTimes(endredeIdenter.length));
+    endredeIdenter.forEach(ident => {
+      expect(lagreSakslisteSaksbehandler).toHaveBeenCalledWith(1, ident, true, 'Nav Vikafossen');
+    });
+
+    lagreSakslisteSaksbehandler.mockClear();
+    await userEvent.click(gruppeCheckbox);
+
+    await waitFor(() => expect(lagreSakslisteSaksbehandler).toHaveBeenCalledTimes(gruppe1Identer.length));
+    gruppe1Identer.forEach(ident => {
+      expect(lagreSakslisteSaksbehandler).toHaveBeenCalledWith(1, ident, false, 'Nav Vikafossen');
+    });
+  });
+
+  it('skal sperre gruppevalg mens lagring pågår', async () => {
+    const ventendeLagringer: (() => void)[] = [];
+    lagreSakslisteSaksbehandler.mockImplementation(
+      () =>
+        new Promise<void>(resolve => {
+          ventendeLagringer.push(resolve);
+        }),
+    );
+    await SaksbehandlereSomErGruppert.run();
+
+    expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
+
+    const gruppeCheckbox = screen.getByRole('checkbox', { name: 'Velg alle i Drammen' });
+    await userEvent.click(gruppeCheckbox);
+    expect(gruppeCheckbox).toBeDisabled();
+
+    ventendeLagringer.forEach(fullførLagring => fullførLagring());
+    await waitFor(() => expect(gruppeCheckbox).toBeEnabled());
+  });
+
+  it('skal fjerne avhuking for saksbehandlere som ikke ble lagret', async () => {
+    lagreSakslisteSaksbehandler.mockImplementation((_sakslisteId: number, brukerIdent: string) =>
+      brukerIdent === 'M00002' ? Promise.reject(new Error('Lagring feilet')) : Promise.resolve(),
+    );
+    await SaksbehandlereSomErGruppert.run();
+
+    expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('checkbox', { name: 'Velg alle i Drammen' }));
+    await userEvent.click(screen.getByRole('cell', { name: 'Drammen' }));
+
+    await waitFor(() => expect(screen.getByRole('checkbox', { name: 'Marte' })).not.toBeChecked());
+    expect(screen.getByRole('checkbox', { name: 'Kari Kanari' })).toBeChecked();
+  });
+
   it('skal vise tekst som viser at ingen saksbehandlere er tilknyttet', async () => {
     await IngenSaksbehandlere.run();
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
