@@ -89,6 +89,16 @@ export const MedVergeOgBrukerUnder18: Story = {
   },
 };
 
+export const FarSomSøkerMedVergeOgMorSomAnnenPart: Story = {
+  args: {
+    erMor: false,
+    harVergeIÅpenBehandling: true,
+    bruker: fagsakPersonFar,
+    annenPart: fagsakPersonMor,
+    lenkeTilAnnenPart: 'testlenke til annen part',
+  },
+};
+
 export const FamilieMedFødtBarn: Story = {
   args: {
     erMor: true,

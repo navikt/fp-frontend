@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export type FaktaPanelMedÅpentApInfo = {
   urlCode: string;
@@ -29,9 +29,19 @@ export const useFaktaPanelMenyData = (
       }
       return newData;
     });
-
-    setFaktaPanelMedÅpentApInfo?.(data.harÅpentAksjonspunkt ? { urlCode: data.id, text: data.tekst } : undefined);
   };
+
+  const panelMedÅpentAp = faktaPanelMenyData.find(d => d.skalVisesIMeny && d.harÅpentAksjonspunkt);
+  const åpentApUrlCode = panelMedÅpentAp?.id;
+  const åpentApTekst = panelMedÅpentAp?.tekst;
+
+  useEffect(() => {
+    setFaktaPanelMedÅpentApInfo?.(
+      åpentApUrlCode !== undefined && åpentApTekst !== undefined
+        ? { urlCode: åpentApUrlCode, text: åpentApTekst }
+        : undefined,
+    );
+  }, [åpentApUrlCode, åpentApTekst, setFaktaPanelMedÅpentApInfo]);
 
   return {
     faktaPanelMenyData: faktaPanelMenyData.filter(d => d.skalVisesIMeny),
