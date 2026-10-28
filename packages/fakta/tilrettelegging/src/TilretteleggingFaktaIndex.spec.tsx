@@ -1018,6 +1018,51 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(ap.bekreftetSvpArbeidsforholdList[0]!.tilretteleggingDatoer[1]?.overstyrtUtbetalingsgrad).toBe(70);
   });
 
+  it('skal ikke gjenopprette overstyrt utbetalingsgrad når arbeidsprosenten endres og settes tilbake', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    const svangerskapspengerTilrettelegging =
+      stories.TilretteleggingMedOverstyrtUtbetalingsgrad.args.svangerskapspengerTilrettelegging;
+    const arbeidsforhold = svangerskapspengerTilrettelegging.arbeidsforholdListe[0]!;
+
+    render(
+      <TilretteleggingMedOverstyrtUtbetalingsgrad
+        submitCallback={lagre}
+        svangerskapspengerTilrettelegging={{
+          ...svangerskapspengerTilrettelegging,
+          arbeidsforholdListe: [
+            {
+              ...arbeidsforhold,
+              tilretteleggingDatoer: arbeidsforhold.tilretteleggingDatoer.map(dato =>
+                dato.fom === '2020-06-01' ? { ...dato, overstyrtUtbetalingsgrad: 70 } : dato,
+              ),
+            },
+          ],
+        }}
+      />,
+    );
+
+    await userEvent.click(await screen.findByText('01.06.2020 - 14.08.2020'));
+    const utbetalingsgrad = screen.getByRole('textbox', { name: 'Prosent svangerskapspenger' });
+    expect(utbetalingsgrad).toHaveValue('70,00');
+
+    const arbeidsprosent = screen.getByRole('textbox', { name: 'Arbeidsprosent' });
+    await userEvent.clear(arbeidsprosent);
+    await userEvent.type(arbeidsprosent, '40');
+    await userEvent.clear(arbeidsprosent);
+    await userEvent.type(arbeidsprosent, '50');
+    expect(utbetalingsgrad).toHaveValue('50,00');
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    const ap = (lagre.mock.calls[0] as unknown as [BekreftSvangerskapspengerAp])[0];
+    const endretDato = ap.bekreftetSvpArbeidsforholdList[0]!.tilretteleggingDatoer[1];
+    expect(endretDato?.stillingsprosent).toBe(50);
+    expect(endretDato?.overstyrtUtbetalingsgrad).toBeUndefined();
+  });
+
   it('skal sende overstyrt utbetalingsgrad for splittet arbeidsforhold uten arbeidsprosent, også når graden er 100', async () => {
     const lagre = vi.fn(() => Promise.resolve());
     const svangerskapspengerTilrettelegging =

@@ -108,7 +108,8 @@ const finnOverstyrtUtbetalingsgrad = (
 
   const grunnlagErUendret =
     lagreFormValues.type === opprinneligTilretteleggingDato.type &&
-    lagreFormValues.stillingsprosent === opprinneligTilretteleggingDato.stillingsprosent;
+    lagreFormValues.stillingsprosent === opprinneligTilretteleggingDato.stillingsprosent &&
+    lagreFormValues.overstyrtUtbetalingsgrad === opprinneligTilretteleggingDato.overstyrtUtbetalingsgrad;
 
   if (lagreFormValues.type === 'HEL_TILRETTELEGGING' || !grunnlagErUendret) {
     return undefined;
