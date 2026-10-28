@@ -292,7 +292,7 @@ export const UttakAktiviteterTabell = ({
                   control={control}
                   label={<FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />}
                   hideLabel
-                  className="justify-end"
+                  className="ml-auto max-w-48 justify-items-end text-right"
                   htmlSize={8}
                   validate={[
                     required,
