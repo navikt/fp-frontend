@@ -21,8 +21,8 @@ describe('EndreSakslisterPanel', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Legg til behandlingskø' }));
 
-    expect(screen.getByRole('columnheader', { name: 'Navn' })).toBeInTheDocument();
-    expect(screen.getByRole('cell', { name: 'Ny liste' })).toBeInTheDocument();
+    expect(await screen.findByRole('columnheader', { name: 'Navn' })).toBeInTheDocument();
+    expect(await screen.findByRole('cell', { name: 'Ny liste' })).toBeInTheDocument();
   });
 
   it('skal vise antall saksbehandlere og oppgaver for kø', async () => {
