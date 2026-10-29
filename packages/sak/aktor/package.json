@@ -23,7 +23,7 @@
     "@navikt/fp-sak-visittkort": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-plattform-komponenter": "13.1.1",
-    "@navikt/ft-ui-komponenter": "9.1.1",
+    "@navikt/ft-ui-komponenter": "9.1.2",
     "@navikt/ft-utils": "7.0.0",
     "dayjs": "1.11.23",
     "react": "19.3.1",
