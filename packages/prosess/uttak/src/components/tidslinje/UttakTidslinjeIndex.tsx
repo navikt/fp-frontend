@@ -85,10 +85,11 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
 
     if (uttak.oppholdÅrsak !== '-') {
       const stonadskonto = OppholdArsakMapper[uttak.oppholdÅrsak];
+      const dager = calcDays(uttak.fom, uttak.tom) ?? 0;
       const oppholdInfo = {
         stønadskontoType: stonadskonto,
-        trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
-        trekkdager: calcDays(uttak.fom, uttak.tom),
+        trekkdagerDesimaler: dager,
+        trekkdager: dager,
       };
       uttakPerioder.aktiviteter = [oppholdInfo];
     }

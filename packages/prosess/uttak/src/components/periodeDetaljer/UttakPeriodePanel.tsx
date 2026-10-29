@@ -128,6 +128,9 @@ const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): Perio
   const { aktiviteter, samtidigUttak, samtidigUttaksprosent } = valgtPeriode;
 
   const virkedager = calcDays(fom, tom);
+  if (virkedager === undefined) {
+    throw new Error('Kan ikke beregne trekkdager for en periode uten sluttdato');
+  }
   const oppdaterteAktiviteter = aktiviteter.map(aktivitet =>
     aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler > 0
       ? {
