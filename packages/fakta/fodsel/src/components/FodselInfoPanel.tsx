@@ -42,13 +42,13 @@ export const FodselInfoPanel = ({ fødsel, terminbekreftelseDokument }: Props) =
 
       <Situasjon gjeldende={fødsel.gjeldende} />
 
-      <HGrid columns="repeat(auto-fit, minmax(24rem, 1fr))" gap="space-16">
+      <HGrid columns="repeat(auto-fit, minmax(min(100%, 24rem), 1fr))" gap="space-16">
         <FaktaFraSøknad søknad={fødsel.søknad} terminbekreftelseDokument={terminbekreftelseDokument} />
         <FaktaFraFReg barna={fødsel.register.barn} />
       </HGrid>
 
       {(terminbekreftelseAp || manglendeFødselAp) && (
-        <HGrid columns="repeat(auto-fit, minmax(40rem, 1fr))" gap="space-16">
+        <HGrid columns="repeat(auto-fit, minmax(min(100%, 40rem), 1fr))" gap="space-16">
           {manglendeFødselAp && <SjekkManglendeFødselForm fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />}
           {terminbekreftelseAp && <SjekkTerminbekreftelseForm fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />}
         </HGrid>
