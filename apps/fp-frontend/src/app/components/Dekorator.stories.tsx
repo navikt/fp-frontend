@@ -4,6 +4,8 @@ import { action } from 'storybook/actions';
 import { getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 
 import { initFetchFpsak } from '../../../.storybook/testdata';
+import { SnarvegerProvider } from '../../snarveger/SnarvegerContext';
+import { SnarvegerHjelpModal } from '../../snarveger/SnarvegerHjelpModal';
 import { Dekorator } from './Dekorator';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -14,6 +16,12 @@ const meta = {
   title: 'app/Dekorator',
   decorators: [withIntl, withRouter],
   component: Dekorator,
+  render: args => (
+    <SnarvegerProvider>
+      <Dekorator {...args} />
+      <SnarvegerHjelpModal />
+    </SnarvegerProvider>
+  ),
   parameters: {
     layout: 'fullscreen',
   },
