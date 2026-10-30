@@ -14,10 +14,6 @@ import {
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
-const merknaderFraBeslutter = {
-  notAccepted: false,
-};
-
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
@@ -27,7 +23,6 @@ const meta = {
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
     isReadOnly: false,
     aksjonspunkterForPanel: [],
-    alleMerknaderFraBeslutter: {},
     terminbekreftelseDokument: {
       journalpostId: '1',
       dokumentId: '2',
@@ -85,9 +80,6 @@ export const Default: Story = {};
 export const APTerminbekreftelse: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE)],
-    alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: merknaderFraBeslutter,
-    },
     fødsel: {
       søknad: {
         barn: [],
@@ -149,9 +141,6 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
       },
     },
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL)],
-    alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
-    },
   },
 };
 export const APSjekkManglendeFødselPåForeldrepenger: Story = {
@@ -192,9 +181,6 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
       },
     },
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL)],
-    alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
-    },
   },
 };
 
@@ -241,9 +227,6 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
       },
     },
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL)],
-    alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
-    },
   },
 };
 
@@ -294,9 +277,6 @@ export const APSjekkManglendeFødselUtførtOgUtført: Story = {
   args: {
     isReadOnly: true,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL, { status: 'UTFO' })],
-    alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
-    },
     terminbekreftelseDokument: undefined,
   },
 };
