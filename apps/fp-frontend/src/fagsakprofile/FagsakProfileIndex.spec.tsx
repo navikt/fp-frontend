@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 
 import * as stories from './FagsakProfileIndex.stories';
 
-const { BehandlingErValgt, BehandlingErIkkeValgt } = composeStories(stories);
+const { BehandlingErValgt, BehandlingErIkkeValgt, FptilbakeKodeverkManglar } = composeStories(stories);
 
 describe('FagsakProfileIndex', () => {
   it('skal vise en behandling i liste når behandling er valgt', async () => {
@@ -27,5 +27,14 @@ describe('FagsakProfileIndex', () => {
 
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
     expect(screen.getByText('Revurdering')).toBeInTheDocument();
+  });
+
+  it('skal vise fagsakprofil og behandlinger når fptilbake-kodeverk ikke kan hentes', async () => {
+    await FptilbakeKodeverkManglar.run();
+
+    expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();
+    expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
+    expect(screen.getByText('Tilbakekreving')).toBeInTheDocument();
   });
 });

@@ -17,7 +17,7 @@ interface Props {
   withChevronUp?: boolean;
   behandling: FagsakBehandlingDto;
   alleKodeverk: AlleKodeverk;
-  alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
+  alleKodeverkTilbakekreving?: AlleKodeverkTilbakekreving;
 }
 
 /**
@@ -37,11 +37,11 @@ export const BehandlingInformasjon = ({
   const erTilbakekreving = behandling.type === 'BT-007' || behandling.type === 'BT-009';
 
   const behandlingType = erTilbakekreving
-    ? alleKodeverkTilbakekreving['BehandlingType']
+    ? (alleKodeverkTilbakekreving?.['BehandlingType'] ?? alleKodeverk['BehandlingType'])
     : alleKodeverk['BehandlingType'];
 
   const behandlingResultatType = erTilbakekreving
-    ? alleKodeverkTilbakekreving['BehandlingResultatType']
+    ? (alleKodeverkTilbakekreving?.['BehandlingResultatType'] ?? [])
     : alleKodeverk['BehandlingResultatType'];
 
   return (
