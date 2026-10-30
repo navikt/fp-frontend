@@ -36,6 +36,7 @@ interface Props {
   setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
   ansattnavn: string;
   gotToAppRoot: () => void;
+  visTastatursnarveier?: () => void;
 }
 
 export const FellesDekorator = ({
@@ -49,6 +50,7 @@ export const FellesDekorator = ({
   setTheme,
   ansattnavn,
   gotToAppRoot,
+  visTastatursnarveier,
 }: Props) => {
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
@@ -86,6 +88,7 @@ export const FellesDekorator = ({
       eksterneLenker={eksterneLenker}
       theme={theme}
       setTheme={setTheme}
+      visTastatursnarveier={visTastatursnarveier}
     />
   );
 };

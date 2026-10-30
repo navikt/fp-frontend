@@ -1,7 +1,7 @@
 import React, { type ComponentProps, useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { ExternalLinkIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
+import { ExternalLinkIcon, KeyboardIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
 import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -25,6 +25,7 @@ interface Props {
   eksterneLenker: DekoratorLenke[];
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
+  visTastatursnarveier?: () => void;
 }
 
 /**
@@ -46,6 +47,7 @@ export const DekoratorMedFeilviserSakIndex = ({
   eksterneLenker,
   theme,
   setTheme,
+  visTastatursnarveier,
 }: Props) => {
   const fixedHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -104,6 +106,19 @@ export const DekoratorMedFeilviserSakIndex = ({
             </Theme>
           </Dropdown>
           <InternalHeader.User name={navAnsattNavn} />
+          {location.hostname.includes('localhost') && (
+            <InternalHeader.Button href={`${location.origin}/oauth2/login?redirect=${location.pathname}`} as={Link}>
+              Bytt bruker
+            </InternalHeader.Button>
+          )}
+          {visTastatursnarveier && (
+            <InternalHeader.Button
+              onClick={visTastatursnarveier}
+              aria-label={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.Tastatursnarveier' })}
+            >
+              <KeyboardIcon fontSize="1.5rem" aria-hidden />
+            </InternalHeader.Button>
+          )}
           <InternalHeader.Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
             {theme === 'dark' ? (
               <SunIcon
@@ -117,11 +132,6 @@ export const DekoratorMedFeilviserSakIndex = ({
               />
             )}
           </InternalHeader.Button>
-          {location.hostname.includes('localhost') && (
-            <InternalHeader.Button href={`${location.origin}/oauth2/login?redirect=${location.pathname}`} as={Link}>
-              Bytt bruker
-            </InternalHeader.Button>
-          )}
         </InternalHeader>
         <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
