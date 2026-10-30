@@ -62,9 +62,11 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
               isDirty={formMethods.formState.isDirty}
               buttonText={intl.formatMessage({ id: 'OverstyringForm.Bekreft' })}
             />
-            <Button variant="secondary" size="small" type="button" onClick={avbrytOverstyring}>
-              <FormattedMessage id="OverstyringForm.Avbryt" />
-            </Button>
+            {!overstyringsAP && (
+              <Button variant="secondary" size="small" type="button" onClick={avbrytOverstyring}>
+                <FormattedMessage id="OverstyringForm.Avbryt" />
+              </Button>
+            )}
           </HStack>
         )}
       </VStack>

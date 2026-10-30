@@ -11,6 +11,7 @@ const {
   APSjekkManglendeFødselPåEngangstønad,
   APSjekkManglendeFødselPåForeldrepenger,
   OverstyringSomOverstyrer,
+  OverstyrtSettSomOverstyrer,
 } = composeStories(stories);
 
 describe('FodselFaktaIndex', () => {
@@ -228,6 +229,25 @@ describe('FodselFaktaIndex', () => {
     });
   });
   describe('overstyring', () => {
+    it('skal kunne avbryte en ny overstyring uten å lagre', async () => {
+      const lagre = vi.fn(() => Promise.resolve());
+      render(<OverstyringSomOverstyrer submitCallback={lagre} />);
+
+      await userEvent.click(screen.getByRole('button', { name: 'Overstyr' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Avbryt' }));
+
+      expect(screen.queryByLabelText('Overstyring av fødselsdetaljer')).not.toBeInTheDocument();
+      expect(lagre).not.toHaveBeenCalled();
+    });
+
+    it('skal ikke vise avbryt når overstyringsaksjonspunktet allerede finnes', () => {
+      render(<OverstyrtSettSomOverstyrer />);
+
+      const overstyringBoks = within(screen.getByLabelText('Overstyring av fødselsdetaljer'));
+      expect(overstyringBoks.getByRole('button', { name: 'Bekreft' })).toBeInTheDocument();
+      expect(overstyringBoks.queryByRole('button', { name: 'Avbryt' })).not.toBeInTheDocument();
+    });
+
     it('skal overstyre termindato og legge til et barn', async () => {
       const lagre = vi.fn(() => Promise.resolve());
       render(<OverstyringSomOverstyrer submitCallback={lagre} />);
