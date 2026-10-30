@@ -2,7 +2,7 @@ import React, { type ComponentProps, useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ExternalLinkIcon, KeyboardIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
-import { Dropdown, InternalHeader, Link, Spacer, Theme, Tooltip } from '@navikt/ds-react';
+import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
@@ -112,14 +112,12 @@ export const DekoratorMedFeilviserSakIndex = ({
             </InternalHeader.Button>
           )}
           {visTastatursnarveier && (
-            <Tooltip
-              content={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.Tastatursnarveier' })}
-              placement="bottom"
+            <InternalHeader.Button
+              onClick={visTastatursnarveier}
+              aria-label={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.Tastatursnarveier' })}
             >
-              <InternalHeader.Button onClick={visTastatursnarveier}>
-                <KeyboardIcon fontSize="1.5rem" aria-hidden />
-              </InternalHeader.Button>
-            </Tooltip>
+              <KeyboardIcon fontSize="1.5rem" aria-hidden />
+            </InternalHeader.Button>
           )}
           <InternalHeader.Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
             {theme === 'dark' ? (
