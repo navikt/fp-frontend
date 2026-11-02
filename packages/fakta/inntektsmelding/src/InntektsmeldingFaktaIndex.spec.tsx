@@ -6,13 +6,23 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import * as stories from './InntektsmeldingFaktaIndex.stories';
 
-const { InntektsmeldingDefault } = composeStories(stories);
+const { InntektsmeldingDefault, IngenInntektsmeldinger } = composeStories(stories);
 
 describe('InntektsmeldingFaktaIndex', () => {
-  // eslint-disable-next-line vitest/expect-expect -- assertes i hjelpefunksjon
+  it('skal vise en tommelding uten ikon når ingen inntektsmeldinger er registrert', () => {
+    const { container } = render(<IngenInntektsmeldinger />);
+
+    expect(screen.getByRole('heading', { name: 'Inntektsmeldinger', level: 2 })).toBeVisible();
+    expect(screen.getByText('Ingen inntektsmeldinger er registrert')).toBeInTheDocument();
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
+    expect(container.querySelector('svg')).not.toBeInTheDocument();
+  });
+
   it('Skal kunne sortere tabellen', async () => {
     render(<InntektsmeldingDefault />);
 
+    expect(screen.getByRole('heading', { name: 'Inntektsmeldinger', level: 2 })).toBeVisible();
+    expect(screen.getByRole('table')).toBeInTheDocument();
     // "Innsendt" er standard sortering. Derfor tester vi å sortere arbeidsgiver først
     await verifiserKolonneSortering('Arbeidsgiver', 1, ['Kiwi', 'Meny', 'Rema 1000']);
     await verifiserKolonneSortering('Innsendt', 0, [
