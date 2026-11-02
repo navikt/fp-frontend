@@ -108,7 +108,7 @@ export const DekoratorMedFeilviserSakIndex = ({
           <InternalHeader.User name={navAnsattNavn} />
           {location.hostname.includes('localhost') && (
             <InternalHeader.Button href={`${location.origin}/oauth2/login?redirect=${location.pathname}`} as={Link}>
-              Bytt bruker
+              <FormattedMessage id="DekoratorMedFeilviserSakIndex.ByttBruker" />
             </InternalHeader.Button>
           )}
           {visTastatursnarveier && (

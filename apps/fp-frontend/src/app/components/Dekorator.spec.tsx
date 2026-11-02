@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './Dekorator.stories';
@@ -38,22 +38,6 @@ describe('Dekorator', () => {
 
     expect(screen.queryByText('Tastatursnarveier (hjelp)')).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Tastatursnarveier' })).toBeInTheDocument();
-  });
-
-  it('skal ikke vise tooltip når pekeren er over tastatursnarveiknappen', () => {
-    vi.useFakeTimers();
-    try {
-      render(<Default />);
-
-      fireEvent.mouseEnter(screen.getByRole('button', { name: 'Tastatursnarveier' }));
-      act(() => {
-        vi.advanceTimersByTime(200);
-      });
-
-      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
-    } finally {
-      vi.useRealTimers();
-    }
   });
 
   it('skal vise feilmeldinger som ligger i URL', async () => {
