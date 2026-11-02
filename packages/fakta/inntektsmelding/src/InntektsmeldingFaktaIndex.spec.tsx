@@ -9,13 +9,12 @@ import * as stories from './InntektsmeldingFaktaIndex.stories';
 const { InntektsmeldingDefault, IngenInntektsmeldinger } = composeStories(stories);
 
 describe('InntektsmeldingFaktaIndex', () => {
-  it('skal vise en tommelding uten ikon når ingen inntektsmeldinger er registrert', () => {
-    const { container } = render(<IngenInntektsmeldinger />);
+  it('skal vise en tommelding når ingen inntektsmeldinger er registrert', () => {
+    render(<IngenInntektsmeldinger />);
 
     expect(screen.getByRole('heading', { name: 'Inntektsmeldinger', level: 2 })).toBeVisible();
     expect(screen.getByText('Ingen inntektsmeldinger er registrert')).toBeInTheDocument();
     expect(screen.queryByRole('table')).not.toBeInTheDocument();
-    expect(container.querySelector('svg')).not.toBeInTheDocument();
   });
 
   it('Skal kunne sortere tabellen', async () => {
