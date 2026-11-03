@@ -17,15 +17,6 @@
   padding: var(--ax-space-24) var(--ax-space-16);
 }
 
-.ingenInntektsmeldinger {
-  color: var(--ax-text-neutral-subtle);
-
-  svg {
-    height: 24px;
-    width: 24px;
-  }
-}
-
 ul {
   margin: 0;
 }
