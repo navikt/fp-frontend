@@ -33,7 +33,7 @@
     "eslint": "10.13.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-simple-import-sort": "14.0.0",
-    "eslint-plugin-unicorn": "78.0.0",
+    "eslint-plugin-unicorn": "79.0.0",
     "knip": "6.43.0",
     "prettier": "3.9.10",
     "supertest": "7.3.1",
