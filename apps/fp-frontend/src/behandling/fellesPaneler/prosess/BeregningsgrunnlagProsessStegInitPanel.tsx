@@ -180,7 +180,10 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
 
 type Visning = 'ny' | 'gammel';
 
-const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessIndex>, 'formData' | 'setFormData'>) => {
+const Wrapper = (
+  props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessIndex>, 'formData' | 'setFormData'> &
+    Pick<ComponentProps<typeof BeregningProsessIndex>, 'kodeverkSamling'>,
+) => {
   const { mellomlagretFormData, setMellomlagretFormData } =
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
 
