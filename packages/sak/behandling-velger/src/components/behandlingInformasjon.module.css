@@ -8,17 +8,6 @@
   }
 }
 
-.tittelAvstand {
-  flex: 1;
-  max-height: calc(var(--ax-space-32) + var(--ax-space-4));
-}
-
-.enhet {
-  margin-top: auto;
-  position: relative;
-  z-index: 1;
-}
-
 .detaljer {
   display: grid;
   gap: var(--ax-space-4) var(--ax-space-16);

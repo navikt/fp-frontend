@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.valgtBehandling {
+.valgt {
   border: 1px solid var(--ax-border-strong);
   border-radius: var(--ax-radius-8);
 }
@@ -16,14 +16,18 @@
   width: 100%;
 }
 
-.behandlingList {
+.liste {
   border-radius: inherit;
   list-style-type: none;
   margin: 0;
   padding: 0;
   width: 100%;
 }
-.behandlingList li {
+.liste li {
   border-radius: inherit;
   width: 100%;
+}
+
+.liste li + li {
+  margin-top: var(--ax-space-4);
 }
