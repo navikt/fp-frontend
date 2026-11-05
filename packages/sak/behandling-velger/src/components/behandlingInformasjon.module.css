@@ -1,39 +1,22 @@
-.behandling {
-  border-color: var(--ax-border-default);
-  position: relative;
+.innhold {
+  min-width: 0;
 
-  &[data-interactive='true']:hover {
-    outline: 1px solid var(--ax-border-default);
-  }
-
-  &:has(.header > :first-child:focus-visible) {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: 3px;
-  }
-
-  &[data-pressed='true'] {
-    background-color: var(--ax-bg-moderate-pressed);
+  > :first-child {
+    align-content: center;
+    min-height: var(--ax-space-32);
+    text-align: start;
   }
 }
 
-.header {
-  border-bottom: 1px solid var(--ax-border-subtleA);
+.tittelAvstand {
+  flex: 1;
+  max-height: calc(var(--ax-space-32) + var(--ax-space-4));
+}
 
-  > :is(a, button):first-child:focus-visible {
-    outline: none;
-  }
-
-  > :is(a, button):first-child:after {
-    content: '';
-    cursor: pointer;
-    inset: 0;
-    position: absolute;
-  }
-
-  > :is(a, button):last-child {
-    position: relative;
-    z-index: 1;
-  }
+.enhet {
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .detaljer {

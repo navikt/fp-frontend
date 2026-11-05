@@ -1,11 +1,29 @@
+.velger {
+  position: relative;
+}
+
+.valgtBehandling {
+  border: 1px solid var(--ax-border-strong);
+  border-radius: var(--ax-radius-8);
+}
+
+.meny {
+  border-radius: var(--ax-radius-8);
+  max-height: min(60vh, 36rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--ax-space-8);
+  width: 100%;
+}
+
 .behandlingList {
+  border-radius: inherit;
   list-style-type: none;
+  margin: 0;
   padding: 0;
   width: 100%;
 }
 .behandlingList li {
+  border-radius: inherit;
   width: 100%;
-}
-.behandlingList > li:not(:first-child) {
-  margin-top: 16px;
 }

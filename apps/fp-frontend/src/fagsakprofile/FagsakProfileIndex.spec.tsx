@@ -53,6 +53,25 @@ describe('FagsakProfileIndex', () => {
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne behandlingsliste' }));
     expect(screen.getByText('Tilbakekreving')).toBeInTheDocument();
+  });
+
+  it('skal navigere mellom behandlinger uten at containerens tastaturhåndtering flytter fokus en gang til', async () => {
+    await BehandlingErValgt.run();
+    const utløser = await screen.findByRole('button', { name: 'Åpne behandlingsliste' });
+    utløser.focus();
+
+    await userEvent.keyboard('{Enter}');
+
+    const rader = screen.getAllByTestId(/^behandling-/);
+    const første = rader[0]!.querySelector('a, button');
+    const andre = rader[1]!.querySelector('a, button');
+    expect(første).toHaveFocus();
+
+    await userEvent.keyboard('{ArrowDown}');
+    expect(andre).toHaveFocus();
+    await userEvent.keyboard('{ArrowUp}');
+    expect(første).toHaveFocus();
   });
 });
