@@ -172,9 +172,9 @@ describe('BehandlingVelgerSakIndex', () => {
     await userEvent.keyboard('{End}');
     expect(siste).toHaveFocus();
     await userEvent.keyboard('{ArrowDown}');
-    expect(første).toHaveFocus();
-    await userEvent.keyboard('{ArrowUp}');
     expect(siste).toHaveFocus();
+    await userEvent.keyboard('{ArrowUp}');
+    expect(tredje).toHaveFocus();
     await userEvent.keyboard('{Home}');
     expect(første).toHaveFocus();
 
