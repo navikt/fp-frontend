@@ -47,7 +47,7 @@ export const CardSelect = ({
   const listeId = useId();
   const [utløserElement, setUtløserElement] = useState<HTMLDivElement | null>(null);
   const listeRef = useRef<HTMLUListElement>(null);
-  const skalFokusereFørsteRef = useRef(false);
+  const fokusIndexRef = useRef<number | undefined>(undefined);
   const valgt = options.find(option => option.value === value);
   const erStatisk = options.length === 0 || (options.length === 1 && !!valgt);
   const erMenyÅpen = open && !erStatisk;
@@ -58,14 +58,15 @@ export const CardSelect = ({
       .forEach(handling => {
         handling.tabIndex = -1;
       });
-    if (erMenyÅpen && skalFokusereFørsteRef.current) {
-      skalFokusereFørsteRef.current = false;
-      listeRef.current?.querySelector<HTMLElement>('a, button')?.focus();
+    if (erMenyÅpen && fokusIndexRef.current !== undefined) {
+      const index = Math.min(fokusIndexRef.current, options.length - 1);
+      fokusIndexRef.current = undefined;
+      listeRef.current?.children[index]?.querySelector<HTMLElement>('[data-primary]')?.focus();
     }
   }, [erMenyÅpen, options]);
 
   const toggleMeny: MouseEventHandler<HTMLButtonElement> = event => {
-    skalFokusereFørsteRef.current = !erMenyÅpen && event.detail === 0;
+    fokusIndexRef.current = !erMenyÅpen && event.detail === 0 ? 0 : undefined;
     onOpenChange(!erMenyÅpen);
   };
 
@@ -88,18 +89,30 @@ export const CardSelect = ({
       event.altKey ||
       event.ctrlKey ||
       event.metaKey ||
-      !['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)
+      !['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'].includes(event.key) ||
+      erStatisk
     ) {
       return;
     }
 
+    event.preventDefault();
+    // Unngå at en overordnet container også flytter fokus.
+    event.stopPropagation();
+
     if (!erMenyÅpen) {
-      if (erStatisk || (event.key !== 'ArrowDown' && event.key !== 'ArrowUp')) {
-        return;
+      switch (event.key) {
+        case 'ArrowDown':
+          fokusIndexRef.current = 0;
+          break;
+        case 'End':
+          fokusIndexRef.current = options.length - 1;
+          break;
+        case 'PageDown':
+          fokusIndexRef.current = Math.min(5, options.length - 1);
+          break;
+        default:
+          return;
       }
-      event.preventDefault();
-      event.stopPropagation();
-      skalFokusereFørsteRef.current = true;
       onOpenChange(true);
       return;
     }
@@ -109,9 +122,6 @@ export const CardSelect = ({
       return;
     }
     const aktivIndex = rader.findIndex(rad => rad.contains(document.activeElement));
-    event.preventDefault();
-    // Unngå at en overordnet container også flytter fokus.
-    event.stopPropagation();
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       const handlinger = Array.from(
         rader[aktivIndex]?.querySelectorAll<HTMLElement>('a[href], button:not(:disabled)') ?? [],
@@ -125,16 +135,34 @@ export const CardSelect = ({
     let nesteIndex = 0;
     switch (event.key) {
       case 'ArrowDown':
-        nesteIndex = (aktivIndex + 1) % rader.length;
+        nesteIndex = Math.min(aktivIndex + 1, rader.length - 1);
         break;
       case 'ArrowUp':
-        nesteIndex = aktivIndex <= 0 ? rader.length - 1 : aktivIndex - 1;
+        if (aktivIndex === 0) {
+          lukkMeny();
+          return;
+        }
+        if (aktivIndex < 0) {
+          return;
+        }
+        nesteIndex = aktivIndex - 1;
+        break;
+      case 'Home':
         break;
       case 'End':
         nesteIndex = rader.length - 1;
         break;
+      case 'PageUp':
+        if (aktivIndex < 0) {
+          return;
+        }
+        nesteIndex = Math.max(aktivIndex - 6, 0);
+        break;
+      case 'PageDown':
+        nesteIndex = Math.min(aktivIndex + 6, rader.length - 1);
+        break;
     }
-    rader[nesteIndex]?.querySelector<HTMLElement>('a, button')?.focus();
+    rader[nesteIndex]?.querySelector<HTMLElement>('[data-primary]')?.focus();
   };
 
   const liste = (
