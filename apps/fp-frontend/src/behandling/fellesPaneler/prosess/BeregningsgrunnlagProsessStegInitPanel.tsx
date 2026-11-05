@@ -24,6 +24,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { type Beregningsvisning, utledBeregningsvisning } from './utledBeregningsvisning';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 import '@navikt/ft-prosess-beregning/dist/style.css';
@@ -178,8 +179,6 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
   );
 };
 
-type Visning = 'ny' | 'gammel';
-
 const Wrapper = (
   props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessIndex>, 'formData' | 'setFormData'> &
     Pick<ComponentProps<typeof BeregningProsessIndex>, 'kodeverkSamling'>,
@@ -188,16 +187,15 @@ const Wrapper = (
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
 
   const erProd = location.hostname.includes('intern.nav.no');
-  const aktivitetsstatuser = props.beregningsgrunnlagListe.flatMap(bg => bg.aktivitetStatus);
-  const erAktivitetKunAT_FL = aktivitetsstatuser.every(status => status === 'AT' || status === 'FL');
-  const erAktivitetKunSN = aktivitetsstatuser.every(status => status === 'SN');
 
-  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT_FL || erAktivitetKunSN ? 'ny' : 'gammel');
+  const [valgtVisning, setValgtVisning] = useState<Beregningsvisning>(() =>
+    utledBeregningsvisning(props.beregningsgrunnlagListe),
+  );
 
   return (
     <VStack gap="space-16">
       {!erProd && (
-        <ToggleGroup value={valgtVisning} onChange={value => setValgtVisning(value as Visning)} size="small">
+        <ToggleGroup value={valgtVisning} onChange={value => setValgtVisning(value as Beregningsvisning)} size="small">
           <ToggleGroup.Item value="gammel" label="Gammel visning" />
           <ToggleGroup.Item value="ny" label="Ny visning" />
         </ToggleGroup>
