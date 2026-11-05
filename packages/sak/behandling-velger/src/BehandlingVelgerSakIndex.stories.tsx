@@ -1,13 +1,43 @@
-import { useState } from 'react';
+import { createContext, use, useState } from 'react';
 
+import { Box } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { alleKodeverk, alleKodeverkTilbakekreving, lagFagsakBehandling } from '@navikt/fp-storybook-utils';
 
-import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
+import { type BehandlingLenkeProps, BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
+
+const VelgBehandlingContext = createContext<((uuid: string) => void) | undefined>(undefined);
+
+const BehandlingLenke = ({ behandlingUuid, onClick, ...props }: BehandlingLenkeProps) => {
+  const velgBehandling = use(VelgBehandlingContext);
+
+  return (
+    <a
+      {...props}
+      href={`/fagsak/123/behandling/${behandlingUuid}/?punkt=default&fakta=default`}
+      onClick={event => {
+        action('gå-til-behandling')(behandlingUuid, props.target);
+        onClick?.(event);
+        if (
+          !event.defaultPrevented &&
+          event.button === 0 &&
+          !event.metaKey &&
+          !event.ctrlKey &&
+          !event.shiftKey &&
+          !event.altKey &&
+          props.target !== '_blank'
+        ) {
+          event.preventDefault();
+          velgBehandling?.(behandlingUuid);
+        }
+      }}
+    />
+  );
+};
 
 const meta = {
   title: 'sak/sak-behandling-velger',
@@ -15,8 +45,8 @@ const meta = {
   args: {
     behandlingUuid: '1',
     skalViseAlleBehandlinger: false,
-    toggleVisAlleBehandlinger: action('button-click'),
-    renderRadSomLenke: () => <div>dummy</div>,
+    toggleVisAlleBehandlinger: action('toggleVisAlleBehandlinger'),
+    behandlingLenke: BehandlingLenke,
     alleKodeverk: alleKodeverk,
     alleKodeverkTilbakekreving: alleKodeverkTilbakekreving,
   },
@@ -29,17 +59,13 @@ const meta = {
     };
 
     return (
-      <div style={{ width: '600px' }}>
-        <BehandlingVelgerSakIndex
-          {...args}
-          toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
-          renderRadSomLenke={(className, behandlingInfoKomponent) => (
-            <button type="button" className={className} onClick={toggleVisAlleBehandlinger}>
-              {behandlingInfoKomponent}
-            </button>
-          )}
-        />
-      </div>
+      <VelgBehandlingContext
+        value={uuid => setArgs(oldArgs => ({ ...oldArgs, behandlingUuid: uuid, skalViseAlleBehandlinger: false }))}
+      >
+        <Box width="100%" maxWidth="600px">
+          <BehandlingVelgerSakIndex {...args} toggleVisAlleBehandlinger={toggleVisAlleBehandlinger} />
+        </Box>
+      </VelgBehandlingContext>
     );
   },
 } satisfies Meta<typeof BehandlingVelgerSakIndex>;
@@ -47,8 +73,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AlleBehandlinger: Story = {
   args: {
+    behandlingUuid: '3',
     behandlinger: [
       lagFagsakBehandling({
         behandlendeEnhetId: '4812',
@@ -124,5 +151,11 @@ export const Default: Story = {
 export const IngenBehandlinger: Story = {
   args: {
     behandlinger: [],
+  },
+};
+
+export const EnBehandling: Story = {
+  args: {
+    behandlinger: [lagFagsakBehandling({ uuid: '1' })],
   },
 };

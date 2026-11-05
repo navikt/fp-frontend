@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { createContext, use, useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { type Location, Navigate, NavLink, useLocation, useMatch } from 'react-router';
 
@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ReservasjonsstatusPanel } from '@navikt/fp-los-saksbehandler';
-import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
+import { type BehandlingLenkeProps, BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type { Behandling, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
@@ -25,6 +25,8 @@ import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
 import styles from './fagsakProfileIndex.module.css';
+
+const SaksnummerContext = createContext<string | undefined>(undefined);
 
 const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: FagsakBehandlingDto[]) => {
   if (alleBehandlinger.length === 1) {
@@ -154,12 +156,6 @@ export const FagsakProfileIndex = ({
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;
 
-  const getBehandlingLocation = (valgtBehandlingUuid: string) =>
-    getLocationWithDefaultProsessStegAndFakta({
-      ...location,
-      pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
-    });
-
   return (
     <div className={styles['panelPadding']}>
       <VStack gap="space-16">
@@ -216,19 +212,17 @@ export const FagsakProfileIndex = ({
                 errorMessageCallback={addErrorMessage}
                 errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
               >
-                <BehandlingVelgerSakIndex
-                  behandlinger={fagsakData.getAlleBehandlinger()}
-                  behandlingUuid={behandlingUuid}
-                  skalViseAlleBehandlinger={showAll}
-                  toggleVisAlleBehandlinger={toggleShowAll}
-                  renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                    <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
-                      {behandlingInfoKomponent}
-                    </NavLink>
-                  )}
-                  alleKodeverk={notEmpty(alleFpSakKodeverk)}
-                  alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}
-                />
+                <SaksnummerContext value={fagsak.saksnummer}>
+                  <BehandlingVelgerSakIndex
+                    behandlinger={fagsakData.getAlleBehandlinger()}
+                    behandlingUuid={behandlingUuid}
+                    skalViseAlleBehandlinger={showAll}
+                    toggleVisAlleBehandlinger={toggleShowAll}
+                    behandlingLenke={BehandlingLenke}
+                    alleKodeverk={notEmpty(alleFpSakKodeverk)}
+                    alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}
+                  />
+                </SaksnummerContext>
               </ErrorBoundary>
             </div>
           )}
@@ -244,4 +238,15 @@ export const FagsakProfileIndex = ({
       </VStack>
     </div>
   );
+};
+
+const BehandlingLenke = ({ behandlingUuid, ...props }: BehandlingLenkeProps) => {
+  const location = useLocation();
+  const saksnummer = use(SaksnummerContext);
+  const to = getLocationWithDefaultProsessStegAndFakta({
+    ...location,
+    pathname: pathToBehandling(notEmpty(saksnummer), behandlingUuid),
+  });
+
+  return <NavLink {...props} to={to} />;
 };
