@@ -23,7 +23,7 @@
     "@navikt/fp-brev-editor": "workspace:*",
     "@navikt/fp-sak-ukjent-adresse": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "14.0.0",
+    "@navikt/ft-form-hooks": "14.1.0",
     "@navikt/ft-form-validators": "8.0.0",
     "@navikt/ft-ui-komponenter": "10.0.0",
     "@navikt/ft-utils": "8.0.0",
