@@ -188,11 +188,11 @@ const Wrapper = (
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
 
   const erProd = location.hostname.includes('intern.nav.no');
-  const erAktivitetKunAT = props.beregningsgrunnlagListe
-    .flatMap(bg => bg.aktivitetStatus)
-    .every(status => status === 'AT' || status === 'FL');
+  const aktivitetsstatuser = props.beregningsgrunnlagListe.flatMap(bg => bg.aktivitetStatus);
+  const erAktivitetKunAT_FL = aktivitetsstatuser.every(status => status === 'AT' || status === 'FL');
+  const erAktivitetKunSN = aktivitetsstatuser.every(status => status === 'SN');
 
-  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT ? 'ny' : 'gammel');
+  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT_FL || erAktivitetKunSN ? 'ny' : 'gammel');
 
   return (
     <VStack gap="space-16">
