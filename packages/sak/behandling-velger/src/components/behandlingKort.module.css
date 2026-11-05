@@ -1,0 +1,56 @@
+.behandling {
+  border-radius: inherit;
+  display: grid;
+  gap: var(--ax-space-8);
+  grid-template-columns: minmax(0, 1fr) auto;
+  position: relative;
+
+  &[data-interactive='true']:hover,
+  &:has(> .hovedHandling:focus-visible) {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -2px;
+  }
+
+  &[data-trigger='true']:has(> .hovedHandling:focus-visible, > .ikonHandling:focus-visible) {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    z-index: 2;
+  }
+
+  &[data-pressed='true'] {
+    background-color: var(--ax-bg-moderate-pressed);
+  }
+
+  &[data-trigger='true'] > .ikonHandling:focus-visible {
+    outline: none;
+  }
+}
+
+.hovedHandling {
+  background: none;
+  border: 0;
+  border-radius: inherit;
+  cursor: pointer;
+  inset: 0;
+  padding: 0;
+  position: absolute;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.valgtIkon {
+  align-self: center;
+  color: var(--ax-text-subtle);
+  width: var(--ax-space-24);
+}
+
+.ikonHandling {
+  position: relative;
+  z-index: 1;
+}
+
+.behandling > .ikonHandling {
+  align-self: center;
+}
