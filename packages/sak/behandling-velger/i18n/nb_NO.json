@@ -3,10 +3,11 @@
   "BehandlingPickerItemContent.Avsluttet": "Avsluttet",
   "BehandlingPickerItemContent.Open": "Åpne behandlingsliste",
   "BehandlingPickerItemContent.Close": "Lukk behandlingsliste",
+  "BehandlingPickerItemContent.OpenInNewWindow": "Åpne behandlingen i nytt vindu",
   "BehandlingPickerItemContent.GjeldendeVedtak": "Gjeldende vedtak",
   "BehandlingPickerItemContent.Behandlingstatus": "Behandlingsstatus",
   "BehandlingPickerItemContent.Resultat": "Resultat",
-  "BehandlingPickerItemContent.Enhet": "Enhet ",
+  "BehandlingPickerItemContent.Enhet": "Enhet {enhetId}",
 
   "BehandlingList.ZeroBehandlinger": "Ingen behandlinger er opprettet",
 

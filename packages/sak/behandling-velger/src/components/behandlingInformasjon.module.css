@@ -1,35 +1,50 @@
-.starImage {
-  color: var(--ax-warning-600);
-  height: 20px;
-  width: 20px;
+.behandling {
+  border-color: var(--ax-border-default);
+  position: relative;
+
+  &[data-interactive='true']:hover {
+    outline: 1px solid var(--ax-border-default);
+  }
+
+  &:has(.header > :first-child:focus-visible) {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  &[data-pressed='true'] {
+    background-color: var(--ax-bg-moderate-pressed);
+  }
 }
-.chevronImage {
-  color: var(--ax-accent-600);
-  height: 30px;
-  margin-top: -4px;
-  width: 30px;
+
+.header {
+  border-bottom: 1px solid var(--ax-border-subtleA);
+
+  > :is(a, button):first-child:focus-visible {
+    outline: none;
+  }
+
+  > :is(a, button):first-child:after {
+    content: '';
+    cursor: pointer;
+    inset: 0;
+    position: absolute;
+  }
+
+  > :is(a, button):last-child {
+    position: relative;
+    z-index: 1;
+  }
 }
-.pushRight {
-  margin-left: auto;
-}
-.pushRightCorner {
-  margin-left: auto;
-  margin-top: auto;
-}
-.line {
-  border: 0;
-  border-top: 1px solid var(--ax-neutral-200);
-  height: 1px;
-}
-.arsakPadding {
-  padding: 0 0 0 8px;
-}
-.timePadding {
-  padding-left: 10px;
-}
-.inline {
-  display: inline;
-}
-.firstColumnWidth {
-  width: 150px;
+
+.detaljer {
+  display: grid;
+  gap: var(--ax-space-4) var(--ax-space-16);
+  grid-template-columns: auto minmax(0, 1fr);
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+
+  > dd {
+    margin: 0;
+  }
 }
