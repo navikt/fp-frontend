@@ -13,12 +13,31 @@ describe('Dekorator', () => {
     expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
   });
 
-  it('skal vise snarveimeny utanfor prod', async () => {
+  it('skal åpne tastatursnarveiene fra ikonknappen nest lengst til høyre', async () => {
+    render(<Default />);
+
+    const snarveiknapp = screen.getByRole('button', { name: 'Tastatursnarveier' });
+    const knapper = screen.getAllByRole('button');
+    expect(knapper.at(-2)).toBe(snarveiknapp);
+    expect(knapper.at(-1)).toHaveAccessibleName('Endre til mørkt tema');
+
+    await userEvent.click(snarveiknapp);
+
+    expect(await screen.findByRole('dialog', { name: 'Tastatursnarveier' })).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(snarveiknapp).toHaveFocus();
+  });
+
+  it('skal ikke vise tastatursnarveiene i systemmenyen', async () => {
     render(<Default />);
 
     await userEvent.click(screen.getByRole('button', { name: 'Systemer og oppslagsverk' }));
 
-    expect(await screen.findByText('Tastatursnarveier (hjelp)')).toBeInTheDocument();
+    expect(screen.queryByText('Tastatursnarveier (hjelp)')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Tastatursnarveier' })).toBeInTheDocument();
   });
 
   it('skal vise feilmeldinger som ligger i URL', async () => {

@@ -39,11 +39,6 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
     e.preventDefault();
   };
 
-  const visSnarveger = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    snarvegerContext?.settSnarveiModalÅpen(true);
-  };
-
   useRegistrerSnarveg(
     GLOBALE_SNARVEG_IDER.AVDELINGSLEDER,
     () => (location.href = getAvdelingslederLenke()),
@@ -76,10 +71,6 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
       tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
       callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
     },
-    {
-      tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
-      callback: (e: React.SyntheticEvent) => visSnarveger(e),
-    },
   ];
 
   return (
@@ -88,6 +79,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
       interneLenker={interneLenker}
       ansattnavn={navn}
       gotToAppRoot={gotToAppRoot}
+      visTastatursnarveier={snarvegerContext ? () => snarvegerContext.settSnarveiModalÅpen(true) : undefined}
       {...rest}
     />
   );
