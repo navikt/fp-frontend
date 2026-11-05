@@ -1,4 +1,4 @@
-.behandling {
+.kort {
   border-radius: inherit;
   display: grid;
   gap: var(--ax-space-8);
@@ -51,6 +51,12 @@
   z-index: 1;
 }
 
-.behandling > .ikonHandling {
+.kort > .ikonHandling,
+.kort[data-trigger='true'] > .innhold {
   align-self: center;
+}
+
+.innhold :is(a, button) {
+  position: relative;
+  z-index: 1;
 }

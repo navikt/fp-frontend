@@ -20,21 +20,23 @@ describe('FagsakProfileIndex', () => {
     expect(screen.queryByText('Revurdering')).not.toBeInTheDocument();
   });
 
-  it('skal vise alle behandlinger i liste når ingen behandling er valgt', async () => {
+  it('skal vise plassholderen når ingen behandling er valgt og åpne listen på forespørsel', async () => {
     await BehandlingErIkkeValgt.run();
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();
 
+    expect(screen.getByRole('button', { name: 'Velg behandling' })).toBeVisible();
+    expect(screen.queryByText('Førstegangsbehandling')).not.toBeInTheDocument();
+    expect(screen.queryByText('Revurdering')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Velg behandling' }));
+
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
     expect(screen.getByText('Revurdering')).toBeInTheDocument();
 
-    const rad = within(screen.getByTestId('behandling-2'));
-    expect(rad.getByRole('link', { name: /Revurdering/ })).toHaveAttribute(
-      'href',
-      '/fagsak/123/behandling/2/?punkt=default&fakta=default',
-    );
-    const eksternLenke = rad.getByRole('link', { name: 'Åpne behandlingen i nytt vindu' });
+    const rad = within(screen.getByTestId('card-select-option-2'));
+    expect(rad.getByRole('button', { name: /Revurdering/ })).toBeVisible();
+    const eksternLenke = rad.getByRole('link', { name: 'Åpne i ny fane' });
     expect(eksternLenke).toHaveAttribute('href', '/fagsak/123/behandling/2/?punkt=default&fakta=default');
     expect(eksternLenke).toHaveAttribute('target', '_blank');
     expect(eksternLenke).toHaveAttribute('rel', 'noopener noreferrer');
@@ -54,7 +56,7 @@ describe('FagsakProfileIndex', () => {
 
     await userEvent.keyboard('{Enter}');
 
-    const rader = screen.getAllByTestId(/^behandling-/);
+    const rader = screen.getAllByTestId(/^card-select-option-/);
     const første = rader[0]!.querySelector('a, button');
     const andre = rader[1]!.querySelector('a, button');
     expect(første).toHaveFocus();
@@ -63,5 +65,20 @@ describe('FagsakProfileIndex', () => {
     expect(andre).toHaveFocus();
     await userEvent.keyboard('{ArrowUp}');
     expect(første).toHaveFocus();
+  });
+
+  it('skal navigere til valgt behandling med standard prosessteg og fakta', async () => {
+    await BehandlingErIkkeValgt.run();
+    await userEvent.click(await screen.findByRole('button', { name: 'Velg behandling' }));
+
+    await userEvent.click(
+      within(screen.getByTestId('card-select-option-2')).getByRole('button', { name: /Revurdering/ }),
+    );
+
+    expect(window.location.pathname).toBe('/fagsak/123/behandling/2/');
+    const params = new URLSearchParams(window.location.search);
+    expect(params.get('punkt')).toBe('default');
+    expect(params.get('fakta')).toBe('default');
+    expect(screen.queryAllByTestId(/^card-select-option-/)).toHaveLength(0);
   });
 });

@@ -1,6 +1,6 @@
 import { createContext, use, useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { type Location, Navigate, NavLink, useLocation, useMatch } from 'react-router';
+import { type Location, Navigate, NavLink, useLocation, useMatch, useNavigate } from 'react-router';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
@@ -64,13 +64,13 @@ export const FagsakProfileIndex = ({
   visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
-  const [showAll, setShowAll] = useState(!behandlingUuid);
+  const [showAll, setShowAll] = useState(false);
   const toggleShowAll = () => setShowAll(!showAll);
 
   const [forrigeBehandlingUuid, setForrigeBehandlingUuid] = useState(behandlingUuid);
   if (behandlingUuid !== forrigeBehandlingUuid) {
     setForrigeBehandlingUuid(behandlingUuid);
-    setShowAll(!behandlingUuid);
+    setShowAll(false);
   }
 
   const {
@@ -146,6 +146,7 @@ export const FagsakProfileIndex = ({
   const initFetchQuery = useQuery(initFetchOptions());
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { sakLinks, innloggetBruker } = notEmpty(initFetchQuery.data);
   const arbeidstakerHref = sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href;
@@ -218,6 +219,14 @@ export const FagsakProfileIndex = ({
                     behandlingUuid={behandlingUuid}
                     skalViseAlleBehandlinger={showAll}
                     toggleVisAlleBehandlinger={toggleShowAll}
+                    velgBehandling={uuid =>
+                      navigate(
+                        getLocationWithDefaultProsessStegAndFakta({
+                          ...location,
+                          pathname: pathToBehandling(fagsak.saksnummer, uuid),
+                        }),
+                      )
+                    }
                     behandlingLenke={BehandlingLenke}
                     alleKodeverk={notEmpty(alleFpSakKodeverk)}
                     alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}

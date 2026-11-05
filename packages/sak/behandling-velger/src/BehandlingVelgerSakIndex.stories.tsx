@@ -1,4 +1,4 @@
-import { createContext, use, useState } from 'react';
+import { useState } from 'react';
 
 import { Box } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -10,11 +10,7 @@ import { type BehandlingLenkeProps, BehandlingVelgerSakIndex } from './Behandlin
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const VelgBehandlingContext = createContext<((uuid: string) => void) | undefined>(undefined);
-
 const BehandlingLenke = ({ behandlingUuid, onClick, ...props }: BehandlingLenkeProps) => {
-  const velgBehandling = use(VelgBehandlingContext);
-
   return (
     <a
       {...props}
@@ -22,18 +18,6 @@ const BehandlingLenke = ({ behandlingUuid, onClick, ...props }: BehandlingLenkeP
       onClick={event => {
         action('gå-til-behandling')(behandlingUuid, props.target);
         onClick?.(event);
-        if (
-          !event.defaultPrevented &&
-          event.button === 0 &&
-          !event.metaKey &&
-          !event.ctrlKey &&
-          !event.shiftKey &&
-          !event.altKey &&
-          props.target !== '_blank'
-        ) {
-          event.preventDefault();
-          velgBehandling?.(behandlingUuid);
-        }
       }}
     />
   );
@@ -46,6 +30,7 @@ const meta = {
     behandlingUuid: '1',
     skalViseAlleBehandlinger: false,
     toggleVisAlleBehandlinger: action('toggleVisAlleBehandlinger'),
+    velgBehandling: action('velgBehandling'),
     behandlingLenke: BehandlingLenke,
     alleKodeverk: alleKodeverk,
     alleKodeverkTilbakekreving: alleKodeverkTilbakekreving,
@@ -59,13 +44,16 @@ const meta = {
     };
 
     return (
-      <VelgBehandlingContext
-        value={uuid => setArgs(oldArgs => ({ ...oldArgs, behandlingUuid: uuid, skalViseAlleBehandlinger: false }))}
-      >
-        <Box width="100%" maxWidth="600px">
-          <BehandlingVelgerSakIndex {...args} toggleVisAlleBehandlinger={toggleVisAlleBehandlinger} />
-        </Box>
-      </VelgBehandlingContext>
+      <Box width="100%" maxWidth="600px">
+        <BehandlingVelgerSakIndex
+          {...args}
+          toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
+          velgBehandling={uuid => {
+            args.velgBehandling(uuid);
+            setArgs(oldArgs => ({ ...oldArgs, behandlingUuid: uuid, skalViseAlleBehandlinger: false }));
+          }}
+        />
+      </Box>
     );
   },
 } satisfies Meta<typeof BehandlingVelgerSakIndex>;
@@ -151,6 +139,13 @@ export const AlleBehandlinger: Story = {
 export const IngenBehandlinger: Story = {
   args: {
     behandlinger: [],
+  },
+};
+
+export const IngenBehandlingErValgt: Story = {
+  args: {
+    ...AlleBehandlinger.args,
+    behandlingUuid: undefined,
   },
 };
 

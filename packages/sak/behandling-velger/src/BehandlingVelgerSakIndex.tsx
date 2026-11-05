@@ -20,6 +20,7 @@ interface Props {
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
+  velgBehandling: (behandlingUuid: string) => void;
   behandlingLenke: ComponentType<BehandlingLenkeProps>;
   alleKodeverk: AlleKodeverk;
   alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
