@@ -6,22 +6,9 @@ import { action } from 'storybook/actions';
 
 import { alleKodeverk, alleKodeverkTilbakekreving, lagFagsakBehandling } from '@navikt/fp-storybook-utils';
 
-import { type BehandlingLenkeProps, BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
+import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const BehandlingLenke = ({ behandlingUuid, onClick, ...props }: BehandlingLenkeProps) => {
-  return (
-    <a
-      {...props}
-      href={`/fagsak/123/behandling/${behandlingUuid}/?punkt=default&fakta=default`}
-      onClick={event => {
-        action('gå-til-behandling')(behandlingUuid, props.target);
-        onClick?.(event);
-      }}
-    />
-  );
-};
 
 const meta = {
   title: 'sak/sak-behandling-velger',
@@ -31,7 +18,7 @@ const meta = {
     skalViseAlleBehandlinger: false,
     toggleVisAlleBehandlinger: action('toggleVisAlleBehandlinger'),
     velgBehandling: action('velgBehandling'),
-    behandlingLenke: BehandlingLenke,
+    behandlingHref: uuid => `/fagsak/123/behandling/${uuid}/?punkt=default&fakta=default`,
     alleKodeverk: alleKodeverk,
     alleKodeverkTilbakekreving: alleKodeverkTilbakekreving,
   },
@@ -133,6 +120,33 @@ export const AlleBehandlinger: Story = {
         },
       }),
     ],
+  },
+};
+
+export const MangeBehandlinger: Story = {
+  args: {
+    skalViseAlleBehandlinger: true,
+    behandlinger: Array.from({ length: 15 }, (_, index) => {
+      const dato = `2025-01-${String(15 - index).padStart(2, '0')}`;
+      return lagFagsakBehandling({
+        uuid: String(index + 1),
+        type: index % 2 === 0 ? 'BT-004' : 'BT-002',
+        status: index === 0 ? 'UTRED' : 'AVSLU',
+        opprettet: `${dato}T09:30:00`,
+        avsluttet: index === 0 ? undefined : `${dato}T10:00:00`,
+        gjeldendeVedtak: index === 1,
+        behandlendeEnhetId: '4812',
+        behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
+        behandlingsresultat:
+          index === 0
+            ? undefined
+            : {
+                type: 'INNVILGET',
+                id: index + 1,
+                vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+              },
+      });
+    }),
   },
 };
 

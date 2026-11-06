@@ -1,4 +1,3 @@
-import { type ComponentType } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExternalLinkIcon } from '@navikt/aksel-icons';
@@ -7,13 +6,12 @@ import dayjs from 'dayjs';
 
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
 
-import type { BehandlingLenkeProps } from '../BehandlingVelgerSakIndex';
 import { BehandlingInformasjon, finnBehandlingNavn } from './BehandlingInformasjon';
 import { CardSelect, type CardSelectOption } from './card-select/CardSelect';
 
 interface Props {
   behandlinger: FagsakBehandlingDto[];
-  behandlingLenke: ComponentType<BehandlingLenkeProps>;
+  behandlingHref: (behandlingUuid: string) => string;
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
@@ -24,7 +22,7 @@ interface Props {
 
 export const BehandlingerListe = ({
   behandlinger,
-  behandlingLenke: BehandlingLenke,
+  behandlingHref,
   behandlingUuid,
   skalViseAlleBehandlinger,
   toggleVisAlleBehandlinger,
@@ -48,8 +46,7 @@ export const BehandlingerListe = ({
           eksternLenke={
             behandling.uuid !== behandlingUuid && (
               <Link
-                as={BehandlingLenke}
-                behandlingUuid={behandling.uuid}
+                href={behandlingHref(behandling.uuid)}
                 aria-label={intl.formatMessage({ id: 'BehandlingPickerItemContent.OpenInNewTab' })}
                 target="_blank"
                 rel="noopener noreferrer"

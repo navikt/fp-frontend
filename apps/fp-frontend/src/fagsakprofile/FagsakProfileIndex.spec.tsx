@@ -21,6 +21,11 @@ describe('FagsakProfileIndex', () => {
   });
 
   it('skal vise plassholderen når ingen behandling er valgt og åpne listen på forespørsel', async () => {
+    window.history.replaceState(
+      null,
+      '',
+      '/fagsak/123/behandling/?punkt=uttak&fakta=medlemskap&stotte=historikk#detaljer',
+    );
     await BehandlingErIkkeValgt.run();
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
@@ -37,7 +42,12 @@ describe('FagsakProfileIndex', () => {
     const rad = within(screen.getByTestId('card-select-option-2'));
     expect(rad.getByRole('button', { name: /Revurdering/ })).toBeVisible();
     const eksternLenke = rad.getByRole('link', { name: 'Åpne i ny fane' });
-    expect(eksternLenke).toHaveAttribute('href', '/fagsak/123/behandling/2/?punkt=default&fakta=default');
+    const url = new URL(eksternLenke.getAttribute('href') ?? '', window.location.origin);
+    expect(url.pathname).toBe('/fagsak/123/behandling/2/');
+    expect(url.searchParams.get('punkt')).toBe('default');
+    expect(url.searchParams.get('fakta')).toBe('default');
+    expect(url.searchParams.get('stotte')).toBe('historikk');
+    expect(url.hash).toBe('#detaljer');
     expect(eksternLenke).toHaveAttribute('target', '_blank');
     expect(eksternLenke).toHaveAttribute('rel', 'noopener noreferrer');
 

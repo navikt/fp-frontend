@@ -40,8 +40,9 @@ describe('AppIndex', () => {
     expect(screen.getByText('Ikke fastsatt')).toBeInTheDocument();
     expect(screen.getByText('Opprettet')).toBeInTheDocument();
     expect(screen.getByText('05.03.2025 kl. 16:42')).toBeInTheDocument();
-    expect(screen.getByText('Enhet')).toBeInTheDocument();
-    expect(screen.getByText(/^4867 - /)).toBeInTheDocument();
+    const valgtBehandling = within(screen.getByTestId('card-select-selected'));
+    expect(valgtBehandling.queryByText('Enhet', { selector: 'dt' })).not.toBeInTheDocument();
+    expect(valgtBehandling.queryByText(/^4867 - /)).not.toBeInTheDocument();
 
     expect(screen.getByText('Ingen faresignaler oppdaget')).toBeInTheDocument();
 
