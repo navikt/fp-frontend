@@ -4,6 +4,7 @@ import {
   type ReactNode,
   useEffect,
   useId,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -46,11 +47,34 @@ export const CardSelect = ({
 }: Props) => {
   const listeId = useId();
   const [utløserElement, setUtløserElement] = useState<HTMLDivElement | null>(null);
+  const menyRef = useRef<HTMLDivElement>(null);
   const listeRef = useRef<HTMLUListElement>(null);
   const fokusIndexRef = useRef<number | undefined>(undefined);
   const valgt = options.find(option => option.value === value);
   const erStatisk = options.length === 0 || (options.length === 1 && !!valgt);
   const erMenyÅpen = open && !erStatisk;
+
+  useLayoutEffect(() => {
+    if (!erMenyÅpen || !utløserElement) {
+      return;
+    }
+    const oppdaterHøyde = () => {
+      const { top, bottom } = utløserElement.getBoundingClientRect();
+      // Reserver 4 px mellom felt og meny, og 12 px til vinduskanten.
+      const tilgjengeligHøyde = Math.max(0, Math.max(top, window.innerHeight - bottom) - 16);
+      menyRef.current?.style.setProperty('--card-select-available-height', `${tilgjengeligHøyde}px`);
+    };
+    oppdaterHøyde();
+    const observer = typeof ResizeObserver === 'undefined' ? undefined : new ResizeObserver(oppdaterHøyde);
+    observer?.observe(utløserElement);
+    window.addEventListener('resize', oppdaterHøyde);
+    window.addEventListener('scroll', oppdaterHøyde, true);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', oppdaterHøyde);
+      window.removeEventListener('scroll', oppdaterHøyde, true);
+    };
+  }, [erMenyÅpen, utløserElement]);
 
   useEffect(() => {
     listeRef.current
@@ -203,6 +227,7 @@ export const CardSelect = ({
       )}
       {options.length > 0 && (
         <Popover
+          ref={menyRef}
           anchorEl={utløserElement}
           open={erMenyÅpen}
           onClose={lukkMeny}
