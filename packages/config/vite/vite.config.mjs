@@ -45,6 +45,6 @@ export const createConfig = setupFileDirName =>
       globals: true,
       setupFiles: setupFileDirName || path.resolve(folder, './vitest-setup'),
       watch: false,
-      testTimeout: 25000,
+      testTimeout: 15000,
     },
   });
