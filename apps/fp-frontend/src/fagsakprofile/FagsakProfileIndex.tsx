@@ -1,13 +1,13 @@
-import { createContext, use, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { type Location, Navigate, NavLink, useLocation, useMatch, useNavigate } from 'react-router';
+import { createPath, type Location, Navigate, useLocation, useMatch, useNavigate } from 'react-router';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ReservasjonsstatusPanel } from '@navikt/fp-los-saksbehandler';
-import { type BehandlingLenkeProps, BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
+import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type { Behandling, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
@@ -25,8 +25,6 @@ import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
 import styles from './fagsakProfileIndex.module.css';
-
-const SaksnummerContext = createContext<string | undefined>(undefined);
 
 const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: FagsakBehandlingDto[]) => {
   if (alleBehandlinger.length === 1) {
@@ -213,25 +211,30 @@ export const FagsakProfileIndex = ({
                 errorMessageCallback={addErrorMessage}
                 errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
               >
-                <SaksnummerContext value={fagsak.saksnummer}>
-                  <BehandlingVelgerSakIndex
-                    behandlinger={fagsakData.getAlleBehandlinger()}
-                    behandlingUuid={behandlingUuid}
-                    skalViseAlleBehandlinger={showAll}
-                    toggleVisAlleBehandlinger={toggleShowAll}
-                    velgBehandling={uuid =>
-                      navigate(
-                        getLocationWithDefaultProsessStegAndFakta({
-                          ...location,
-                          pathname: pathToBehandling(fagsak.saksnummer, uuid),
-                        }),
-                      )
-                    }
-                    behandlingLenke={BehandlingLenke}
-                    alleKodeverk={notEmpty(alleFpSakKodeverk)}
-                    alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}
-                  />
-                </SaksnummerContext>
+                <BehandlingVelgerSakIndex
+                  behandlinger={fagsakData.getAlleBehandlinger()}
+                  behandlingUuid={behandlingUuid}
+                  skalViseAlleBehandlinger={showAll}
+                  toggleVisAlleBehandlinger={toggleShowAll}
+                  velgBehandling={uuid =>
+                    navigate(
+                      getLocationWithDefaultProsessStegAndFakta({
+                        ...location,
+                        pathname: pathToBehandling(fagsak.saksnummer, uuid),
+                      }),
+                    )
+                  }
+                  behandlingHref={uuid =>
+                    createPath(
+                      getLocationWithDefaultProsessStegAndFakta({
+                        ...location,
+                        pathname: pathToBehandling(fagsak.saksnummer, uuid),
+                      }),
+                    )
+                  }
+                  alleKodeverk={notEmpty(alleFpSakKodeverk)}
+                  alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}
+                />
               </ErrorBoundary>
             </div>
           )}
@@ -247,15 +250,4 @@ export const FagsakProfileIndex = ({
       </VStack>
     </div>
   );
-};
-
-const BehandlingLenke = ({ behandlingUuid, ...props }: BehandlingLenkeProps) => {
-  const location = useLocation();
-  const saksnummer = use(SaksnummerContext);
-  const to = getLocationWithDefaultProsessStegAndFakta({
-    ...location,
-    pathname: pathToBehandling(notEmpty(saksnummer), behandlingUuid),
-  });
-
-  return <NavLink {...props} to={to} />;
 };

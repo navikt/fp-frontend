@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, HStack, Label, Tag, VStack } from '@navikt/ds-react';
+import { BodyShort, Detail, HStack, Label, Tag, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
@@ -35,11 +35,9 @@ export const BehandlingInformasjon = ({
           {navn.type}
         </Label>
 
-        {eksternLenke}
+        {navn.årsak && <Detail as="span">{navn.årsak}</Detail>}
 
-        <BodyShort as="span" size="small">
-          {navn.årsak && ` - ${navn.årsak}`}
-        </BodyShort>
+        {eksternLenke}
 
         {'gjeldendeVedtak' in behandling && behandling.gjeldendeVedtak && (
           <Tag size="small" variant="moderate" data-color="neutral">
@@ -47,6 +45,7 @@ export const BehandlingInformasjon = ({
           </Tag>
         )}
       </HStack>
+
       <dl className={styles['detaljer']}>
         <BodyShort as="dt" size="small">
           <FormattedMessage id="BehandlingPickerItemContent.Behandlingstatus" />
@@ -83,7 +82,7 @@ export const BehandlingInformasjon = ({
             </BodyShort>
           </>
         )}
-        {behandling.type !== 'BT-003' && (
+        {behandling.behandlendeEnhetId !== '4867' && (
           <>
             <BodyShort as="dt" size="small">
               <FormattedMessage id="BehandlingPickerItemContent.Enhet" />

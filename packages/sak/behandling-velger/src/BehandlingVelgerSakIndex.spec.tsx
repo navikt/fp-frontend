@@ -27,16 +27,26 @@ describe('BehandlingVelgerSakIndex', () => {
     expect(enhet).toBeVisible();
   });
 
-  it('skal skjule enhet for klage i valgt behandling og menyen, men beholde den for andre behandlinger', () => {
-    const behandlinger = [lagFagsakBehandling({ uuid: '3', type: 'BT-003' }), lagFagsakBehandling({ uuid: '1' })];
+  it.each([
+    { type: 'BT-003', enhet: '4867', synlig: false },
+    { type: 'BT-002', enhet: '4867', synlig: false },
+    { type: 'BT-003', enhet: '4812', synlig: true },
+    { type: 'BT-002', enhet: '4812', synlig: true },
+  ] as const)('skal styre enhetsvisning etter enhetsnummer for $type/$enhet', ({ type, enhet, synlig }) => {
+    const behandlinger = [
+      lagFagsakBehandling({ uuid: '3', type, behandlendeEnhetId: enhet }),
+      lagFagsakBehandling({ uuid: '1' }),
+    ];
     render(<AlleBehandlinger behandlinger={behandlinger} skalViseAlleBehandlinger />);
 
-    const valgt = within(screen.getByTestId('card-select-selected'));
-    const klageRad = within(screen.getByTestId('card-select-option-3'));
-    expect(valgt.getByText('Klage')).toBeVisible();
-    expect(valgt.queryByText('Enhet', { selector: 'dt' })).not.toBeInTheDocument();
-    expect(klageRad.queryByText('Enhet', { selector: 'dt' })).not.toBeInTheDocument();
-    expect(klageRad.queryByText(/4820 - /)).not.toBeInTheDocument();
+    for (const innhold of [
+      within(screen.getByTestId('card-select-selected')),
+      within(screen.getByTestId('card-select-option-3')),
+    ]) {
+      const antall = synlig ? 1 : 0;
+      expect(innhold.queryAllByText('Enhet', { selector: 'dt' })).toHaveLength(antall);
+      expect(innhold.queryAllByText(new RegExp(`^${enhet} - `))).toHaveLength(antall);
+    }
     expect(within(screen.getByTestId('card-select-option-1')).getByText(/4820 - /)).toBeVisible();
   });
 

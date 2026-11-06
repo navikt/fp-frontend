@@ -1,4 +1,3 @@
-import { type ComponentPropsWithRef, type ComponentType } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,17 +10,13 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-export type BehandlingLenkeProps = Omit<ComponentPropsWithRef<'a'>, 'href'> & {
-  behandlingUuid: string;
-};
-
 interface Props {
   behandlinger: FagsakBehandlingDto[];
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
   velgBehandling: (behandlingUuid: string) => void;
-  behandlingLenke: ComponentType<BehandlingLenkeProps>;
+  behandlingHref: (behandlingUuid: string) => string;
   alleKodeverk: AlleKodeverk;
   alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }
