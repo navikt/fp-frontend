@@ -23,22 +23,22 @@ export const CardSelectItem = ({ option, selected, onSelect }: Props) => {
       paddingInline="space-16"
       data-interactive
       data-pressed={selected || undefined}
-      className={styles['kort']}
+      className={styles['card']}
     >
       <button
         type="button"
         data-primary
-        className={styles['hovedHandling']}
+        className={styles['primaryAction']}
         onClick={onSelect}
         aria-label={option.ariaLabel}
         aria-labelledby={option.ariaLabel ? undefined : labelId}
         aria-current={selected || undefined}
         tabIndex={-1}
       />
-      <div id={labelId} className={styles['innhold']}>
+      <div id={labelId} className={styles['content']}>
         {option.label}
       </div>
-      <span className={styles['valgtIkon']}>{selected && <CheckmarkIcon aria-hidden fontSize="1.5rem" />}</span>
+      <span className={styles['selectedIcon']}>{selected && <CheckmarkIcon aria-hidden fontSize="1.5rem" />}</span>
     </Box>
   );
 };

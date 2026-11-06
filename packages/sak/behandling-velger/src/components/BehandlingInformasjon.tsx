@@ -83,12 +83,16 @@ export const BehandlingInformasjon = ({
             </BodyShort>
           </>
         )}
-        <BodyShort as="dt" size="small">
-          <FormattedMessage id="BehandlingPickerItemContent.Enhet" />
-        </BodyShort>
-        <BodyShort as="dd" size="small">
-          {behandling.behandlendeEnhetId} - {behandling.behandlendeEnhetNavn}
-        </BodyShort>
+        {behandling.type !== 'BT-003' && (
+          <>
+            <BodyShort as="dt" size="small">
+              <FormattedMessage id="BehandlingPickerItemContent.Enhet" />
+            </BodyShort>
+            <BodyShort as="dd" size="small">
+              {behandling.behandlendeEnhetId} - {behandling.behandlendeEnhetNavn}
+            </BodyShort>
+          </>
+        )}
       </dl>
     </VStack>
   );

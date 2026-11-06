@@ -1,4 +1,4 @@
-.kort {
+.card {
   border-radius: inherit;
   display: grid;
   gap: var(--ax-space-8);
@@ -6,12 +6,12 @@
   position: relative;
 
   &[data-interactive='true']:hover,
-  &:has(> .hovedHandling:focus-visible) {
+  &:has(> .primaryAction:focus-visible) {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: -2px;
   }
 
-  &[data-trigger='true']:has(> .hovedHandling:focus-visible, > .ikonHandling:focus-visible) {
+  &[data-trigger='true']:has(> .primaryAction:focus-visible, > .iconAction:focus-visible) {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
     z-index: 2;
@@ -21,12 +21,12 @@
     background-color: var(--ax-bg-moderate-pressed);
   }
 
-  &[data-trigger='true'] > .ikonHandling:focus-visible {
+  &[data-trigger='true'] > .iconAction:focus-visible {
     outline: none;
   }
 }
 
-.hovedHandling {
+.primaryAction {
   background: none;
   border: 0;
   border-radius: inherit;
@@ -40,23 +40,23 @@
   }
 }
 
-.valgtIkon {
+.selectedIcon {
   align-self: center;
   color: var(--ax-text-subtle);
   width: var(--ax-space-24);
 }
 
-.ikonHandling {
+.iconAction {
   position: relative;
   z-index: 1;
 }
 
-.kort > .ikonHandling,
-.kort[data-trigger='true'] > .innhold {
+.card > .iconAction,
+.card[data-trigger='true'] > .content {
   align-self: center;
 }
 
-.innhold :is(a, button) {
+.content :is(a, button) {
   position: relative;
   z-index: 1;
 }

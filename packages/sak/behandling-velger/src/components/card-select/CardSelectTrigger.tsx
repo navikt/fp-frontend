@@ -26,13 +26,13 @@ export const CardSelectTrigger = ({ listeId, label, ariaLabel, isStatic, open, o
       paddingInline="space-16"
       data-interactive={!isStatic}
       data-trigger
-      className={styles['kort']}
+      className={styles['card']}
     >
       {!isStatic && (
         <button
           type="button"
           data-primary
-          className={styles['hovedHandling']}
+          className={styles['primaryAction']}
           onClick={onToggle}
           aria-expanded={open}
           aria-controls={listeId}
@@ -40,7 +40,7 @@ export const CardSelectTrigger = ({ listeId, label, ariaLabel, isStatic, open, o
           aria-labelledby={ariaLabel ? undefined : labelId}
         />
       )}
-      <div id={labelId} className={styles['innhold']}>
+      <div id={labelId} className={styles['content']}>
         {label}
       </div>
       {!isStatic && (
@@ -48,7 +48,7 @@ export const CardSelectTrigger = ({ listeId, label, ariaLabel, isStatic, open, o
           type="button"
           variant="tertiary"
           size="small"
-          className={styles['ikonHandling']}
+          className={styles['iconAction']}
           onClick={onToggle}
           onKeyDown={event => {
             if (event.key === ' ') {

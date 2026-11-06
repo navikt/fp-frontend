@@ -166,7 +166,7 @@ export const CardSelect = ({
   };
 
   const liste = (
-    <ul ref={listeRef} id={listeId} className={styles['liste']} hidden={!erMenyÅpen}>
+    <ul ref={listeRef} id={listeId} className={styles['list']} hidden={!erMenyÅpen}>
       {erMenyÅpen &&
         options.map(option => (
           <li key={option.value} data-testid={`card-select-option-${option.value}`}>
@@ -177,7 +177,7 @@ export const CardSelect = ({
   );
 
   return (
-    <Box data-color="neutral" width="100%" className={styles['velger']} onKeyDownCapture={håndterTast}>
+    <Box data-color="neutral" width="100%" className={styles['root']} onKeyDownCapture={håndterTast}>
       {options.length === 0 && (
         <Box background="raised" borderWidth="1" borderColor="neutral" borderRadius="8" padding="space-16">
           {emptyContent}
@@ -186,7 +186,7 @@ export const CardSelect = ({
       {options.length > 0 && (
         <div
           ref={setUtløserElement}
-          className={styles['valgt']}
+          className={styles['selected']}
           data-testid="card-select-selected"
           aria-current={erStatisk && valgt ? true : undefined}
         >
@@ -208,7 +208,7 @@ export const CardSelect = ({
           onClose={lukkMeny}
           placement="bottom-start"
           offset={4}
-          className={styles['meny']}
+          className={styles['menu']}
         >
           {liste}
         </Popover>

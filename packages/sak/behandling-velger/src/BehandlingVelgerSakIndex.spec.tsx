@@ -2,6 +2,8 @@ import { composeStories } from '@storybook/react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { lagFagsakBehandling } from '@navikt/fp-storybook-utils';
+
 import * as stories from './BehandlingVelgerSakIndex.stories';
 
 const { IngenBehandlinger, EnBehandling, AlleBehandlinger } = composeStories(stories);
@@ -23,6 +25,19 @@ describe('BehandlingVelgerSakIndex', () => {
     const enhet = screen.getByText('Enhet', { selector: 'dt' }).nextElementSibling;
     expect(enhet).toHaveTextContent('4812 - Nav familie- og pensjonsytelser Bergen');
     expect(enhet).toBeVisible();
+  });
+
+  it('skal skjule enhet for klage i valgt behandling og menyen, men beholde den for andre behandlinger', () => {
+    const behandlinger = [lagFagsakBehandling({ uuid: '3', type: 'BT-003' }), lagFagsakBehandling({ uuid: '1' })];
+    render(<AlleBehandlinger behandlinger={behandlinger} skalViseAlleBehandlinger />);
+
+    const valgt = within(screen.getByTestId('card-select-selected'));
+    const klageRad = within(screen.getByTestId('card-select-option-3'));
+    expect(valgt.getByText('Klage')).toBeVisible();
+    expect(valgt.queryByText('Enhet', { selector: 'dt' })).not.toBeInTheDocument();
+    expect(klageRad.queryByText('Enhet', { selector: 'dt' })).not.toBeInTheDocument();
+    expect(klageRad.queryByText(/4820 - /)).not.toBeInTheDocument();
+    expect(within(screen.getByTestId('card-select-option-1')).getByText(/4820 - /)).toBeVisible();
   });
 
   it('skal ekspandere behandlingslisten og da vise alle behandlinger', async () => {

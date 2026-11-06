@@ -41,7 +41,7 @@ describe('AppIndex', () => {
     expect(screen.getByText('Opprettet')).toBeInTheDocument();
     expect(screen.getByText('05.03.2025 kl. 16:42')).toBeInTheDocument();
     expect(screen.getByText('Enhet')).toBeInTheDocument();
-    expect(screen.getByText('4867')).toBeInTheDocument();
+    expect(screen.getByText(/^4867 - /)).toBeInTheDocument();
 
     expect(screen.getByText('Ingen faresignaler oppdaget')).toBeInTheDocument();
 
