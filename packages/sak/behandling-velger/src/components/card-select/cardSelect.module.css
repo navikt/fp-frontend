@@ -1,13 +1,13 @@
-.velger {
+.root {
   position: relative;
 }
 
-.valgt {
+.selected {
   border: 1px solid var(--ax-border-strong);
   border-radius: var(--ax-radius-8);
 }
 
-.meny {
+.menu {
   border-radius: var(--ax-radius-8);
   max-height: min(60vh, 36rem);
   overflow-y: auto;
@@ -16,18 +16,18 @@
   width: 100%;
 }
 
-.liste {
+.list {
   border-radius: inherit;
   list-style-type: none;
   margin: 0;
   padding: 0;
   width: 100%;
 }
-.liste li {
+.list li {
   border-radius: inherit;
   width: 100%;
 }
 
-.liste li + li {
+.list li + li {
   margin-top: var(--ax-space-4);
 }
