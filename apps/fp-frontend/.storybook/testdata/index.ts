@@ -20,5 +20,6 @@ export { omsorgOgRett } from './omsorgOgRett';
 export { oppgaverForFagsaker } from './oppgaverForFagsaker';
 export { opptjening } from './opptjening';
 export { personoversikt } from './personoversikt';
+export { refusjon } from './refusjon';
 export { soknad } from './soknad';
 export { ytelseFordeling } from './ytelseFordeling';
