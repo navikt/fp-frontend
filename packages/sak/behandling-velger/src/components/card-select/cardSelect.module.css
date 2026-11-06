@@ -9,7 +9,7 @@
 
 .menu {
   border-radius: var(--ax-radius-8);
-  max-height: min(60vh, 36rem);
+  max-height: min(80vh, 48rem, var(--card-select-available-height, 100vh));
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: var(--ax-space-8);

@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './CardSelect.stories';
@@ -12,6 +12,23 @@ const mangeValg = Array.from({ length: 10 }, (_, index) => ({
 }));
 
 describe('CardSelect', () => {
+  it('skal begrense menyen til tilgjengelig plass og oppdatere grensen når vinduet endres', async () => {
+    render(<Default />);
+    const felt = screen.getByTestId('card-select-selected');
+    const målFelt = vi.spyOn(felt, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 50, 500, 100));
+
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne valg' }));
+
+    const meny = screen.getByRole('list').parentElement;
+    expect(meny).toHaveStyle({ '--card-select-available-height': `${window.innerHeight - 166}px` });
+
+    målFelt.mockReturnValue(new DOMRect(0, window.innerHeight - 200, 500, 100));
+    fireEvent.resize(window);
+
+    expect(meny).toHaveStyle({ '--card-select-available-height': `${window.innerHeight - 216}px` });
+    målFelt.mockRestore();
+  });
+
   it.each([undefined, 'ukjent'])('skal vise plassholderen for verdien %s og velge med tastaturet', async value => {
     const onChange = vi.fn();
     render(<Unselected value={value} onChange={onChange} />);
