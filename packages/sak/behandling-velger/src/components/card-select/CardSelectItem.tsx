@@ -32,6 +32,7 @@ export const CardSelectItem = ({ option, selected, onSelect }: Props) => {
         onClick={onSelect}
         aria-label={option.ariaLabel}
         aria-labelledby={option.ariaLabel ? undefined : labelId}
+        aria-describedby={option.ariaLabel ? labelId : undefined}
         aria-current={selected || undefined}
         tabIndex={-1}
       />

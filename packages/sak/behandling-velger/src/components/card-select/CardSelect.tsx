@@ -50,9 +50,21 @@ export const CardSelect = ({
   const menyRef = useRef<HTMLDivElement>(null);
   const listeRef = useRef<HTMLUListElement>(null);
   const fokusIndexRef = useRef<number | undefined>(undefined);
+  const fokusEtterValgRef = useRef<Element | null>(null);
   const valgt = options.find(option => option.value === value);
   const erStatisk = options.length === 0 || (options.length === 1 && !!valgt);
   const erMenyÅpen = open && !erStatisk;
+
+  useLayoutEffect(() => {
+    const forrigeFokus = fokusEtterValgRef.current;
+    if (!erStatisk || !valgt || !forrigeFokus) {
+      return;
+    }
+    fokusEtterValgRef.current = null;
+    if (!forrigeFokus.isConnected && document.activeElement === document.body) {
+      utløserElement?.querySelector<HTMLElement>('[data-trigger]')?.focus();
+    }
+  }, [erStatisk, utløserElement, valgt]);
 
   useLayoutEffect(() => {
     if (!erMenyÅpen || !utløserElement) {
@@ -104,6 +116,8 @@ export const CardSelect = ({
   const velg = (nyVerdi: string) => {
     lukkMeny();
     if (nyVerdi !== value) {
+      fokusEtterValgRef.current =
+        options.length === 1 && utløserElement?.contains(document.activeElement) ? document.activeElement : null;
       onChange(nyVerdi);
     }
   };

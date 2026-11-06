@@ -76,7 +76,7 @@ export const FagsakProfileIndex = ({
     hentElementer: hentBehandlingsvelgerRader,
     fokuserElement: fokuserRad,
   } = useTastaturfokus<HTMLDivElement, HTMLElement>({
-    selector: 'a, button',
+    selector: 'a, button, [data-trigger][tabindex="-1"]',
     scrollVedFokus: true,
     lyttPåContainer: true,
   });
@@ -86,7 +86,7 @@ export const FagsakProfileIndex = ({
     if (rader.length === 0) {
       return false;
     }
-    const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'page');
+    const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'true');
     fokuserRad(aktivIndex === -1 ? 0 : aktivIndex);
     return true;
   }, [fokuserRad, hentBehandlingsvelgerRader]);
