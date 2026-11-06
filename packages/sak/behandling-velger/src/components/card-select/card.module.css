@@ -11,6 +11,7 @@
     outline-offset: -2px;
   }
 
+  &[data-trigger='true']:focus-visible,
   &[data-trigger='true']:has(> .primaryAction:focus-visible, > .iconAction:focus-visible) {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;

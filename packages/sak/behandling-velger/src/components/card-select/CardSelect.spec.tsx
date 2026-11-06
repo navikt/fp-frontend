@@ -132,14 +132,26 @@ describe('CardSelect', () => {
   });
 
   it('skal kunne velge det eneste alternativet fra plassholderen og deretter vise et statisk kort', async () => {
-    render(<SingleOption />);
+    render(
+      <>
+        <SingleOption />
+        <button type="button">Etter velgeren</button>
+      </>,
+    );
     screen.getByRole('button', { name: /Velg kontaktmåte/ }).focus();
 
     await userEvent.keyboard('{ArrowDown}{Enter}');
 
     expect(screen.getByText('SMS')).toBeVisible();
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    const valgtKort = screen.getByRole('group', { name: 'SMS' });
+    expect(valgtKort).toHaveFocus();
+    expect(valgtKort).toHaveAttribute('tabindex', '-1');
+    expect(within(valgtKort).queryByRole('button')).not.toBeInTheDocument();
     expect(screen.queryByRole('list')).not.toBeInTheDocument();
+
+    await userEvent.tab();
+
+    expect(screen.getByRole('button', { name: 'Etter velgeren' })).toHaveFocus();
   });
 
   it('skal vise egen tomtilstand uten plassholder eller nedtrekk når alternativene mangler', () => {

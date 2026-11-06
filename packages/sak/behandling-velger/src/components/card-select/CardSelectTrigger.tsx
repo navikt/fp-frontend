@@ -27,6 +27,11 @@ export const CardSelectTrigger = ({ listeId, label, ariaLabel, isStatic, open, o
       data-interactive={!isStatic}
       data-trigger
       className={styles['card']}
+      role={isStatic ? 'group' : undefined}
+      tabIndex={isStatic ? -1 : undefined}
+      aria-label={isStatic ? ariaLabel : undefined}
+      aria-labelledby={isStatic && !ariaLabel ? labelId : undefined}
+      aria-describedby={isStatic && ariaLabel ? labelId : undefined}
     >
       {!isStatic && (
         <button
@@ -38,6 +43,7 @@ export const CardSelectTrigger = ({ listeId, label, ariaLabel, isStatic, open, o
           aria-controls={listeId}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabel ? undefined : labelId}
+          aria-describedby={ariaLabel ? labelId : undefined}
         />
       )}
       <div id={labelId} className={styles['content']}>

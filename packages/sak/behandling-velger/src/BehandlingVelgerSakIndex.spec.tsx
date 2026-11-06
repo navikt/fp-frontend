@@ -9,6 +9,25 @@ import * as stories from './BehandlingVelgerSakIndex.stories';
 const { IngenBehandlinger, EnBehandling, AlleBehandlinger } = composeStories(stories);
 
 describe('BehandlingVelgerSakIndex', () => {
+  it('skal beskrive dato og resultat på kort og utløser når behandlinger har samme navn', () => {
+    render(<AlleBehandlinger behandlingUuid="1" skalViseAlleBehandlinger />);
+    const første = within(screen.getByTestId('card-select-option-1')).getByRole('button', {
+      name: 'Førstegangsbehandling',
+    });
+    const siste = within(screen.getByTestId('card-select-option-4')).getByRole('button', {
+      name: 'Førstegangsbehandling',
+    });
+    const utløser = within(screen.getByTestId('card-select-selected')).getByRole('button', {
+      name: 'Førstegangsbehandling',
+    });
+
+    expect(første).toHaveAccessibleDescription(/02\.08\.2017/);
+    expect(første).toHaveAccessibleDescription(/Resultat/);
+    expect(siste).toHaveAccessibleDescription(/12\.07\.2017/);
+    expect(siste).toHaveAccessibleDescription(/Resultat/);
+    expect(utløser).toHaveAccessibleDescription(/02\.08\.2017/);
+  });
+
   it('skal vise kun en behandling når behandlingslisten ikke er ekspandert', async () => {
     render(<AlleBehandlinger />);
     expect(await screen.findByText('Revurdering')).toBeInTheDocument();

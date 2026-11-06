@@ -1,12 +1,66 @@
-import { composeStories } from '@storybook/react';
-import { screen, within } from '@testing-library/react';
+import { composeStories, composeStory } from '@storybook/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { SnarvegerProvider } from '../snarveger/SnarvegerContext';
+import { useGlobalSnarveger } from '../snarveger/useGlobalSnarveger';
 import * as stories from './FagsakProfileIndex.stories';
 
 const { BehandlingErValgt, BehandlingErIkkeValgt } = composeStories(stories);
 
+const SnarvegLytter = () => {
+  useGlobalSnarveger();
+  return null;
+};
+
+const BehandlingMedSnarveger = composeStory(
+  {
+    ...stories.BehandlingErValgt,
+    decorators: [
+      Story => (
+        <SnarvegerProvider>
+          <SnarvegLytter />
+          <Story />
+        </SnarvegerProvider>
+      ),
+    ],
+  },
+  stories.default,
+);
+
 describe('FagsakProfileIndex', () => {
+  it('skal fokusere valgt rad med B-snarveien når valgt behandling ikke er første rad', async () => {
+    const opprinneligScrollIntoView = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollIntoView');
+    const scrollIntoView = vi.fn();
+    HTMLElement.prototype.scrollIntoView = scrollIntoView;
+    try {
+      await BehandlingMedSnarveger.run();
+      await screen.findByText('Førstegangsbehandling');
+
+      await userEvent.keyboard('b');
+
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId('card-select-option-1')).getByRole('button', { name: 'Førstegangsbehandling' }),
+        ).toHaveFocus(),
+      );
+      expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
+      expect(screen.getAllByTestId(/^card-select-option-/)[0]).toHaveAttribute('data-testid', 'card-select-option-2');
+
+      await userEvent.keyboard('{ArrowUp}');
+
+      expect(
+        within(screen.getByTestId('card-select-option-2')).getByRole('button', { name: /Revurdering/ }),
+      ).toHaveFocus();
+    } finally {
+      if (opprinneligScrollIntoView) {
+        Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', opprinneligScrollIntoView);
+      } else {
+        Reflect.deleteProperty(HTMLElement.prototype, 'scrollIntoView');
+      }
+    }
+  });
+
   it('skal vise en behandling i liste når behandling er valgt', async () => {
     await BehandlingErValgt.run();
 
