@@ -21,7 +21,7 @@
     "@navikt/aksel-icons": "8.21.0",
     "@navikt/ds-react": "8.21.0",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "14.0.0",
+    "@navikt/ft-form-hooks": "14.1.0",
     "@navikt/ft-ui-komponenter": "10.0.0",
     "@navikt/ft-utils": "8.0.0",
     "dayjs": "1.11.23",

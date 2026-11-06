@@ -177,7 +177,7 @@ __metadata:
     eslint-plugin-unicorn: "npm:78.0.0"
     express: "npm:5.3.0"
     helmet: "npm:8.3.0"
-    http-proxy-middleware: "npm:4.2.0"
+    http-proxy-middleware: "npm:4.2.1"
     knip: "npm:6.44.1"
     morgan: "npm:1.12.1"
     prettier: "npm:3.9.10"
@@ -2388,16 +2388,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-proxy-middleware@npm:4.2.0":
-  version: 4.2.0
-  resolution: "http-proxy-middleware@npm:4.2.0"
+"http-proxy-middleware@npm:4.2.1":
+  version: 4.2.1
+  resolution: "http-proxy-middleware@npm:4.2.1"
   dependencies:
     debug: "npm:^4.4.3"
     httpxy: "npm:^0.5.4"
     is-glob: "npm:^4.0.3"
     is-plain-obj: "npm:^4.1.0"
     micromatch: "npm:^4.0.8"
-  checksum: 10/ea3f08f527e120f0616418896ec2fefdaed67b437a0a301dbccdf0db9b5327a75349245566dafbc489eb6703a204bb7503fc67478b73738732819681ea69022b
+  checksum: 10/c924486ffebcf47fab25a52a75359379b6283b4b7fd5eb5db3f6499ab3848715f3dfd2c17639db39c6c7b46330b2b83c163526beb5b0d78809abbb451c49e12d
   languageName: node
   linkType: hard
 

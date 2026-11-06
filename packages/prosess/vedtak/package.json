@@ -28,7 +28,7 @@
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-ui-komponenter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "14.0.0",
+    "@navikt/ft-form-hooks": "14.1.0",
     "@navikt/ft-form-validators": "8.0.0",
     "@navikt/ft-ui-komponenter": "10.0.0",
     "@navikt/ft-utils": "8.0.0",
