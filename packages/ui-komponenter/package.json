@@ -19,7 +19,7 @@
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:^",
-    "@navikt/ft-utils": "8.0.0",
+    "@navikt/ft-utils": "8.0.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-intl": "12.1.6"
