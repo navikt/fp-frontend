@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Box } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
@@ -15,8 +16,9 @@ const meta = {
   args: {
     behandlingUuid: '1',
     skalViseAlleBehandlinger: false,
-    toggleVisAlleBehandlinger: action('button-click'),
-    renderRadSomLenke: () => <div>dummy</div>,
+    toggleVisAlleBehandlinger: action('toggleVisAlleBehandlinger'),
+    velgBehandling: action('velgBehandling'),
+    behandlingHref: uuid => `/fagsak/123/behandling/${uuid}/?punkt=default&fakta=default`,
     alleKodeverk: alleKodeverk,
     alleKodeverkTilbakekreving: alleKodeverkTilbakekreving,
   },
@@ -29,17 +31,16 @@ const meta = {
     };
 
     return (
-      <div style={{ width: '600px' }}>
+      <Box width="100%" maxWidth="600px">
         <BehandlingVelgerSakIndex
           {...args}
           toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
-          renderRadSomLenke={(className, behandlingInfoKomponent) => (
-            <button type="button" className={className} onClick={toggleVisAlleBehandlinger}>
-              {behandlingInfoKomponent}
-            </button>
-          )}
+          velgBehandling={uuid => {
+            args.velgBehandling(uuid);
+            setArgs(oldArgs => ({ ...oldArgs, behandlingUuid: uuid, skalViseAlleBehandlinger: false }));
+          }}
         />
-      </div>
+      </Box>
     );
   },
 } satisfies Meta<typeof BehandlingVelgerSakIndex>;
@@ -47,8 +48,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AlleBehandlinger: Story = {
   args: {
+    behandlingUuid: '3',
     behandlinger: [
       lagFagsakBehandling({
         behandlendeEnhetId: '4812',
@@ -121,8 +123,48 @@ export const Default: Story = {
   },
 };
 
+export const MangeBehandlinger: Story = {
+  args: {
+    skalViseAlleBehandlinger: true,
+    behandlinger: Array.from({ length: 15 }, (_, index) => {
+      const dato = `2025-01-${String(15 - index).padStart(2, '0')}`;
+      return lagFagsakBehandling({
+        uuid: String(index + 1),
+        type: index % 2 === 0 ? 'BT-004' : 'BT-002',
+        status: index === 0 ? 'UTRED' : 'AVSLU',
+        opprettet: `${dato}T09:30:00`,
+        avsluttet: index === 0 ? undefined : `${dato}T10:00:00`,
+        gjeldendeVedtak: index === 1,
+        behandlendeEnhetId: '4812',
+        behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
+        behandlingsresultat:
+          index === 0
+            ? undefined
+            : {
+                type: 'INNVILGET',
+                id: index + 1,
+                vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+              },
+      });
+    }),
+  },
+};
+
 export const IngenBehandlinger: Story = {
   args: {
     behandlinger: [],
+  },
+};
+
+export const IngenBehandlingErValgt: Story = {
+  args: {
+    ...AlleBehandlinger.args,
+    behandlingUuid: undefined,
+  },
+};
+
+export const EnBehandling: Story = {
+  args: {
+    behandlinger: [lagFagsakBehandling({ uuid: '1' })],
   },
 };

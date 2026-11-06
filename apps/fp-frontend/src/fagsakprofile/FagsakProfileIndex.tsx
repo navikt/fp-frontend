@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { type Location, Navigate, NavLink, useLocation, useMatch } from 'react-router';
+import { createPath, type Location, Navigate, useLocation, useMatch, useNavigate } from 'react-router';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
@@ -62,13 +62,13 @@ export const FagsakProfileIndex = ({
   visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
-  const [showAll, setShowAll] = useState(!behandlingUuid);
+  const [showAll, setShowAll] = useState(false);
   const toggleShowAll = () => setShowAll(!showAll);
 
   const [forrigeBehandlingUuid, setForrigeBehandlingUuid] = useState(behandlingUuid);
   if (behandlingUuid !== forrigeBehandlingUuid) {
     setForrigeBehandlingUuid(behandlingUuid);
-    setShowAll(!behandlingUuid);
+    setShowAll(false);
   }
 
   const {
@@ -76,7 +76,7 @@ export const FagsakProfileIndex = ({
     hentElementer: hentBehandlingsvelgerRader,
     fokuserElement: fokuserRad,
   } = useTastaturfokus<HTMLDivElement, HTMLElement>({
-    selector: 'a, button',
+    selector: 'a, button, [data-trigger][tabindex="-1"]',
     scrollVedFokus: true,
     lyttPåContainer: true,
   });
@@ -86,7 +86,7 @@ export const FagsakProfileIndex = ({
     if (rader.length === 0) {
       return false;
     }
-    const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'page');
+    const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'true');
     fokuserRad(aktivIndex === -1 ? 0 : aktivIndex);
     return true;
   }, [fokuserRad, hentBehandlingsvelgerRader]);
@@ -144,6 +144,7 @@ export const FagsakProfileIndex = ({
   const initFetchQuery = useQuery(initFetchOptions());
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { sakLinks, innloggetBruker } = notEmpty(initFetchQuery.data);
   const arbeidstakerHref = sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href;
@@ -153,12 +154,6 @@ export const FagsakProfileIndex = ({
 
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;
-
-  const getBehandlingLocation = (valgtBehandlingUuid: string) =>
-    getLocationWithDefaultProsessStegAndFakta({
-      ...location,
-      pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
-    });
 
   return (
     <div className={styles['panelPadding']}>
@@ -221,11 +216,22 @@ export const FagsakProfileIndex = ({
                   behandlingUuid={behandlingUuid}
                   skalViseAlleBehandlinger={showAll}
                   toggleVisAlleBehandlinger={toggleShowAll}
-                  renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                    <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
-                      {behandlingInfoKomponent}
-                    </NavLink>
-                  )}
+                  velgBehandling={uuid =>
+                    navigate(
+                      getLocationWithDefaultProsessStegAndFakta({
+                        ...location,
+                        pathname: pathToBehandling(fagsak.saksnummer, uuid),
+                      }),
+                    )
+                  }
+                  behandlingHref={uuid =>
+                    createPath(
+                      getLocationWithDefaultProsessStegAndFakta({
+                        ...location,
+                        pathname: pathToBehandling(fagsak.saksnummer, uuid),
+                      }),
+                    )
+                  }
                   alleKodeverk={notEmpty(alleFpSakKodeverk)}
                   alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}
                 />

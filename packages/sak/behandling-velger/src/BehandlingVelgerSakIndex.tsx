@@ -1,4 +1,3 @@
-import { type ReactElement } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -16,7 +15,8 @@ interface Props {
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
-  renderRadSomLenke: (className: string, behandlingInfoKomponent: ReactElement, uuid: string) => ReactElement;
+  velgBehandling: (behandlingUuid: string) => void;
+  behandlingHref: (behandlingUuid: string) => string;
   alleKodeverk: AlleKodeverk;
   alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }

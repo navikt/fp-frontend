@@ -1,81 +1,102 @@
-import { type ReactElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Box } from '@navikt/ds-react';
+import { ExternalLinkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Link } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
 
-import { BehandlingListeRad } from './BehandlingListeRad';
-
-import styles from './behandlingerListe.module.css';
-
-const sorterBehandlinger = (behandlinger: FagsakBehandlingDto[]): FagsakBehandlingDto[] =>
-  [...behandlinger].sort((b1, b2) => {
-    if (b1.avsluttet && !b2.avsluttet) {
-      return 1;
-    }
-    if (!b1.avsluttet && b2.avsluttet) {
-      return -1;
-    }
-    if (b1.avsluttet && b2.avsluttet) {
-      return dayjs(b2.avsluttet).diff(dayjs(b1.avsluttet));
-    }
-    return dayjs(b2.opprettet).diff(dayjs(b1.opprettet));
-  });
+import { BehandlingInformasjon, finnBehandlingNavn } from './BehandlingInformasjon';
+import { CardSelect, type CardSelectOption } from './card-select/CardSelect';
 
 interface Props {
   behandlinger: FagsakBehandlingDto[];
-  renderRadSomLenke: (className: string, behandlingInfoKomponent: ReactElement, uuid: string) => ReactElement;
+  behandlingHref: (behandlingUuid: string) => string;
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
+  velgBehandling: (behandlingUuid: string) => void;
   alleKodeverk: AlleKodeverk;
   alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }
 
-/**
- * BehandlingerListe
- *
- * Viser behandlinger knyttet til fagsak,
- */
 export const BehandlingerListe = ({
   behandlinger,
-  renderRadSomLenke,
+  behandlingHref,
   behandlingUuid,
   skalViseAlleBehandlinger,
   toggleVisAlleBehandlinger,
+  velgBehandling,
   alleKodeverk,
   alleKodeverkTilbakekreving,
 }: Props) => {
-  const sorterteOgFiltrerteBehandlinger = sorterBehandlinger(behandlinger).filter(
-    behandling => skalViseAlleBehandlinger || behandling.uuid === behandlingUuid,
-  );
+  const intl = useIntl();
+  const klageTekst = intl.formatMessage({ id: 'Behandlingspunkt.Årsak.Klage' });
+  const valg: CardSelectOption[] = behandlinger.toSorted(sorterBehandlinger).map(behandling => {
+    const navn = finnBehandlingNavn(behandling, alleKodeverk, alleKodeverkTilbakekreving, klageTekst);
+    return {
+      value: behandling.uuid,
+      ariaLabel: [navn.type, navn.årsak].filter(Boolean).join(' - '),
+      label: (
+        <BehandlingInformasjon
+          behandling={behandling}
+          navn={navn}
+          alleKodeverk={alleKodeverk}
+          alleKodeverkTilbakekreving={alleKodeverkTilbakekreving}
+          eksternLenke={
+            behandling.uuid !== behandlingUuid && (
+              <Link
+                href={behandlingHref(behandling.uuid)}
+                aria-label={intl.formatMessage({ id: 'BehandlingPickerItemContent.OpenInNewTab' })}
+                target="_blank"
+                rel="noopener noreferrer"
+                tabIndex={-1}
+              >
+                <ExternalLinkIcon aria-hidden fontSize="1.5rem" />
+              </Link>
+            )
+          }
+        />
+      ),
+    };
+  });
 
   return (
-    <ul className={styles['behandlingList']}>
-      {behandlinger.length === 0 && (
-        <Box borderWidth="2" borderColor="neutral-subtle" borderRadius="8" padding="space-12">
-          <BodyShort size="small" textColor="subtle">
-            <FormattedMessage id="BehandlingList.ZeroBehandlinger" />
-          </BodyShort>
-        </Box>
-      )}
-      {behandlinger.length > 0 &&
-        sorterteOgFiltrerteBehandlinger.map(behandling => (
-          <li key={behandling.uuid} data-testid={`behandling-${behandling.uuid}`}>
-            <BehandlingListeRad
-              erKunEnBehandling={behandlinger.length === 1}
-              behandling={behandling}
-              renderRadSomLenke={renderRadSomLenke}
-              erAktiv={behandling.uuid === behandlingUuid}
-              skalViseAlleBehandlinger={skalViseAlleBehandlinger}
-              toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
-              alleKodeverk={alleKodeverk}
-              alleKodeverkTilbakekreving={alleKodeverkTilbakekreving}
-            />
-          </li>
-        ))}
-    </ul>
+    <CardSelect
+      options={valg}
+      value={behandlingUuid}
+      placeholder={
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="BehandlingList.Placeholder" />
+        </BodyShort>
+      }
+      emptyContent={
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="BehandlingList.ZeroBehandlinger" />
+        </BodyShort>
+      }
+      open={skalViseAlleBehandlinger}
+      onOpenChange={åpen => {
+        if (åpen !== skalViseAlleBehandlinger) {
+          toggleVisAlleBehandlinger();
+        }
+      }}
+      onChange={velgBehandling}
+      openLabel={intl.formatMessage({ id: 'BehandlingPickerItemContent.Open' })}
+      closeLabel={intl.formatMessage({ id: 'BehandlingPickerItemContent.Close' })}
+    />
   );
+};
+
+const sorterBehandlinger = (a: FagsakBehandlingDto, b: FagsakBehandlingDto): number => {
+  if (a.avsluttet && !b.avsluttet) {
+    return 1;
+  }
+  if (!a.avsluttet && b.avsluttet) {
+    return -1;
+  }
+  if (a.avsluttet && b.avsluttet) {
+    return dayjs(b.avsluttet).diff(dayjs(a.avsluttet));
+  }
+  return dayjs(b.opprettet).diff(dayjs(a.opprettet));
 };

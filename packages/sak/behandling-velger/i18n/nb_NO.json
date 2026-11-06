@@ -3,12 +3,14 @@
   "BehandlingPickerItemContent.Avsluttet": "Avsluttet",
   "BehandlingPickerItemContent.Open": "Åpne behandlingsliste",
   "BehandlingPickerItemContent.Close": "Lukk behandlingsliste",
+  "BehandlingPickerItemContent.OpenInNewTab": "Åpne i ny fane",
   "BehandlingPickerItemContent.GjeldendeVedtak": "Gjeldende vedtak",
   "BehandlingPickerItemContent.Behandlingstatus": "Behandlingsstatus",
   "BehandlingPickerItemContent.Resultat": "Resultat",
-  "BehandlingPickerItemContent.Enhet": "Enhet ",
+  "BehandlingPickerItemContent.Enhet": "Enhet",
 
   "BehandlingList.ZeroBehandlinger": "Ingen behandlinger er opprettet",
+  "BehandlingList.Placeholder": "Velg behandling",
 
   "Behandlingspunkt.Årsak.Klage": "Klage"
 }
