@@ -31,6 +31,7 @@ import {
   oppgaverForFagsaker,
   opptjening,
   personoversikt,
+  refusjon,
   soknad,
   ytelseFordeling,
 } from '../../.storybook/testdata';
@@ -62,6 +63,7 @@ const ressursMap = {
   [BehandlingRel.FERIEPENGEGRUNNLAG]: feriepengeGrunnlag,
   [BehandlingRel.UTTAK_KONTROLLER_FAKTA_PERIODER_V2]: kontrollerFaktaPeriode,
   [BehandlingRel.BEREGNINGSGRUNNLAG]: beregningsgrunnlag,
+  [BehandlingRel.REFUSJON]: refusjon,
   [BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE]: beregningresultatDagytelse,
   [BehandlingRel.FAKTA_ARBEIDSFORHOLD]: faktaArbeidsforhold,
   [BehandlingRel.OMSORG_OG_RETT]: omsorgOgRett,
