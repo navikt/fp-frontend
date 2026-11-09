@@ -128,9 +128,9 @@ const meta = {
     const { status } = useQuery(initFetchOptions());
     const { kodeverkOptions, fptilbake } = useFagsakApi();
     const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-    const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
+    const { status: kodeverkFpTilbakeStatus } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
 
-    return kodeverk && kodeverkFpTilbake ? <FagsakProfileIndex {...props} /> : <LoadingPanel />;
+    return kodeverk && kodeverkFpTilbakeStatus !== 'pending' ? <FagsakProfileIndex {...props} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof FagsakProfileIndex>;
 export default meta;
@@ -147,5 +147,28 @@ export const BehandlingErValgt: Story = {
 export const BehandlingErIkkeValgt: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
+  },
+};
+
+export const FptilbakeKodeverkManglar: Story = {
+  beforeEach({ msw }) {
+    msw.use(http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => new HttpResponse(null, { status: 500 })));
+  },
+  args: {
+    fagsakData: new FagsakData({
+      ...FAGSAK,
+      behandlinger: [
+        ...ALLE_BEHANDLINGER,
+        lagFagsakBehandling({
+          uuid: '3',
+          type: 'BT-007',
+          behandlendeEnhetId: '2323',
+          behandlendeEnhetNavn: 'Nav Vikafossen',
+          opprettet: '2024-09-02T00:54:25.455',
+          språkkode: '-',
+          behandlingTillatteOperasjoner: TILLATTE_OPERASJONER,
+        }),
+      ],
+    }),
   },
 };

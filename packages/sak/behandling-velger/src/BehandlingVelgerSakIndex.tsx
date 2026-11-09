@@ -18,7 +18,7 @@ interface Props {
   toggleVisAlleBehandlinger: () => void;
   renderRadSomLenke: (className: string, behandlingInfoKomponent: ReactElement, uuid: string) => ReactElement;
   alleKodeverk: AlleKodeverk;
-  alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
+  alleKodeverkTilbakekreving?: AlleKodeverkTilbakekreving;
 }
 
 export const BehandlingVelgerSakIndex = (props: Props) => (
