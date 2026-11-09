@@ -94,16 +94,14 @@ const valider = (
   erMor: boolean,
   intl: IntlShape,
   dato: string,
-  erFørsteUttaktsdato: boolean,
+  brukFødselsdato: boolean,
 ) => {
   if (
     uttakPerioder.filter(up => erMor || periodeSkalVurderesIftFørsteDato(up)).some(up => dayjs(up.fom).isBefore(dato))
   ) {
     return intl.formatMessage(
       {
-        id: erFørsteUttaktsdato
-          ? 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato'
-          : 'UttakFaktaDetailForm.ErFørFødselsdato',
+        id: brukFødselsdato ? 'UttakFaktaDetailForm.ErFørFødselsdato' : 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato',
       },
       { dato: dateFormat(dato) },
     );

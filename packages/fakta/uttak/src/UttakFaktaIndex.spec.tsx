@@ -99,6 +99,36 @@ describe('UttakFaktaIndex', () => {
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
   });
 
+  it('skal vise feilmelding om fødselsdato når mor har periode før fødsel', async () => {
+    render(
+      <VisAksjonspunktDerIngenPerioderFinnes
+        fagsak={lagFagsak({
+          familiehendelse: { hendelseType: 'FODSL', hendelseDato: '2022-01-17', antallBarn: 1, dødfødsel: false },
+        })}
+        uttakKontrollerFaktaPerioder={[
+          {
+            fom: '2022-01-10',
+            tom: '2022-01-30',
+            uttakPeriodeType: 'FORELDREPENGER_FØR_FØDSEL',
+            flerbarnsdager: false,
+            periodeKilde: 'SAKSBEHANDLER',
+          },
+          {
+            fom: '2022-01-31',
+            tom: '2022-02-28',
+            uttakPeriodeType: 'MØDREKVOTE',
+            flerbarnsdager: false,
+            periodeKilde: 'SØKNAD',
+          },
+        ]}
+      />,
+    );
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    expect(await screen.findByText('En periode kan ikke starte før fødselsdato (17.01.2022)')).toBeInTheDocument();
+  });
+
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<VisUttaksperiodeUtenAksjonspunkt />);
 
