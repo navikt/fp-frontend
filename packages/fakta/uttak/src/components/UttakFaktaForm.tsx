@@ -87,8 +87,7 @@ const leggTilAksjonspunktMarkering = (
     };
   });
 
-const periodeSkalVurderesIftFørsteDato = (periode: FaktaUttakPeriode): boolean =>
-  !(periode.utsettelseÅrsak ?? periode.oppholdÅrsak);
+const periodeSkalVurderesIftFørsteDato = (periode: FaktaUttakPeriode): boolean => !periode.utsettelseÅrsak;
 
 const valider = (
   uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],

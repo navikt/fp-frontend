@@ -2,6 +2,7 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { lagFagsak } from '@navikt/fp-storybook-utils';
 import type { FaktaUttakPeriode } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
@@ -62,6 +63,40 @@ describe('UttakFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+  });
+
+  it('skal ikke tillate oppholdsperiode før første uttaksdato for far', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(
+      <VisAksjonspunktDerIngenPerioderFinnes
+        submitCallback={lagre}
+        fagsak={lagFagsak({ relasjonsRolleType: 'FARA' })}
+        uttakKontrollerFaktaPerioder={[
+          {
+            fom: '2022-01-10',
+            tom: '2022-01-30',
+            oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
+            flerbarnsdager: false,
+            periodeKilde: 'SAKSBEHANDLER',
+          },
+          {
+            fom: '2022-01-31',
+            tom: '2022-02-28',
+            uttakPeriodeType: 'FEDREKVOTE',
+            flerbarnsdager: false,
+            periodeKilde: 'SØKNAD',
+          },
+        ]}
+      />,
+    );
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    expect(
+      await screen.findByText('En periode kan ikke starte før første uttaksdato (31.01.2022)'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
   });
 
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
