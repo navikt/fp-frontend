@@ -28,7 +28,7 @@
     "@navikt/ft-plattform-komponenter": "14.0.0",
     "@navikt/ft-ui-komponenter": "10.0.0",
     "@navikt/ft-utils": "8.0.0",
-    "@tanstack/react-query": "5.105.0",
+    "@tanstack/react-query": "5.107.1",
     "dayjs": "1.11.23",
     "ky": "2.2.0",
     "react": "19.3.1",
@@ -42,18 +42,18 @@
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
-    "@storybook/react": "10.6.5",
-    "@storybook/react-vite": "10.6.5",
+    "@storybook/react": "10.6.6",
+    "@storybook/react-vite": "10.6.6",
     "@testing-library/dom": "10.4.2",
     "@testing-library/react": "16.3.3",
     "@testing-library/user-event": "14.6.8",
     "@types/react": "19.3.0",
     "eslint": "10.13.0",
-    "msw": "3.0.3",
-    "storybook": "10.6.5",
+    "msw": "3.0.4",
+    "storybook": "10.6.6",
     "stylelint": "17.16.0",
     "typescript": "6.0.3",
-    "vite": "8.3.5",
-    "vitest": "5.0.5"
+    "vite": "8.3.6",
+    "vitest": "5.1.0"
   }
 }
