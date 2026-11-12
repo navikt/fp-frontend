@@ -101,6 +101,7 @@
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-fakta-beregning": "16.1.0",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "18.1.0",
+    "@navikt/ft-fakta-refusjon": "1.1.1",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "12.1.0",
     "@navikt/ft-form-hooks": "14.1.0",
     "@navikt/ft-form-validators": "8.0.0",

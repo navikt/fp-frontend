@@ -48,6 +48,7 @@ import type {
   OpptjeningIUtlandDokStatusDto,
   PeriodeSoker,
   Personoversikt,
+  Refusjon,
   SimuleringResultat,
   Soknad,
   SvpTilrettelegging,
@@ -184,6 +185,7 @@ export const BehandlingRel = {
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
   TILBAKEKREVINGVALG: 'tilbakekrevingvalg',
   BEREGNINGSGRUNNLAG: 'beregningsgrunnlag',
+  REFUSJON: 'refusjon',
   SIMULERING_RESULTAT: 'simulering-resultat',
   BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING: 'beregningsresultat-dagytelse-original-behandling',
   ARBEID_OG_INNTEKT: 'arbeidsforhold-inntektsmelding',
@@ -562,6 +564,15 @@ const getVergeOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak, isEn
     select: data => data ?? undefined,
   });
 
+const getRefusjonOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
+  queryOptions({
+    queryKey: [BehandlingRel.REFUSJON, behandling.uuid, behandling.versjon],
+    queryFn: () => jsonEllerNull<Refusjon>(kyExtended.get(getUrlFromRel('REFUSJON', links))),
+    enabled: harLenke(behandling, 'REFUSJON'),
+    staleTime: Infinity,
+    select: data => data ?? undefined,
+  });
+
 const getOppgaverOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
   queryOptions({
     queryKey: [BehandlingRel.HENT_OPPGAVER, behandling.uuid, behandling.versjon],
@@ -804,6 +815,7 @@ export const getBehandlingApi = (behandling: Behandling) => {
     omsorgOgRettOptions: getFaktaOmsorgOgRettOptions(links),
     oppdaterStønadskontoer: getOppdaterStønadskontoer(links),
     beregningsgrunnlagOptions: getBeregningsgrunnlagOptions(links),
+    refusjonOptions: getRefusjonOptions(links),
     opptjeningOptions: getOpptjeningOptions(links),
     dokumentasjonVurderingBehovOptions: getDokumentasjonVurderingBehovOptions(links),
     uttakKontrollerFaktaPerioderOptions: getUttakKontrollerFaktaPerioderOptions(links),

@@ -2608,6 +2608,7 @@ __metadata:
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-fakta-beregning": "npm:16.1.0"
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:18.1.0"
+    "@navikt/ft-fakta-refusjon": "npm:1.1.1"
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:12.1.0"
     "@navikt/ft-form-hooks": "npm:14.1.0"
     "@navikt/ft-form-validators": "npm:8.0.0"
@@ -4621,6 +4622,26 @@ __metadata:
     react-hook-form: 7.x
     react-intl: 12.x
   checksum: 10/ff3517f09a01e108720e9d674e74555f6aa05d0618ff956b6d8eaee4281f87a197634041c98293f18343e980acf210e99aaf8a04b1f12035b7da434e79711831
+  languageName: node
+  linkType: hard
+
+"@navikt/ft-fakta-refusjon@npm:1.1.1":
+  version: 1.1.1
+  resolution: "@navikt/ft-fakta-refusjon@npm:1.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-refusjon%2F1.1.1%2F26dd67f65165cb0da0e2c7e9fc0dd2e7445b8590"
+  peerDependencies:
+    "@navikt/aksel-icons": 8.x
+    "@navikt/ds-css": 8.x
+    "@navikt/ds-react": 8.x
+    "@navikt/ft-form-hooks": 14.x
+    "@navikt/ft-form-validators": 8.x
+    "@navikt/ft-types": 8.x
+    "@navikt/ft-ui-komponenter": 10.x
+    "@navikt/ft-utils": 8.x
+    react: 19.x
+    react-dom: 19.x
+    react-hook-form: 7.x
+    react-intl: 12.x
+  checksum: 10/f3eda0ca3163ceed2cdc58d81d3454f87a99b3ef4b3739a3db37e60b43d059ca633384f2d1f0f079b91d5c65488a17ced5dd57f1ea95554a770f232181c64e5d
   languageName: node
   linkType: hard
 
