@@ -19,16 +19,16 @@
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:^",
-    "@navikt/ft-utils": "8.0.0",
+    "@navikt/ft-utils": "8.0.2",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "react-intl": "12.1.6"
+    "react-intl": "12.1.7"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@types/react": "19.3.0",
-    "eslint": "10.13.0",
+    "eslint": "10.14.0",
     "typescript": "6.0.3"
   }
 }

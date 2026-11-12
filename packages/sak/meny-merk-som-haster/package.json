@@ -19,27 +19,27 @@
   },
   "dependencies": {
     "@navikt/ds-react": "8.22.1",
-    "@navikt/ft-utils": "8.0.0",
+    "@navikt/ft-utils": "8.0.2",
     "dayjs": "1.11.23",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "react-intl": "12.1.6"
+    "react-intl": "12.1.7"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
-    "@storybook/react": "10.6.5",
-    "@storybook/react-vite": "10.6.5",
+    "@storybook/react": "10.6.6",
+    "@storybook/react-vite": "10.6.6",
     "@testing-library/dom": "10.4.2",
     "@testing-library/react": "16.3.3",
     "@testing-library/user-event": "14.6.8",
     "@types/react": "19.3.0",
-    "eslint": "10.13.0",
-    "storybook": "10.6.5",
+    "eslint": "10.14.0",
+    "storybook": "10.6.6",
     "typescript": "6.0.3",
-    "vite": "8.3.5",
-    "vitest": "5.0.5"
+    "vite": "8.3.7",
+    "vitest": "5.1.0"
   }
 }
