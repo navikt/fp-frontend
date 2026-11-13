@@ -75,7 +75,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Bygg og test
-        run: yarn ci --filter=@navikt/${{ inputs.app }}
+        run: yarn ci --filter=@navikt/${{ inputs.app }}...
         env:
           VITE_CDN_URL: ${{ inputs.vite-cdn-url }}
 
