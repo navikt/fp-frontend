@@ -10,7 +10,10 @@
     ".prettierrc",
     "packages/config/eslint/eslint.config.mjs",
     "packages/config/typescript/tsconfig.json",
-    "packages/config/vite/vite.config.mjs"
+    "packages/config/vite/vite.config.mjs",
+    "packages/config/vite/vitest-setup.ts",
+    ".storybook/**",
+    "@types/**"
   ],
   "tasks": {
     "dev": {
@@ -24,10 +27,15 @@
     "generate:local": {
       "cache": false
     },
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
     "tsc": {
+      "dependsOn": ["transit"],
       "outputs": []
     },
     "eslint": {
+      "dependsOn": ["transit"],
       "outputs": []
     },
     "eslint:fix": {
@@ -40,7 +48,7 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["^test"],
+      "dependsOn": ["transit"],
       "outputs": []
     },
     "build:storybook": {
