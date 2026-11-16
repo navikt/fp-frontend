@@ -23,6 +23,7 @@ export type { VurderMedlemskapAp } from './src/fakta/VurderMedlemskapAp';
 export type { VurderForutgaendeMedlemskapAp } from './src/fakta/VurderForutgaendeMedlemskapAp';
 export type { BekreftAnnenpartsUttakEøsAp } from './src/fakta/BekreftAnnenpartsUttakEøsAp';
 export type { BeregningAp } from './src/fakta/BeregningAp';
+export type { FordelBeregningsgrunnlagAp } from './src/fakta/FordelBeregningsgrunnlagAp';
 export type { ManuellKontrollBesteberegningAP } from './src/fakta/ManuellKontrollBesteberegningAP';
 export type { ManuellKontrollAapKombinertAtflAP } from './src/fakta/ManuellKontrollAapKombinertAtflAP';
 

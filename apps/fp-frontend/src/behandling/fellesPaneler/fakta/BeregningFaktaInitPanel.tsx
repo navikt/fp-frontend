@@ -6,6 +6,7 @@ import {
   FaktaBeregningAvklaringsbehovCode,
   type FtBeregningsgrunnlag,
   type FtVilkar,
+  type OverstyrBeregningsaktiviteterAP,
   type SubmitBeregningType,
 } from '@navikt/ft-fakta-beregning';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -14,7 +15,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår } from '@navikt/fp-types';
+import type {
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag,
+  FaktaOmBeregningTilfelle,
+  OpptjeningAktivitetType,
+  Vilkår,
+} from '@navikt/fp-types';
 import type { BeregningAp, FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
@@ -22,6 +29,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { lagKodeverkValidator, tilInntektskategori, tilValgfriKode } from './beregningKodeverk';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
@@ -79,45 +87,126 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningFaktaIndex>, 'formDa
   return <BeregningFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };
 
-const mapBGKodeTilFpsakKode = (
-  bgKode: string,
-):
-  | typeof AksjonspunktKode.AVKLAR_AKTIVITETER
-  | typeof AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER
-  | typeof AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN
-  | typeof AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG => {
-  switch (bgKode) {
+// SubmitBeregningType mangler aksjonspunktene for aktiviteter, men ft-fakta-beregning sender dem også
+type InnsendtBeregningAP =
+  | SubmitBeregningType
+  | OverstyrBeregningsaktiviteterAP
+  | (Omit<OverstyrBeregningsaktiviteterAP, 'kode'> & { kode: FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER });
+
+type BeregningsaktiviteterGrunnlag = OverstyrBeregningsaktiviteterAP['grunnlag'][number];
+type FaktaBeregning = SubmitBeregningType['grunnlag'][number]['fakta'];
+type OverstyrtAndel = NonNullable<SubmitBeregningType['grunnlag'][number]['overstyrteAndeler']>[number];
+
+const tilOpptjeningAktivitetType = lagKodeverkValidator<OpptjeningAktivitetType>('opptjeningaktivitettype', {
+  AAP: true,
+  ARBEID: true,
+  DAGPENGER: true,
+  FORELDREPENGER: true,
+  FRILANS: true,
+  FRILOPP: true,
+  MILITÆR_ELLER_SIVILTJENESTE: true,
+  NÆRING: true,
+  OMSORGSPENGER: true,
+  OPPLÆRINGSPENGER: true,
+  PLEIEPENGER: true,
+  FRISINN: true,
+  ETTERLØNN_SLUTTPAKKE: true,
+  SVANGERSKAPSPENGER: true,
+  SYKEPENGER: true,
+  VENTELØNN_VARTPENGER: true,
+  VIDERE_ETTERUTDANNING: true,
+  UTENLANDSK_ARBEIDSFORHOLD: true,
+  UTDANNINGSPERMISJON: true,
+  '-': true,
+});
+
+const tilFaktaOmBeregningTilfelle = lagKodeverkValidator<FaktaOmBeregningTilfelle>('fakta om beregning-tilfelle', {
+  VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD: true,
+  VURDER_SN_NY_I_ARBEIDSLIVET: true,
+  VURDER_NYOPPSTARTET_FL: true,
+  FASTSETT_MAANEDSINNTEKT_FL: true,
+  FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING: true,
+  VURDER_LØNNSENDRING: true,
+  FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING: true,
+  VURDER_AT_OG_FL_I_SAMME_ORGANISASJON: true,
+  FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE: true,
+  VURDER_ETTERLØNN_SLUTTPAKKE: true,
+  FASTSETT_ETTERLØNN_SLUTTPAKKE: true,
+  VURDER_MOTTAR_YTELSE: true,
+  VURDER_BESTEBEREGNING: true,
+  VURDER_MILITÆR_SIVILTJENESTE: true,
+  VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT: true,
+  FASTSETT_BG_KUN_YTELSE: true,
+  TILSTØTENDE_YTELSE: true,
+  FASTSETT_ENDRET_BEREGNINGSGRUNNLAG: true,
+  '-': true,
+});
+
+const førsteGrunnlag = <T,>(ap: { grunnlag: T[] }): T => notEmpty(ap.grunnlag[0], 'Mangler grunnlag i beregning');
+
+const lagBeregningsaktiviteter = (grunnlag: BeregningsaktiviteterGrunnlag) => ({
+  ...grunnlag,
+  beregningsaktivitetLagreDtoList: grunnlag.beregningsaktivitetLagreDtoList.map(aktivitet => ({
+    ...aktivitet,
+    opptjeningAktivitetType: tilOpptjeningAktivitetType(aktivitet.opptjeningAktivitetType),
+  })),
+});
+
+const lagFakta = (fakta: FaktaBeregning) => ({
+  ...fakta,
+  faktaOmBeregningTilfeller: fakta.faktaOmBeregningTilfeller?.map(tilFaktaOmBeregningTilfelle),
+  fastsattUtenInntektsmelding: fakta.fastsattUtenInntektsmelding && {
+    andelListe: fakta.fastsattUtenInntektsmelding.andelListe.map(andel => ({
+      ...andel,
+      inntektskategori: tilValgfriKode(andel.inntektskategori, tilInntektskategori),
+    })),
+  },
+  kunYtelseFordeling: fakta.kunYtelseFordeling && {
+    ...fakta.kunYtelseFordeling,
+    skalBrukeBesteberegning: fakta.kunYtelseFordeling.skalBrukeBesteberegning ?? undefined,
+  },
+});
+
+const lagOverstyrtAndel = (andel: OverstyrtAndel) => ({
+  ...andel,
+  forrigeInntektskategori: tilValgfriKode(andel.forrigeInntektskategori, tilInntektskategori),
+  fastsatteVerdier: {
+    ...andel.fastsatteVerdier,
+    inntektskategori: tilValgfriKode(andel.fastsatteVerdier.inntektskategori, tilInntektskategori),
+  },
+});
+
+const tilBeregningAp = (apData: InnsendtBeregningAP): BeregningAp => {
+  switch (apData.kode) {
     case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER: {
-      return AksjonspunktKode.AVKLAR_AKTIVITETER;
+      return { ...lagBeregningsaktiviteter(førsteGrunnlag(apData)), kode: AksjonspunktKode.AVKLAR_AKTIVITETER };
     }
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER: {
-      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
+      return {
+        ...lagBeregningsaktiviteter(førsteGrunnlag(apData)),
+        kode: AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+      };
     }
     case FaktaBeregningAvklaringsbehovCode.VURDER_FAKTA_FOR_ATFL_SN: {
-      return AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN;
+      const grunnlag = førsteGrunnlag(apData);
+      return { ...grunnlag, kode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN, fakta: lagFakta(grunnlag.fakta) };
     }
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG: {
-      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
-    }
-    default: {
-      throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
+      const grunnlag = førsteGrunnlag(apData);
+      return {
+        ...grunnlag,
+        kode: AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+        fakta: lagFakta(grunnlag.fakta),
+        overstyrteAndeler: notEmpty(grunnlag.overstyrteAndeler, 'Mangler overstyrte andeler').map(lagOverstyrtAndel),
+      };
     }
   }
 };
 
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-  (aksjonspunkterSomSkalLagres: SubmitBeregningType[]) => {
-    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
-      ? aksjonspunkterSomSkalLagres
-      : [aksjonspunkterSomSkalLagres];
-
-    const transformerteData = apListe.map<BeregningAp>(apData => ({
-      kode: mapBGKodeTilFpsakKode(apData.kode),
-      ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
-    }));
-    return submitCallback(transformerteData);
-  };
+  (aksjonspunkterSomSkalLagres: InnsendtBeregningAP[]) =>
+    submitCallback(aksjonspunkterSomSkalLagres.map(tilBeregningAp));
 
 const lagBGVilkår = (vilkår: Vilkår[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
   const bgVilkar = vilkår.find(v => v.vilkarType === 'FP_VK_41');

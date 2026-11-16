@@ -1,12 +1,3 @@
-import type {
-  BeregningFaktaAP,
-  BeregningOverstyringAP,
-  OverstyrBeregningsaktiviteterAP,
-} from '@navikt/ft-fakta-beregning';
-import type {
-  FordelBeregningsgrunnlagAP,
-  VurderRefusjonBeregningsgrunnlagAP,
-} from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import type { AvklartFaktaFeilutbetalingAp } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 
 import type { AvklarAktivitetsPerioderAp } from './fakta/AvklarAktivitetsPerioderAp';
@@ -22,6 +13,7 @@ import type { BeregningAp } from './fakta/BeregningAp';
 import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
 import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
 import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
+import type { FordelBeregningsgrunnlagAp } from './fakta/FordelBeregningsgrunnlagAp';
 import type { ManuellKontrollAapKombinertAtflAP } from './fakta/ManuellKontrollAapKombinertAtflAP';
 import type { ManuellKontrollBesteberegningAP } from './fakta/ManuellKontrollBesteberegningAP';
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
@@ -53,11 +45,7 @@ export type FaktaAksjonspunkt =
   | AvklarAnnenforelderHarRettAp
   | BekreftUttaksperioderAp
   | OverstyringAvklarStartdatoForPeriodenAp
-  | OverstyrBeregningsaktiviteterAP
-  | BeregningFaktaAP
-  | BeregningOverstyringAP
-  | FordelBeregningsgrunnlagAP
-  | VurderRefusjonBeregningsgrunnlagAP
+  | FordelBeregningsgrunnlagAp
   | VurderArbeidsforholdInntektsmeldingAp
   | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp

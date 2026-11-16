@@ -29,73 +29,62 @@ import { type Beregningsvisning, utledBeregningsvisning } from './utledBeregning
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 import '@navikt/ft-prosess-beregning/dist/style.css';
 
-const mapBGKodeTilFpsakKode = (
-  bgKode: string,
-):
-  | typeof AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
-  | typeof AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD
-  | typeof AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET
-  | typeof AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE => {
-  switch (bgKode) {
+const tilBeregningsgrunnlagAp = (apData: BeregningAksjonspunktSubmitType): BeregningsgrunnlagAp => {
+  const grunnlag = notEmpty(apData.grunnlag[0], 'Mangler grunnlag i beregningsgrunnlag');
+  const { begrunnelse } = grunnlag;
+
+  switch (apData.kode) {
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS: {
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS;
+      if ('inntektPrAndelList' in grunnlag) {
+        return {
+          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+          begrunnelse,
+          inntektPrAndelList: grunnlag.inntektPrAndelList,
+          inntektFrilanser: grunnlag.inntektFrilanser ?? undefined,
+        };
+      }
+      break;
     }
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD: {
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD;
-    }
-    case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET: {
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET;
+      if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
+        return {
+          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+          begrunnelse,
+          fastsatteTidsbegrensedePerioder: grunnlag.fastsatteTidsbegrensedePerioder,
+          frilansInntekt: grunnlag.frilansInntekt ?? undefined,
+        };
+      }
+      break;
     }
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE: {
-      return AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE;
+      if ('erVarigEndretNaering' in grunnlag) {
+        return {
+          kode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE,
+          begrunnelse,
+          erVarigEndretNaering: grunnlag.erVarigEndretNaering,
+          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
+        };
+      }
+      break;
     }
-    default: {
-      throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
+    case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET: {
+      if (!('erVarigEndretNaering' in grunnlag) && 'bruttoBeregningsgrunnlag' in grunnlag) {
+        return {
+          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET,
+          begrunnelse,
+          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
+        };
+      }
+      break;
     }
   }
+  throw new Error(`Ukjent avklaringspunkt eller grunnlag ${apData.kode}`);
 };
 
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>) =>
-  (aksjonspunkterSomSkalLagres: BeregningAksjonspunktSubmitType[]) => {
-    const transformerteData = aksjonspunkterSomSkalLagres.map((apData): BeregningsgrunnlagAp => {
-      const grunnlag = notEmpty(apData.grunnlag[0]);
-      const felles = {
-        kode: mapBGKodeTilFpsakKode(apData.kode),
-        periode: grunnlag.periode,
-        begrunnelse: grunnlag.begrunnelse,
-      };
-
-      if ('inntektPrAndelList' in grunnlag) {
-        return {
-          ...felles,
-          inntektPrAndelList: grunnlag.inntektPrAndelList,
-          inntektFrilanser: grunnlag.inntektFrilanser,
-        };
-      }
-      if ('erVarigEndretNaering' in grunnlag) {
-        return {
-          ...felles,
-          erVarigEndretNaering: grunnlag.erVarigEndretNaering,
-          erVarigEndret: grunnlag.erVarigEndret,
-          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
-        };
-      }
-      if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
-        return {
-          ...felles,
-          fastsatteTidsbegrensedePerioder: grunnlag.fastsatteTidsbegrensedePerioder,
-          frilansInntekt: grunnlag.frilansInntekt,
-        };
-      }
-      return {
-        ...felles,
-        bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
-      };
-    });
-
-    return submitCallback(transformerteData);
-  };
+  (aksjonspunkterSomSkalLagres: BeregningAksjonspunktSubmitType[]) =>
+    submitCallback(aksjonspunkterSomSkalLagres.map(tilBeregningsgrunnlagAp));
 
 const lagBGVilkår = (vilkår: Vilkår[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
   const bgVilkar = vilkår.find(v => v.vilkarType === 'FP_VK_41');

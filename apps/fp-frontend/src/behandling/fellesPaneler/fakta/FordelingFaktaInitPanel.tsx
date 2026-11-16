@@ -16,13 +16,14 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår } from '@navikt/fp-types';
-import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { harAksjonspunkt, useMellomlagretFormData } from '@navikt/fp-utils';
+import type { FaktaAksjonspunkt, FordelBeregningsgrunnlagAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { harAksjonspunkt, notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { lagKodeverkValidator, tilInntektskategori, tilValgfriKode } from './beregningKodeverk';
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 
@@ -79,34 +80,90 @@ const Wrapper = (
   );
 };
 
-const mapBGKodeTilFpsakKode = (bgKode: string): string => {
-  switch (bgKode) {
+type FordelAp = Extract<FordelBeregningsgrunnlagAp, { kode: typeof AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG }>;
+type FordelAndelDto = NonNullable<NonNullable<FordelAp['endretBeregningsgrunnlagPerioder']>[number]['andeler']>[number];
+type FordelAndel =
+  FordelBeregningsgrunnlagAP['grunnlag'][number]['endretBeregningsgrunnlagPerioder'][number]['andeler'][number];
+
+const tilAktivitetStatus = lagKodeverkValidator<NonNullable<FordelAndelDto['aktivitetStatus']>>('aktivitetstatus', {
+  AAP: true,
+  AT: true,
+  DP: true,
+  FL: true,
+  MS: true,
+  SN: true,
+  AT_FL: true,
+  AT_SN: true,
+  FL_SN: true,
+  AT_FL_SN: true,
+  BA: true,
+  KUN_YTELSE: true,
+  TY: true,
+  VENTELØNN_VARTPENGER: true,
+  '-': true,
+});
+
+const tilAndelKilde = lagKodeverkValidator<NonNullable<FordelAndelDto['kilde']>>('andelkilde', {
+  SAKSBEHANDLER_KOFAKBER: true,
+  PROSESS_BESTEBEREGNING: true,
+  SAKSBEHANDLER_FORDELING: true,
+  PROSESS_PERIODISERING: true,
+  PROSESS_OMFORDELING: true,
+  PROSESS_START: true,
+});
+
+const tilAndelsnr = (andelsnr: number | string): number => {
+  const tall = Number(andelsnr);
+  if (!Number.isInteger(tall)) {
+    throw new Error(`Ugyldig andelsnr: ${andelsnr}`);
+  }
+  return tall;
+};
+
+const lagFordelAndel = (andel: FordelAndel) => ({
+  ...andel,
+  andelsnr: tilAndelsnr(andel.andelsnr),
+  aktivitetStatus: tilValgfriKode(andel.aktivitetStatus, tilAktivitetStatus),
+  kilde: tilValgfriKode(andel.kilde, tilAndelKilde),
+  forrigeInntektskategori: tilValgfriKode(andel.forrigeInntektskategori, tilInntektskategori),
+});
+
+const tilFordelBeregningsgrunnlagAp = (
+  apData: VurderRefusjonBeregningsgrunnlagAP | FordelBeregningsgrunnlagAP,
+): FordelBeregningsgrunnlagAp => {
+  switch (apData.kode) {
     case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG: {
-      return AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG;
+      const grunnlag = notEmpty(apData.grunnlag[0], 'Mangler grunnlag i fordeling');
+      return {
+        ...grunnlag,
+        kode: AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG,
+        endretBeregningsgrunnlagPerioder: grunnlag.endretBeregningsgrunnlagPerioder.map(periode => ({
+          ...periode,
+          andeler: periode.andeler.map(lagFordelAndel),
+        })),
+      };
     }
     case FaktaFordelBeregningAvklaringsbehovCode.VURDER_REFUSJON_BERGRUNN: {
-      return AksjonspunktKode.VURDER_REFUSJON_BERGRUNN;
-    }
-    default: {
-      throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
+      return {
+        ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i fordeling'),
+        kode: AksjonspunktKode.VURDER_REFUSJON_BERGRUNN,
+      };
     }
   }
 };
 
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-  (aksjonspunkterSomSkalLagres: VurderRefusjonBeregningsgrunnlagAP | FordelBeregningsgrunnlagAP) => {
+  (
+    aksjonspunkterSomSkalLagres:
+      | VurderRefusjonBeregningsgrunnlagAP
+      | FordelBeregningsgrunnlagAP
+      | (VurderRefusjonBeregningsgrunnlagAP | FordelBeregningsgrunnlagAP)[],
+  ) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    const transformerteData = apListe.map(apData => ({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
-      kode: mapBGKodeTilFpsakKode(apData.kode),
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      ...apData.grunnlag[0],
-    }));
-    return submitCallback(transformerteData);
+    return submitCallback(apListe.map(tilFordelBeregningsgrunnlagAp));
   };
 
 const lagBGVilkår = (vilkår: Vilkår[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
