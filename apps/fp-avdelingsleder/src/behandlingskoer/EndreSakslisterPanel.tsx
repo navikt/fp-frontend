@@ -35,7 +35,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
   const { mutate: lagNySakslisteOgHentAvdelingensSakslisterPåNytt } = useMutation({
     mutationFn: () => opprettNySaksliste(valgtAvdelingEnhet),
     onSuccess: data => {
-      setValgtSakslisteId(Number.parseInt(data.sakslisteId, 10));
+      setValgtSakslisteId(data.sakslisteId);
       void refetchSakslister();
     },
   });
