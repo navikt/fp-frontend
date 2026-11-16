@@ -7,6 +7,7 @@ import type {
   KøStatistikkDto,
   OppgaveDto,
   OppgaveDtoMedStatus,
+  OppgaveIdDto,
   ReservasjonStatusDto,
   SaksbehandlerDto,
   SakslisteDto,
@@ -127,7 +128,7 @@ export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>
   kyExtended.post(LosUrl.SØK_FAGSAK, { json: { searchString, skalReservere } }).json<FagsakEnkel[]>();
 
 export const opphevReservasjon = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } });
+  kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } satisfies OppgaveIdDto });
 
 export const reserverOppgavePost = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
+  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } satisfies OppgaveIdDto }).json<ReservasjonStatusDto>();
