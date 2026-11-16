@@ -1,4 +1,3 @@
-export type { AksjonspunktTilBekreftelse } from './src/AksjonspunktTilBekreftelse';
 export type { FaktaAksjonspunkt } from './src/FaktaAksjonspunkt';
 export type { AvklarVergeAp } from './src/fakta/AvklarVergeAp';
 export type { MerkOpptjeningUtlandAp } from './src/fakta/MerkOpptjeningUtlandAp';
@@ -52,5 +51,7 @@ export type { VarselRevurderingAp } from './src/prosess/VarselRevurderingAp';
 export type { UttakAp } from './src/prosess/UttakAp';
 export type { SoknadsfristAp } from './src/prosess/SoknadsfristAp';
 export type { BeregningsgrunnlagAp } from './src/prosess/BeregningsgrunnlagAp';
+
+export type { VurderFaresignalerAp } from './src/sak/VurderFaresignalerAp';
 
 export type { FatterVedtakAp } from './src/totrinn/FatterVedtakAp';

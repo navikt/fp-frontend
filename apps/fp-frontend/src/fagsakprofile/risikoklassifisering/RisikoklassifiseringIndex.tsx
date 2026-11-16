@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 
 import { parseQueryString } from '@navikt/fp-app-felles';
-import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
+import { RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
 import type {
   AksessRettigheter,
   Behandling,
@@ -13,6 +13,7 @@ import type {
   FagsakBehandlingDtoFpSak,
   NavAnsatt,
 } from '@navikt/fp-types';
+import type { VurderFaresignalerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, erTilbakekrevingBehandling, notEmpty } from '@navikt/fp-utils';
 
 import { getRiskPanelLocationCreator } from '../../app/paths';
@@ -117,7 +118,7 @@ const RisikoklassifiseringBehandling = ({
 
   const { lagreAksjonspunkter } = useBehandlingPollingOperasjoner(behandling, setBehandling);
 
-  const lagreRisikoklassifiseringAksjonspunkt = (values: AvklartRisikoklassifiseringAp) => {
+  const lagreRisikoklassifiseringAksjonspunkt = (values: VurderFaresignalerAp) => {
     void lagreAksjonspunkter({
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,

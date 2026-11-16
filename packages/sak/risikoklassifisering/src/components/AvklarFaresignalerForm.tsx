@@ -13,8 +13,7 @@ import {
   type KodeverkMedNavn,
   type Risikoklassifisering,
 } from '@navikt/fp-types';
-
-import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
+import type { VurderFaresignalerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -33,7 +32,7 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
-  submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
+  submitCallback?: (data: VurderFaresignalerAp) => void;
   faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }
 
@@ -135,7 +134,7 @@ const buildInitialValues = (
   return undefined;
 };
 
-const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
+const transformValues = (values: Values): VurderFaresignalerAp => ({
   kode: AksjonspunktKode.VURDER_FARESIGNALER,
   faresignalVurdering: utledFaresignalVurderingVerdi(
     values[VURDERING_HOVEDKATEGORI],
@@ -147,5 +146,12 @@ const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
 const utledFaresignalVurderingVerdi = (
   vurderingHovedkategori: FaresignalVurdering,
   vurderingUnderkategori?: FaresignalVurdering,
-): FaresignalVurdering | undefined =>
-  vurderingHovedkategori === 'INGEN_INNVIRKNING' ? 'INGEN_INNVIRKNING' : vurderingUnderkategori;
+): FaresignalVurdering => {
+  if (vurderingHovedkategori === 'INGEN_INNVIRKNING') {
+    return 'INGEN_INNVIRKNING';
+  }
+  if (!vurderingUnderkategori) {
+    throw new Error('Underkategori må være valgt når faresignalene har innvirkning');
+  }
+  return vurderingUnderkategori;
+};
