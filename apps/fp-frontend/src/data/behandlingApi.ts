@@ -9,8 +9,6 @@ import { queryOptions } from '@tanstack/react-query';
 import ky, { type ResponsePromise } from 'ky';
 
 import type { PapirsøknadAp } from '@navikt/fp-papirsoknad';
-import type { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
-import type { AksjonspunktVerdier } from '@navikt/fp-prosess-klagevurdering';
 import type { AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
 import type {
   AnkeVurdering,
@@ -21,76 +19,81 @@ import type {
   Behandling,
   BehandlingFpSak,
   BehandlingFpTilbake,
+  BehandlingIdVersjonDto,
+  BekreftedeAksjonspunkterDto,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
+  BrevHtml,
   BrevOverstyring,
+  ByttBehandlendeEnhetDto,
   Dokument,
   DokumentasjonVurderingBehov,
+  DokumentMalType,
   FaktaArbeidsforhold,
   FaktaUttakPeriode,
   FamilieHendelse,
   Feriepengegrunnlag,
   Fødsel,
   ForhåndsvisMeldingParams,
+  GjenopptaBehandlingDto,
+  HenleggBehandlingDto,
+  HentMellomlagring,
   Innsyn,
   InntektArbeidYtelse,
   Inntektsmelding,
+  KlageFormkravMellomlagring,
   KlageVurdering,
+  KlageVurderingResultatMellomlagring,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
+  Mellomlagring,
   OmsorgOgRett,
   OmsorgsovertakelseDto,
   Oppgave,
   Opptjening,
   OpptjeningIUtlandDokStatusDto,
+  OverstyrteAksjonspunkterDto,
   PeriodeSoker,
   Personoversikt,
+  ReåpneBehandlingDto,
+  RevurderingVarslingÅrsak,
+  SettBehandlingPaVentDto,
   SimuleringResultat,
   Soknad,
   SvpTilrettelegging,
   TilbakekrevingValg,
   Uttaksresultat,
   UttakStonadskontoer,
+  VenteArsakType,
+  VenteÅrsakTypeFpTilbake,
   Verge,
   VilkårsVurderingDto,
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-type SettPaVentParams = {
-  ventearsak?: string;
-  frist?: string;
-  behandlingUuid: string;
-  behandlingVersjon: number;
+type SettPåVentParams = Omit<SettBehandlingPaVentDto, 'ventearsak'> & {
+  ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake;
 };
 
-type NyBehandlendeEnhet = {
-  behandlingUuid: string;
-  enhetNavn: string;
-  enhetId: string;
-  begrunnelse: string;
-  behandlingVersjon: number;
-};
+// fptilbake bruker fritekst til henleggelsesbrev
+type HenleggBehandlingParams = HenleggBehandlingDto & { fritekst?: string };
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
 
 type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp | PapirsøknadAp;
 
-export type AksjonspunktArgs = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
+export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
   } & AksjonspunktType)[];
 };
 
-export type OverstyrteAksjonspunktArgs = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
+export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'overstyrteAksjonspunktDtoer'> & {
   saksnummer: string;
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
@@ -614,47 +617,43 @@ export const forhåndsvisTilbakekrevingMelding = (params: {
 
 const getÅpneBehandlingForEndring = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
   kyExtended.post(getUrlFromRel('OPEN_BEHANDLING_FOR_CHANGES', links), {
-    json: { behandlingUuid, behandlingVersjon },
+    json: { behandlingUuid, behandlingVersjon } satisfies ReåpneBehandlingDto,
   });
 
 const getMerkSomHaster = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
   kyExtended.post(getUrlFromRel('MERK_HASTER', links), {
-    json: { behandlingUuid, behandlingVersjon },
+    json: { behandlingUuid, behandlingVersjon } satisfies ReåpneBehandlingDto,
   });
 
-const getNyBehandlendeEnhet = (links: ApiLink[]) => (params: NyBehandlendeEnhet) =>
+const getNyBehandlendeEnhet = (links: ApiLink[]) => (params: ByttBehandlendeEnhetDto) =>
   kyExtended
     .post(getUrlFromRel('BEHANDLING_NY_BEHANDLENDE_ENHET', links), {
       json: params,
     })
     .then(() => {});
 
-const getHenleggBehandling =
-  (links: ApiLink[]) =>
-  (params: { behandlingUuid: string; årsakKode: string; begrunnelse: string; behandlingVersjon: number }) =>
-    kyExtended
-      .post(getUrlFromRel('HENLEGG_BEHANDLING', links), {
-        json: params,
-      })
-      .then(() => {});
+const getHenleggBehandling = (links: ApiLink[]) => (params: HenleggBehandlingParams) =>
+  kyExtended
+    .post(getUrlFromRel('HENLEGG_BEHANDLING', links), {
+      json: params,
+    })
+    .then(() => {});
 
-const getSettBehandlingPåVent =
-  (links: ApiLink[]) =>
-  (params: { behandlingUuid: string; behandlingVersjon: number; frist: string; ventearsak: string }) =>
-    kyExtended
-      .post(getUrlFromRel('BEHANDLING_ON_HOLD', links), {
-        json: params,
-      })
-      .then(() => {});
+const getSettBehandlingPåVent = (links: ApiLink[]) => (params: SettPåVentParams) =>
+  kyExtended
+    .post(getUrlFromRel('BEHANDLING_ON_HOLD', links), {
+      json: params,
+    })
+    .then(() => {});
 
-const getOppdaterPåVent = (links: ApiLink[]) => (params: SettPaVentParams) =>
+const getOppdaterPåVent = (links: ApiLink[]) => (params: SettPåVentParams) =>
   kyExtended
     .post(getUrlFromRel('UPDATE_ON_HOLD', links), {
       json: params,
     })
     .then(() => {});
 
-const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+const getFortsettBehandling = (links: ApiLink[]) => (params: GjenopptaBehandlingDto) =>
   kyExtended.post<BehandlingFpSak>(getUrlFromRel('RESUME_BEHANDLING', links), {
     json: params,
   });
@@ -665,20 +664,25 @@ const getOpprettVergeV2 = (links: ApiLink[]) => (params: Verge) =>
   });
 
 const getHentBrevHtml =
-  (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType?: string, revurderingÅrsak?: string) =>
+  (links: ApiLink[]) =>
+  (
+    behandlingUuid: string,
+    dokumentMalType?: DokumentMalType,
+    revurderingÅrsak?: RevurderingVarslingÅrsak,
+  ) =>
     kyExtended
       .post(getUrlFromRel('HENT_BREV_HTML', links), {
         json: {
           behandlingUuid,
           ...(dokumentMalType && { dokumentMal: dokumentMalType }),
           ...(revurderingÅrsak && { revurderingÅrsak }),
-        },
+        } satisfies BrevHtml,
       })
       .json<BrevOverstyring>();
 
 const getMellomlagring =
   (links: ApiLink[]) =>
-  (params: { behandlingUuid: string; type?: string; dokumentMal?: string; innhold?: string | null }) =>
+  (params: Omit<Mellomlagring, 'innhold'> & { innhold?: string | null }) =>
     kyExtended
       .post(getUrlFromRel('MELLOMLAGRING', links), {
         json: params,
@@ -691,7 +695,7 @@ const getMellomlagretPapirsøknadOptions = (links: ApiLink[]) => (behandling: Be
     queryFn: () =>
       jsonEllerNull<{ innhold: string }>(
         kyExtended.post(getUrlFromRel('HENT_MELLOMLAGRING', links), {
-          json: { behandlingUuid: behandling.uuid, type: 'PAPIRSØKNAD' },
+          json: { behandlingUuid: behandling.uuid, type: 'PAPIRSØKNAD' } satisfies HentMellomlagring,
         }),
       ),
     enabled: harLenke(behandling, 'HENT_MELLOMLAGRING'),
@@ -733,15 +737,14 @@ const getLagreVurderingForAOI = (links: ApiLink[]) => (params: ManglendeInntekts
     })
     .then(() => {});
 
-const getÅpneForNyVurderingAOI =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-    kyExtended
-      .post(getUrlFromRel('ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING', links), {
-        json: params,
-      })
-      .then(() => {});
+const getÅpneForNyVurderingAOI = (links: ApiLink[]) => (params: BehandlingIdVersjonDto) =>
+  kyExtended
+    .post(getUrlFromRel('ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING', links), {
+      json: params,
+    })
+    .then(() => {});
 
-const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: FormkravMellomlagretDataType) =>
+const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: KlageFormkravMellomlagring) =>
   kyExtended
     .post(getUrlFromRel('SAVE_FORMKRAV_VURDERING', links), {
       json: params,
@@ -750,11 +753,7 @@ const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: FormkravM
 
 const getMellomlagreKlageVurdering =
   (links: ApiLink[]) =>
-  (
-    params: AksjonspunktVerdier & {
-      behandlingUuid: string;
-    },
-  ) =>
+  (params: KlageVurderingResultatMellomlagring) =>
     kyExtended
       .post(getUrlFromRel('SAVE_KLAGE_VURDERING', links), {
         json: params,

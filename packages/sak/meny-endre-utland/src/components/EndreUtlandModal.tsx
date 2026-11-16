@@ -4,11 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Checkbox, Dialog } from '@navikt/ds-react';
 import { RhfCheckboxGroup, RhfForm } from '@navikt/ft-form-hooks';
 
-import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
+import type { FagsakMarkeringType, KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
 export type FormValues = {
   saksnummer: string;
-  fagsakMarkeringer: string[];
+  fagsakMarkeringer: FagsakMarkeringType[];
 };
 
 interface Props {
