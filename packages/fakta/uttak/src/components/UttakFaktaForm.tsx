@@ -87,24 +87,21 @@ const leggTilAksjonspunktMarkering = (
     };
   });
 
-const periodeSkalVurderesIftFørsteDato = (periode: FaktaUttakPeriode): boolean =>
-  !(periode.utsettelseÅrsak ?? periode.oppholdÅrsak);
+const periodeSkalVurderesIftFørsteDato = (periode: FaktaUttakPeriode): boolean => !periode.utsettelseÅrsak;
 
 const valider = (
   uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
   erMor: boolean,
   intl: IntlShape,
   dato: string,
-  erFørsteUttaktsdato: boolean,
+  brukFødselsdato: boolean,
 ) => {
   if (
     uttakPerioder.filter(up => erMor || periodeSkalVurderesIftFørsteDato(up)).some(up => dayjs(up.fom).isBefore(dato))
   ) {
     return intl.formatMessage(
       {
-        id: erFørsteUttaktsdato
-          ? 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato'
-          : 'UttakFaktaDetailForm.ErFørFødselsdato',
+        id: brukFødselsdato ? 'UttakFaktaDetailForm.ErFørFødselsdato' : 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato',
       },
       { dato: dateFormat(dato) },
     );

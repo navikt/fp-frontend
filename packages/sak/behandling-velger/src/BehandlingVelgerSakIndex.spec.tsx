@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './BehandlingVelgerSakIndex.stories';
 
-const { Default, IngenBehandlinger } = composeStories(stories);
+const { Default, IngenBehandlinger, TilbakekrevingUtenFptilbakeKodeverk } = composeStories(stories);
 
 describe('BehandlingVelgerSakIndex', () => {
   it('skal vise kun en behandling når behandlingslisten ikke er ekspandert', async () => {
@@ -52,5 +52,12 @@ describe('BehandlingVelgerSakIndex', () => {
     expect(alleRader[1]!).toHaveTextContent(/Opprettet02.08.2017/);
     expect(alleRader[2]!).toHaveTextContent(/Opprettet01.08.2017/);
     expect(alleRader[3]!).toHaveTextContent(/Opprettet12.07.2017/);
+  });
+
+  it('skal vise tilbakekrevingsbehandling med fpsak-kodeverk når fptilbake-kodeverk mangler', async () => {
+    render(<TilbakekrevingUtenFptilbakeKodeverk />);
+    expect(await screen.findByText('Tilbakekreving')).toBeInTheDocument();
+    expect(screen.getByText('Behandling utredes')).toBeInTheDocument();
+    expect(screen.getByText('-')).toBeInTheDocument();
   });
 });

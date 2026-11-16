@@ -175,6 +175,7 @@ const getKodeverkFpTilbakeOptions =
       queryFn: () => kyExtended.get(getUrlFromRel('KODEVERK_FPTILBAKE', links)).json<AlleKodeverkTilbakekreving>(),
       enabled: skalHenteKodeverk,
       staleTime: Infinity,
+      retryOnMount: false,
     });
 
 const getHentFagsakOptions = (links?: ApiLink[]) => (saksnummer: string) =>

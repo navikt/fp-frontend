@@ -1886,7 +1886,6 @@ export type tjenester_registrering_dto_RettigheterDto =
 export type tjenester_registrering_dto_UtenlandsoppholdDto = {
   land: string;
   periodeFom: string;
-  // TFP-5511: midlertidig gjort valgfri i påvente av at typen regenereres fra fp-sak sin OpenAPI-spesifikasjon
   periodeTom?: string;
 };
 
@@ -4245,8 +4244,7 @@ export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_Fagområde =
   | 'OPP'
   | 'OPPREF'
   | 'OOP'
-  | 'OOPREF'
-  | 'UNG';
+  | 'OOPREF';
 
 export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_MottakerType = 'BRUKER' | 'ARBG_ORG' | 'ARBG_PRIV';
 

@@ -126,3 +126,27 @@ export const IngenBehandlinger: Story = {
     behandlinger: [],
   },
 };
+
+export const TilbakekrevingUtenFptilbakeKodeverk: Story = {
+  args: {
+    alleKodeverkTilbakekreving: undefined,
+    behandlinger: [
+      lagFagsakBehandling({
+        behandlendeEnhetId: '4812',
+        behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
+        versjon: 2,
+        uuid: '1',
+        type: 'BT-007',
+        status: 'UTRED',
+        språkkode: 'NB',
+        opprettet: '2017-08-02T02:04:25.455',
+        gjeldendeVedtak: false,
+        behandlingsresultat: {
+          type: 'IKKE_FASTSATT',
+          id: 1,
+          vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+        },
+      }),
+    ],
+  },
+};

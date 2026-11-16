@@ -125,19 +125,15 @@ export type tjenester_saksbehandler_oppgave_dto_OppgaveIdDto = {
 };
 
 export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeNavneEndringRequestDto = {
-  avdelingEnhet?: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  avdelingEnhet?: string;
   gruppeId?: number;
   gruppeNavn: string;
 };
 
 export type tjenester_avdelingsleder_dto_SaksbehandlerOgGruppeDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
-  gruppeId?: number;
-};
-
-export type tjenester_felles_dto_SaksbehandlerBrukerIdentDto = {
+  avdelingEnhet: string;
   brukerIdent: string;
+  gruppeId?: number;
 };
 
 export type tjenester_felles_dto_SaksbehandlerDto = {
@@ -157,13 +153,17 @@ export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlereOgSaksbehan
 };
 
 export type tjenester_avdelingsleder_dto_SaksbehandlerOgAvdelingDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
+  avdelingEnhet: string;
+  brukerIdent: string;
 };
 
 export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeSletteRequestDto = {
-  avdelingEnhet?: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  avdelingEnhet?: string;
   gruppeId?: number;
+};
+
+export type tjenester_felles_dto_SaksbehandlerBrukerIdentDto = {
+  brukerIdent: string;
 };
 
 export type oppgave_Periodefilter = 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER' | 'FAST_PERIODE';
@@ -237,15 +237,15 @@ export type tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto_SorteringDt
 };
 
 export type tjenester_avdelingsleder_saksliste_dto_SakslisteSaksbehandlerDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
+  avdelingEnhet: string;
+  brukerIdent: string;
   checked?: boolean;
-  sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+  sakslisteId: number;
 };
 
 export type tjenester_avdelingsleder_saksliste_dto_SakslisteOgAvdelingDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+  avdelingEnhet: string;
+  sakslisteId: number;
 };
 
 export type tjenester_kodeverk_KodeverkRestTjeneste_KriterieFilterDto = {
@@ -271,14 +271,14 @@ export type tjenester_felles_dto_ReservasjonStatusDto = {
 };
 
 export type tjenester_reservasjon_dto_ReservasjonEndringRequestDto = {
-  oppgaveId: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  oppgaveId: number;
   reserverTil: string;
 };
 
 export type tjenester_saksbehandler_oppgave_dto_OppgaveFlyttingDto = {
   begrunnelse: string;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
-  oppgaveId: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  brukerIdent: string;
+  oppgaveId: number;
 };
 
 export type domene_typer_Fagsystem = 'FPSAK' | 'FPTILBAKE';

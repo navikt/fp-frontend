@@ -31,7 +31,7 @@ interface Props {
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
   alleKodeverk: AlleKodeverk;
-  alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
+  alleKodeverkTilbakekreving?: AlleKodeverkTilbakekreving;
 }
 
 /**
