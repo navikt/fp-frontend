@@ -21,12 +21,15 @@ import type {
   Behandling,
   BehandlingFpSak,
   BehandlingFpTilbake,
+  BehandlingIdVersjonDto,
+  BekreftedeAksjonspunkterDto,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
   BrevHtml,
   BrevOverstyring,
+  ByttBehandlendeEnhetDto,
   Dokument,
   DokumentasjonVurderingBehov,
   DokumentMalType,
@@ -36,6 +39,8 @@ import type {
   Feriepengegrunnlag,
   Fødsel,
   ForhåndsvisMeldingParams,
+  GjenopptaBehandlingDto,
+  HenleggBehandlingDto,
   HentMellomlagring,
   Innsyn,
   InntektArbeidYtelse,
@@ -50,52 +55,45 @@ import type {
   Oppgave,
   Opptjening,
   OpptjeningIUtlandDokStatusDto,
+  OverstyrteAksjonspunkterDto,
   PeriodeSoker,
   Personoversikt,
+  ReåpneBehandlingDto,
   RevurderingVarslingÅrsak,
+  SettBehandlingPaVentDto,
   SimuleringResultat,
   Soknad,
   SvpTilrettelegging,
   TilbakekrevingValg,
   Uttaksresultat,
   UttakStonadskontoer,
+  VenteArsakType,
+  VenteÅrsakTypeFpTilbake,
   Verge,
   VilkårsVurderingDto,
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-type SettPaVentParams = {
-  ventearsak?: string;
-  frist?: string;
-  behandlingUuid: string;
-  behandlingVersjon: number;
+type SettPåVentParams = Omit<SettBehandlingPaVentDto, 'ventearsak'> & {
+  ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake;
 };
 
-type NyBehandlendeEnhet = {
-  behandlingUuid: string;
-  enhetNavn: string;
-  enhetId: string;
-  begrunnelse: string;
-  behandlingVersjon: number;
-};
+// fptilbake bruker fritekst til henleggelsesbrev
+type HenleggBehandlingParams = HenleggBehandlingDto & { fritekst?: string };
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
 
 type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp | PapirsøknadAp;
 
-export type AksjonspunktArgs = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
+export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
   } & AksjonspunktType)[];
 };
 
-export type OverstyrteAksjonspunktArgs = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
+export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'overstyrteAksjonspunktDtoer'> & {
   saksnummer: string;
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
@@ -619,47 +617,43 @@ export const forhåndsvisTilbakekrevingMelding = (params: {
 
 const getÅpneBehandlingForEndring = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
   kyExtended.post(getUrlFromRel('OPEN_BEHANDLING_FOR_CHANGES', links), {
-    json: { behandlingUuid, behandlingVersjon },
+    json: { behandlingUuid, behandlingVersjon } satisfies ReåpneBehandlingDto,
   });
 
 const getMerkSomHaster = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
   kyExtended.post(getUrlFromRel('MERK_HASTER', links), {
-    json: { behandlingUuid, behandlingVersjon },
+    json: { behandlingUuid, behandlingVersjon } satisfies ReåpneBehandlingDto,
   });
 
-const getNyBehandlendeEnhet = (links: ApiLink[]) => (params: NyBehandlendeEnhet) =>
+const getNyBehandlendeEnhet = (links: ApiLink[]) => (params: ByttBehandlendeEnhetDto) =>
   kyExtended
     .post(getUrlFromRel('BEHANDLING_NY_BEHANDLENDE_ENHET', links), {
       json: params,
     })
     .then(() => {});
 
-const getHenleggBehandling =
-  (links: ApiLink[]) =>
-  (params: { behandlingUuid: string; årsakKode: string; begrunnelse: string; behandlingVersjon: number }) =>
-    kyExtended
-      .post(getUrlFromRel('HENLEGG_BEHANDLING', links), {
-        json: params,
-      })
-      .then(() => {});
+const getHenleggBehandling = (links: ApiLink[]) => (params: HenleggBehandlingParams) =>
+  kyExtended
+    .post(getUrlFromRel('HENLEGG_BEHANDLING', links), {
+      json: params,
+    })
+    .then(() => {});
 
-const getSettBehandlingPåVent =
-  (links: ApiLink[]) =>
-  (params: { behandlingUuid: string; behandlingVersjon: number; frist: string; ventearsak: string }) =>
-    kyExtended
-      .post(getUrlFromRel('BEHANDLING_ON_HOLD', links), {
-        json: params,
-      })
-      .then(() => {});
+const getSettBehandlingPåVent = (links: ApiLink[]) => (params: SettPåVentParams) =>
+  kyExtended
+    .post(getUrlFromRel('BEHANDLING_ON_HOLD', links), {
+      json: params,
+    })
+    .then(() => {});
 
-const getOppdaterPåVent = (links: ApiLink[]) => (params: SettPaVentParams) =>
+const getOppdaterPåVent = (links: ApiLink[]) => (params: SettPåVentParams) =>
   kyExtended
     .post(getUrlFromRel('UPDATE_ON_HOLD', links), {
       json: params,
     })
     .then(() => {});
 
-const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+const getFortsettBehandling = (links: ApiLink[]) => (params: GjenopptaBehandlingDto) =>
   kyExtended.post<BehandlingFpSak>(getUrlFromRel('RESUME_BEHANDLING', links), {
     json: params,
   });
@@ -743,13 +737,12 @@ const getLagreVurderingForAOI = (links: ApiLink[]) => (params: ManglendeInntekts
     })
     .then(() => {});
 
-const getÅpneForNyVurderingAOI =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-    kyExtended
-      .post(getUrlFromRel('ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING', links), {
-        json: params,
-      })
-      .then(() => {});
+const getÅpneForNyVurderingAOI = (links: ApiLink[]) => (params: BehandlingIdVersjonDto) =>
+  kyExtended
+    .post(getUrlFromRel('ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING', links), {
+      json: params,
+    })
+    .then(() => {});
 
 const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: FormkravMellomlagretDataType) =>
   kyExtended

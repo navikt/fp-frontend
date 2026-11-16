@@ -10,6 +10,8 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
+  VenteArsakType,
+  VenteÅrsakTypeFpTilbake,
 } from '@navikt/fp-types';
 import { harAksjonspunkt } from '@navikt/fp-utils';
 
@@ -36,7 +38,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
   const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
 
   const { mutate: settBehandlingPåVent } = useMutation({
-    mutationFn: (values: { frist?: string; ventearsak: string }) =>
+    mutationFn: (values: { frist?: string; ventearsak: VenteArsakType | VenteÅrsakTypeFpTilbake }) =>
       api.settBehandlingPåVent({
         frist: values.frist ?? '',
         ventearsak: values.ventearsak,

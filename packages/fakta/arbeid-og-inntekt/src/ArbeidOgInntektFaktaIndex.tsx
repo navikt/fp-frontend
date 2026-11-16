@@ -7,6 +7,8 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
+  VenteArsakType,
+  VenteÅrsakTypeFpTilbake,
 } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaPanel } from './components/ArbeidOgInntektFaktaPanel';
@@ -20,7 +22,7 @@ interface Props {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   erOverstyrer: boolean;
-  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => void;
+  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: VenteArsakType | VenteÅrsakTypeFpTilbake }) => void;
   åpneForNyVurdering: () => void;
 }
 
