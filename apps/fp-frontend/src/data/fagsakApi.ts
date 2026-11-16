@@ -1,7 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
 import type { FormValues } from '@navikt/fp-sak-meny-ny-behandling';
 import type {
   Aktor,
@@ -12,13 +11,17 @@ import type {
   BehandlingFpTilbake,
   BrevOverstyring,
   Dokument,
+  EndreUtlandMarkering,
   Fagsak,
   FagsakBehandlingDto,
   FagsakEnkel,
   ForhåndsvisMeldingParams,
   InfotrygdVedtak,
+  LagreFagsakNotat,
+  Mellomlagring,
   NavAnsatt,
   SakFullDtoFpTilbake,
+  Sokefelt,
 } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -231,18 +234,18 @@ const getKanTilbakekrevingRevurderingOpprettesOptions = (links?: ApiLink[]) => (
 const getSøkInfotrygd = (links?: ApiLink[]) => (searchString: string) =>
   kyExtended
     .post(getUrlFromRel('SEARCH_UTBETALINGSDATA_IS15', links), {
-      json: { searchString },
+      json: { searchString } satisfies Sokefelt,
     })
     .json<InfotrygdVedtak>();
 
 const getSøkFagsak = (links?: ApiLink[]) => (searchString: string) =>
   kyExtended
     .post(getUrlFromRel('SEARCH_FAGSAK', links), {
-      json: { searchString },
+      json: { searchString } satisfies Sokefelt,
     })
     .json<FagsakEnkel[]>();
 
-const getEndreSakMarkering = (links?: ApiLink[]) => (params: EndreUtlandFormValues) =>
+const getEndreSakMarkering = (links?: ApiLink[]) => (params: EndreUtlandMarkering) =>
   kyExtended
     .post(getUrlFromRel('ENDRE_SAK_MARKERING', links), {
       json: params,
@@ -252,7 +255,7 @@ const getEndreSakMarkering = (links?: ApiLink[]) => (params: EndreUtlandFormValu
 const getLagreNotat = (links?: ApiLink[]) => (saksnummer: string, notat: string) =>
   kyExtended
     .post(getUrlFromRel('LAGRE_NOTAT', links), {
-      json: { saksnummer, notat },
+      json: { saksnummer, notat } satisfies LagreFagsakNotat,
     })
     .then(() => {});
 
@@ -290,7 +293,7 @@ const getHentBrevHtml =
       .json<BrevOverstyring>();
 
 const getMellomlagring =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; dokumentMal?: string; innhold?: string }) =>
+  (links: ApiLink[]) => (params: Omit<Mellomlagring, 'dokumentMal'> & { dokumentMal?: string }) =>
     kyExtended
       .post(getUrlFromRel('MELLOMLAGRING', links), {
         json: params,

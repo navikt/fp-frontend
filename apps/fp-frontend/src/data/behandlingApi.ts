@@ -25,15 +25,18 @@ import type {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
+  BrevHtml,
   BrevOverstyring,
   Dokument,
   DokumentasjonVurderingBehov,
+  DokumentMalType,
   FaktaArbeidsforhold,
   FaktaUttakPeriode,
   FamilieHendelse,
   Feriepengegrunnlag,
   Fødsel,
   ForhåndsvisMeldingParams,
+  HentMellomlagring,
   Innsyn,
   InntektArbeidYtelse,
   Inntektsmelding,
@@ -41,6 +44,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
+  Mellomlagring,
   OmsorgOgRett,
   OmsorgsovertakelseDto,
   Oppgave,
@@ -48,6 +52,7 @@ import type {
   OpptjeningIUtlandDokStatusDto,
   PeriodeSoker,
   Personoversikt,
+  RevurderingVarslingÅrsak,
   SimuleringResultat,
   Soknad,
   SvpTilrettelegging,
@@ -665,20 +670,25 @@ const getOpprettVergeV2 = (links: ApiLink[]) => (params: Verge) =>
   });
 
 const getHentBrevHtml =
-  (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType?: string, revurderingÅrsak?: string) =>
+  (links: ApiLink[]) =>
+  (
+    behandlingUuid: string,
+    dokumentMalType?: DokumentMalType,
+    revurderingÅrsak?: RevurderingVarslingÅrsak,
+  ) =>
     kyExtended
       .post(getUrlFromRel('HENT_BREV_HTML', links), {
         json: {
           behandlingUuid,
           ...(dokumentMalType && { dokumentMal: dokumentMalType }),
           ...(revurderingÅrsak && { revurderingÅrsak }),
-        },
+        } satisfies BrevHtml,
       })
       .json<BrevOverstyring>();
 
 const getMellomlagring =
   (links: ApiLink[]) =>
-  (params: { behandlingUuid: string; type?: string; dokumentMal?: string; innhold?: string | null }) =>
+  (params: Omit<Mellomlagring, 'innhold'> & { innhold?: string | null }) =>
     kyExtended
       .post(getUrlFromRel('MELLOMLAGRING', links), {
         json: params,
@@ -691,7 +701,7 @@ const getMellomlagretPapirsøknadOptions = (links: ApiLink[]) => (behandling: Be
     queryFn: () =>
       jsonEllerNull<{ innhold: string }>(
         kyExtended.post(getUrlFromRel('HENT_MELLOMLAGRING', links), {
-          json: { behandlingUuid: behandling.uuid, type: 'PAPIRSØKNAD' },
+          json: { behandlingUuid: behandling.uuid, type: 'PAPIRSØKNAD' } satisfies HentMellomlagring,
         }),
       ),
     enabled: harLenke(behandling, 'HENT_MELLOMLAGRING'),
