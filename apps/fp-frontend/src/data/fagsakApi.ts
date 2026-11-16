@@ -9,6 +9,7 @@ import type {
   ApiLink,
   BehandlingFpSak,
   BehandlingFpTilbake,
+  BekreftedeAksjonspunkterDto,
   BrevOverstyring,
   Dokument,
   EndreUtlandMarkering,
@@ -42,9 +43,7 @@ export type InitDataFpTilbake = {
   sakLinks: ApiLink[];
 };
 
-export type BekreftedeTotrinnsaksjonspunkter = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
+export type BekreftedeTotrinnsaksjonspunkter = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
   } & FatterVedtakAp)[];
