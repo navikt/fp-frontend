@@ -9,8 +9,6 @@ import { queryOptions } from '@tanstack/react-query';
 import ky, { type ResponsePromise } from 'ky';
 
 import type { PapirsøknadAp } from '@navikt/fp-papirsoknad';
-import type { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
-import type { AksjonspunktVerdier } from '@navikt/fp-prosess-klagevurdering';
 import type { AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
 import type {
   AnkeVurdering,
@@ -45,7 +43,9 @@ import type {
   Innsyn,
   InntektArbeidYtelse,
   Inntektsmelding,
+  KlageFormkravMellomlagring,
   KlageVurdering,
+  KlageVurderingResultatMellomlagring,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
@@ -744,7 +744,7 @@ const getÅpneForNyVurderingAOI = (links: ApiLink[]) => (params: BehandlingIdVer
     })
     .then(() => {});
 
-const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: FormkravMellomlagretDataType) =>
+const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: KlageFormkravMellomlagring) =>
   kyExtended
     .post(getUrlFromRel('SAVE_FORMKRAV_VURDERING', links), {
       json: params,
@@ -753,11 +753,7 @@ const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: FormkravM
 
 const getMellomlagreKlageVurdering =
   (links: ApiLink[]) =>
-  (
-    params: AksjonspunktVerdier & {
-      behandlingUuid: string;
-    },
-  ) =>
+  (params: KlageVurderingResultatMellomlagring) =>
     kyExtended
       .post(getUrlFromRel('SAVE_KLAGE_VURDERING', links), {
         json: params,
