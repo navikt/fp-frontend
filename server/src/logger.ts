@@ -26,7 +26,6 @@ const colors = {
   debug: "white",
 };
 
-// eslint-disable-next-line unicorn/no-top-level-side-effects
 winston.addColors(colors);
 
 const uppercaseLevel = format((info) => {

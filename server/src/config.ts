@@ -54,16 +54,16 @@ const cors = {
   allowedMethods: environmentVariable("CORS_ALLOWED_METHODS", false) ?? "",
 };
 
-type ProxyConfig = {
-  apis: [
-    {
-      path: string;
-      url: string;
-      scopes: string;
-    },
-  ];
-};
 const getProxyConfig = () => {
+  type ProxyConfig = {
+    apis: [
+      {
+        path: string;
+        url: string;
+        scopes: string;
+      },
+    ];
+  };
   const config = configValueAsJson("PROXY_CONFIG", false);
   if (!config.apis) {
     const errorMessage = "Config: 'PROXY_CONFIG' mangler 'apis' entry.";
@@ -91,7 +91,6 @@ const getProxyConfig = () => {
   return config as ProxyConfig;
 };
 
-// eslint-disable-next-line unicorn/no-top-level-side-effects -- konfig skal valideres ved oppstart slik at appen feiler tidlig
 export default {
   server,
   azureAd,
