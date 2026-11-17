@@ -10,6 +10,8 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
+// Midlertidig: test av Turbo-cache, skal fjernast
+
 interface Props {
   saksnummer: string;
   notater: Saksnotat[];
