@@ -23,15 +23,15 @@ export const globalTypes = {
     description: 'Aksel tema',
     defaultValue: 'light',
     toolbar: {
+      title: 'Tema',
       icon: 'circlehollow',
       items: [
         { value: 'light', icon: 'circlehollow', title: 'Lys' },
         { value: 'dark', icon: 'circle', title: 'Mørk' },
       ],
-      showName: true,
     },
   },
-};
+} satisfies Preview['globalTypes'];
 
 const preview: Preview = {
   loaders: [
