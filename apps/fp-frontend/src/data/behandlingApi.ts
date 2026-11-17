@@ -9,7 +9,6 @@ import { queryOptions } from '@tanstack/react-query';
 import ky, { type ResponsePromise } from 'ky';
 
 import type { PapirsøknadAp } from '@navikt/fp-papirsoknad';
-import type { AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
 import type {
   AnkeVurdering,
   AnnenforelderUttakEøsPeriode,
@@ -73,7 +72,11 @@ import type {
   VilkårsVurderingDto,
   Ytelsefordeling,
 } from '@navikt/fp-types';
-import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  FaktaAksjonspunkt,
+  ProsessAksjonspunkt,
+  VurderFaresignalerAp,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type SettPåVentParams = Omit<SettBehandlingPaVentDto, 'ventearsak'> & {
   ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake;
@@ -84,7 +87,7 @@ type HenleggBehandlingParams = HenleggBehandlingDto & { fritekst?: string };
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
 
-type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp | PapirsøknadAp;
+type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFaresignalerAp | PapirsøknadAp;
 
 export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;

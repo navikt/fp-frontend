@@ -3,12 +3,12 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import type { VurderFaresignalerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { HoyRisikoTittel } from './components/HoyRisikoTittel';
 import { IngenRisikoPanel } from './components/IngenRisikoPanel';
 import { ManglendeKlassifiseringPanel } from './components/ManglendeKlassifiseringPanel';
 import type { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
-import type { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -26,7 +26,7 @@ interface Props {
   risikoklassifisering?: Risikoklassifisering;
   isPanelOpen: boolean;
   readOnly: boolean;
-  submitAksjonspunkt?: (data: AvklartRisikoklassifiseringAp) => void;
+  submitAksjonspunkt?: (data: VurderFaresignalerAp) => void;
   toggleRiskPanel: () => void;
   faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }

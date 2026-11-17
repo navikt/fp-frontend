@@ -5,15 +5,15 @@ import { XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { ExpansionCard, HStack, Label } from '@navikt/ds-react';
 
 import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import type { VurderFaresignalerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 import { HoyRisikoPanel } from './HoyRisikoPanel';
 
 interface Props {
   risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
+  submitCallback?: (data: VurderFaresignalerAp) => void;
   isRiskPanelOpen: boolean;
   toggleRiskPanel: () => void;
   faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
