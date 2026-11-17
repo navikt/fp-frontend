@@ -3,6 +3,7 @@ import ky from 'ky';
 
 import type { FormValues } from '@navikt/fp-sak-meny-ny-behandling';
 import type {
+  AktoerIdDto,
   Aktor,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
@@ -10,6 +11,7 @@ import type {
   BehandlingFpSak,
   BehandlingFpTilbake,
   BekreftedeAksjonspunkterDto,
+  BestillDokumentDto,
   BrevOverstyring,
   Dokument,
   EndreUtlandMarkering,
@@ -18,24 +20,19 @@ import type {
   FagsakEnkel,
   ForhåndsvisMeldingParams,
   InfotrygdVedtak,
+  InitLinksDtoFpSak,
   LagreFagsakNotat,
   Mellomlagring,
-  NavAnsatt,
+  NyBehandlingDto,
+  OrganisasjonsEnhet,
   SakFullDtoFpTilbake,
+  SaksnummerDto,
   Sokefelt,
 } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-type BehandlendeEnheter = {
-  enhetId: string;
-  enhetNavn: string;
-}[];
-
-export type InitDataFpSak = {
-  behandlendeEnheter: BehandlendeEnheter;
-  innloggetBruker: NavAnsatt;
-  links: ApiLink[];
-  sakLinks: ApiLink[];
+export type InitDataFpSak = Required<Omit<InitLinksDtoFpSak, 'behandlendeEnheter'>> & {
+  behandlendeEnheter: Required<OrganisasjonsEnhet>[];
 };
 
 export type InitDataFpTilbake = {
@@ -49,12 +46,13 @@ export type BekreftedeTotrinnsaksjonspunkter = Omit<BekreftedeAksjonspunkterDto,
   } & FatterVedtakAp)[];
 };
 
-export type SubmitMessageParams = {
-  behandlingUuid?: string;
+export type BestillDokumentFpTilbakeParams = {
+  behandlingUuid: string;
   brevmalkode?: string;
   fritekst?: string;
-  årsakskode?: string;
 };
+
+export type SubmitMessageParams = BestillDokumentDto | BestillDokumentFpTilbakeParams;
 
 export type NyBehandlingParams = {
   saksnummer: string;
@@ -129,7 +127,10 @@ export const initFetchFpTilbakeOptions = () =>
 export const aktørInfoOptions = (aktørId?: string) =>
   queryOptions({
     queryKey: [FagsakUrl.AKTOER_INFO, aktørId],
-    queryFn: () => kyExtended.get(FagsakUrl.AKTOER_INFO, { searchParams: { aktoerId: aktørId ?? '' } }).json<Aktor>(),
+    queryFn: () =>
+      kyExtended
+        .get(FagsakUrl.AKTOER_INFO, { searchParams: { aktoerId: aktørId ?? '' } satisfies AktoerIdDto })
+        .json<Aktor>(),
     enabled: !!aktørId,
   });
 
@@ -147,7 +148,7 @@ export const forhåndsvisTilbakekrevingHenleggelse = (behandlingUuid: string, fr
     })
     .blob();
 
-export const lagNyBehandling = (params: NyBehandlingParams) =>
+export const lagNyBehandling = (params: NyBehandlingDto) =>
   kyExtended.put<BehandlingFpSak>(FagsakUrl.NEW_BEHANDLING_FPSAK, {
     json: params,
   });
@@ -184,7 +185,9 @@ const getHentFagsakOptions = (links?: ApiLink[]) => (saksnummer: string) =>
   queryOptions({
     queryKey: [FagsakRel.FETCH_FAGSAK, saksnummer],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel('FETCH_FAGSAK', links), { searchParams: { saksnummer } }).json<Fagsak>(),
+      kyExtended
+        .get(getUrlFromRel('FETCH_FAGSAK', links), { searchParams: { saksnummer } satisfies SaksnummerDto })
+        .json<Fagsak>(),
   });
 
 const getHentFagsakFpTilbakeOptions = (links?: ApiLink[]) => (isEnabled: boolean, saksnummer: string) =>
@@ -202,7 +205,9 @@ const getHentDokumenter =
     queryOptions({
       queryKey: [FagsakRel.ALL_DOCUMENTS, saksnummer, behandlingUuid, behandlingVersjon],
       queryFn: () =>
-        kyExtended.get(getUrlFromRel('ALL_DOCUMENTS', links), { searchParams: { saksnummer } }).json<Dokument[]>(),
+        kyExtended
+          .get(getUrlFromRel('ALL_DOCUMENTS', links), { searchParams: { saksnummer } satisfies SaksnummerDto })
+          .json<Dokument[]>(),
     });
 
 const getKanTilbakekrevingOpprettesOptions =
