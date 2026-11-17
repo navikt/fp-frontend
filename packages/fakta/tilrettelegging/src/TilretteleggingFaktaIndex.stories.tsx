@@ -411,6 +411,14 @@ export const ErReadonly: Story = {
   },
 };
 
+export const UtenAksjonspunkt: Story = {
+  args: {
+    aksjonspunkterForPanel: [],
+    svangerskapspengerTilrettelegging: TILRETTELEGGING_PERMISJON,
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
+  },
+};
+
 export const ErRevurdering: Story = {
   args: {
     aksjonspunkterForPanel: [
