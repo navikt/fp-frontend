@@ -3,6 +3,8 @@ export type {
   tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto as ManuellRegistreringEndringsøknadDto,
   tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto as ManuellRegistreringForeldrepengerDto,
   tjenester_registrering_dto_DekningsgradDto as DekningsgradDto,
+  tjenester_registrering_dto_FrilansDto_Oppdragperiode as FrilansOppdragperiodeDto,
+  tjenester_registrering_dto_ArbeidsforholdDto as RegistreringArbeidsforholdDto,
   tjenester_registrering_dto_RettigheterDto as RettigheterDto,
   tjenester_registrering_fp_TidsromPermisjonDto as TidsromPermisjonDto,
   tjenester_registrering_dto_GraderingDto as GraderingDto,

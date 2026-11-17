@@ -10,11 +10,10 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { KlageVurdering } from '@navikt/fp-types';
+import type { KlageFormkravMellomlagring, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
 import type { AvsluttetBehandling } from './types/avsluttetBehandlingTsType';
-import type { FormkravMellomlagretDataType } from './types/FormkravMellomlagretDataType';
 
 const avsluttedeBehandlinger = [
   {
@@ -29,7 +28,7 @@ const meta = {
   component: FormkravProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    lagreFormkravVurdering: action('button-click') as (data: FormkravMellomlagretDataType) => Promise<void>,
+    lagreFormkravVurdering: action('button-click') as (data: KlageFormkravMellomlagring) => Promise<void>,
     avsluttedeBehandlinger,
   },
   render: args => <FormkravProsessIndex {...args} />,

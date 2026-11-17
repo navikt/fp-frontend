@@ -1,14 +1,12 @@
+import type { FrilansOppdragperiodeDto } from '@navikt/fp-types';
+
 import { FRILANS_NAME_PREFIX } from './constants';
 
 export type FrilansFormValues = {
   [FRILANS_NAME_PREFIX]: FrilansSubFormValues;
 };
 
-type OppdragPeriode = {
-  fomDato: string;
-  tomDato: string;
-  oppdragsgiver: string;
-};
+type OppdragPeriode = Required<FrilansOppdragperiodeDto>;
 
 export type FrilansSubFormValues = {
   harSøkerPeriodeMedFrilans?: boolean;

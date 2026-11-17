@@ -11,12 +11,11 @@ import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
-import type { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
+import type { AlleKodeverk, KlageFormkravMellomlagring, KlageVurdering } from '@navikt/fp-types';
 import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
-import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 import {
   erTilbakekreving,
   type FormValues,
@@ -94,7 +93,7 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
 interface Props {
   klageVurdering: KlageVurdering;
   avsluttedeBehandlinger: AvsluttetBehandling[];
-  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
+  lagreFormkravVurdering: (data: KlageFormkravMellomlagring) => void;
 }
 
 /**
