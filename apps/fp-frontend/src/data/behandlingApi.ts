@@ -35,6 +35,7 @@ import type {
   FamilieHendelse,
   Feriepengegrunnlag,
   Fødsel,
+  Fordelingsgrunnlag,
   ForhåndsvisMeldingParams,
   GjenopptaBehandlingDto,
   HenleggBehandlingDto,
@@ -190,7 +191,7 @@ export const BehandlingRel = {
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
   TILBAKEKREVINGVALG: 'tilbakekrevingvalg',
   BEREGNINGSGRUNNLAG: 'beregningsgrunnlag',
-  REFUSJON: 'refusjon',
+  FORDELINGSGRUNNLAG: 'fordelingsgrunnlag',
   SIMULERING_RESULTAT: 'simulering-resultat',
   BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING: 'beregningsresultat-dagytelse-original-behandling',
   ARBEID_OG_INNTEKT: 'arbeidsforhold-inntektsmelding',
@@ -569,11 +570,11 @@ const getVergeOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak, isEn
     select: data => data ?? undefined,
   });
 
-const getRefusjonOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
+const getFordelingsgrunnlagOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
   queryOptions({
-    queryKey: [BehandlingRel.REFUSJON, behandling.uuid, behandling.versjon],
-    queryFn: () => jsonEllerNull<Refusjon>(kyExtended.get(getUrlFromRel('REFUSJON', links))),
-    enabled: harLenke(behandling, 'REFUSJON'),
+    queryKey: [BehandlingRel.FORDELINGSGRUNNLAG, behandling.uuid, behandling.versjon],
+    queryFn: () => jsonEllerNull<Fordelingsgrunnlag>(kyExtended.get(getUrlFromRel('FORDELINGSGRUNNLAG', links))),
+    enabled: harLenke(behandling, 'FORDELINGSGRUNNLAG'),
     staleTime: Infinity,
     select: data => data ?? undefined,
   });
@@ -816,7 +817,7 @@ export const getBehandlingApi = (behandling: Behandling) => {
     omsorgOgRettOptions: getFaktaOmsorgOgRettOptions(links),
     oppdaterStønadskontoer: getOppdaterStønadskontoer(links),
     beregningsgrunnlagOptions: getBeregningsgrunnlagOptions(links),
-    refusjonOptions: getRefusjonOptions(links),
+    fordelingsgrunnlagOptions: getFordelingsgrunnlagOptions(links),
     opptjeningOptions: getOpptjeningOptions(links),
     dokumentasjonVurderingBehovOptions: getDokumentasjonVurderingBehovOptions(links),
     uttakKontrollerFaktaPerioderOptions: getUttakKontrollerFaktaPerioderOptions(links),

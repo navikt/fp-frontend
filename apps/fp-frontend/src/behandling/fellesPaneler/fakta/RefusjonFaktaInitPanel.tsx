@@ -8,14 +8,13 @@ import { useQuery } from '@tanstack/react-query';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import { åpneDokument, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
+import { useFagsakApi } from '../../../data/fagsakApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-
-import '@navikt/ft-fakta-refusjon/dist/style.css';
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -26,13 +25,18 @@ export const RefusjonFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props)
 
   const standardPanelProps = useStandardFaktaPanelProps();
 
-  const { behandling } = useBehandlingDataContext();
+  const { behandling, fagsak } = useBehandlingDataContext();
 
   const api = getBehandlingApi(behandling);
+  const fagsakApi = useFagsakApi();
 
-  const skalPanelVisesIMeny = harLenke(behandling, 'REFUSJON');
+  const skalPanelVisesIMeny = harLenke(behandling, 'FORDELINGSGRUNNLAG');
 
-  const { data: refusjon, isFetching } = useQuery(api.refusjonOptions(behandling));
+  const { data: fordelingsgrunnlag, isFetching: isFGFetching } = useQuery(api.fordelingsgrunnlagOptions(behandling));
+  const { data: dokumenter = [], isFetching: isDokFetching } = useQuery({
+    ...fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon),
+    enabled: skalPanelVisesIMeny,
+  });
 
   return (
     <FaktaDefaultInitPanel
@@ -41,14 +45,26 @@ export const RefusjonFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props)
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Refusjon' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {isFetching ? (
+      {isFGFetching || isDokFetching ? (
         <LoadingPanel />
       ) : (
         <Wrapper
           aksjonspunkt={[]}
-          refusjonsandeler={refusjon?.refusjonsandeler ?? []}
+          refusjonsandeler={fordelingsgrunnlag?.refusjonsandeler ?? []}
+          dokumenter={dokumenter}
+          åpneDokument={(journalpostId, dokumentId) =>
+            åpneDokument(
+              fagsak.saksnummer,
+              journalpostId,
+              dokumentId,
+              dokumenter.find(d => d.journalpostId === journalpostId && d.dokumentId === dokumentId)?.tittel ??
+                intl.formatMessage({ id: 'FaktaInitPanel.Title.Inntektsmelding' }),
+            )
+          }
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           readOnly={standardPanelProps.isReadOnly}
+          // TODO: Overstyring må vente til fp-sak støtter refusjonsaksjonspunktet (TFP-7267).
+          erOverstyrer={false}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
         />
       )}

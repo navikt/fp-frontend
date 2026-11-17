@@ -10,10 +10,10 @@ export type { BrevOverstyring } from './brevOverstyring';
 export type { Arbeidskategori } from './arbeidskategori';
 export type { StønadskontoTypeKodeverk } from './stønadskontoTypeKodeverk';
 export type {
-  Refusjon,
+  Fordelingsgrunnlag,
   Refusjonsandel,
   Refusjonsperiode,
   RefusjonKilde,
   RefusjonUtfall,
   RefusjonUtfallÅrsak,
-} from './refusjon';
+} from './fordelingsgrunnlag';

@@ -228,8 +228,8 @@ export const behandling: BehandlingFpSak = {
       type: 'GET',
     },
     {
-      href: '/fpsak/api/behandling/refusjon?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
-      rel: 'refusjon',
+      href: '/fpsak/api/behandling/fordelingsgrunnlag?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
+      rel: 'fordelingsgrunnlag',
       type: 'GET',
     },
   ],
