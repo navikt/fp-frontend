@@ -1618,7 +1618,6 @@ __metadata:
     dayjs: "npm:1.11.23"
     es-toolkit: "npm:1.53.2"
     eslint: "npm:10.15.0"
-    ky: "npm:2.2.0"
     msw: "npm:3.0.5"
     react: "npm:19.3.1"
     react-dom: "npm:19.3.1"

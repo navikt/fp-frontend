@@ -4,7 +4,7 @@ import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import {
-  type AsyncPollingStatus,
+  type LosAsyncPollingStatus,
   type NavAnsatt,
   type OppgaveDto,
   type OppgaveDtoMedStatus,
@@ -196,7 +196,7 @@ const meta = {
           : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
       }),
       http.get('https://www.test.com/api/status', () =>
-        HttpResponse.json<AsyncPollingStatus>({
+        HttpResponse.json<LosAsyncPollingStatus>({
           status: 'PENDING',
           pollIntervalMillis: 100_000_000,
           message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
