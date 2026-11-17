@@ -1,7 +1,12 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { AlleKodeverkLos, ReservasjonStatusDto } from '@navikt/fp-types';
+import type {
+  AlleKodeverkLos,
+  OppgaveFlyttingDto,
+  ReservasjonEndringRequestDto,
+  ReservasjonStatusDto,
+} from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -35,10 +40,14 @@ export const losKodeverkOptions = () =>
 
 export const endreReservasjon = (oppgaveId: number, reserverTil: string) =>
   kyExtended
-    .post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, { json: { oppgaveId, reserverTil } })
+    .post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, {
+      json: { oppgaveId, reserverTil } satisfies ReservasjonEndringRequestDto,
+    })
     .json<ReservasjonStatusDto>();
 
 export const flyttReservasjon = (oppgaveId: number, brukerIdent: string, begrunnelse: string) =>
   kyExtended
-    .post(LosUrlFelles.FLYTT_RESERVASJON, { json: { oppgaveId, brukerIdent, begrunnelse } })
+    .post(LosUrlFelles.FLYTT_RESERVASJON, {
+      json: { oppgaveId, brukerIdent, begrunnelse } satisfies OppgaveFlyttingDto,
+    })
     .json<ReservasjonStatusDto>();

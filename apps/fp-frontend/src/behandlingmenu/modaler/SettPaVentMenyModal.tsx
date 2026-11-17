@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
-import type { Behandling } from '@navikt/fp-types';
+import type { Behandling, VenteArsakType, VenteÅrsakTypeFpTilbake } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../data/behandlingApi';
@@ -21,7 +21,7 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
   const { data: alleFpTilbakeKodeverk } = useQuery(fagsakApi.fptilbake.kodeverkOptions());
 
   const { mutate: settBehandlingPåVent } = useMutation({
-    mutationFn: (values: { frist: string; ventearsak: string }) =>
+    mutationFn: (values: { frist: string; ventearsak: VenteArsakType | VenteÅrsakTypeFpTilbake }) =>
       behandlingApi.settBehandlingPåVent({
         frist: values.frist,
         ventearsak: values.ventearsak,

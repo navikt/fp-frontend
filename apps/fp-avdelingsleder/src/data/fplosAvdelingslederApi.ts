@@ -4,19 +4,29 @@ import ky from 'ky';
 import { LosUrlFelles } from '@navikt/fp-los-felles';
 import {
   type AndreKriterierType,
+  type AvdelingEnhetDto,
   type AvdelingReservasjonDto,
   type InitLinksDto,
   type KøStatistikkDto,
   type KriterieFilterDto,
   type NøkkeltallBehandlingFørsteUttakDto,
   type NøkkeltallBehandlingVentefristUtløperDto,
+  type OppgaveIdDto,
   type OppgaverForAvdeling,
   type OppgaverForAvdelingPerDato,
   type OppgaverForFørsteStønadsdagUkeMåned,
+  type SaksbehandlerBrukerIdentDto,
   type SaksbehandlerDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
+  type SaksbehandlerGruppeNavneEndringRequestDto,
+  type SaksbehandlerGruppeSletteRequestDto,
+  type SaksbehandlerOgAvdelingDto,
+  type SaksbehandlerOgGruppeDto,
   type SakslisteDto,
+  type SakslisteIdDto,
   type SakslisteLagreDto,
+  type SakslisteOgAvdelingDto,
+  type SakslisteSaksbehandlerDto,
 } from '@navikt/fp-types';
 
 export { losKodeverkOptions } from '@navikt/fp-los-felles';
@@ -191,7 +201,9 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
   });
 
 export const opprettNySaksliste = (avdelingEnhet: string) =>
-  kyExtended.post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } }).json<{ sakslisteId: string }>();
+  kyExtended
+    .post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } satisfies AvdelingEnhetDto })
+    .json<SakslisteIdDto>();
 
 export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteLagreDto) =>
   kyExtended.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, { json: sakslisteDto }).then(() => {});
@@ -203,68 +215,70 @@ export const lagreSakslisteSaksbehandler = (
   avdelingEnhet: string,
 ) =>
   kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, { json: { sakslisteId, brukerIdent, checked, avdelingEnhet } })
+    .post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, {
+      json: { sakslisteId, brukerIdent, checked, avdelingEnhet } satisfies SakslisteSaksbehandlerDto,
+    })
     .then(() => {});
 
 export const slettSaksliste = (sakslisteId: number, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.SLETT_SAKSLISTE, {
-      json: { sakslisteId, avdelingEnhet },
+      json: { sakslisteId, avdelingEnhet } satisfies SakslisteOgAvdelingDto,
     })
     .then(() => {});
 
 export const opprettGruppe = (avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.OPPRETT_GRUPPE, {
-      json: { avdelingEnhet },
+      json: { avdelingEnhet } satisfies AvdelingEnhetDto,
     })
     .then(() => {});
 
 export const leggSaksbehandlerTilGruppe = (brukerIdent: string, avdelingEnhet: string, gruppeId: number) =>
   kyExtended
     .post(LosUrl.LEGG_SAKSBEHANDLER_TIL_GRUPPE, {
-      json: { brukerIdent, avdelingEnhet, gruppeId },
+      json: { brukerIdent, avdelingEnhet, gruppeId } satisfies SaksbehandlerOgGruppeDto,
     })
     .then(() => {});
 
 export const fjernSaksbehandlerFraGruppe = (brukerIdent: string, avdelingEnhet: string, gruppeId: number) =>
   kyExtended
     .post(LosUrl.FJERN_SAKSBEHANDLER_FRA_GRUPPE, {
-      json: { brukerIdent, avdelingEnhet, gruppeId },
+      json: { brukerIdent, avdelingEnhet, gruppeId } satisfies SaksbehandlerOgGruppeDto,
     })
     .then(() => {});
 
 export const endreGruppenavn = (gruppeId: number, gruppeNavn: string, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.ENDRE_GRUPPENAVN, {
-      json: { gruppeId, gruppeNavn, avdelingEnhet },
+      json: { gruppeId, gruppeNavn, avdelingEnhet } satisfies SaksbehandlerGruppeNavneEndringRequestDto,
     })
     .then(() => {});
 
 export const slettGruppe = (gruppeId: number, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.SLETT_GRUPPE, {
-      json: { gruppeId, avdelingEnhet },
+      json: { gruppeId, avdelingEnhet } satisfies SaksbehandlerGruppeSletteRequestDto,
     })
     .then(() => {});
 
 export const opphevReservasjon = (oppgaveId: number) =>
   kyExtended
     .post(LosUrl.AVDELINGSLEDER_OPPHEVER_RESERVASJON, {
-      json: { oppgaveId },
+      json: { oppgaveId } satisfies OppgaveIdDto,
     })
     .then(() => {});
 
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.SLETT_SAKSBEHANDLER, {
-      json: { brukerIdent, avdelingEnhet },
+      json: { brukerIdent, avdelingEnhet } satisfies SaksbehandlerOgAvdelingDto,
     })
     .then(() => {});
 
 export const saksbehandlerSøk = async (brukerIdent: string) => {
   const response = await kyExtended.post(LosUrl.SAKSBEHANDLER_SOK, {
-    json: { brukerIdent },
+    json: { brukerIdent } satisfies SaksbehandlerBrukerIdentDto,
   });
   if (response.status === 204) {
     return;
@@ -275,6 +289,6 @@ export const saksbehandlerSøk = async (brukerIdent: string) => {
 export const opprettNySaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.OPPRETT_NY_SAKSBEHANDLER, {
-      json: { brukerIdent, avdelingEnhet },
+      json: { brukerIdent, avdelingEnhet } satisfies SaksbehandlerOgAvdelingDto,
     })
     .then(() => {});

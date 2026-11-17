@@ -4,12 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { Alert, BodyShort, Button, Table, VStack } from '@navikt/ds-react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { type FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type {
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
+  VenteArsakType,
+  VenteÅrsakTypeFpTilbake,
 } from '@navikt/fp-types';
 import type { VurderArbeidsforholdInntektsmeldingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -25,7 +27,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
-  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => void;
+  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: VenteArsakType | VenteÅrsakTypeFpTilbake }) => void;
   erOverstyrer: boolean;
   åpneForNyVurdering: () => void;
 }
@@ -91,7 +93,7 @@ export const ArbeidOgInntektFaktaPanel = ({
     åpneForNyVurdering();
   };
 
-  const settPaVent = (params: { frist?: string; ventearsak?: string }) => {
+  const settPaVent = (params: FormValues) => {
     setErKnappTrykket(true);
     setVisSettPåVentModal(false);
 
