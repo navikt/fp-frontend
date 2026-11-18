@@ -20,7 +20,6 @@ export type Refusjonsperiode = {
   refusjonPrMnd: number;
   utfall?: RefusjonUtfall;
   utfallÅrsak?: RefusjonUtfallÅrsak;
-  utfallBegrunnelse?: string;
 };
 
 export type Refusjonsandel = {
