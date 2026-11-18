@@ -126,7 +126,7 @@ const getEnabledBehandlingstyper = (
 
 export type FormValues = {
   behandlingType?: string;
-  nyBehandlingEtterKlage?: string;
+  nyBehandlingEtterKlage?: boolean;
   behandlingArsakType?: string;
 };
 

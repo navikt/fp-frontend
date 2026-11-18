@@ -5,8 +5,8 @@ import { createIntl } from '@navikt/ft-utils';
 import type {
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
+  BehandlingMedUttaksperioderDto,
   FamilieHendelse,
-  PeriodeSoker,
   Personoversikt,
   Soknad,
   Uttaksresultat,
@@ -25,10 +25,7 @@ interface Props {
   uttaksresultat: Uttaksresultat;
   familiehendelse: FamilieHendelse;
   personoversikt: Personoversikt;
-  oppdaterStønadskontoer: (params: {
-    behandlingUuid: string;
-    perioder: PeriodeSoker[];
-  }) => Promise<UttakStonadskontoer>;
+  oppdaterStønadskontoer: (params: BehandlingMedUttaksperioderDto) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined;
 }
