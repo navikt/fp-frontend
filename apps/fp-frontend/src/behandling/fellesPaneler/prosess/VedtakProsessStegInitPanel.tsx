@@ -72,8 +72,11 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
     api.beregningsgrunnlagOptions(behandling, !erEngangsstønad),
   );
   const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
-  const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
-    api.beregningDagytelseOriginalBehandlingOptions(behandling),
+  const { data: beregningsresultatDagytelseOriginal, isFetching: isBdoFetching } = useQuery(
+    api.beregningsresultatDagytelseOriginalBehandlingOptions(behandling, !erEngangsstønad),
+  );
+  const { data: beregningsresultatEngangsstønadOriginal, isFetching: isBeoFetching } = useQuery(
+    api.es.beregningsresultatEngangsstønadOriginalBehandlingOptions(behandling, erEngangsstønad),
   );
   const {
     data: oppgaver,
@@ -122,7 +125,8 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
     !isTvFetching &&
     !isBgFetching &&
     !isSrFetching &&
-    !isBdobFetching &&
+    !isBdoFetching &&
+    !isBeoFetching &&
     !isOFetching;
 
   return (
@@ -155,9 +159,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
             <VedtakProsessIndex
               beregningsresultat={erEngangsstønad ? beregningsresultatEngangsstønad : beregningsresultatDagytelse}
               originaltBeregningsresultat={
-                beregningDagytelseOriginalBehandling?.[
-                  erEngangsstønad ? 'beregningsresultat-engangsstonad' : 'beregningsresultat-foreldrepenger'
-                ]
+                erEngangsstønad ? beregningsresultatEngangsstønadOriginal : beregningsresultatDagytelseOriginal
               }
               tilbakekrevingvalg={tilbakekrevingValg}
               simuleringResultat={simuleringResultat}
