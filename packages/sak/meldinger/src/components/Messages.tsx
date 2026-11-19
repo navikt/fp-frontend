@@ -258,7 +258,7 @@ export const Messages = ({
 const getFritekstMessage = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake) =>
   brevmalkode === 'INNHEN' ? 'Messages.DocumentList' : 'Messages.Fritekst';
 
-// TODO (TOR) Bør erstattast av ein markør fra backend
+// Kun fptilbake-maler har fritekst
 const showFritekst = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake): boolean =>
   brevmalkode === 'KORRIGVARS' || brevmalkode === 'VARS' || brevmalkode === 'INNHEN';
 
