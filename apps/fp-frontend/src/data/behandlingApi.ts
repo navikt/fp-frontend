@@ -37,6 +37,7 @@ import type {
   FamilieHendelse,
   Feriepengegrunnlag,
   Fødsel,
+  Fordelingsgrunnlag,
   ForhåndsvisMeldingParams,
   GjenopptaBehandlingDto,
   HenleggBehandlingDto,
@@ -191,6 +192,7 @@ export const BehandlingRel = {
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
   TILBAKEKREVINGVALG: 'tilbakekrevingvalg',
   BEREGNINGSGRUNNLAG: 'beregningsgrunnlag',
+  FORDELINGSGRUNNLAG: 'fordelingsgrunnlag',
   SIMULERING_RESULTAT: 'simulering-resultat',
   BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING: 'beregningsresultat-dagytelse-original-behandling',
   ARBEID_OG_INNTEKT: 'arbeidsforhold-inntektsmelding',
@@ -569,6 +571,15 @@ const getVergeOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak, isEn
     select: data => data ?? undefined,
   });
 
+const getFordelingsgrunnlagOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
+  queryOptions({
+    queryKey: [BehandlingRel.FORDELINGSGRUNNLAG, behandling.uuid, behandling.versjon],
+    queryFn: () => jsonEllerNull<Fordelingsgrunnlag>(kyExtended.get(getUrlFromRel('FORDELINGSGRUNNLAG', links))),
+    enabled: harLenke(behandling, 'FORDELINGSGRUNNLAG'),
+    staleTime: Infinity,
+    select: data => data ?? undefined,
+  });
+
 const getOppgaverOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
   queryOptions({
     queryKey: [BehandlingRel.HENT_OPPGAVER, behandling.uuid, behandling.versjon],
@@ -806,6 +817,7 @@ export const getBehandlingApi = (behandling: Behandling) => {
     omsorgOgRettOptions: getFaktaOmsorgOgRettOptions(links),
     oppdaterStønadskontoer: getOppdaterStønadskontoer(links),
     beregningsgrunnlagOptions: getBeregningsgrunnlagOptions(links),
+    fordelingsgrunnlagOptions: getFordelingsgrunnlagOptions(links),
     opptjeningOptions: getOpptjeningOptions(links),
     dokumentasjonVurderingBehovOptions: getDokumentasjonVurderingBehovOptions(links),
     uttakKontrollerFaktaPerioderOptions: getUttakKontrollerFaktaPerioderOptions(links),

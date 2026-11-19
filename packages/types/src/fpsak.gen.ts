@@ -3404,6 +3404,33 @@ export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_refusjon_Ti
   tom?: string;
 };
 
+export type folketrygdloven_kalkulus_kodeverk_RefusjonKilde = 'INNTEKTSMELDING' | 'SAKSBEHANDLER';
+
+export type folketrygdloven_kalkulus_kodeverk_RefusjonUtfall = 'INNVILGET' | 'AVSLÅTT' | 'REDUSERT';
+
+export type folketrygdloven_kalkulus_kodeverk_RefusjonUtfallÅrsak =
+  'IKKE_INNENFOR_FRIST' | 'UTMELDT' | 'ALLEREDE_DIREKTE_UTBETALT';
+
+export type folketrygdloven_kalkulus_response_fordelingsgrunnlag_gui_FordelingGrunnlagDto = {
+  refusjonsandeler: Array<folketrygdloven_kalkulus_response_fordelingsgrunnlag_gui_RefusjonsandelDto>;
+};
+
+export type folketrygdloven_kalkulus_response_fordelingsgrunnlag_gui_RefusjonsandelDto = {
+  arbeidsgiverIdent: string;
+  arbeidsforholdId?: string;
+  kilde: folketrygdloven_kalkulus_kodeverk_RefusjonKilde;
+  journalpostId?: string;
+  refusjonsperioder: Array<folketrygdloven_kalkulus_response_fordelingsgrunnlag_gui_RefusjonsperiodeDto>;
+};
+
+export type folketrygdloven_kalkulus_response_fordelingsgrunnlag_gui_RefusjonsperiodeDto = {
+  fom: string;
+  tom: string;
+  refusjonPrMnd: number;
+  utfall: folketrygdloven_kalkulus_kodeverk_RefusjonUtfall;
+  utfallÅrsak?: folketrygdloven_kalkulus_kodeverk_RefusjonUtfallÅrsak;
+};
+
 export type tjenester_behandling_beregningsresultat_dto_BeregningsresultatMedUttaksplanDto = {
   perioder?: Array<tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeDto>;
 };
@@ -5583,6 +5610,27 @@ export type HentBeregningsgrunnlagResponses = {
 };
 
 export type HentBeregningsgrunnlagResponse = HentBeregningsgrunnlagResponses[keyof HentBeregningsgrunnlagResponses];
+
+export type HentFordelingsgrunnlagData = {
+  body?: never;
+  path?: never;
+  query: {
+    /**
+     * behandlingUUID
+     */
+    uuid: tjenester_behandling_dto_UuidDto;
+  };
+  url: '/api/behandling/fordelingsgrunnlag';
+};
+
+export type HentFordelingsgrunnlagResponses = {
+  /**
+   * default response
+   */
+  default: folketrygdloven_kalkulus_response_fordelingsgrunnlag_gui_FordelingGrunnlagDto;
+};
+
+export type HentFordelingsgrunnlagResponse = HentFordelingsgrunnlagResponses[keyof HentFordelingsgrunnlagResponses];
 
 export type HentBeregningsresultatDagytelseData = {
   body?: never;
