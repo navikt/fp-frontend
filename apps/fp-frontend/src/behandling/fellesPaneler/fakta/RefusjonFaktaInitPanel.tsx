@@ -80,10 +80,8 @@ const Wrapper = (props: Omit<ComponentProps<typeof FaktaRefusjonIndex>, 'formDat
 
 type RefusjonSubmitType = Parameters<FaktaRefusjonIndexProps['submitCallback']>[0];
 
-// 🔴 Rød sone: lagring av aksjonspunkt. fp-sak må først definere aksjonspunktkoden for
-// refusjon i @navikt/fp-kodeverk og en AP-type i @navikt/fp-types-avklar-aksjonspunkter.
+// TODO(TFP-7267): Fjern castet og map til fp-saks aksjonspunktkode når koden og AP-typen er på plass.
 // Inntil da videresendes pakkens submit-payload direkte, og panelet vises i praksis read-only
-// (ingen åpent refusjonsaksjonspunkt). TODO(TFP-7267): fjern castet og map kode → fp-kode.
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
   (aksjonspunktData: RefusjonSubmitType): Promise<void> =>
