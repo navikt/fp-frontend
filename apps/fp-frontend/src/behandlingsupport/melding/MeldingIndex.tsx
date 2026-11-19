@@ -13,10 +13,11 @@ import {
   type MessagesFormValues,
   MessagesModalSakIndex,
 } from '@navikt/fp-sak-meldinger';
-import type { DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
+import type { BestillDokumentDto, DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
+  type BestillDokumentFpTilbakeParams,
   forhåndsvisTilbakekreving,
   getFagsakBehandlingApi,
   initFetchOptions,
@@ -196,17 +197,16 @@ const getSubmitCallback =
     setShowMessageModal(!skalSettePåVent);
 
     const data = erTilbakekreving
-      ? {
+      ? ({
           behandlingUuid: behandling.uuid,
           fritekst: values.fritekst,
           brevmalkode: values.brevmalkode,
-        }
-      : {
+        } satisfies BestillDokumentFpTilbakeParams)
+      : ({
           behandlingUuid: behandling.uuid,
-          brevmalkode: values.brevmalkode,
-          fritekst: values.fritekst,
+          brevmalkode: notEmpty(values.brevmalkode) as DokumentMalType,
           årsakskode: values.årsakskode,
-        };
+        } satisfies BestillDokumentDto);
     return submitMessage(data).then(() => {
       setMeldingFormData();
       if (skalSettePåVent) {

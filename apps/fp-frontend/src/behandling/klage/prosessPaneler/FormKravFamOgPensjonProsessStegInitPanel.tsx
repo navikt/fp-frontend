@@ -5,7 +5,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { type FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
+import { FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
+import type { KlageFormkravMellomlagring } from '@navikt/fp-types';
 import { isKlageAvvist } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
@@ -35,7 +36,7 @@ export const FormKravFamOgPensjonProsessStegInitPanel = () => {
   const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(behandling));
 
   const { mutate: lagreFormkravVurdering } = useMutation({
-    mutationFn: (values: FormkravMellomlagretDataType) => api.klage.mellomlagreFormkravVurdering(values),
+    mutationFn: (values: KlageFormkravMellomlagring) => api.klage.mellomlagreFormkravVurdering(values),
     onSuccess: () => hentOgSettBehandling(),
   });
 

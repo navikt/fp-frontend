@@ -18,6 +18,7 @@ const {
   TilretteleggingMed100ProsentVelferdspermisjon,
   KanSplittes,
   TilretteleggingMedOverstyrtUtbetalingsgrad,
+  UtenAksjonspunkt,
 } = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
@@ -37,6 +38,14 @@ describe('TilretteleggingFaktaIndex', () => {
     };
 
     expect(finnProsentSvangerskapspenger(tilretteleggingDato, 100, 50)).toBe(0);
+  });
+
+  it('skal ikke kunne redigere eller bekrefte når behandlingen mangler aksjonspunkt', async () => {
+    render(<UtenAksjonspunkt />);
+
+    expect(await screen.findByText('Arbeidsgiveren AS')).toBeInTheDocument();
+    expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: /Begrunn endringene/ })).not.toBeInTheDocument();
   });
 
   it('skal vurdere velferdspermisjon og så bekrefte aksjonspunkt', async () => {

@@ -1,4 +1,5 @@
 import type { TilbakekrevingVidereBehandling } from '@navikt/fp-types';
+import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 /**
  * Reint UI-val: «opprett tilbakekreving, men ikkje send varsel». Blir omsett til
@@ -6,10 +7,8 @@ import type { TilbakekrevingVidereBehandling } from '@navikt/fp-types';
  */
 export const TILBAKEKR_OPPRETT_UTEN_VARSEL = 'TILBAKEKR_OPPRETT_UTEN_VARSEL';
 
-export type FeilutbetalingFormValues = {
+export type FeilutbetalingFormValues = Omit<VurderFeilutbetalingAp, 'kode' | 'videreBehandling'> & {
   videreBehandling: TilbakekrevingVidereBehandling | typeof TILBAKEKR_OPPRETT_UTEN_VARSEL;
-  varseltekst?: string;
-  begrunnelse?: string;
 };
 
 export type EtterbetalingSøkerFormValues = {

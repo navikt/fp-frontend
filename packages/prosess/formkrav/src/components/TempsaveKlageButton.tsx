@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
 import type { ProsessStegBegrunnelseTextFieldFormValues } from '@navikt/fp-prosess-felles';
+import type { KlageFormkravMellomlagring, KlageTilbakekreving } from '@navikt/fp-types';
 
 import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
-import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
@@ -19,12 +19,6 @@ export type FormValues = {
   mottattDato?: string;
   fritekstTilBrev?: string;
 } & ProsessStegBegrunnelseTextFieldFormValues;
-
-type TilbakekrevingInfo = {
-  tilbakekrevingUuid: string;
-  tilbakekrevingVedtakDato?: string;
-  tilbakekrevingBehandlingType?: string;
-};
 
 export const skalLagreFritekstfelt = (formVerdier: FormValues): boolean =>
   formVerdier.erKlagerPart === false ||
@@ -46,7 +40,7 @@ export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], 
 export const påklagdTilbakekrevingInfo = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
   påklagdVedtak?: string,
-): TilbakekrevingInfo | undefined => {
+): KlageTilbakekreving | undefined => {
   const erTilbakekrevingVedtak = erTilbakekreving(avsluttedeBehandlinger, påklagdVedtak);
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
   return behandling && erTilbakekrevingVedtak
@@ -63,7 +57,7 @@ const transformValues = (
   behandlingUuid: string,
   avsluttedeBehandlinger: AvsluttetBehandling[],
   aksjonspunktCode: string,
-): FormkravMellomlagretDataType => ({
+): KlageFormkravMellomlagring => ({
   kode: aksjonspunktCode,
   begrunnelse: values.begrunnelse,
   behandlingUuid,
@@ -82,7 +76,7 @@ interface Props {
   behandlingUuid: string;
   aksjonspunktCode: string;
   avsluttedeBehandlinger: AvsluttetBehandling[];
-  saveKlage: (data: FormkravMellomlagretDataType) => void;
+  saveKlage: (data: KlageFormkravMellomlagring) => void;
   spinner?: boolean;
   readOnly?: boolean;
   handleSubmit: UseFormHandleSubmit<FormValues>;

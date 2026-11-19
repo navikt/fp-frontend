@@ -9,12 +9,9 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type {
-  KlageHjemmel,
-  KlageMedholdÅrsak,
   KlageVurdering,
-  KlageVurderingOmgjørType,
   KlageVurderingResultat,
-  KlageVurderingType,
+  KlageVurderingResultatMellomlagring,
   KodeverkMedNavn,
 } from '@navikt/fp-types';
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -26,15 +23,7 @@ import { FritekstBrevTextField } from './FritekstKlageBrevTextField';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
 import { type KlagevurderingForhåndsvisData, PreviewKlageLink } from './PreviewKlageLink';
 
-export type TransformedValues = {
-  kode: string;
-  klageMedholdÅrsak?: KlageMedholdÅrsak;
-  klageVurderingOmgjør?: KlageVurderingOmgjørType;
-  klageHjemmel?: KlageHjemmel;
-  fritekstTilBrev: string;
-  begrunnelse: string;
-  klageVurdering: KlageVurderingType;
-};
+export type TransformedValues = Omit<KlageVurderingResultatMellomlagring, 'behandlingUuid'>;
 
 const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
   klageMedholdÅrsak: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageMedholdÅrsak : undefined,

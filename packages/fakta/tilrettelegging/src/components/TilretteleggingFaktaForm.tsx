@@ -42,6 +42,7 @@ export const TilretteleggingFaktaForm = ({
 
   const { isSubmittable, isReadOnly, aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
     usePanelDataContext<BekreftSvangerskapspengerAp>();
+  const erReadOnlyEllerManglerAksjonspunkt = isReadOnly || aksjonspunkterForPanel.length === 0;
   const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<TilretteleggingFormValues>();
@@ -83,7 +84,7 @@ export const TilretteleggingFaktaForm = ({
             control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
-            readOnly={isReadOnly}
+            readOnly={erReadOnlyEllerManglerAksjonspunkt}
           />
 
           {svangerskapspengerTilrettelegging.fødselsdato && (
@@ -92,7 +93,7 @@ export const TilretteleggingFaktaForm = ({
               control={formMethods.control}
               label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
               validate={[required, hasValidDate]}
-              readOnly={isReadOnly}
+              readOnly={erReadOnlyEllerManglerAksjonspunkt}
             />
           )}
         </HStack>
@@ -100,7 +101,7 @@ export const TilretteleggingFaktaForm = ({
         <ArbeidsforholdFieldArray
           aoiArbeidsforhold={aoiArbeidsforhold}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnly={isReadOnly}
+          readOnly={erReadOnlyEllerManglerAksjonspunkt}
           uttakArbeidTyper={uttakArbeidTyper}
         />
 
@@ -110,7 +111,7 @@ export const TilretteleggingFaktaForm = ({
           name="begrunnelse"
           control={formMethods.control}
           size="small"
-          readOnly={isReadOnly}
+          readOnly={erReadOnlyEllerManglerAksjonspunkt}
           className="max-w-2xl"
           label={<FormattedMessage id="TilretteleggingFaktaForm.BegrunnEndringene" />}
           description={
@@ -125,7 +126,7 @@ export const TilretteleggingFaktaForm = ({
 
         <FaktaSubmitButton
           isSubmittable={isSubmittable}
-          isReadOnly={isReadOnly}
+          isReadOnly={erReadOnlyEllerManglerAksjonspunkt}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
         />

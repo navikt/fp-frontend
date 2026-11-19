@@ -18,7 +18,9 @@ import type {
   Behandling,
   BehandlingFpSak,
   BehandlingFpTilbake,
+  BehandlingIdDto,
   BehandlingIdVersjonDto,
+  BehandlingMedUttaksperioderDto,
   BekreftedeAksjonspunkterDto,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
@@ -56,7 +58,6 @@ import type {
   Opptjening,
   OpptjeningIUtlandDokStatusDto,
   OverstyrteAksjonspunkterDto,
-  PeriodeSoker,
   Personoversikt,
   ReåpneBehandlingDto,
   RevurderingVarslingÅrsak,
@@ -596,7 +597,7 @@ const getFerdigstillOppgave = (links: ApiLink[]) => (oppgaveId: string) =>
 
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<BehandlingFpSak>(BehandlingUrl.BEHANDLING, {
-    json: { behandlingUuid },
+    json: { behandlingUuid } satisfies BehandlingIdDto,
   });
 
 export const hentBehandlingTilbakekreving = (behandlingUuid: string) =>
@@ -781,13 +782,12 @@ const getBeregneBeløp = (links: ApiLink[]) => (params: BeregnBeløpParams) =>
     })
     .json<{ perioder: { belop: number }[] }>();
 
-const getOppdaterStønadskontoer =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) =>
-    kyExtended
-      .post(getUrlFromRel('STONADSKONTOER_GITT_UTTAKSPERIODER', links), {
-        json: params,
-      })
-      .json<UttakStonadskontoer>();
+const getOppdaterStønadskontoer = (links: ApiLink[]) => (params: BehandlingMedUttaksperioderDto) =>
+  kyExtended
+    .post(getUrlFromRel('STONADSKONTOER_GITT_UTTAKSPERIODER', links), {
+      json: params,
+    })
+    .json<UttakStonadskontoer>();
 
 export const getBehandlingApi = (behandling: Behandling) => {
   const { links } = behandling;

@@ -12,6 +12,7 @@ import type {
   AksjonspunktDefinisjon,
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
+  BehandlingMedUttaksperioderDto,
   FamilieHendelse,
   PeriodeSoker,
   Personoversikt,
@@ -171,10 +172,7 @@ interface Props {
   familiehendelse: FamilieHendelse;
   soknad: Soknad;
   personoversikt: Personoversikt;
-  oppdaterStønadskontoer: (params: {
-    behandlingUuid: string;
-    perioder: PeriodeSoker[];
-  }) => Promise<UttakStonadskontoer>;
+  oppdaterStønadskontoer: (params: BehandlingMedUttaksperioderDto) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined;
 }
@@ -278,7 +276,7 @@ export const UttakProsessPanel = ({
       try {
         const oppdatertStønadskonto = await oppdaterStønadskontoer({
           behandlingUuid: behandling.uuid,
-          perioder: saldoForespørsel.perioder,
+          perioder: saldoForespørsel.perioder.map(mapPerioderTilBekreftelse),
         });
         if (erAktiv && saldoForespørsel.id === sisteSaldoForespørselRef.current) {
           setStønadskonto(oppdatertStønadskonto);
