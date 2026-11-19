@@ -1,6 +1,10 @@
-import type { BekreftetAksjonspunkt, MedType, OverstyrtAksjonspunkt } from '../../../data/behandlingApi';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-const erBackendKode = (kode: string) => /^\d{4}$/.test(kode);
+import type { BekreftetAksjonspunkt, MedType, OverstyrtAksjonspunkt, UtgåttKode } from '../../../data/behandlingApi';
+
+const UTGÅTTE_KODER: readonly UtgåttKode[] = [AksjonspunktKode.UTGÅTT_5056, AksjonspunktKode.UTGÅTT_6012];
+
+const erBackendKode = (kode: string) => /^\d{4}$/.test(kode) && !UTGÅTTE_KODER.some(utgått => utgått === kode);
 
 export const erOverstyrtAksjonspunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, OverstyrtAksjonspunkt> =>
   erBackendKode(ap.kode) && ap.kode.startsWith('6');
@@ -8,4 +12,4 @@ export const erOverstyrtAksjonspunkt = <T extends { kode: string }>(ap: T): ap i
 export const erBekreftetAksjonspunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, BekreftetAksjonspunkt> =>
   erBackendKode(ap.kode) && !ap.kode.startsWith('6');
 
-export const medType = <T extends { kode: string }>(ap: T) => ({ '@type': ap.kode, ...ap }) as MedType<T>;
+export const medType = <T extends { kode: string }>(ap: T) => ({ ...ap, '@type': ap.kode }) as unknown as MedType<T>;

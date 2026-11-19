@@ -105,7 +105,16 @@ type AksjonspunktMedKode = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFares
 export type OverstyrtAksjonspunkt = Extract<AksjonspunktMedKode, { kode: OverstyringKode }>;
 export type BekreftetAksjonspunkt = Extract<AksjonspunktMedKode, { kode: BekreftetKode }> | TilbakekrevingAksjonspunkt;
 
-export type MedType<T> = T extends { kode: infer K } ? T & { '@type': K } : never;
+export type UtgåttKode = Exclude<
+  Extract<AksjonspunktMedKode['kode'], `${number}`>,
+  BekreftetKode | OverstyringKode | TilbakekrevingAksjonspunkt['kode']
+>;
+
+export type MedType<T> = T extends { kode: infer K }
+  ? K extends unknown
+    ? Omit<T, 'kode'> & { kode: K; '@type': K }
+    : never
+  : never;
 
 export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;

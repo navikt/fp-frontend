@@ -113,4 +113,27 @@ describe('useStandardFaktaPanelProps', () => {
     expect(lagreAksjonspunkter).not.toHaveBeenCalled();
     expect(lagreOverstyrteAksjonspunkter).not.toHaveBeenCalled();
   });
+
+  it.each([AksjonspunktKode.UTGÅTT_5056, AksjonspunktKode.UTGÅTT_6012])(
+    'skal avvise utgått kode %s uten å lagre',
+    kode => {
+      const { submitCallback, lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = rendreHook();
+      const utgått = { kode } as unknown as Parameters<typeof submitCallback>[0];
+
+      expect(() => submitCallback(utgått)).toThrow(kode);
+      expect(lagreAksjonspunkter).not.toHaveBeenCalled();
+      expect(lagreOverstyrteAksjonspunkter).not.toHaveBeenCalled();
+    },
+  );
+
+  it('skal sette @type fra kode selv om aksjonspunktet har en annen @type', async () => {
+    const { submitCallback, lagreOverstyrteAksjonspunkter } = rendreHook();
+    const medFeilType = { ...overstyrt, '@type': '5002' };
+
+    await submitCallback(medFeilType);
+
+    expect(lagreOverstyrteAksjonspunkter).toHaveBeenCalledWith(
+      expect.objectContaining({ overstyrteAksjonspunktDtoer: [{ ...overstyrt, '@type': '6045' }] }),
+    );
+  });
 });
