@@ -16,13 +16,6 @@ export {
 
 export type { ColorPair } from './src/echartUtils';
 
-export {
-  LosUrlFelles,
-  losEndepunkt,
-  losGet,
-  losPost,
-  losKodeverkOptions,
-  flyttReservasjon,
-} from './src/api/fplosFellesApi';
+export { LosUrlFelles, losKodeverkOptions, flyttReservasjon } from './src/api/fplosFellesApi';
 
 export type { LosFellesMessageId } from './i18n/messageIds';

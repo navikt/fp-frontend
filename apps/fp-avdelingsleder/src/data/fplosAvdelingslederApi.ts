@@ -1,167 +1,122 @@
 import { queryOptions } from '@tanstack/react-query';
+import ky from 'ky';
 
-import { losEndepunkt, losGet, losPost, LosUrlFelles } from '@navikt/fp-los-felles';
-import type {
-  AktiveOgTilgjengligeOppgaverStatistikkForKøData,
-  AktiveOgTilgjengligeOppgaverStatistikkForKøResponse,
-  EndreSaksbehandlerGruppeData,
-  FjernSaksbehandlerFraGruppeData,
-  GetAlleBehandlingerForAvdelingData,
-  GetAlleBehandlingerForAvdelingResponse,
-  GetAlleOppgaverForAvdelingData,
-  GetAlleOppgaverForAvdelingResponse,
-  GetAlleVentefristerForAvdelingData,
-  GetAlleVentefristerForAvdelingResponse,
-  GetAntallOppgaverForAvdelingPerDatoData,
-  GetAntallOppgaverForAvdelingPerDatoResponse,
-  GetOppgaverPerFørsteStønadsdagMånedData,
-  GetOppgaverPerFørsteStønadsdagMånedResponse,
-  HentAntallOppgaverForAvdelingData,
-  HentAntallOppgaverForAvdelingResponse,
-  HentAntallOppgaverForSakslisteData,
-  HentAntallOppgaverForSakslisteResponse,
-  HentAvdelingensReservasjonerData,
-  HentAvdelingensReservasjonerResponse,
-  HentAvdelingensSaksbehandlereData,
-  HentAvdelingensSaksbehandlereResponse,
-  HentAvdelingensSakslisterData,
-  HentAvdelingensSakslisterResponse,
-  HentInitielleRessurserData,
-  HentInitielleRessurserResponse,
-  HentKriterieFilterData,
-  HentKriterieFilterResponse,
-  HentSaksbehandlerGrupperData,
-  HentSaksbehandlerGrupperResponse,
-  LagreNavnData,
-  LeggSaksbehandlerTilGruppeData,
-  LeggSaksbehandlerTilSakslisteData,
-  LeggTilNySaksbehandlerData,
-  OpphevOppgaveReservasjonData,
-  OpprettNySakslisteData,
-  OpprettNySakslisteResponse,
-  OpprettSaksbehandlerGruppeData,
-  OpprettSaksbehandlerGruppeResponse,
-  SakslisteLagreDto,
-  SlettSaksbehandlerData,
-  SlettSaksbehandlerGruppeData,
-  SlettSakslisteData,
-  SøkAvdelingensSaksbehandlereData,
-  SøkAvdelingensSaksbehandlereResponse,
+import { LosUrlFelles } from '@navikt/fp-los-felles';
+import {
+  type AndreKriterierType,
+  type AvdelingEnhetDto,
+  type AvdelingReservasjonDto,
+  type InitLinksDto,
+  type KøStatistikkDto,
+  type KriterieFilterDto,
+  type NøkkeltallBehandlingFørsteUttakDto,
+  type NøkkeltallBehandlingVentefristUtløperDto,
+  type OppgaveIdDto,
+  type OppgaverForAvdeling,
+  type OppgaverForAvdelingPerDato,
+  type OppgaverForFørsteStønadsdagUkeMåned,
+  type SaksbehandlerBrukerIdentDto,
+  type SaksbehandlerDto,
+  type SaksbehandlereOgSaksbehandlerGrupper,
+  type SaksbehandlerGruppeNavneEndringRequestDto,
+  type SaksbehandlerGruppeSletteRequestDto,
+  type SaksbehandlerOgAvdelingDto,
+  type SaksbehandlerOgGruppeDto,
+  type SakslisteDto,
+  type SakslisteIdDto,
+  type SakslisteLagreDto,
+  type SakslisteOgAvdelingDto,
+  type SakslisteSaksbehandlerDto,
 } from '@navikt/fp-types';
 
 export { losKodeverkOptions } from '@navikt/fp-los-felles';
 
+const kyExtended = ky.extend({
+  retry: 0,
+  timeout: 15_000,
+  hooks: {
+    beforeRequest: [
+      ({ request }) => {
+        const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1_000_000_000)}`;
+        request.headers.set('Nav-Callid', navCallId);
+      },
+    ],
+  },
+});
+
+//MÅ være en gyldig URL for at KY skal fungere i test
+const isTest = import.meta.env.MODE === 'test';
+const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
+
 export const LosUrl = {
   ...LosUrlFelles,
-  KODEVERK_KRITERIE_FILTER: losEndepunkt<HentKriterieFilterData, HentKriterieFilterResponse>(
-    '/api/kodeverk/kriterie-filter',
+  KODEVERK_KRITERIE_FILTER: wrapUrl('/fplos/api/kodeverk/kriterie-filter'),
+  INIT_FETCH: wrapUrl('/fplos/api/avdelingsleder/init-fetch'),
+  SAKSBEHANDLERE_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
+  OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
+  SAKSLISTER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
+  OPPRETT_NY_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
+  ENDRE_EKSISTERENDE_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/endre'),
+  OPPGAVE_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/antall'),
+  LAGRE_SAKSLISTE_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/sakslister/saksbehandler'),
+  HENT_OPPGAVER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid'),
+  HENT_OPPGAVER_PER_DATO: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid-historikk'),
+  HENT_OPPGAVER_APNE_ELLER_PA_VENT: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/åpne-behandlinger'),
+  HENT_BEHANDLINGER_FRISTUTLOP: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/frist-utløp'),
+  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: wrapUrl(
+    '/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd',
   ),
-  INIT_FETCH: losEndepunkt<HentInitielleRessurserData, HentInitielleRessurserResponse>(
-    '/api/avdelingsleder/init-fetch',
-  ),
-  SAKSBEHANDLERE_FOR_AVDELING: losEndepunkt<HentAvdelingensSaksbehandlereData, HentAvdelingensSaksbehandlereResponse>(
-    '/api/avdelingsleder/saksbehandlere',
-  ),
-  OPPGAVE_AVDELING_ANTALL: losEndepunkt<HentAntallOppgaverForAvdelingData, HentAntallOppgaverForAvdelingResponse>(
-    '/api/avdelingsleder/oppgaver/avdelingantall',
-  ),
-  SAKSLISTER_FOR_AVDELING: losEndepunkt<HentAvdelingensSakslisterData, HentAvdelingensSakslisterResponse>(
-    '/api/avdelingsleder/sakslister',
-  ),
-  OPPRETT_NY_SAKSLISTE: losEndepunkt<OpprettNySakslisteData, OpprettNySakslisteResponse>(
-    '/api/avdelingsleder/sakslister',
-  ),
-  ENDRE_EKSISTERENDE_SAKSLISTE: losEndepunkt<LagreNavnData>('/api/avdelingsleder/sakslister/endre'),
-  OPPGAVE_ANTALL: losEndepunkt<HentAntallOppgaverForSakslisteData, HentAntallOppgaverForSakslisteResponse>(
-    '/api/avdelingsleder/oppgaver/antall',
-  ),
-  LAGRE_SAKSLISTE_SAKSBEHANDLER: losEndepunkt<LeggSaksbehandlerTilSakslisteData>(
-    '/api/avdelingsleder/sakslister/saksbehandler',
-  ),
-  HENT_OPPGAVER_FOR_AVDELING: losEndepunkt<GetAlleOppgaverForAvdelingData, GetAlleOppgaverForAvdelingResponse>(
-    '/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid',
-  ),
-  HENT_OPPGAVER_PER_DATO: losEndepunkt<
-    GetAntallOppgaverForAvdelingPerDatoData,
-    GetAntallOppgaverForAvdelingPerDatoResponse
-  >('/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid-historikk'),
-  HENT_OPPGAVER_APNE_ELLER_PA_VENT: losEndepunkt<
-    GetAlleBehandlingerForAvdelingData,
-    GetAlleBehandlingerForAvdelingResponse
-  >('/api/avdelingsleder/nøkkeltall/åpne-behandlinger'),
-  HENT_BEHANDLINGER_FRISTUTLOP: losEndepunkt<
-    GetAlleVentefristerForAvdelingData,
-    GetAlleVentefristerForAvdelingResponse
-  >('/api/avdelingsleder/nøkkeltall/frist-utløp'),
-  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: losEndepunkt<
-    GetOppgaverPerFørsteStønadsdagMånedData,
-    GetOppgaverPerFørsteStønadsdagMånedResponse
-  >('/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd'),
-  RESERVASJONER_FOR_AVDELING: losEndepunkt<HentAvdelingensReservasjonerData, HentAvdelingensReservasjonerResponse>(
-    '/api/avdelingsleder/reservasjoner',
-  ),
-  SLETT_SAKSLISTE: losEndepunkt<SlettSakslisteData>('/api/avdelingsleder/sakslister/slett'),
-  HENT_GRUPPER: losEndepunkt<HentSaksbehandlerGrupperData, HentSaksbehandlerGrupperResponse>(
-    '/api/avdelingsleder/saksbehandlere/grupper',
-  ),
-  OPPRETT_GRUPPE: losEndepunkt<OpprettSaksbehandlerGruppeData, OpprettSaksbehandlerGruppeResponse>(
-    '/api/avdelingsleder/saksbehandlere/grupper/opprett-gruppe',
-  ),
-  LEGG_SAKSBEHANDLER_TIL_GRUPPE: losEndepunkt<LeggSaksbehandlerTilGruppeData>(
-    '/api/avdelingsleder/saksbehandlere/grupper/legg-til-saksbehandler',
-  ),
-  FJERN_SAKSBEHANDLER_FRA_GRUPPE: losEndepunkt<FjernSaksbehandlerFraGruppeData>(
-    '/api/avdelingsleder/saksbehandlere/grupper/fjern-saksbehandler',
-  ),
-  ENDRE_GRUPPENAVN: losEndepunkt<EndreSaksbehandlerGruppeData>(
-    '/api/avdelingsleder/saksbehandlere/grupper/endre-gruppenavn',
-  ),
-  SLETT_GRUPPE: losEndepunkt<SlettSaksbehandlerGruppeData>(
-    '/api/avdelingsleder/saksbehandlere/grupper/slett-saksbehandlergruppe',
-  ),
-  AVDELINGSLEDER_OPPHEVER_RESERVASJON: losEndepunkt<OpphevOppgaveReservasjonData>(
-    '/api/avdelingsleder/reservasjoner/opphev',
-  ),
-  SLETT_SAKSBEHANDLER: losEndepunkt<SlettSaksbehandlerData>('/api/avdelingsleder/saksbehandlere/slett'),
-  SAKSBEHANDLER_SOK: losEndepunkt<SøkAvdelingensSaksbehandlereData, SøkAvdelingensSaksbehandlereResponse>(
-    '/api/avdelingsleder/saksbehandlere/søk',
-  ),
-  OPPRETT_NY_SAKSBEHANDLER: losEndepunkt<LeggTilNySaksbehandlerData>('/api/avdelingsleder/saksbehandlere'),
-  OPPGAVE_FILTER_STATISTIKK: losEndepunkt<
-    AktiveOgTilgjengligeOppgaverStatistikkForKøData,
-    AktiveOgTilgjengligeOppgaverStatistikkForKøResponse
-  >('/api/avdelingsleder/nøkkeltall/statistikk-oppgave-filter'),
+  RESERVASJONER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/reservasjoner'),
+  SLETT_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/slett'),
+  HENT_GRUPPER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper'),
+  OPPRETT_GRUPPE: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper/opprett-gruppe'),
+  LEGG_SAKSBEHANDLER_TIL_GRUPPE: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper/legg-til-saksbehandler'),
+  FJERN_SAKSBEHANDLER_FRA_GRUPPE: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper/fjern-saksbehandler'),
+  ENDRE_GRUPPENAVN: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper/endre-gruppenavn'),
+  SLETT_GRUPPE: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper/slett-saksbehandlergruppe'),
+  AVDELINGSLEDER_OPPHEVER_RESERVASJON: wrapUrl('/fplos/api/avdelingsleder/reservasjoner/opphev'),
+  SLETT_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/slett'),
+  SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/søk'),
+  OPPRETT_NY_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
+  OPPGAVE_FILTER_STATISTIKK: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/statistikk-oppgave-filter'),
 };
 
 export const initFetchOptions = () =>
   queryOptions({
     queryKey: [LosUrl.INIT_FETCH],
-    queryFn: () => losGet(LosUrl.INIT_FETCH).json(),
+    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitLinksDto>(),
   });
 
-export const oppgaveFilterStatistikkOptions = (sakslisteId: number) =>
+const getOppgaveFilterStatistikk = (sakslisteId: number) =>
+  kyExtended.get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId } }).json<KøStatistikkDto[]>();
+
+export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number) =>
   queryOptions({
-    queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, sakslisteId],
-    queryFn: () => losGet(LosUrl.OPPGAVE_FILTER_STATISTIKK, { sakslisteId }).json(),
+    queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId],
+    queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId),
   });
 
 export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.OPPGAVE_AVDELING_ANTALL, { avdelingEnhet }).json(),
+    queryFn: () => kyExtended.get(LosUrl.OPPGAVE_AVDELING_ANTALL, { searchParams: { avdelingEnhet } }).json<number>(),
   });
 
 export const sakslisterForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.SAKSLISTER_FOR_AVDELING, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended.get(LosUrl.SAKSLISTER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<SakslisteDto[]>(),
     initialData: [],
   });
 
 export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
   queryOptions({
     queryKey: [LosUrl.SAKSBEHANDLERE_FOR_AVDELING, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.SAKSBEHANDLERE_FOR_AVDELING, { avdelingEnhet: avdelingEnhet ?? '' }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.SAKSBEHANDLERE_FOR_AVDELING, { searchParams: { avdelingEnhet: avdelingEnhet ?? '' } })
+        .json<SaksbehandlerDto[]>(),
     initialData: [],
     enabled: !!avdelingEnhet,
   });
@@ -169,102 +124,169 @@ export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
 export const kriterieFilterOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_KRITERIE_FILTER],
-    queryFn: () => losGet(LosUrl.KODEVERK_KRITERIE_FILTER).json(),
+    queryFn: () =>
+      kyExtended.get(LosUrl.KODEVERK_KRITERIE_FILTER).json<Partial<Record<AndreKriterierType, KriterieFilterDto>>>(),
     staleTime: Infinity,
   });
 
 export const grupperOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_GRUPPER, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.HENT_GRUPPER, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_GRUPPER, { searchParams: { avdelingEnhet } })
+        .json<SaksbehandlereOgSaksbehandlerGrupper>(),
   });
 
 export const oppgaverPerFørsteStønadsdagMånedOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, { searchParams: { avdelingEnhet } })
+        .json<OppgaverForFørsteStønadsdagUkeMåned[]>(),
     initialData: [],
   });
 
 export const oppgaverÅpneEllerPåVentOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT, { searchParams: { avdelingEnhet } })
+        .json<NøkkeltallBehandlingFørsteUttakDto[]>(),
     initialData: [],
   });
 
 export const oppgaverForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_OPPGAVER_FOR_AVDELING, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.HENT_OPPGAVER_FOR_AVDELING, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_FOR_AVDELING, { searchParams: { avdelingEnhet } })
+        .json<OppgaverForAvdeling[]>(),
     initialData: [],
   });
 
 export const oppgaverPerDatoOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_OPPGAVER_PER_DATO, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.HENT_OPPGAVER_PER_DATO, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_PER_DATO, { searchParams: { avdelingEnhet } })
+        .json<OppgaverForAvdelingPerDato[]>(),
     initialData: [],
   });
 
 export const behandlingerFristUtløptOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_BEHANDLINGER_FRISTUTLOP, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP, { searchParams: { avdelingEnhet } })
+        .json<NøkkeltallBehandlingVentefristUtløperDto[]>(),
     initialData: [],
   });
 
 export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, avdelingEnhet],
-    queryFn: () => losGet(LosUrl.RESERVASJONER_FOR_AVDELING, { avdelingEnhet }).json(),
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } })
+        .json<AvdelingReservasjonDto[]>(),
     initialData: [],
   });
 
 export const opprettNySaksliste = (avdelingEnhet: string) =>
-  losPost(LosUrl.OPPRETT_NY_SAKSLISTE, { avdelingEnhet }).json();
+  kyExtended
+    .post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } satisfies AvdelingEnhetDto })
+    .json<SakslisteIdDto>();
 
 export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteLagreDto) =>
-  losPost(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, sakslisteDto).then(() => {});
+  kyExtended.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, { json: sakslisteDto }).then(() => {});
 
 export const lagreSakslisteSaksbehandler = (
   sakslisteId: number,
   brukerIdent: string,
   checked: boolean,
   avdelingEnhet: string,
-) => losPost(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, { sakslisteId, brukerIdent, checked, avdelingEnhet }).then(() => {});
+) =>
+  kyExtended
+    .post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, {
+      json: { sakslisteId, brukerIdent, checked, avdelingEnhet } satisfies SakslisteSaksbehandlerDto,
+    })
+    .then(() => {});
 
 export const slettSaksliste = (sakslisteId: number, avdelingEnhet: string) =>
-  losPost(LosUrl.SLETT_SAKSLISTE, { sakslisteId, avdelingEnhet }).then(() => {});
+  kyExtended
+    .post(LosUrl.SLETT_SAKSLISTE, {
+      json: { sakslisteId, avdelingEnhet } satisfies SakslisteOgAvdelingDto,
+    })
+    .then(() => {});
 
 export const opprettGruppe = (avdelingEnhet: string) =>
-  losPost(LosUrl.OPPRETT_GRUPPE, { avdelingEnhet }).then(() => {});
+  kyExtended
+    .post(LosUrl.OPPRETT_GRUPPE, {
+      json: { avdelingEnhet } satisfies AvdelingEnhetDto,
+    })
+    .then(() => {});
 
 export const leggSaksbehandlerTilGruppe = (brukerIdent: string, avdelingEnhet: string, gruppeId: number) =>
-  losPost(LosUrl.LEGG_SAKSBEHANDLER_TIL_GRUPPE, { brukerIdent, avdelingEnhet, gruppeId }).then(() => {});
+  kyExtended
+    .post(LosUrl.LEGG_SAKSBEHANDLER_TIL_GRUPPE, {
+      json: { brukerIdent, avdelingEnhet, gruppeId } satisfies SaksbehandlerOgGruppeDto,
+    })
+    .then(() => {});
 
 export const fjernSaksbehandlerFraGruppe = (brukerIdent: string, avdelingEnhet: string, gruppeId: number) =>
-  losPost(LosUrl.FJERN_SAKSBEHANDLER_FRA_GRUPPE, { brukerIdent, avdelingEnhet, gruppeId }).then(() => {});
+  kyExtended
+    .post(LosUrl.FJERN_SAKSBEHANDLER_FRA_GRUPPE, {
+      json: { brukerIdent, avdelingEnhet, gruppeId } satisfies SaksbehandlerOgGruppeDto,
+    })
+    .then(() => {});
 
 export const endreGruppenavn = (gruppeId: number, gruppeNavn: string, avdelingEnhet: string) =>
-  losPost(LosUrl.ENDRE_GRUPPENAVN, { gruppeId, gruppeNavn, avdelingEnhet }).then(() => {});
+  kyExtended
+    .post(LosUrl.ENDRE_GRUPPENAVN, {
+      json: { gruppeId, gruppeNavn, avdelingEnhet } satisfies SaksbehandlerGruppeNavneEndringRequestDto,
+    })
+    .then(() => {});
 
 export const slettGruppe = (gruppeId: number, avdelingEnhet: string) =>
-  losPost(LosUrl.SLETT_GRUPPE, { gruppeId, avdelingEnhet }).then(() => {});
+  kyExtended
+    .post(LosUrl.SLETT_GRUPPE, {
+      json: { gruppeId, avdelingEnhet } satisfies SaksbehandlerGruppeSletteRequestDto,
+    })
+    .then(() => {});
 
 export const opphevReservasjon = (oppgaveId: number) =>
-  losPost(LosUrl.AVDELINGSLEDER_OPPHEVER_RESERVASJON, { oppgaveId }).then(() => {});
+  kyExtended
+    .post(LosUrl.AVDELINGSLEDER_OPPHEVER_RESERVASJON, {
+      json: { oppgaveId } satisfies OppgaveIdDto,
+    })
+    .then(() => {});
 
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
-  losPost(LosUrl.SLETT_SAKSBEHANDLER, { brukerIdent, avdelingEnhet }).then(() => {});
+  kyExtended
+    .post(LosUrl.SLETT_SAKSBEHANDLER, {
+      json: { brukerIdent, avdelingEnhet } satisfies SaksbehandlerOgAvdelingDto,
+    })
+    .then(() => {});
 
 export const saksbehandlerSøk = async (brukerIdent: string) => {
-  const response = await losPost(LosUrl.SAKSBEHANDLER_SOK, { brukerIdent });
+  const response = await kyExtended.post(LosUrl.SAKSBEHANDLER_SOK, {
+    json: { brukerIdent } satisfies SaksbehandlerBrukerIdentDto,
+  });
   if (response.status === 204) {
     return;
   }
-  return response.json();
+  return response.json<SaksbehandlerDto>();
 };
 
 export const opprettNySaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
-  losPost(LosUrl.OPPRETT_NY_SAKSBEHANDLER, { brukerIdent, avdelingEnhet }).then(() => {});
+  kyExtended
+    .post(LosUrl.OPPRETT_NY_SAKSBEHANDLER, {
+      json: { brukerIdent, avdelingEnhet } satisfies SaksbehandlerOgAvdelingDto,
+    })
+    .then(() => {});
