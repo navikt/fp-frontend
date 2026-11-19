@@ -85,6 +85,7 @@ const baseConfig = [
 const sharedRulesConfig = {
   rules: {
     ...vitest.configs.recommended.rules,
+    'vitest/expect-expect': [ERROR, { assertFunctionNames: ['expect', 'expectTypeOf'] }],
     '@eslint-react/purity': ERROR,
     eqeqeq: ERROR,
     'max-len': [ERROR, 160],

@@ -5,7 +5,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
-import { erBekreftetAksjonspunkt, erOverstyrtAksjonspunkt } from '../utils/erOverstyrtAksjonspunkt';
+import { erBekreftetAksjonspunkt, erOverstyrtAksjonspunkt, medType } from '../utils/erOverstyrtAksjonspunkt';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
@@ -124,10 +124,7 @@ const getBekreftAksjonspunktProsessCallback =
         throw new Error(`Overstyr-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
       }
       const overstyrteAksjonspunkter = apListe.filter(erOverstyrtAksjonspunkt);
-      const models = overstyrteAksjonspunkter.map(ap => ({
-        '@type': ap.kode,
-        ...ap,
-      }));
+      const models = overstyrteAksjonspunkter.map(medType);
       return lagreOverstyrteAksjonspunkter({
         ...params,
         overstyrteAksjonspunktDtoer: models,
@@ -145,13 +142,10 @@ const getBekreftAksjonspunktProsessCallback =
 
     if (!apListe.every(erBekreftetAksjonspunkt)) {
       const ugyldigeKoder = apListe.filter(ap => !erBekreftetAksjonspunkt(ap)).map(ap => ap.kode);
-      throw new Error(`Bekreft-endepunktet kan ikke lagre overstyringsaksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
+      throw new Error(`Bekreft-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
     }
     const bekreftedeAksjonspunkter = apListe.filter(erBekreftetAksjonspunkt);
-    const models = bekreftedeAksjonspunkter.map(ap => ({
-      '@type': ap.kode,
-      ...ap,
-    }));
+    const models = bekreftedeAksjonspunkter.map(medType);
 
     return lagreAksjonspunkter({
       ...params,

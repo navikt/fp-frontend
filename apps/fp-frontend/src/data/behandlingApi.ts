@@ -1,15 +1,24 @@
-import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type {
+  AvklartFaktaFeilutbetalingAp,
+  FeilutbetalingÅrsak,
+  FeilutbetalingFakta,
+} from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
   BeregnBeløpParams,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
 } from '@navikt/ft-prosess-tilbakekreving';
-import type { ForhandsvisData, Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
+import type {
+  ForeslaVedtakTilbakekrevingAp,
+  ForhandsvisData,
+  Vedtaksbrev,
+} from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { queryOptions } from '@tanstack/react-query';
 import ky, { type ResponsePromise } from 'ky';
 
 import type { PapirsøknadAp } from '@navikt/fp-papirsoknad';
 import type {
+  AksjonspunktKodeTilbakekreving,
   AnkeVurdering,
   AnnenforelderUttakEøsPeriode,
   ApiLink,
@@ -22,6 +31,7 @@ import type {
   BehandlingIdVersjonDto,
   BehandlingMedUttaksperioderDto,
   BekreftedeAksjonspunkterDto,
+  BekreftetAksjonspunktDto,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
@@ -88,23 +98,23 @@ type SettPåVentParams = Omit<SettBehandlingPaVentDto, 'ventearsak'> & {
 // fptilbake bruker fritekst til henleggelsesbrev
 type HenleggBehandlingParams = HenleggBehandlingDto & { fritekst?: string };
 
+type BekreftetKode = BekreftetAksjonspunktDto['@type'] | AksjonspunktKodeTilbakekreving;
+type TilbakekrevingAksjonspunkt = AvklartFaktaFeilutbetalingAp | ForeslaVedtakTilbakekrevingAp;
 type OverstyringKode = OverstyringAksjonspunktDto['@type'];
-export type AlleAksjonspunkt = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFaresignalerAp | PapirsøknadAp;
-export type OverstyrtAksjonspunkt = Extract<AlleAksjonspunkt, { kode: OverstyringKode }>;
-export type BekreftetAksjonspunkt = Exclude<AlleAksjonspunkt, { kode: OverstyringKode }>;
+type AksjonspunktMedKode = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFaresignalerAp;
+export type OverstyrtAksjonspunkt = Extract<AksjonspunktMedKode, { kode: OverstyringKode }>;
+export type BekreftetAksjonspunkt = Extract<AksjonspunktMedKode, { kode: BekreftetKode }> | TilbakekrevingAksjonspunkt;
+
+export type MedType<T> = T extends { kode: infer K } ? T & { '@type': K } : never;
 
 export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;
-  bekreftedeAksjonspunktDtoer: ({
-    '@type': string;
-  } & BekreftetAksjonspunkt)[];
+  bekreftedeAksjonspunktDtoer: (MedType<BekreftetAksjonspunkt> | PapirsøknadAp)[];
 };
 
 export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'overstyrteAksjonspunktDtoer'> & {
   saksnummer: string;
-  overstyrteAksjonspunktDtoer: ({
-    '@type': string;
-  } & OverstyrtAksjonspunkt)[];
+  overstyrteAksjonspunktDtoer: MedType<OverstyrtAksjonspunkt>[];
 };
 
 const kyExtended = ky.extend({

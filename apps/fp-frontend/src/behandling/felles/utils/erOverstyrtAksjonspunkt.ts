@@ -1,15 +1,11 @@
-import type {
-  AlleAksjonspunkt,
-  BekreftetAksjonspunkt,
-  OverstyrtAksjonspunkt,
-} from '../../../data/behandlingApi';
+import type { BekreftetAksjonspunkt, MedType, OverstyrtAksjonspunkt } from '../../../data/behandlingApi';
 
-type AksjonspunktMedKode = Extract<AlleAksjonspunkt, { kode: string }>;
+const erBackendKode = (kode: string) => /^\d{4}$/.test(kode);
 
-export const erOverstyrtAksjonspunkt = <T extends AksjonspunktMedKode>(
-  ap: T,
-): ap is Extract<T, OverstyrtAksjonspunkt> => ap.kode.startsWith('6');
+export const erOverstyrtAksjonspunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, OverstyrtAksjonspunkt> =>
+  erBackendKode(ap.kode) && ap.kode.startsWith('6');
 
-export const erBekreftetAksjonspunkt = <T extends AksjonspunktMedKode>(
-  ap: T,
-): ap is Extract<T, BekreftetAksjonspunkt> => !ap.kode.startsWith('6');
+export const erBekreftetAksjonspunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, BekreftetAksjonspunkt> =>
+  erBackendKode(ap.kode) && !ap.kode.startsWith('6');
+
+export const medType = <T extends { kode: string }>(ap: T) => ({ '@type': ap.kode, ...ap }) as MedType<T>;
