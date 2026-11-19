@@ -42,3 +42,10 @@ export type {
   tjenester_avdelingsleder_saksliste_dto_SakslisteOgAvdelingDto as SakslisteOgAvdelingDto,
   tjenester_avdelingsleder_saksliste_dto_SakslisteSaksbehandlerDto as SakslisteSaksbehandlerDto,
 } from './fplos.gen';
+
+export type {
+  tjenester_felles_dto_AsyncPollingStatus as LosAsyncPollingStatus,
+  tjenester_felles_dto_AsyncPollingStatus_Status as LosPollingStatus,
+  tjenester_saksbehandler_oppgave_dto_OppgaveIderDto as OppgaveIderDto,
+  tjenester_saksbehandler_oppgave_dto_SaknummerIderDto as SaknummerIderDto,
+} from './fplos.gen';

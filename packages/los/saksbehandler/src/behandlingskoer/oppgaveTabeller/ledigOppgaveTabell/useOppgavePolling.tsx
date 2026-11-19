@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
-import { type AsyncPollingStatus, type OppgaveDto } from '@navikt/fp-types';
+import type { LosAsyncPollingStatus, LosPollingStatus, OppgaveDto, OppgaveIderDto } from '@navikt/fp-types';
 
 import { doGetRequest, getOppgaverTilBehandling } from '../../../data/fplosSaksbehandlerApi';
 
@@ -12,6 +12,7 @@ const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 1800;
 const MAX_POLLING_REACHED = 'MAX_POLLING';
 const MAX_POLLING_INTERVAL = 1000 * 60 * 5;
+const POLLING_STATUSER: LosPollingStatus[] = ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'];
 
 const pollOgHentData = async (
   valgtSakslisteId: number,
@@ -19,7 +20,7 @@ const pollOgHentData = async (
   getSakslisteId: () => number,
   pollingCounter = 0,
 ) => {
-  const response = await doGetRequest<AsyncPollingStatus | OppgaveDto[]>(location);
+  const response = await doGetRequest<LosAsyncPollingStatus | OppgaveDto[]>(location);
   if (getSakslisteId() !== valgtSakslisteId) {
     return [];
   }
@@ -64,8 +65,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
     error: tilBehandlingError,
   } = useMutation({
     retry: skalPrøveLeseoperasjonPåNytt,
-    mutationFn: (values: { oppgaveIder?: string }) =>
-      hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
+    mutationFn: (values: Partial<OppgaveIderDto>) => hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
   });
 
   useEffect(() => {
@@ -115,8 +115,6 @@ const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
-const isPollingResponse = (response: AsyncPollingStatus | OppgaveDto[]): response is AsyncPollingStatus => {
-  return (
-    !Array.isArray(response) && ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status)
-  );
+const isPollingResponse = (response: LosAsyncPollingStatus | OppgaveDto[]): response is LosAsyncPollingStatus => {
+  return !Array.isArray(response) && response.status !== undefined && POLLING_STATUSER.includes(response.status);
 };

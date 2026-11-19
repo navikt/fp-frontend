@@ -118,7 +118,7 @@ export const GjeldendeSakslisterTabell = ({
             <Table.DataCell align="right">{reserverteOppgaver(saksliste)}</Table.DataCell>
             <Table.DataCell align="right">
               <HStack gap="space-8" justify="end" wrap={false}>
-                <OppgaverGrafDialog saksliste={saksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+                <OppgaverGrafDialog saksliste={saksliste} />
                 <Button
                   variant="tertiary"
                   data-color="danger"

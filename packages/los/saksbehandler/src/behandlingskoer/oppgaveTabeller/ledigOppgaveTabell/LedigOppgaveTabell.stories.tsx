@@ -7,7 +7,7 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import { type AsyncPollingStatus, type OppgaveDto } from '@navikt/fp-types';
+import { type LosAsyncPollingStatus, type OppgaveDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { LedigOppgaveTabell } from './LedigOppgaveTabell';
@@ -72,7 +72,7 @@ export const Default: Story = {
           : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
       }),
       http.get('https://www.test.com/api/status', () =>
-        HttpResponse.json<AsyncPollingStatus>({
+        HttpResponse.json<LosAsyncPollingStatus>({
           status: 'PENDING',
           pollIntervalMillis: 100_000_000,
           message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
@@ -100,7 +100,7 @@ export const TomOppgaveTabell: Story = {
           : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
       }),
       http.get('https://www.test.com/api/status', () =>
-        HttpResponse.json<AsyncPollingStatus>({
+        HttpResponse.json<LosAsyncPollingStatus>({
           status: 'PENDING',
           pollIntervalMillis: 100_000_000,
           message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',

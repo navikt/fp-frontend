@@ -8,7 +8,9 @@ import type {
   OppgaveDto,
   OppgaveDtoMedStatus,
   OppgaveIdDto,
+  OppgaveIderDto,
   ReservasjonStatusDto,
+  SaknummerIderDto,
   SaksbehandlerDto,
   SakslisteDto,
 } from '@navikt/fp-types';
@@ -43,7 +45,6 @@ export const LosUrl = {
   OPPGAVER_FOR_FAGSAKER: wrapUrl('/fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker'),
   HENT_RESERVASJONSSTATUS: wrapUrl('/fplos/api/reservasjon/reservasjon-status'),
   OPPHEV_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/opphev-reservasjon'),
-  FORLENG_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/forleng'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
   HENT_AKTUELLE_SAKSBEHANDLERE: wrapUrl('/fplos/api/reservasjon/hent-aktuelle-saksbehandlere'),
@@ -55,7 +56,7 @@ export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
 export const getReservasjonsstatus = (oppgaveId: number) =>
   kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<ReservasjonStatusDto>();
 
-export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
+export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: OppgaveIderDto['oppgaveIder']) =>
   kyExtended.get<OppgaveDto[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
     searchParams: oppgaveIder
       ? {
@@ -70,7 +71,7 @@ export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
 export const getOppgaverForFagsaker = (saksnummer: string[]) =>
   kyExtended
     .get(LosUrl.OPPGAVER_FOR_FAGSAKER, {
-      searchParams: { saksnummerListe: saksnummer.join(',') },
+      searchParams: { saksnummerListe: saksnummer.join(',') } satisfies SaknummerIderDto,
     })
     .json<OppgaveDto[]>();
 

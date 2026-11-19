@@ -87,15 +87,13 @@ export const initFetchOptions = () =>
     queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitLinksDto>(),
   });
 
-const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
-  kyExtended
-    .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
-    .json<KøStatistikkDto[]>();
+const getOppgaveFilterStatistikk = (sakslisteId: number) =>
+  kyExtended.get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId } }).json<KøStatistikkDto[]>();
 
-export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
+export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number) =>
   queryOptions({
-    queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId, valgtAvdelingEnhet],
-    queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId, valgtAvdelingEnhet),
+    queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId],
+    queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId),
   });
 
 export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>

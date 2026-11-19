@@ -12,10 +12,9 @@ import { oppgaveFilterStatistikkOptions } from '../data/fplosAvdelingslederApi';
 
 interface Props {
   saksliste: SakslisteDto;
-  valgtAvdelingEnhet: string;
 }
 
-export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => {
+export const OppgaverGrafDialog = ({ saksliste }: Props) => {
   const intl = useIntl();
   return (
     <Dialog>
@@ -34,7 +33,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
         </Dialog.Header>
         <Dialog.Body>
           <VStack gap="space-16">
-            <OppgaverGrafDialogBody valgtSakslisteId={saksliste.sakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+            <OppgaverGrafDialogBody valgtSakslisteId={saksliste.sakslisteId} />
           </VStack>
         </Dialog.Body>
         <Dialog.Footer>
@@ -51,16 +50,10 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
 
 type VisningType = 'aktive' | 'lukkede';
 
-const OppgaverGrafDialogBody = ({
-  valgtSakslisteId,
-  valgtAvdelingEnhet,
-}: {
-  valgtSakslisteId: number;
-  valgtAvdelingEnhet: string;
-}) => {
+const OppgaverGrafDialogBody = ({ valgtSakslisteId }: { valgtSakslisteId: number }) => {
   const intl = useIntl();
   const { data: køStatistikk, isPending } = useQuery({
-    ...oppgaveFilterStatistikkOptions(valgtSakslisteId, valgtAvdelingEnhet),
+    ...oppgaveFilterStatistikkOptions(valgtSakslisteId),
   });
   const [visningType, setVisningType] = useState<VisningType>();
 
