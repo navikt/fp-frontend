@@ -129,7 +129,7 @@ const sharedRulesConfig = {
     'no-unused-vars': OFF,
     '@typescript-eslint/no-unused-vars': [ERROR],
 
-    // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
+    // Dekkes av tsc
     'import-x/no-unresolved': OFF,
 
     'no-restricted-syntax': [
