@@ -19,7 +19,6 @@ export const fordelingsgrunnlag: Fordelingsgrunnlag = {
           refusjonPrMnd: 15_000,
           utfall: 'REDUSERT',
           utfallÅrsak: 'IKKE_INNENFOR_FRIST',
-          utfallBegrunnelse: 'Refusjonskravet kom inn etter fristen for deler av perioden.',
         },
       ],
     },
