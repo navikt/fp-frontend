@@ -57,6 +57,7 @@ import type {
   Oppgave,
   Opptjening,
   OpptjeningIUtlandDokStatusDto,
+  OverstyringAksjonspunktDto,
   OverstyrteAksjonspunkterDto,
   Personoversikt,
   ReåpneBehandlingDto,
@@ -87,22 +88,23 @@ type SettPåVentParams = Omit<SettBehandlingPaVentDto, 'ventearsak'> & {
 // fptilbake bruker fritekst til henleggelsesbrev
 type HenleggBehandlingParams = HenleggBehandlingDto & { fritekst?: string };
 
-//TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
-
-type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFaresignalerAp | PapirsøknadAp;
+type OverstyringKode = OverstyringAksjonspunktDto['@type'];
+export type AlleAksjonspunkt = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFaresignalerAp | PapirsøknadAp;
+export type OverstyrtAksjonspunkt = Extract<AlleAksjonspunkt, { kode: OverstyringKode }>;
+export type BekreftetAksjonspunkt = Exclude<AlleAksjonspunkt, { kode: OverstyringKode }>;
 
 export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
-  } & AksjonspunktType)[];
+  } & BekreftetAksjonspunkt)[];
 };
 
 export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'overstyrteAksjonspunktDtoer'> & {
   saksnummer: string;
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
-  } & AksjonspunktType)[];
+  } & OverstyrtAksjonspunkt)[];
 };
 
 const kyExtended = ky.extend({

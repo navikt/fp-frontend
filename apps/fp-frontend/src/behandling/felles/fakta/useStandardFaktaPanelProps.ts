@@ -5,6 +5,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
+import { erBekreftetAksjonspunkt, erOverstyrtAksjonspunkt } from '../utils/erOverstyrtAksjonspunkt';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
@@ -74,11 +75,6 @@ const getBekreftAksjonspunktFaktaCallback =
   (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
     const apListe = Array.isArray(aksjonspunkter) ? aksjonspunkter : [aksjonspunkter];
 
-    const model = apListe.map(ap => ({
-      '@type': ap.kode,
-      ...ap,
-    }));
-
     const params = {
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
@@ -86,10 +82,19 @@ const getBekreftAksjonspunktFaktaCallback =
     };
 
     if (overstyringApCodes.length > 0) {
-      if (model.length === 0) {
+      if (apListe.length === 0) {
         throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
-      if (overstyringApCodes.includes(model[0]?.kode ?? '')) {
+      if (overstyringApCodes.includes(apListe[0]?.kode ?? '')) {
+        if (!apListe.every(erOverstyrtAksjonspunkt)) {
+          const ugyldigeKoder = apListe.filter(ap => !erOverstyrtAksjonspunkt(ap)).map(ap => ap.kode);
+          throw new Error(`Overstyr-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
+        }
+        const overstyrteAksjonspunkter = apListe.filter(erOverstyrtAksjonspunkt);
+        const model = overstyrteAksjonspunkter.map(ap => ({
+          '@type': ap.kode,
+          ...ap,
+        }));
         return lagreOverstyrteAksjonspunkter({
           ...params,
           overstyrteAksjonspunktDtoer: model,
@@ -102,6 +107,16 @@ const getBekreftAksjonspunktFaktaCallback =
         });
       }
     }
+
+    if (!apListe.every(erBekreftetAksjonspunkt)) {
+      const ugyldigeKoder = apListe.filter(ap => !erBekreftetAksjonspunkt(ap)).map(ap => ap.kode);
+      throw new Error(`Bekreft-endepunktet kan ikke lagre overstyringsaksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
+    }
+    const bekreftedeAksjonspunkter = apListe.filter(erBekreftetAksjonspunkt);
+    const model = bekreftedeAksjonspunkter.map(ap => ({
+      '@type': ap.kode,
+      ...ap,
+    }));
 
     return lagreAksjonspunkter({
       ...params,
