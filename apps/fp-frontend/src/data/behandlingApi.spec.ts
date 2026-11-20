@@ -42,30 +42,23 @@ const stubFetch = () => {
 const innsyn = { kode: '5037', begrunnelse: 'test' } as unknown as VurderInnsynAp;
 const startdato = { kode: '6045', begrunnelse: 'test' } as unknown as OverstyringAvklarStartdatoForPeriodenAp;
 
+// Typesjekkene under håndheves av tsc, ikke av vitest.
+expectTypeOf<BeregningOverstyringAP>().not.toExtend<BekreftetAksjonspunkt>();
+expectTypeOf<BeregningOverstyringAP>().not.toExtend<OverstyrtAksjonspunkt>();
+
+expectTypeOf<VurderInnsynAp>().toExtend<BekreftetInput>();
+expectTypeOf<VurderInnsynAp>().not.toExtend<OverstyrtInput>();
+expectTypeOf<OverstyringAvklarStartdatoForPeriodenAp>().toExtend<OverstyrtInput>();
+expectTypeOf<OverstyringAvklarStartdatoForPeriodenAp>().not.toExtend<BekreftetInput>();
+
+expectTypeOf<FordelBeregningAp>().toExtend<BekreftetAksjonspunkt>();
+expectTypeOf<FordelBeregningsgrunnlagAP>().not.toExtend<BekreftetAksjonspunkt>();
+
+expectTypeOf<UtgåttKode>().toEqualTypeOf<'5056' | '6012'>();
+
 describe('behandlingApi', () => {
   afterEach(() => {
     vi.unstubAllGlobals();
-  });
-
-  it('skal avvise umappet aksjonspunkt fra ft-fakta-beregning', () => {
-    expectTypeOf<BeregningOverstyringAP>().not.toExtend<BekreftetAksjonspunkt>();
-    expectTypeOf<BeregningOverstyringAP>().not.toExtend<OverstyrtAksjonspunkt>();
-  });
-
-  it('skal avvise aksjonspunkt sendt til feil endepunkt', () => {
-    expectTypeOf<VurderInnsynAp>().toExtend<BekreftetInput>();
-    expectTypeOf<VurderInnsynAp>().not.toExtend<OverstyrtInput>();
-    expectTypeOf<OverstyringAvklarStartdatoForPeriodenAp>().toExtend<OverstyrtInput>();
-    expectTypeOf<OverstyringAvklarStartdatoForPeriodenAp>().not.toExtend<BekreftetInput>();
-  });
-
-  it('skal godta mappet fordelingsaksjonspunkt og avvise umappet', () => {
-    expectTypeOf<FordelBeregningAp>().toExtend<BekreftetAksjonspunkt>();
-    expectTypeOf<FordelBeregningsgrunnlagAP>().not.toExtend<BekreftetAksjonspunkt>();
-  });
-
-  it('skal kun ha 5056 og 6012 som utgåtte koder', () => {
-    expectTypeOf<UtgåttKode>().toEqualTypeOf<'5056' | '6012'>();
   });
 
   it('skal sette @type fra kode ved lagring av aksjonspunkt', async () => {
