@@ -5,6 +5,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
+import { skalTilBekreftEndepunkt, skalTilOverstyrEndepunkt } from '../utils/aksjonspunktEndepunkt';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
@@ -93,10 +94,6 @@ const getBekreftAksjonspunktProsessCallback =
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
-    const models = apListe.map(ap => ({
-      '@type': ap.kode,
-      ...ap,
-    }));
 
     const params = {
       saksnummer: fagsak.saksnummer,
@@ -122,9 +119,14 @@ const getBekreftAksjonspunktProsessCallback =
     }
 
     if (erOverstyring) {
+      if (!apListe.every(skalTilOverstyrEndepunkt)) {
+        const ugyldigeKoder = apListe.filter(ap => !skalTilOverstyrEndepunkt(ap)).map(ap => ap.kode);
+        throw new Error(`Overstyr-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
+      }
+      const overstyrteAksjonspunkter = apListe.filter(skalTilOverstyrEndepunkt);
       return lagreOverstyrteAksjonspunkter({
         ...params,
-        overstyrteAksjonspunktDtoer: models,
+        overstyrteAksjonspunktDtoer: overstyrteAksjonspunkter,
       }).then(etterLagringCallback);
     }
 
@@ -137,9 +139,15 @@ const getBekreftAksjonspunktProsessCallback =
       );
     }
 
+    if (!apListe.every(skalTilBekreftEndepunkt)) {
+      const ugyldigeKoder = apListe.filter(ap => !skalTilBekreftEndepunkt(ap)).map(ap => ap.kode);
+      throw new Error(`Bekreft-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
+    }
+    const bekreftedeAksjonspunkter = apListe.filter(skalTilBekreftEndepunkt);
+
     return lagreAksjonspunkter({
       ...params,
-      bekreftedeAksjonspunktDtoer: models,
+      bekreftedeAksjonspunktDtoer: bekreftedeAksjonspunkter,
     }).then(etterLagringCallback);
   };
 

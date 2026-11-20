@@ -1,15 +1,24 @@
-import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type {
+  AvklartFaktaFeilutbetalingAp,
+  FeilutbetalingÅrsak,
+  FeilutbetalingFakta,
+} from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
   BeregnBeløpParams,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
 } from '@navikt/ft-prosess-tilbakekreving';
-import type { ForhandsvisData, Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
+import type {
+  ForeslaVedtakTilbakekrevingAp,
+  ForhandsvisData,
+  Vedtaksbrev,
+} from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { queryOptions } from '@tanstack/react-query';
 import ky, { type ResponsePromise } from 'ky';
 
 import type { PapirsøknadAp } from '@navikt/fp-papirsoknad';
 import type {
+  AksjonspunktKodeTilbakekreving,
   AnkeVurdering,
   AnnenforelderUttakEøsPeriode,
   ApiLink,
@@ -22,6 +31,7 @@ import type {
   BehandlingIdVersjonDto,
   BehandlingMedUttaksperioderDto,
   BekreftedeAksjonspunkterDto,
+  BekreftetAksjonspunktDto,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
@@ -57,6 +67,7 @@ import type {
   Oppgave,
   Opptjening,
   OpptjeningIUtlandDokStatusDto,
+  OverstyringAksjonspunktDto,
   OverstyrteAksjonspunkterDto,
   Personoversikt,
   ReåpneBehandlingDto,
@@ -87,23 +98,33 @@ type SettPåVentParams = Omit<SettBehandlingPaVentDto, 'ventearsak'> & {
 // fptilbake bruker fritekst til henleggelsesbrev
 type HenleggBehandlingParams = HenleggBehandlingDto & { fritekst?: string };
 
-//TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
+type BekreftetKode = BekreftetAksjonspunktDto['@type'] | AksjonspunktKodeTilbakekreving;
+type TilbakekrevingAksjonspunkt = AvklartFaktaFeilutbetalingAp | ForeslaVedtakTilbakekrevingAp;
+type OverstyringKode = OverstyringAksjonspunktDto['@type'];
+type AksjonspunktMedKode = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFaresignalerAp;
+export type OverstyrtAksjonspunkt = Extract<AksjonspunktMedKode, { kode: OverstyringKode }>;
+export type BekreftetAksjonspunkt = Extract<AksjonspunktMedKode, { kode: BekreftetKode }> | TilbakekrevingAksjonspunkt;
 
-type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | VurderFaresignalerAp | PapirsøknadAp;
+export type UtgåttKode = Exclude<
+  Extract<AksjonspunktMedKode['kode'], `${number}`>,
+  BekreftetKode | OverstyringKode | TilbakekrevingAksjonspunkt['kode']
+>;
 
 export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;
-  bekreftedeAksjonspunktDtoer: ({
-    '@type': string;
-  } & AksjonspunktType)[];
+  bekreftedeAksjonspunktDtoer: (BekreftetAksjonspunkt | PapirsøknadAp)[];
 };
 
 export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'overstyrteAksjonspunktDtoer'> & {
   saksnummer: string;
-  overstyrteAksjonspunktDtoer: ({
-    '@type': string;
-  } & AksjonspunktType)[];
+  overstyrteAksjonspunktDtoer: OverstyrtAksjonspunkt[];
 };
+
+const medTypeFraKode = (
+  ap:
+    | AksjonspunktArgs['bekreftedeAksjonspunktDtoer'][number]
+    | OverstyrteAksjonspunktArgs['overstyrteAksjonspunktDtoer'][number],
+) => ('kode' in ap ? { ...ap, '@type': ap.kode } : ap);
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -746,12 +767,12 @@ const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
 
 const getLagreAksjonspunkt = (links: ApiLink[]) => (params: AksjonspunktArgs) =>
   kyExtended.post<BehandlingFpSak>(getUrlFromRel('SAVE_AKSJONSPUNKT', links), {
-    json: params,
+    json: { ...params, bekreftedeAksjonspunktDtoer: params.bekreftedeAksjonspunktDtoer.map(medTypeFraKode) },
   });
 
 const getLagreOverstyrtAksjonspunkt = (links: ApiLink[]) => (params: OverstyrteAksjonspunktArgs) =>
   kyExtended.post<BehandlingFpSak>(getUrlFromRel('SAVE_OVERSTYRT_AKSJONSPUNKT', links), {
-    json: params,
+    json: { ...params, overstyrteAksjonspunktDtoer: params.overstyrteAksjonspunktDtoer.map(medTypeFraKode) },
   });
 
 const getRegistrerArbeidsforholdForAOI = (links: ApiLink[]) => (params: ManueltArbeidsforhold) =>
