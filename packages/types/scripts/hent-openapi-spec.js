@@ -92,10 +92,12 @@ async function hentOpenAPISpec(source, token) {
 try {
   console.log(`Kjører i ${isLokal ? 'lokal' : 'remote'} modus.`);
 
-  for (const source of SOURCES) {
-    const token = await hentToken(source.aud);
-    await hentOpenAPISpec(source, token);
-  }
+  await Promise.all(
+    SOURCES.map(async source => {
+      const token = await hentToken(source.aud);
+      await hentOpenAPISpec(source, token);
+    }),
+  );
 } catch (error) {
   console.error(error);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
