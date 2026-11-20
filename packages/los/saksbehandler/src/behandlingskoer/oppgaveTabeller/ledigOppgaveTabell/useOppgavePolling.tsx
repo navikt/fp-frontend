@@ -12,6 +12,7 @@ const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 1800;
 const MAX_POLLING_REACHED = 'MAX_POLLING';
 const MAX_POLLING_INTERVAL = 1000 * 60 * 5;
+const VENTETID_VED_TOM_LISTE_MILLIS = 5000;
 const POLLING_STATUSER: LosPollingStatus[] = ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'];
 
 const pollOgHentData = async (
@@ -82,8 +83,17 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
         setNyeBehandlinger(tilBehandling.filter(o => oppgaverTilBehandling.every(ob => ob.id !== o.id)));
       }
 
-      void pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });
+      const oppgaveIder = tilBehandling.map(o => o.id).join(',');
+      if (tilBehandling.length > 0) {
+        void pollEtterOppgaver({ oppgaveIder });
+      } else {
+        // Uten oppgaveIder svarer fplos med resultat med en gang når køen har ledige oppgaver
+        // som saksbehandler ikke har tilgang til. Uten pause blir det en tett løkke.
+        const timeoutId = setTimeout(() => void pollEtterOppgaver({ oppgaveIder }), VENTETID_VED_TOM_LISTE_MILLIS);
+        return () => clearTimeout(timeoutId);
+      }
     }
+    return undefined;
     // eslint-disable-next-line react-hooks/exhaustive-deps -- polling-kjede som berre skal reagere på isSuccess; oppgaver/pollEtterOppgaver ville gitt loop
   }, [isSuccess]);
 
