@@ -75,7 +75,7 @@ describe('useStandardFaktaPanelProps', () => {
     await submitCallback(overstyrt);
 
     expect(lagreOverstyrteAksjonspunkter).toHaveBeenCalledWith(
-      expect.objectContaining({ overstyrteAksjonspunktDtoer: [{ '@type': '6045', ...overstyrt }] }),
+      expect.objectContaining({ overstyrteAksjonspunktDtoer: [overstyrt] }),
     );
     expect(lagreAksjonspunkter).not.toHaveBeenCalled();
   });
@@ -86,7 +86,7 @@ describe('useStandardFaktaPanelProps', () => {
     await submitCallback(bekreftet);
 
     expect(lagreAksjonspunkter).toHaveBeenCalledWith(
-      expect.objectContaining({ bekreftedeAksjonspunktDtoer: [{ '@type': '5002', ...bekreftet }] }),
+      expect.objectContaining({ bekreftedeAksjonspunktDtoer: [bekreftet] }),
     );
     expect(lagreOverstyrteAksjonspunkter).not.toHaveBeenCalled();
   });
@@ -125,15 +125,4 @@ describe('useStandardFaktaPanelProps', () => {
       expect(lagreOverstyrteAksjonspunkter).not.toHaveBeenCalled();
     },
   );
-
-  it('skal sette @type fra kode selv om aksjonspunktet har en annen @type', async () => {
-    const { submitCallback, lagreOverstyrteAksjonspunkter } = rendreHook();
-    const medFeilType = { ...overstyrt, '@type': '5002' };
-
-    await submitCallback(medFeilType);
-
-    expect(lagreOverstyrteAksjonspunkter).toHaveBeenCalledWith(
-      expect.objectContaining({ overstyrteAksjonspunktDtoer: [{ ...overstyrt, '@type': '6045' }] }),
-    );
-  });
 });

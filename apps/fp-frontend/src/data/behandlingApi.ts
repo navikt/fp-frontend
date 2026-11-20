@@ -110,21 +110,17 @@ export type UtgåttKode = Exclude<
   BekreftetKode | OverstyringKode | TilbakekrevingAksjonspunkt['kode']
 >;
 
-export type MedType<T> = T extends { kode: infer K }
-  ? K extends unknown
-    ? Omit<T, 'kode'> & { kode: K; '@type': K }
-    : never
-  : never;
-
 export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;
-  bekreftedeAksjonspunktDtoer: (MedType<BekreftetAksjonspunkt> | PapirsøknadAp)[];
+  bekreftedeAksjonspunktDtoer: (BekreftetAksjonspunkt | PapirsøknadAp)[];
 };
 
 export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'overstyrteAksjonspunktDtoer'> & {
   saksnummer: string;
-  overstyrteAksjonspunktDtoer: MedType<OverstyrtAksjonspunkt>[];
+  overstyrteAksjonspunktDtoer: OverstyrtAksjonspunkt[];
 };
+
+const medTypeFraKode = <T extends object>(ap: T) => ('kode' in ap ? { ...ap, '@type': ap.kode } : ap);
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -767,12 +763,12 @@ const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
 
 const getLagreAksjonspunkt = (links: ApiLink[]) => (params: AksjonspunktArgs) =>
   kyExtended.post<BehandlingFpSak>(getUrlFromRel('SAVE_AKSJONSPUNKT', links), {
-    json: params,
+    json: { ...params, bekreftedeAksjonspunktDtoer: params.bekreftedeAksjonspunktDtoer.map(medTypeFraKode) },
   });
 
 const getLagreOverstyrtAksjonspunkt = (links: ApiLink[]) => (params: OverstyrteAksjonspunktArgs) =>
   kyExtended.post<BehandlingFpSak>(getUrlFromRel('SAVE_OVERSTYRT_AKSJONSPUNKT', links), {
-    json: params,
+    json: { ...params, overstyrteAksjonspunktDtoer: params.overstyrteAksjonspunktDtoer.map(medTypeFraKode) },
   });
 
 const getRegistrerArbeidsforholdForAOI = (links: ApiLink[]) => (params: ManueltArbeidsforhold) =>

@@ -5,7 +5,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
-import { erBekreftetAksjonspunkt, erOverstyrtAksjonspunkt, medType } from '../utils/erOverstyrtAksjonspunkt';
+import { skalTilBekreftEndepunkt, skalTilOverstyrEndepunkt } from '../utils/aksjonspunktEndepunkt';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
@@ -86,17 +86,16 @@ const getBekreftAksjonspunktFaktaCallback =
         throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
       if (overstyringApCodes.includes(apListe[0]?.kode ?? '')) {
-        if (!apListe.every(erOverstyrtAksjonspunkt)) {
-          const ugyldigeKoder = apListe.filter(ap => !erOverstyrtAksjonspunkt(ap)).map(ap => ap.kode);
+        if (!apListe.every(skalTilOverstyrEndepunkt)) {
+          const ugyldigeKoder = apListe.filter(ap => !skalTilOverstyrEndepunkt(ap)).map(ap => ap.kode);
           throw new Error(
             `Overstyr-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`,
           );
         }
-        const overstyrteAksjonspunkter = apListe.filter(erOverstyrtAksjonspunkt);
-        const model = overstyrteAksjonspunkter.map(medType);
+        const overstyrteAksjonspunkter = apListe.filter(skalTilOverstyrEndepunkt);
         return lagreOverstyrteAksjonspunkter({
           ...params,
-          overstyrteAksjonspunktDtoer: model,
+          overstyrteAksjonspunktDtoer: overstyrteAksjonspunkter,
         }).then(() => {
           oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
           scrollTo({
@@ -107,16 +106,15 @@ const getBekreftAksjonspunktFaktaCallback =
       }
     }
 
-    if (!apListe.every(erBekreftetAksjonspunkt)) {
-      const ugyldigeKoder = apListe.filter(ap => !erBekreftetAksjonspunkt(ap)).map(ap => ap.kode);
+    if (!apListe.every(skalTilBekreftEndepunkt)) {
+      const ugyldigeKoder = apListe.filter(ap => !skalTilBekreftEndepunkt(ap)).map(ap => ap.kode);
       throw new Error(`Bekreft-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
     }
-    const bekreftedeAksjonspunkter = apListe.filter(erBekreftetAksjonspunkt);
-    const model = bekreftedeAksjonspunkter.map(medType);
+    const bekreftedeAksjonspunkter = apListe.filter(skalTilBekreftEndepunkt);
 
     return lagreAksjonspunkter({
       ...params,
-      bekreftedeAksjonspunktDtoer: model,
+      bekreftedeAksjonspunktDtoer: bekreftedeAksjonspunkter,
     }).then(() => {
       oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
       scrollTo({

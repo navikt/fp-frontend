@@ -2,37 +2,61 @@ import type { BeregningOverstyringAP } from '@navikt/ft-fakta-beregning';
 import type { FordelBeregningsgrunnlagAP } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { expectTypeOf } from 'vitest';
 
-import type { BeregningsgrunnlagAp, FordelBeregningAp, VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-
+import type { PapirsøknadAp } from '@navikt/fp-papirsoknad';
+import type { Behandling } from '@navikt/fp-types';
 import type {
-  AksjonspunktArgs,
-  BekreftetAksjonspunkt,
-  MedType,
-  OverstyrtAksjonspunkt,
-  OverstyrteAksjonspunktArgs,
-  UtgåttKode,
+  FordelBeregningAp,
+  OverstyringAvklarStartdatoForPeriodenAp,
+  VurderInnsynAp,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import {
+  type AksjonspunktArgs,
+  type BekreftetAksjonspunkt,
+  getBehandlingApi,
+  type OverstyrtAksjonspunkt,
+  type OverstyrteAksjonspunktArgs,
+  type UtgåttKode,
 } from './behandlingApi';
 
-type BekreftetDto = AksjonspunktArgs['bekreftedeAksjonspunktDtoer'][number];
-type OverstyrtDto = OverstyrteAksjonspunktArgs['overstyrteAksjonspunktDtoer'][number];
+type BekreftetInput = AksjonspunktArgs['bekreftedeAksjonspunktDtoer'][number];
+type OverstyrtInput = OverstyrteAksjonspunktArgs['overstyrteAksjonspunktDtoer'][number];
+
+const lagApi = () =>
+  getBehandlingApi({
+    links: [
+      { rel: 'lagre-aksjonspunkter', href: '/bekreft', requestPayload: undefined, type: 'POST' },
+      { rel: 'lagre-overstyr-aksjonspunkter', href: '/overstyr', requestPayload: undefined, type: 'POST' },
+    ],
+  } as unknown as Behandling);
+
+const stubFetch = () => {
+  const requests: { url: string; body: Record<string, unknown> }[] = [];
+  vi.stubGlobal('fetch', async (request: Request) => {
+    requests.push({ url: request.url, body: (await request.clone().json()) as Record<string, unknown> });
+    return new Response('{}');
+  });
+  return () => requests[0]!;
+};
+
+const innsyn = { kode: '5037', begrunnelse: 'test' } as unknown as VurderInnsynAp;
+const startdato = { kode: '6045', begrunnelse: 'test' } as unknown as OverstyringAvklarStartdatoForPeriodenAp;
 
 describe('behandlingApi', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it('skal avvise umappet aksjonspunkt fra ft-fakta-beregning', () => {
     expectTypeOf<BeregningOverstyringAP>().not.toExtend<BekreftetAksjonspunkt>();
     expectTypeOf<BeregningOverstyringAP>().not.toExtend<OverstyrtAksjonspunkt>();
   });
 
-  it('skal kreve at @type er lik kode', () => {
-    expectTypeOf<VurderInnsynAp & { '@type': '5037' }>().toExtend<BekreftetDto>();
-    expectTypeOf<VurderInnsynAp & { '@type': '6045' }>().not.toExtend<BekreftetDto>();
-    expectTypeOf<VurderInnsynAp & { '@type': '5037' }>().not.toExtend<OverstyrtDto>();
-  });
-
-  it('skal kreve samme kode og @type innenfor en variant med flere koder', () => {
-    type Dto5038 = Extract<MedType<BeregningsgrunnlagAp>, { kode: '5038' }>;
-    expectTypeOf<Dto5038>().toExtend<BekreftetDto>();
-    expectTypeOf<Dto5038['@type']>().toEqualTypeOf<'5038'>();
-    expectTypeOf<Omit<Dto5038, '@type'> & { '@type': '5039' }>().not.toExtend<BekreftetDto>();
+  it('skal avvise aksjonspunkt sendt til feil endepunkt', () => {
+    expectTypeOf<VurderInnsynAp>().toExtend<BekreftetInput>();
+    expectTypeOf<VurderInnsynAp>().not.toExtend<OverstyrtInput>();
+    expectTypeOf<OverstyringAvklarStartdatoForPeriodenAp>().toExtend<OverstyrtInput>();
+    expectTypeOf<OverstyringAvklarStartdatoForPeriodenAp>().not.toExtend<BekreftetInput>();
   });
 
   it('skal godta mappet fordelingsaksjonspunkt og avvise umappet', () => {
@@ -42,5 +66,50 @@ describe('behandlingApi', () => {
 
   it('skal kun ha 5056 og 6012 som utgåtte koder', () => {
     expectTypeOf<UtgåttKode>().toEqualTypeOf<'5056' | '6012'>();
+  });
+
+  it('skal sette @type fra kode ved lagring av aksjonspunkt', async () => {
+    const hentRequest = stubFetch();
+
+    await lagApi().pollingApi.lagreAksjonspunkt({
+      saksnummer: '1',
+      behandlingUuid: 'uuid',
+      behandlingVersjon: 1,
+      bekreftedeAksjonspunktDtoer: [{ ...innsyn, '@type': '6045' } as VurderInnsynAp],
+    });
+
+    const { url, body } = hentRequest();
+    expect(url).toBe('https://www.test.com/bekreft');
+    expect(body['bekreftedeAksjonspunktDtoer']).toEqual([{ ...innsyn, '@type': '5037' }]);
+  });
+
+  it('skal sende papirsøknad uendret', async () => {
+    const hentRequest = stubFetch();
+    const papirsøknad = { '@type': '5012', tema: 'FODSL' } as unknown as PapirsøknadAp;
+
+    await lagApi().pollingApi.lagreAksjonspunkt({
+      saksnummer: '1',
+      behandlingUuid: 'uuid',
+      behandlingVersjon: 1,
+      bekreftedeAksjonspunktDtoer: [papirsøknad],
+    });
+
+    const { body } = hentRequest();
+    expect(body['bekreftedeAksjonspunktDtoer']).toEqual([papirsøknad]);
+  });
+
+  it('skal sette @type fra kode ved lagring av overstyrt aksjonspunkt', async () => {
+    const hentRequest = stubFetch();
+
+    await lagApi().pollingApi.lagreOverstyrtAksjonspunkt({
+      saksnummer: '1',
+      behandlingUuid: 'uuid',
+      behandlingVersjon: 1,
+      overstyrteAksjonspunktDtoer: [startdato],
+    });
+
+    const { url, body } = hentRequest();
+    expect(url).toBe('https://www.test.com/overstyr');
+    expect(body['overstyrteAksjonspunktDtoer']).toEqual([{ ...startdato, '@type': '6045' }]);
   });
 });
