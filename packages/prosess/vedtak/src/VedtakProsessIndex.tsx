@@ -69,12 +69,12 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   if (!beregningsgrunnlag) {
     return false;
   }
-  const behandlingHarLøstBGAP = aksjonspunkter.find(
+  const behandlingHarLøstBGAP = aksjonspunkter.some(
     ap => BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.has(ap.definisjon) && ap.status === 'UTFO',
   );
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode.at(0);
   const andelSomErManueltFastsatt = førstePeriode?.beregningsgrunnlagPrStatusOgAndel?.find(
     andel => andel.overstyrtPrAar || andel.overstyrtPrAar === 0,
   );
-  return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
+  return behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
 };
