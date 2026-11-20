@@ -120,7 +120,11 @@ export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'over
   overstyrteAksjonspunktDtoer: OverstyrtAksjonspunkt[];
 };
 
-const medTypeFraKode = <T extends object>(ap: T) => ('kode' in ap ? { ...ap, '@type': ap.kode } : ap);
+const medTypeFraKode = (
+  ap:
+    | AksjonspunktArgs['bekreftedeAksjonspunktDtoer'][number]
+    | OverstyrteAksjonspunktArgs['overstyrteAksjonspunktDtoer'][number],
+) => ('kode' in ap ? { ...ap, '@type': ap.kode } : ap);
 
 const kyExtended = ky.extend({
   retry: 0,
