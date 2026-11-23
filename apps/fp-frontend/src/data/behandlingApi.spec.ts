@@ -56,6 +56,9 @@ expectTypeOf<FordelBeregningsgrunnlagAP>().not.toExtend<BekreftetAksjonspunkt>()
 
 expectTypeOf<UtgåttKode>().toEqualTypeOf<'5056' | '6012'>();
 
+expectTypeOf<PapirsøknadAp>().toExtend<BekreftetInput>();
+expectTypeOf<PapirsøknadAp & { kode: '6045' }>().not.toExtend<BekreftetInput>();
+
 describe('behandlingApi', () => {
   afterEach(() => {
     vi.unstubAllGlobals();

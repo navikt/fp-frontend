@@ -112,7 +112,7 @@ export type UtgåttKode = Exclude<
 
 export type AksjonspunktArgs = Omit<BekreftedeAksjonspunkterDto, 'bekreftedeAksjonspunktDtoer'> & {
   saksnummer: string;
-  bekreftedeAksjonspunktDtoer: (BekreftetAksjonspunkt | PapirsøknadAp)[];
+  bekreftedeAksjonspunktDtoer: (BekreftetAksjonspunkt | (PapirsøknadAp & { kode?: never }))[];
 };
 
 export type OverstyrteAksjonspunktArgs = Omit<OverstyrteAksjonspunkterDto, 'overstyrteAksjonspunktDtoer'> & {
@@ -124,7 +124,7 @@ const medTypeFraKode = (
   ap:
     | AksjonspunktArgs['bekreftedeAksjonspunktDtoer'][number]
     | OverstyrteAksjonspunktArgs['overstyrteAksjonspunktDtoer'][number],
-) => ('kode' in ap ? { ...ap, '@type': ap.kode } : ap);
+) => (ap.kode === undefined ? ap : { ...ap, '@type': ap.kode });
 
 const kyExtended = ky.extend({
   retry: 0,
