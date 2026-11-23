@@ -129,6 +129,11 @@ export const kriterieFilter: Record<AndreKriterierType, KriterieFilterDto> = {
     valgbarForBehandlingTyper: ['BT-002', 'BT-003', 'BT-004', 'BT-006', 'BT-007', 'BT-008', 'BT-009'],
     valgbarForYtelseTyper: ['ES', 'FP', 'SVP'],
   },
+  FEILUTBETALING: {
+    andreKriterierType: 'FEILUTBETALING',
+    valgbarForBehandlingTyper: ['BT-004', 'BT-002'],
+    valgbarForYtelseTyper: ['ES', 'FP', 'SVP'],
+  },
   NYTT_VEDTAK: {
     andreKriterierType: 'NYTT_VEDTAK',
     valgbarForBehandlingTyper: ['BT-004', 'BT-002'],
