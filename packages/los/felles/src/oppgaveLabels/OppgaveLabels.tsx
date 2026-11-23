@@ -76,6 +76,7 @@ const MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT = {
   ['VURDER_SYKDOM']: 'alt3',
   ['IKKE_VARSLET']: 'alt3',
   ['OVER_FIRE_RETTSGEBYR']: 'alt3',
+  ['FEILUTBETALING']: 'alt3',
   ['BARE_FAR_RETT']: 'alt2',
   ['UTLANDSSAK']: 'alt2',
   ['DØD']: 'alt2',
