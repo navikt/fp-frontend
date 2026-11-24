@@ -23,7 +23,7 @@
     "@navikt/ft-utils": "8.0.3",
     "dayjs": "1.11.23",
     "react": "19.3.1",
-    "react-intl": "12.1.7"
+    "react-intl": "12.2.0"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -33,6 +33,6 @@
     "@types/react": "19.3.0",
     "eslint": "10.15.0",
     "typescript": "6.0.3",
-    "vitest": "5.1.0"
+    "vitest": "5.1.1"
   }
 }

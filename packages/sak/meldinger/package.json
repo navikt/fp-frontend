@@ -31,7 +31,7 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-hook-form": "7.92.0",
-    "react-intl": "12.1.7"
+    "react-intl": "12.2.0"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -39,16 +39,16 @@
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
-    "@storybook/react": "10.6.7",
-    "@storybook/react-vite": "10.6.7",
+    "@storybook/react": "10.6.8",
+    "@storybook/react-vite": "10.6.8",
     "@testing-library/dom": "10.4.2",
     "@testing-library/react": "16.3.3",
-    "@testing-library/user-event": "14.6.12",
+    "@testing-library/user-event": "14.6.13",
     "@types/react": "19.3.0",
     "eslint": "10.15.0",
-    "storybook": "10.6.7",
+    "storybook": "10.6.8",
     "typescript": "6.0.3",
     "vite": "8.3.8",
-    "vitest": "5.1.0"
+    "vitest": "5.1.1"
   }
 }
