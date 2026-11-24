@@ -9,8 +9,26 @@ const UTGÅTTE_KODER: readonly string[] = [
 
 const erBackendKode = (kode: string) => /^\d{4}$/.test(kode) && !UTGÅTTE_KODER.includes(kode);
 
-export const skalTilOverstyrEndepunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, OverstyrtAksjonspunkt> =>
+const skalTilOverstyrEndepunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, OverstyrtAksjonspunkt> =>
   erBackendKode(ap.kode) && ap.kode.startsWith('6');
 
-export const skalTilBekreftEndepunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, BekreftetAksjonspunkt> =>
+const skalTilBekreftEndepunkt = <T extends { kode: string }>(ap: T): ap is Extract<T, BekreftetAksjonspunkt> =>
   erBackendKode(ap.kode) && !ap.kode.startsWith('6');
+
+const filtrerForEndepunkt = <T extends { kode: string }, U extends T>(
+  apListe: T[],
+  skalTilEndepunkt: (ap: T) => ap is U,
+  endepunkt: string,
+): U[] => {
+  const ugyldigeKoder = apListe.filter(ap => !skalTilEndepunkt(ap)).map(ap => ap.kode);
+  if (ugyldigeKoder.length > 0) {
+    throw new Error(`${endepunkt}-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
+  }
+  return apListe.filter(skalTilEndepunkt);
+};
+
+export const hentAksjonspunkterTilOverstyring = <T extends { kode: string }>(apListe: T[]) =>
+  filtrerForEndepunkt(apListe, skalTilOverstyrEndepunkt, 'Overstyr');
+
+export const hentAksjonspunkterTilBekreftelse = <T extends { kode: string }>(apListe: T[]) =>
+  filtrerForEndepunkt(apListe, skalTilBekreftEndepunkt, 'Bekreft');

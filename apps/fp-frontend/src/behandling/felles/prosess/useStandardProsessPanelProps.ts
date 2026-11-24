@@ -5,7 +5,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
-import { skalTilBekreftEndepunkt, skalTilOverstyrEndepunkt } from '../utils/aksjonspunktEndepunkt';
+import { hentAksjonspunkterTilBekreftelse, hentAksjonspunkterTilOverstyring } from '../utils/aksjonspunktEndepunkt';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
@@ -119,14 +119,9 @@ const getBekreftAksjonspunktProsessCallback =
     }
 
     if (erOverstyring) {
-      if (!apListe.every(skalTilOverstyrEndepunkt)) {
-        const ugyldigeKoder = apListe.filter(ap => !skalTilOverstyrEndepunkt(ap)).map(ap => ap.kode);
-        throw new Error(`Overstyr-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
-      }
-      const overstyrteAksjonspunkter = apListe.filter(skalTilOverstyrEndepunkt);
       return lagreOverstyrteAksjonspunkter({
         ...params,
-        overstyrteAksjonspunktDtoer: overstyrteAksjonspunkter,
+        overstyrteAksjonspunktDtoer: hentAksjonspunkterTilOverstyring(apListe),
       }).then(etterLagringCallback);
     }
 
@@ -139,15 +134,9 @@ const getBekreftAksjonspunktProsessCallback =
       );
     }
 
-    if (!apListe.every(skalTilBekreftEndepunkt)) {
-      const ugyldigeKoder = apListe.filter(ap => !skalTilBekreftEndepunkt(ap)).map(ap => ap.kode);
-      throw new Error(`Bekreft-endepunktet kan ikke lagre aksjonspunkter med kodene: ${ugyldigeKoder.join(', ')}.`);
-    }
-    const bekreftedeAksjonspunkter = apListe.filter(skalTilBekreftEndepunkt);
-
     return lagreAksjonspunkter({
       ...params,
-      bekreftedeAksjonspunktDtoer: bekreftedeAksjonspunkter,
+      bekreftedeAksjonspunktDtoer: hentAksjonspunkterTilBekreftelse(apListe),
     }).then(etterLagringCallback);
   };
 
