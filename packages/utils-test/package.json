@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "react": "19.3.1",
-    "react-intl": "12.1.7",
+    "react-intl": "12.2.0",
     "typescript": "6.0.3"
   },
   "devDependencies": {
