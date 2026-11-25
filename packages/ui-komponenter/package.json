@@ -7,18 +7,19 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "eslint": "eslint src/**/*.ts* --color",
-    "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "prettier:fix": "prettier --write src",
+    "test": "vitest",
+    "eslint": "eslint . --color",
+    "eslint:fix": "eslint --fix . --color",
+    "prettier:fix": "prettier --write .",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
     "@navikt/aksel-icons": "8.23.0",
     "@navikt/ds-react": "8.23.0",
-    "@navikt/fp-konstanter": "workspace:^",
+    "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/fp-utils": "workspace:^",
+    "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-utils": "8.0.4",
     "react": "19.3.1",
     "react-dom": "19.3.1",
@@ -27,8 +28,12 @@
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
+    "@navikt/fp-config-vite": "workspace:*",
+    "@navikt/fp-utils-test": "workspace:*",
     "@types/react": "19.3.0",
     "eslint": "10.15.0",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vite": "8.3.8",
+    "vitest": "5.1.1"
   }
 }
