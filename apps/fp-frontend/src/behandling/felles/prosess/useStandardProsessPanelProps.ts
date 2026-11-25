@@ -5,6 +5,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
+import { hentAksjonspunkterTilBekreftelse, hentAksjonspunkterTilOverstyring } from '../utils/aksjonspunktEndepunkt';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
@@ -93,10 +94,6 @@ const getBekreftAksjonspunktProsessCallback =
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
-    const models = apListe.map(ap => ({
-      '@type': ap.kode,
-      ...ap,
-    }));
 
     const params = {
       saksnummer: fagsak.saksnummer,
@@ -124,7 +121,7 @@ const getBekreftAksjonspunktProsessCallback =
     if (erOverstyring) {
       return lagreOverstyrteAksjonspunkter({
         ...params,
-        overstyrteAksjonspunktDtoer: models,
+        overstyrteAksjonspunktDtoer: hentAksjonspunkterTilOverstyring(apListe),
       }).then(etterLagringCallback);
     }
 
@@ -139,7 +136,7 @@ const getBekreftAksjonspunktProsessCallback =
 
     return lagreAksjonspunkter({
       ...params,
-      bekreftedeAksjonspunktDtoer: models,
+      bekreftedeAksjonspunktDtoer: hentAksjonspunkterTilBekreftelse(apListe),
     }).then(etterLagringCallback);
   };
 
