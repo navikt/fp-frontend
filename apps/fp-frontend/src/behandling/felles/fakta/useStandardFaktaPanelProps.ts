@@ -5,6 +5,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
+import { hentAksjonspunkterTilBekreftelse, hentAksjonspunkterTilOverstyring } from '../utils/aksjonspunktEndepunkt';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
@@ -74,11 +75,6 @@ const getBekreftAksjonspunktFaktaCallback =
   (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
     const apListe = Array.isArray(aksjonspunkter) ? aksjonspunkter : [aksjonspunkter];
 
-    const model = apListe.map(ap => ({
-      '@type': ap.kode,
-      ...ap,
-    }));
-
     const params = {
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
@@ -86,13 +82,13 @@ const getBekreftAksjonspunktFaktaCallback =
     };
 
     if (overstyringApCodes.length > 0) {
-      if (model.length === 0) {
+      if (apListe.length === 0) {
         throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
-      if (overstyringApCodes.includes(model[0]?.kode ?? '')) {
+      if (overstyringApCodes.includes(apListe[0]?.kode ?? '')) {
         return lagreOverstyrteAksjonspunkter({
           ...params,
-          overstyrteAksjonspunktDtoer: model,
+          overstyrteAksjonspunktDtoer: hentAksjonspunkterTilOverstyring(apListe),
         }).then(() => {
           oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
           scrollTo({
@@ -105,7 +101,7 @@ const getBekreftAksjonspunktFaktaCallback =
 
     return lagreAksjonspunkter({
       ...params,
-      bekreftedeAksjonspunktDtoer: model,
+      bekreftedeAksjonspunktDtoer: hentAksjonspunkterTilBekreftelse(apListe),
     }).then(() => {
       oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
       scrollTo({

@@ -13,7 +13,7 @@ const MAX_POLLING_ATTEMPTS = 1800;
 const MAX_POLLING_REACHED = 'MAX_POLLING';
 const MAX_POLLING_INTERVAL = 1000 * 60 * 5;
 const VENTETID_VED_TOM_LISTE_MILLIS = 5000;
-const POLLING_STATUSER: LosPollingStatus[] = ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'];
+const POLLING_STATUSER = new Set<LosPollingStatus>(['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED']);
 
 const pollOgHentData = async (
   valgtSakslisteId: number,
@@ -126,5 +126,5 @@ const wait = (ms: number) =>
   });
 
 const isPollingResponse = (response: LosAsyncPollingStatus | OppgaveDto[]): response is LosAsyncPollingStatus => {
-  return !Array.isArray(response) && response.status !== undefined && POLLING_STATUSER.includes(response.status);
+  return !Array.isArray(response) && response.status !== undefined && POLLING_STATUSER.has(response.status);
 };

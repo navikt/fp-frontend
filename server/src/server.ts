@@ -109,7 +109,7 @@ function startApp() {
     response.status(200).send("Alive");
   });
 
-  server.get(["/oauth2/login"], async (_, response) => {
+  server.get(["/oauth2/login"], (_, response) => {
     response.status(502).send({
       message: "Wonderwall must handle /oauth2/login",
     });
@@ -118,7 +118,7 @@ function startApp() {
   // The routes below require the user to be authenticated
   server.use(verifyToken);
 
-  server.get(["/logout"], async (request, response) => {
+  server.get(["/logout"], (request, response) => {
     if (request.headers.authorization) {
       response.redirect("/oauth2/logout");
     }

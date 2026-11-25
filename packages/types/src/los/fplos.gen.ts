@@ -94,6 +94,7 @@ export type oppgave_AndreKriterierType =
   | 'REVURDERING_INNTEKTSMELDING'
   | 'TERMINBEKREFTELSE'
   | 'NYTT_VEDTAK'
+  | 'FEILUTBETALING'
   | 'BARE_FAR_RETT'
   | 'NÆRING'
   | 'KLAGE_PÅ_TILBAKEBETALING'

@@ -89,15 +89,16 @@ export const Default: Story = {
 
 export const TomOppgaveTabell: Story = {
   beforeEach({ msw }) {
+    let erFørsteKall = true;
     msw.use(
       http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
       http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
       http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
-      http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
-        const doPolling = t.request.url.includes('oppgaveIder');
-        return doPolling
-          ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
-          : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
+      // Tom kø gir ingen oppgaveIder. Svarar alle kall med resultat, pollar hooken i ei tett løkke.
+      http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, () => {
+        const location = erFørsteKall ? 'https://www.test.com/api/result' : 'https://www.test.com/api/status';
+        erFørsteKall = false;
+        return new HttpResponse(null, { status: 202, headers: { location } });
       }),
       http.get('https://www.test.com/api/status', () =>
         HttpResponse.json<LosAsyncPollingStatus>({

@@ -168,40 +168,26 @@ const erKlageAksjonspunkt = (
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP ||
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
 
-export const getAksjonspunkttekst = (
-  behandlingStatus: BehandlingStatus,
+const getFpSakAksjonspunkttekst = (
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
-  erTilbakekreving: boolean,
-  aksjonspunkt: TotrinnskontrollAksjonspunkt | TotrinnskontrollAksjonspunkterDtoFpTilbake,
-  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
-): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  const erFpSakAksjonspunkt = 'beregningDto' in aksjonspunkt;
-
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING && erFpSakAksjonspunkt) {
+  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] | undefined => {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
   }
   if (
     aksjonspunkt.aksjonspunktKode ===
-      AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE &&
-    erFpSakAksjonspunkt
+    AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE
   ) {
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN && erFpSakAksjonspunkt) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN) {
     return getFaktaOmBeregningText(faktaOmBeregningTilfeller, aksjonspunkt.beregningDto);
   }
-  if (
-    isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
-    erFpSakAksjonspunkt &&
-    aksjonspunkt.uttakPerioder.length > 0
-  ) {
+  if (isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder.length > 0) {
     return buildUttakText(aksjonspunkt);
   }
-  if (
-    isFaktaUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
-    erFpSakAksjonspunkt &&
-    aksjonspunkt.uttakPerioder.length > 0
-  ) {
+  if (isFaktaUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder.length > 0) {
     const uttakTekster = buildUttakText(aksjonspunkt);
     return aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK
       ? [buildEndretAvSaksbehandlerText(), ...uttakTekster]
@@ -209,10 +195,25 @@ export const getAksjonspunkttekst = (
   }
   if (
     aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK &&
-    erFpSakAksjonspunkt &&
     aksjonspunkt.uttakPerioder.length === 0
   ) {
     return [buildEndretAvSaksbehandlerText()];
+  }
+  return undefined;
+};
+
+export const getAksjonspunkttekst = (
+  behandlingStatus: BehandlingStatus,
+  faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
+  erTilbakekreving: boolean,
+  aksjonspunkt: TotrinnskontrollAksjonspunkt | TotrinnskontrollAksjonspunkterDtoFpTilbake,
+  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
+  if ('beregningDto' in aksjonspunkt) {
+    const fpSakTekster = getFpSakAksjonspunkttekst(faktaOmBeregningTilfeller, aksjonspunkt);
+    if (fpSakTekster) {
+      return fpSakTekster;
+    }
   }
 
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT) {

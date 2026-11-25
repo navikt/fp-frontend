@@ -61,6 +61,10 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       navn: 'EØS (bosatt Norge)',
     },
     {
+      kode: 'FEILUTBETALING',
+      navn: 'Feilutbetaling',
+    },
+    {
       kode: 'MOR_UKJENT_UTLAND',
       navn: 'Gruppe 2',
     },
