@@ -1,16 +1,33 @@
-import { composeStories, composeStory } from '@storybook/react';
+import { useState } from 'react';
+
+import { composeStories, composeStory, type Decorator } from '@storybook/react';
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { SnarvegerProvider } from '../snarveger/SnarvegerContext';
+import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
+import { SnarvegerProvider, useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { useGlobalSnarveger } from '../snarveger/useGlobalSnarveger';
 import * as stories from './FagsakProfileIndex.stories';
+
+import styles from './fagsakProfileIndex.module.css';
 
 const { BehandlingErValgt, BehandlingErIkkeValgt, FptilbakeKodeverkManglar } = composeStories(stories);
 
 const SnarvegLytter = () => {
   useGlobalSnarveger();
   return null;
+};
+
+const UtvidedeDetaljer = ({
+  Story,
+  args,
+}: {
+  Story: Parameters<Decorator>[0];
+  args: Parameters<Decorator>[1]['args'];
+}) => {
+  const [utvidet, setUtvidet] = useState(true);
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.UTVID_DETALJER, () => setUtvidet(false));
+  return <Story args={{ ...args, visUtvidetBehandlingDetaljer: utvidet }} />;
 };
 
 const BehandlingMedSnarveger = composeStory(
@@ -28,37 +45,57 @@ const BehandlingMedSnarveger = composeStory(
   stories.default,
 );
 
+const BehandlingMedUtvidedeDetaljer = composeStory(
+  {
+    ...stories.BehandlingErValgt,
+    decorators: [
+      (Story, context) => (
+        <SnarvegerProvider>
+          <SnarvegLytter />
+          <UtvidedeDetaljer Story={Story} args={context.args} />
+        </SnarvegerProvider>
+      ),
+    ],
+  },
+  stories.default,
+);
+
 describe('FagsakProfileIndex', () => {
+  it('skal vise skjult velger og fokusere valgt behandling med B-snarveien', async () => {
+    await BehandlingMedUtvidedeDetaljer.run();
+    const valgtKort = await screen.findByTestId('card-select-selected');
+    const skjultContainer = valgtKort.closest(`.${styles['skjulUtvidetBehandlingDetaljer']}`);
+    expect(skjultContainer).toBeInTheDocument();
+
+    await userEvent.keyboard('b');
+
+    expect(skjultContainer).toHaveClass(styles['visUtvidetBehandlingDetaljer']!);
+    expect(
+      within(await screen.findByTestId('card-select-option-1')).getByRole('button', { name: 'Førstegangsbehandling' }),
+    ).toHaveFocus();
+  });
+
   it('skal fokusere valgt rad med B-snarveien når valgt behandling ikke er første rad', async () => {
-    const opprinneligScrollIntoView = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollIntoView');
-    const scrollIntoView = vi.fn();
-    HTMLElement.prototype.scrollIntoView = scrollIntoView;
-    try {
-      await BehandlingMedSnarveger.run();
-      await screen.findByText('Førstegangsbehandling');
+    await BehandlingMedSnarveger.run();
+    await screen.findByText('Førstegangsbehandling');
 
-      await userEvent.keyboard('b');
+    await userEvent.keyboard('b');
 
-      await waitFor(() =>
-        expect(
-          within(screen.getByTestId('card-select-option-1')).getByRole('button', { name: 'Førstegangsbehandling' }),
-        ).toHaveFocus(),
-      );
-      expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
-      expect(screen.getAllByTestId(/^card-select-option-/)[0]).toHaveAttribute('data-testid', 'card-select-option-2');
+    const valgtRad = within(await screen.findByTestId('card-select-option-1')).getByRole('button', {
+      name: 'Førstegangsbehandling',
+    });
+    await waitFor(() => expect(valgtRad).toHaveFocus());
+    expect(screen.getAllByTestId(/^card-select-option-/)[0]).toHaveAttribute('data-testid', 'card-select-option-2');
 
-      await userEvent.keyboard('{ArrowUp}');
+    await userEvent.keyboard('{ArrowUp}');
 
-      expect(
-        within(screen.getByTestId('card-select-option-2')).getByRole('button', { name: /Revurdering/ }),
-      ).toHaveFocus();
-    } finally {
-      if (opprinneligScrollIntoView) {
-        Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', opprinneligScrollIntoView);
-      } else {
-        Reflect.deleteProperty(HTMLElement.prototype, 'scrollIntoView');
-      }
-    }
+    expect(
+      within(screen.getByTestId('card-select-option-2')).getByRole('button', { name: /Revurdering/ }),
+    ).toHaveFocus();
+
+    await userEvent.keyboard('b');
+
+    expect(valgtRad).toHaveFocus();
   });
 
   it('skal vise en behandling i liste når behandling er valgt', async () => {
@@ -118,8 +155,8 @@ describe('FagsakProfileIndex', () => {
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Velg behandling' }));
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
-    await userEvent.click(screen.getByRole('button', { name: 'Åpne behandlingsliste' }));
     expect(screen.getByText('Tilbakekreving')).toBeInTheDocument();
   });
 
@@ -142,6 +179,11 @@ describe('FagsakProfileIndex', () => {
   });
 
   it('skal navigere til valgt behandling med standard prosessteg og fakta', async () => {
+    window.history.replaceState(
+      null,
+      '',
+      '/fagsak/123/behandling/?punkt=uttak&fakta=medlemskap&stotte=historikk#detaljer',
+    );
     await BehandlingErIkkeValgt.run();
     await userEvent.click(await screen.findByRole('button', { name: 'Velg behandling' }));
 
@@ -153,6 +195,8 @@ describe('FagsakProfileIndex', () => {
     const params = new URLSearchParams(window.location.search);
     expect(params.get('punkt')).toBe('default');
     expect(params.get('fakta')).toBe('default');
+    expect(params.get('stotte')).toBe('historikk');
+    expect(window.location.hash).toBe('#detaljer');
     expect(screen.queryAllByTestId(/^card-select-option-/)).toHaveLength(0);
   });
 });

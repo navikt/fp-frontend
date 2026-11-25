@@ -1,3 +1,4 @@
+import { type Ref } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExternalLinkIcon } from '@navikt/aksel-icons';
@@ -7,25 +8,27 @@ import dayjs from 'dayjs';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { BehandlingInformasjon, finnBehandlingNavn } from './BehandlingInformasjon';
-import { CardSelect, type CardSelectOption } from './card-select/CardSelect';
+import { CardSelect, type CardSelectHandle, type CardSelectOption } from './card-select/CardSelect';
 
 interface Props {
+  ref?: Ref<CardSelectHandle>;
   behandlinger: FagsakBehandlingDto[];
   behandlingHref: (behandlingUuid: string) => string;
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
-  toggleVisAlleBehandlinger: () => void;
+  onOpenChange: (open: boolean) => void;
   velgBehandling: (behandlingUuid: string) => void;
   alleKodeverk: AlleKodeverk;
   alleKodeverkTilbakekreving?: AlleKodeverkTilbakekreving;
 }
 
 export const BehandlingerListe = ({
+  ref,
   behandlinger,
   behandlingHref,
   behandlingUuid,
   skalViseAlleBehandlinger,
-  toggleVisAlleBehandlinger,
+  onOpenChange,
   velgBehandling,
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -63,6 +66,7 @@ export const BehandlingerListe = ({
 
   return (
     <CardSelect
+      ref={ref}
       options={valg}
       value={behandlingUuid}
       placeholder={
@@ -76,11 +80,7 @@ export const BehandlingerListe = ({
         </BodyShort>
       }
       open={skalViseAlleBehandlinger}
-      onOpenChange={åpen => {
-        if (åpen !== skalViseAlleBehandlinger) {
-          toggleVisAlleBehandlinger();
-        }
-      }}
+      onOpenChange={onOpenChange}
       onChange={velgBehandling}
       openLabel={intl.formatMessage({ id: 'BehandlingPickerItemContent.Open' })}
       closeLabel={intl.formatMessage({ id: 'BehandlingPickerItemContent.Close' })}

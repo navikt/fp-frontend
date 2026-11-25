@@ -6,7 +6,8 @@ import { lagFagsakBehandling } from '@navikt/fp-storybook-utils';
 
 import * as stories from './BehandlingVelgerSakIndex.stories';
 
-const { IngenBehandlinger, EnBehandling, AlleBehandlinger, TilbakekrevingUtenFptilbakeKodeverk } = composeStories(stories);
+const { IngenBehandlinger, EnBehandling, AlleBehandlinger, TilbakekrevingUtenFptilbakeKodeverk } =
+  composeStories(stories);
 
 describe('BehandlingVelgerSakIndex', () => {
   it('skal beskrive dato og resultat på kort og utløser når behandlinger har samme navn', () => {

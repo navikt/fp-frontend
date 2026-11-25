@@ -1,7 +1,10 @@
+import { createRef } from 'react';
+
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import type { CardSelectHandle } from './CardSelect';
 import * as stories from './CardSelect.stories';
 
 const { Default, Unselected, SingleOption, Empty } = composeStories(stories);
@@ -12,6 +15,42 @@ const mangeValg = Array.from({ length: 10 }, (_, index) => ({
 }));
 
 describe('CardSelect', () => {
+  it('skal åpne og fokusere valgt alternativ gjennom fokusgrensesnittet', async () => {
+    const ref = createRef<CardSelectHandle>();
+    render(<Default ref={ref} />);
+
+    act(() => ref.current?.focusSelected());
+
+    const liste = within(screen.getByRole('list'));
+    expect(liste.getByRole('button', { name: 'SMS Til mobil' })).toHaveFocus();
+
+    await userEvent.keyboard('{ArrowUp}');
+    expect(liste.getByRole('button', { name: 'E-post' })).toHaveFocus();
+
+    act(() => ref.current?.focusSelected());
+
+    expect(liste.getByRole('button', { name: 'SMS Til mobil' })).toHaveFocus();
+  });
+
+  it('skal fokusere første alternativ gjennom fokusgrensesnittet når ingen verdi er valgt', () => {
+    const ref = createRef<CardSelectHandle>();
+    render(<Unselected ref={ref} />);
+
+    act(() => ref.current?.focusSelected());
+
+    expect(within(screen.getByRole('list')).getByRole('button', { name: 'E-post' })).toHaveFocus();
+  });
+
+  it('skal fokusere statisk kort gjennom fokusgrensesnittet uten å åpne en meny', () => {
+    const ref = createRef<CardSelectHandle>();
+    render(<SingleOption ref={ref} value="sms" />);
+
+    act(() => ref.current?.focusSelected());
+
+    expect(screen.getByRole('group', { name: 'SMS' })).toHaveFocus();
+    expect(screen.queryByRole('list')).not.toBeInTheDocument();
+  });
+
   it('skal begrense menyen til tilgjengelig plass og oppdatere grensen når vinduet endres', async () => {
     render(<Default />);
     const felt = screen.getByTestId('card-select-selected');

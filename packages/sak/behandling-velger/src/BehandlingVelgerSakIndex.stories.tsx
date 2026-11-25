@@ -16,7 +16,7 @@ const meta = {
   args: {
     behandlingUuid: '1',
     skalViseAlleBehandlinger: false,
-    toggleVisAlleBehandlinger: action('toggleVisAlleBehandlinger'),
+    onOpenChange: action('onOpenChange'),
     velgBehandling: action('velgBehandling'),
     behandlingHref: uuid => `/fagsak/123/behandling/${uuid}/?punkt=default&fakta=default`,
     alleKodeverk: alleKodeverk,
@@ -25,16 +25,14 @@ const meta = {
   render: function Render(storyArgs) {
     const [args, setArgs] = useState(storyArgs);
 
-    const toggleVisAlleBehandlinger = () => {
-      args.toggleVisAlleBehandlinger();
-      setArgs(oldArgs => ({ ...oldArgs, skalViseAlleBehandlinger: !oldArgs.skalViseAlleBehandlinger }));
-    };
-
     return (
       <Box width="100%" maxWidth="600px">
         <BehandlingVelgerSakIndex
           {...args}
-          toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
+          onOpenChange={open => {
+            args.onOpenChange(open);
+            setArgs(oldArgs => ({ ...oldArgs, skalViseAlleBehandlinger: open }));
+          }}
           velgBehandling={uuid => {
             args.velgBehandling(uuid);
             setArgs(oldArgs => ({ ...oldArgs, behandlingUuid: uuid, skalViseAlleBehandlinger: false }));

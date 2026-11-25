@@ -2,8 +2,9 @@ import {
   type KeyboardEventHandler,
   type MouseEventHandler,
   type ReactNode,
-  useEffect,
+  type Ref,
   useId,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState,
@@ -13,6 +14,7 @@ import { Box, Popover } from '@navikt/ds-react';
 
 import { CardSelectItem } from './CardSelectItem';
 import { CardSelectTrigger } from './CardSelectTrigger';
+import { useAvailableMenuHeight } from './useAvailableMenuHeight';
 
 import styles from './cardSelect.module.css';
 
@@ -22,7 +24,12 @@ export type CardSelectOption = {
   ariaLabel?: string;
 };
 
+export type CardSelectHandle = {
+  focusSelected: () => void;
+};
+
 interface Props {
+  ref?: Ref<CardSelectHandle>;
   options: CardSelectOption[];
   value?: string;
   placeholder: ReactNode;
@@ -35,6 +42,7 @@ interface Props {
 }
 
 export const CardSelect = ({
+  ref,
   options,
   value,
   placeholder,
@@ -50,6 +58,7 @@ export const CardSelect = ({
   const menyRef = useRef<HTMLDivElement>(null);
   const listeRef = useRef<HTMLUListElement>(null);
   const fokusIndexRef = useRef<number | undefined>(undefined);
+  const [fokusForespørsel, setFokusForespørsel] = useState(0);
   const fokusEtterValgRef = useRef<Element | null>(null);
   const valgt = options.find(option => option.value === value);
   const erStatisk = options.length === 0 || (options.length === 1 && !!valgt);
@@ -66,40 +75,43 @@ export const CardSelect = ({
     }
   }, [erStatisk, utløserElement, valgt]);
 
-  useLayoutEffect(() => {
-    if (!erMenyÅpen || !utløserElement) {
-      return;
-    }
-    const oppdaterHøyde = () => {
-      const { top, bottom } = utløserElement.getBoundingClientRect();
-      // Reserver 4 px mellom felt og meny, og 12 px til vinduskanten.
-      const tilgjengeligHøyde = Math.max(0, Math.max(top, window.innerHeight - bottom) - 16);
-      menyRef.current?.style.setProperty('--card-select-available-height', `${tilgjengeligHøyde}px`);
-    };
-    oppdaterHøyde();
-    const observer = typeof ResizeObserver === 'undefined' ? undefined : new ResizeObserver(oppdaterHøyde);
-    observer?.observe(utløserElement);
-    window.addEventListener('resize', oppdaterHøyde);
-    window.addEventListener('scroll', oppdaterHøyde, true);
-    return () => {
-      observer?.disconnect();
-      window.removeEventListener('resize', oppdaterHøyde);
-      window.removeEventListener('scroll', oppdaterHøyde, true);
-    };
-  }, [erMenyÅpen, utløserElement]);
+  useAvailableMenuHeight(utløserElement, menyRef, erMenyÅpen);
 
-  useEffect(() => {
+  useImperativeHandle(
+    ref,
+    () => ({
+      focusSelected: () => {
+        fokusIndexRef.current = Math.max(
+          0,
+          options.findIndex(option => option.value === value),
+        );
+        setFokusForespørsel(forrige => forrige + 1);
+        if (!erStatisk) {
+          onOpenChange(true);
+        }
+      },
+    }),
+    [erStatisk, options, value, onOpenChange],
+  );
+
+  useLayoutEffect(() => {
     listeRef.current
       ?.querySelectorAll<HTMLElement>('a:not([data-primary]), button:not([data-primary])')
       .forEach(handling => {
         handling.tabIndex = -1;
       });
-    if (erMenyÅpen && fokusIndexRef.current !== undefined) {
-      const index = Math.min(fokusIndexRef.current, options.length - 1);
-      fokusIndexRef.current = undefined;
+    const fokusIndex = fokusIndexRef.current;
+    if (fokusIndex === undefined || (!erMenyÅpen && !erStatisk)) {
+      return;
+    }
+    fokusIndexRef.current = undefined;
+    if (erStatisk) {
+      utløserElement?.querySelector<HTMLElement>('[data-trigger]')?.focus();
+    } else {
+      const index = Math.min(fokusIndex, options.length - 1);
       listeRef.current?.children[index]?.querySelector<HTMLElement>('[data-primary]')?.focus();
     }
-  }, [erMenyÅpen, options]);
+  }, [erMenyÅpen, erStatisk, fokusForespørsel, options, utløserElement]);
 
   const toggleMeny: MouseEventHandler<HTMLButtonElement> = event => {
     fokusIndexRef.current = !erMenyÅpen && event.detail === 0 ? 0 : undefined;
