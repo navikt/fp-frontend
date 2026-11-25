@@ -22,6 +22,7 @@ import type { BeregningAp } from './fakta/BeregningAp';
 import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
 import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
 import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
+import type { FordelBeregningAp } from './fakta/FordelBeregningAp';
 import type { ManuellKontrollAapKombinertAtflAP } from './fakta/ManuellKontrollAapKombinertAtflAP';
 import type { ManuellKontrollBesteberegningAP } from './fakta/ManuellKontrollBesteberegningAP';
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
@@ -57,6 +58,7 @@ export type FaktaAksjonspunkt =
   | BeregningFaktaAP
   | BeregningOverstyringAP
   | FordelBeregningsgrunnlagAP
+  | FordelBeregningAp
   | VurderRefusjonBeregningsgrunnlagAP
   | VurderArbeidsforholdInntektsmeldingAp
   | VurderDokumentasjonAp
