@@ -192,7 +192,7 @@ __metadata:
   resolution: "@fp-frontend/server@workspace:."
   dependencies:
     "@eslint/js": "npm:10.0.1"
-    "@navikt/oasis": "npm:4.2.2"
+    "@navikt/oasis": "npm:4.2.3"
     "@navikt/vite-mode": "npm:1.0.1"
     "@types/cors": "npm:2.8.19"
     "@types/express": "npm:5.0.6"
@@ -205,7 +205,7 @@ __metadata:
     eslint-plugin-unicorn: "npm:80.0.0"
     express: "npm:5.3.0"
     helmet: "npm:8.3.0"
-    http-proxy-middleware: "npm:4.2.1"
+    http-proxy-middleware: "npm:4.2.2"
     knip: "npm:6.47.0"
     morgan: "npm:1.12.1"
     prettier: "npm:3.10.1"
@@ -342,22 +342,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/oasis@npm:4.2.2":
-  version: 4.2.2
-  resolution: "@navikt/oasis@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.2.2%2F3c43e1e89bb2d46646a9a2aaf27972a024377a6f"
+"@navikt/oasis@npm:4.2.3":
+  version: 4.2.3
+  resolution: "@navikt/oasis@npm:4.2.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.2.3%2F2b6f6ff6ac6c82e6ea93f5ec4e041cf5a93b4302"
   dependencies:
-    "@navikt/texas": "npm:^4.2.2"
+    "@navikt/texas": "npm:^4.2.3"
     "@opentelemetry/api": "npm:^1.9.1"
     "@prometheus-io/client": "npm:^0.16.1"
-    jose: "npm:^6.2.10"
-  checksum: 10/ff6c0ff545e39c7f358077de97f19e2e9d04045cfa948093d2cd1b7417b38fd4d35ee202894ef984257d1c74b19560345eafbd7620602aa159d42a36bbef8ab6
+    jose: "npm:^6.2.17"
+  checksum: 10/2ea4ce6c70f51936fa1c9ff42028a2e4ec661868b88906d926511b6073cc5a0d897277c396acefc2f6a79f9af8dffded9c635f5bbf629d3876b5a45df618bd64
   languageName: node
   linkType: hard
 
-"@navikt/texas@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@navikt/texas@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.2.2%2F862d743a1df21630a007a0d2d2a36a74dd8b5187"
-  checksum: 10/ee1067aa92437e688d1c035d028ae472e9eb0b554e41e739bac953a38adea125ada81dcf6eb2d215be076790d1bfa2157d3b9bead27920a42c917491929c2fb4
+"@navikt/texas@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "@navikt/texas@npm:4.2.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.2.3%2Ff694ea2082a8f801322606ffd3e5998d95a7133a"
+  checksum: 10/09f6b10556ce19b2783885bd7fec474eaf195d74b53d962137c0101e964843096a6cb0cf564bd6bd3924b8ea4a8f9c320497fa4d1a980232a0e9aff53f53ed23
   languageName: node
   linkType: hard
 
@@ -2401,23 +2401,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-proxy-middleware@npm:4.2.1":
-  version: 4.2.1
-  resolution: "http-proxy-middleware@npm:4.2.1"
+"http-proxy-middleware@npm:4.2.2":
+  version: 4.2.2
+  resolution: "http-proxy-middleware@npm:4.2.2"
   dependencies:
     debug: "npm:^4.4.3"
-    httpxy: "npm:^0.5.4"
+    httpxy: "npm:^0.5.6"
     is-glob: "npm:^4.0.3"
     is-plain-obj: "npm:^4.1.0"
     micromatch: "npm:^4.0.8"
-  checksum: 10/c924486ffebcf47fab25a52a75359379b6283b4b7fd5eb5db3f6499ab3848715f3dfd2c17639db39c6c7b46330b2b83c163526beb5b0d78809abbb451c49e12d
+  checksum: 10/bfd40263620b327be51e64748851ba23606842f428411ed3db602604e232853fa771c81bf4a1967bf98b0b9abcadad8fd343acbd20fa7de86fb57397baa04592
   languageName: node
   linkType: hard
 
-"httpxy@npm:^0.5.4":
-  version: 0.5.5
-  resolution: "httpxy@npm:0.5.5"
-  checksum: 10/6ad32b51d509480f7cb37b30197efeb05cb8c6f4806b052e7b05cf02577d59b48f92d0f4e52874e0d38fd3a7863aed13c2b06c521346b06db3f33a014af2bd52
+"httpxy@npm:^0.5.6":
+  version: 0.5.6
+  resolution: "httpxy@npm:0.5.6"
+  checksum: 10/7984d2d57456098ac873ebbda7554ff3847ca8f222b8bd9de44c0fdb4326b8feaf95d935b8e65cb14493a73d4553f048d3b003abd2564ba406d4a69b4d0d00a4
   languageName: node
   linkType: hard
 
@@ -2557,10 +2557,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^6.2.10":
-  version: 6.2.12
-  resolution: "jose@npm:6.2.12"
-  checksum: 10/42ef7b598d22fe4ed0a4d0407f9dd9ae9f56dabd31cbad6cb4f67e296953a46b5d63603f8a599a3ee4c5659bf29bb14e846237f0381ea679116520b53e71e4ea
+"jose@npm:^6.2.17":
+  version: 6.2.18
+  resolution: "jose@npm:6.2.18"
+  checksum: 10/6a3962e4d09599dc359129bf2b29eefcd0436e1a8b1002f53b9e672e7f21df546736d4a5ac53e3cfbfcea9f4126354247d5efcb860e267fda82924e8bd19a8b6
   languageName: node
   linkType: hard
 
