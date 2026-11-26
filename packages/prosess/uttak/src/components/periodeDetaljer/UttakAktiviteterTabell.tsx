@@ -212,7 +212,7 @@ export const UttakAktiviteterTabell = ({
           <Table.HeaderCell scope="col">
             <FormattedMessage id="RenderUttakTable.PeriodeData.Stonadskonto" />
           </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
+          <Table.HeaderCell scope="col" align="right">
             <FormattedMessage id="RenderUttakTable.PeriodeData.Trekk" />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col" align="right">
@@ -250,8 +250,8 @@ export const UttakAktiviteterTabell = ({
                   validate={[validerUkerOgDager(getValues, index)]}
                 />
               </Table.DataCell>
-              <Table.DataCell>
-                <HStack gap="space-8" align="center">
+              <Table.DataCell align="right">
+                <HStack gap="space-8" align="center" justify="end">
                   <RhfNumericField
                     name={`aktiviteter.${index}.weeks`}
                     control={control}
@@ -287,38 +287,40 @@ export const UttakAktiviteterTabell = ({
                 {arbeidsforholdData.prosentArbeidText}
               </Table.DataCell>
               <Table.DataCell align="right">
-                <RhfNumericField
-                  name={`aktiviteter.${index}.utbetalingsgrad`}
-                  control={control}
-                  label={<FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />}
-                  hideLabel
-                  className="ml-auto max-w-48 justify-items-end text-left"
-                  htmlSize={8}
-                  validate={[
-                    required,
-                    minValue0,
-                    maxProsentValue100,
-                    hasValidDecimal,
-                    sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
-                      intl,
-                      valgtPeriode,
-                      samletUtbetalingsgradForAndreAktiviteter,
-                      erOppfylt,
-                      erTilknyttetStortinget,
-                    ),
-                    sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
-                    sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
-                    sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                    (utbetalingsgrad: string) => {
-                      const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                      return harUtsettelsestype && getValues('erOppfylt') && Number.parseFloat(utbetalingsgrad) > 0
-                        ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
-                        : null;
-                    },
-                  ]}
-                  readOnly={isReadOnly}
-                  forceTwoDecimalDigits
-                />
+                <HStack justify="end">
+                  <RhfNumericField
+                    name={`aktiviteter.${index}.utbetalingsgrad`}
+                    control={control}
+                    label={<FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />}
+                    hideLabel
+                    className="ml-auto max-w-48 justify-items-end text-left"
+                    htmlSize={8}
+                    validate={[
+                      required,
+                      minValue0,
+                      maxProsentValue100,
+                      hasValidDecimal,
+                      sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
+                        intl,
+                        valgtPeriode,
+                        samletUtbetalingsgradForAndreAktiviteter,
+                        erOppfylt,
+                        erTilknyttetStortinget,
+                      ),
+                      sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
+                      sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
+                      sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
+                      (utbetalingsgrad: string) => {
+                        const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+                        return harUtsettelsestype && getValues('erOppfylt') && Number.parseFloat(utbetalingsgrad) > 0
+                          ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
+                          : null;
+                      },
+                    ]}
+                    readOnly={isReadOnly}
+                    forceTwoDecimalDigits
+                  />
+                </HStack>
               </Table.DataCell>
             </Table.Row>
           );
