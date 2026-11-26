@@ -11,6 +11,7 @@ describe('SistBehandledeSaker', () => {
     expect(await screen.findByText('Dine siste reserverte behandlinger')).toBeInTheDocument();
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('13232323')).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Vis kun åpne' })).toBeChecked();
   });
 
   it('skal vise ingen behandlinger', async () => {
