@@ -2,7 +2,7 @@ import { setProjectAnnotations } from '@storybook/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
 import { beforeAll, expect, vi } from 'vitest';
 
-import * as globalStorybookConfig from '../../../.storybook/preview-storybook';
+import globalStorybookConfig from '../../../.storybook/preview-storybook';
 
 // Node 26+ defines localStorage/sessionStorage as native getters on globalThis
 // that return undefined (unless --localstorage-file is provided). Vitest's

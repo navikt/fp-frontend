@@ -48,7 +48,15 @@ const unicornRecommended = {
 };
 
 const baseConfig = [
-  { ignores: ['packages/config/eslint/**', 'packages/config/vite/**'] },
+  {
+    ignores: [
+      'packages/config/eslint/**',
+      'packages/config/vite/**',
+      '**/dist/**',
+      '**/.turbo/**',
+      '**/.storybook-static-build/**',
+    ],
+  },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     settings: {
@@ -162,15 +170,25 @@ const fileOverrides = [
       '@eslint-react/component-hook-factories': OFF,
     },
   },
+  {
+    files: ['**/.storybook/preview.tsx', '**/openapi-ts.config.ts'],
+    rules: { 'import-x/no-default-export': OFF },
+  },
   { files: ['**/apiDtoGenerert.ts'], rules: { '@typescript-eslint/no-redundant-type-constituents': OFF } },
+  {
+    // Felles Storybook-importer trekker inn globale intl-typer som kolliderer med pakkens egne meldingstyper.
+    ...tseslint.configs.disableTypeChecked,
+    files: ['**/.storybook/*'],
+    languageOptions: {
+      parserOptions: {
+        projectService: false,
+        project: null,
+      },
+    },
+  },
 ];
 
-export default [
-  ...baseConfig,
-  eslintConfigPrettier,
-  sharedRulesConfig,
-  ...fileOverrides,
-];
+export default [...baseConfig, eslintConfigPrettier, sharedRulesConfig, ...fileOverrides];
 
 export const unicornConfig = [
   ...baseConfig,
