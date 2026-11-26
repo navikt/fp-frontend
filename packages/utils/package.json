@@ -7,18 +7,18 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "eslint": "eslint {src,i18n}/**/*.ts* --color",
-    "eslint:fix": "eslint --fix {src,i18n}/**/*.ts* --color",
-    "prettier:fix": "prettier --write src",
+    "eslint": "eslint . --color",
+    "eslint:fix": "eslint --fix . --color",
+    "prettier:fix": "prettier --write .",
     "test": "vitest",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/fp-kodeverk": "workspace:^",
-    "@navikt/fp-konstanter": "workspace:^",
-    "@navikt/fp-types": "workspace:^",
-    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^",
+    "@navikt/fp-kodeverk": "workspace:*",
+    "@navikt/fp-konstanter": "workspace:*",
+    "@navikt/fp-types": "workspace:*",
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/ft-form-validators": "8.0.4",
     "@navikt/ft-utils": "8.0.4",
     "dayjs": "1.11.23",

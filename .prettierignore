@@ -1,2 +1,4 @@
 *.jsx
 **/dist
+**/.turbo
+**/.storybook-static-build

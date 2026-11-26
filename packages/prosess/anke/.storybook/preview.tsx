@@ -1,1 +1,1 @@
-export { decorators, globalTypes } from '../../../../.storybook/preview-storybook';
+export { default } from '../../../../.storybook/preview-storybook';

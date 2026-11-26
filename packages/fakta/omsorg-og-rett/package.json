@@ -10,19 +10,19 @@
   "scripts": {
     "build:storybook": "storybook build -o .storybook-static-build",
     "test": "vitest",
-    "eslint": "eslint {src,i18n}/**/*.ts* --color",
-    "eslint:fix": "eslint --fix {src,i18n}/**/*.ts* --color",
-    "prettier:fix": "prettier --write src",
+    "eslint": "eslint . --color",
+    "eslint:fix": "eslint --fix . --color",
+    "prettier:fix": "prettier --write .",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
-    "storybook": "storybook dev --quiet -p 7028"
+    "storybook": "storybook dev --quiet -p 7028",
+    "stylelint": "stylelint src/**/*.module.css"
   },
   "dependencies": {
     "@navikt/aksel-icons": "8.23.0",
     "@navikt/ds-react": "8.23.0",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
-    "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-ui-komponenter": "workspace:*",
@@ -41,6 +41,7 @@
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
+    "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
     "@storybook/react": "10.6.8",
     "@storybook/react-vite": "10.6.8",
@@ -50,6 +51,7 @@
     "@types/react": "19.3.0",
     "eslint": "10.15.0",
     "storybook": "10.6.8",
+    "stylelint": "18.1.0",
     "typescript": "6.0.3",
     "vite": "8.3.8",
     "vitest": "5.1.1"

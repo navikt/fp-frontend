@@ -10,9 +10,9 @@
   "scripts": {
     "test": "vitest",
     "storybook": "storybook dev --quiet -p 7013",
-    "eslint": "eslint {src,i18n}/**/*.ts* --color",
-    "eslint:fix": "eslint --fix {src,i18n}/**/*.ts* --color",
-    "prettier:fix": "prettier --write src",
+    "eslint": "eslint . --color",
+    "eslint:fix": "eslint --fix . --color",
+    "prettier:fix": "prettier --write .",
     "tsc": "tsc --noEmit",
     "stylelint": "stylelint src/**/*.module.css",
     "build:storybook": "storybook build -o .storybook-static-build",
