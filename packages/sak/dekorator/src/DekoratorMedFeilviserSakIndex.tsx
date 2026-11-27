@@ -9,6 +9,7 @@ import { Adventslys } from './components/Adventslys';
 import { erJuletid } from './components/adventUtils';
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
 import { Julekrans } from './components/Julekrans';
+import { NisseNavn } from './components/NisseNavn';
 import { PyntetTittel } from './components/PyntetTittel';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
@@ -119,7 +120,7 @@ export const DekoratorMedFeilviserSakIndex = ({
               </Dropdown.Menu>
             </Theme>
           </Dropdown>
-          <InternalHeader.User name={navAnsattNavn} />
+          <InternalHeader.User name={visJuledekor ? <NisseNavn navn={navAnsattNavn} /> : navAnsattNavn} />
           {location.hostname.includes('localhost') && (
             <InternalHeader.Button href={`${location.origin}/oauth2/login?redirect=${location.pathname}`} as={Link}>
               <FormattedMessage id="DekoratorMedFeilviserSakIndex.ByttBruker" />
