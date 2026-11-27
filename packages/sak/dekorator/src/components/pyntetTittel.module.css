@@ -19,7 +19,7 @@
 }
 
 .stjerne {
-  animation: glitre 1.8s ease-in-out infinite;
+  animation: glitre 4.5s ease-in-out infinite;
   filter: drop-shadow(0 0 3px #ffd54f);
   height: 0.55em;
   left: -0.3em;
