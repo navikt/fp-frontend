@@ -8,7 +8,13 @@ const HENGEBOKSTAVER = new Set(['g', 'p', 'j', 'y', 'q']);
 
 /** En julekule som henger i en tynn tråd fra halen på bokstaven. */
 const Julekule = ({ farge, indeks }: { farge: string; indeks: number }) => (
-  <svg className={styles['julekule']} style={{ animationDelay: `${indeks * -0.7}s` }} viewBox="0 0 20 36">
+  <svg
+    className={styles['julekule']}
+    style={{ animationDelay: `${indeks * -0.7}s` }}
+    viewBox="0 0 20 36"
+    aria-hidden
+    focusable="false"
+  >
     <line x1="10" y1="0" x2="10" y2="12" stroke="#d4af37" strokeWidth="1" />
     <rect x="7" y="11.5" width="6" height="3.4" rx="0.8" fill="#d4af37" />
     <circle cx="10" cy="24" r="9" fill={farge} />
@@ -18,7 +24,13 @@ const Julekule = ({ farge, indeks }: { farge: string; indeks: number }) => (
 );
 
 const Stjerne = ({ indeks }: { indeks: number }) => (
-  <svg className={styles['stjerne']} style={{ animationDelay: `${indeks * 1.5}s` }} viewBox="0 0 24 24">
+  <svg
+    className={styles['stjerne']}
+    style={{ animationDelay: `${indeks * 1.5}s` }}
+    viewBox="0 0 24 24"
+    aria-hidden
+    focusable="false"
+  >
     <path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z" fill="#ffd54f" />
   </svg>
 );
