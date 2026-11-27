@@ -5,16 +5,16 @@ import { ExternalLinkIcon, KeyboardIcon, MenuGridIcon, MoonIcon, SunIcon } from 
 import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Adventslys } from './components/Adventslys';
-import { erJuletid } from './components/adventUtils';
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
-import { Julekrans } from './components/Julekrans';
-import { NisseNavn } from './components/NisseNavn';
-import { PyntetTittel } from './components/PyntetTittel';
+import { Adventslys } from './components/jul/Adventslys';
+import { erJuletid } from './components/jul/adventUtils';
+import { Julekrans } from './components/jul/Julekrans';
+import { NisseNavn } from './components/jul/NisseNavn';
+import { PyntetTittel } from './components/jul/PyntetTittel';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
 
-import julekransStyles from './components/julekrans.module.css';
+import julekransStyles from './components/jul/julekrans.module.css';
 
 import messages from '../i18n/nb_NO.json';
 

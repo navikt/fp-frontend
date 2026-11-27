@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Adventslys } from './Adventslys';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
