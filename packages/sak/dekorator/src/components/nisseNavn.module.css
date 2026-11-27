@@ -10,6 +10,6 @@
   pointer-events: none;
   position: absolute;
   top: -0.62em;
-  transform: scaleX(-1) rotate(-14deg);
+  transform: rotate(-6deg) scaleX(-1);
   width: 1.05em;
 }
