@@ -6,10 +6,10 @@
 .nisselue {
   filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.35));
   height: 0.9em;
-  left: -0.22em;
+  left: -0.38em;
   pointer-events: none;
   position: absolute;
-  top: -0.62em;
-  transform: rotate(-6deg) scaleX(-1);
+  top: -0.4em;
+  transform: rotate(-45deg) scaleX(-1);
   width: 1.05em;
 }
