@@ -13,6 +13,8 @@ import { PyntetTittel } from './components/PyntetTittel';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
 
+import julekransStyles from './components/julekrans.module.css';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -71,7 +73,7 @@ export const DekoratorMedFeilviserSakIndex = ({
   return (
     <div ref={fixedHeaderRef} className="fixed top-0 z-[101] w-full">
       <RawIntlProvider value={intl}>
-        <InternalHeader>
+        <InternalHeader className={visJuledekor ? julekransStyles['julehode'] : undefined}>
           <InternalHeader.Title
             className="text-xl"
             href={tittelLenke}
