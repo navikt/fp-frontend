@@ -1,15 +1,22 @@
 /*
  * Tynn granbar-girlander langs underkanten av headeren, med et rødt bær og et gulldryss per flis.
- * Tar ikke plass i layouten.
+ * Høyden er 0, så den påvirker ikke layouten eller høyden som måles for dekoratøren.
  */
 .julekrans {
+  height: 0;
+  position: relative;
+}
+
+.julekrans:before {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='8' viewBox='0 0 48 8'><path d='M0 4 Q6 1 12 4 T24 4 T36 4 T48 4' stroke='%231f5e36' stroke-width='3' fill='none'/><path d='M0 4 Q6 7 12 4 T24 4 T36 4 T48 4' stroke='%234caf50' stroke-width='1.2' fill='none'/><circle cx='24' cy='4' r='1.9' fill='%23d32f2f'/><circle cx='0' cy='4' r='1.2' fill='%23e8b931'/><circle cx='48' cy='4' r='1.2' fill='%23e8b931'/></svg>")
     repeat-x 0 0 / 48px 8px;
+  content: '';
   height: 8px;
-  margin-bottom: -4px;
-  margin-top: -4px;
+  left: 0;
   pointer-events: none;
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: -4px;
   z-index: 1;
 }
 

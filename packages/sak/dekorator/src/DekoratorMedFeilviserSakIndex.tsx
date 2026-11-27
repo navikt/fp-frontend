@@ -147,8 +147,8 @@ export const DekoratorMedFeilviserSakIndex = ({
             )}
           </InternalHeader.Button>
         </InternalHeader>
-        <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
         {visJuledekor && <Julekrans />}
+        <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
     </div>
   );
