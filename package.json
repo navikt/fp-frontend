@@ -66,11 +66,6 @@
     "*.{js,jsx,ts,tsx,cjs,mjs,json,yaml,yml,md,css}": "prettier --write",
     "*.css": "stylelint --fix"
   },
-  "msw": {
-    "workerDirectory": [
-      "./.storybook/mock"
-    ]
-  },
   "dependencies": {
     "react": "19.3.1",
     "react-dom": "19.3.1"
