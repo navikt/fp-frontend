@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+}
+
+.selected {
+  border: 1px solid var(--ax-border-strong);
+  border-radius: var(--ax-radius-8);
+}
+
+.menu {
+  border-radius: var(--ax-radius-8);
+  max-height: min(80vh, 48rem, var(--card-select-available-height, 100vh));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--ax-space-8);
+  width: 100%;
+}
+
+.list {
+  border-radius: inherit;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.list li {
+  border-radius: inherit;
+  width: 100%;
+}
+
+.list li + li {
+  margin-top: var(--ax-space-4);
+}

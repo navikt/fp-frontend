@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { type Location, Navigate, NavLink, useLocation, useMatch } from 'react-router';
+import { createPath, type Location, Navigate, useLocation, useMatch, useNavigate } from 'react-router';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ReservasjonsstatusPanel } from '@navikt/fp-los-saksbehandler';
-import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
+import { type BehandlingVelgerHandle, BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type { Behandling, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
@@ -20,7 +20,6 @@ import { useFpSakKodeverk } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../snarveger/SnarvegerContext';
-import { useTastaturfokus } from '../snarveger/useTastaturfokus';
 import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
@@ -62,73 +61,22 @@ export const FagsakProfileIndex = ({
   visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
-  const [showAll, setShowAll] = useState(!behandlingUuid);
-  const toggleShowAll = () => setShowAll(!showAll);
+  const [showAll, setShowAll] = useState(false);
 
   const [forrigeBehandlingUuid, setForrigeBehandlingUuid] = useState(behandlingUuid);
   if (behandlingUuid !== forrigeBehandlingUuid) {
     setForrigeBehandlingUuid(behandlingUuid);
-    setShowAll(!behandlingUuid);
+    setShowAll(false);
   }
 
-  const {
-    containerRef: behandlingsvelgerRef,
-    hentElementer: hentBehandlingsvelgerRader,
-    fokuserElement: fokuserRad,
-  } = useTastaturfokus<HTMLDivElement, HTMLElement>({
-    selector: 'a, button',
-    scrollVedFokus: true,
-    lyttPåContainer: true,
-  });
-
-  const fokuserBehandlingsvelger = useCallback(() => {
-    const rader = hentBehandlingsvelgerRader();
-    if (rader.length === 0) {
-      return false;
-    }
-    const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'page');
-    fokuserRad(aktivIndex === -1 ? 0 : aktivIndex);
-    return true;
-  }, [fokuserRad, hentBehandlingsvelgerRader]);
-
-  // Behandlingsvelgaren er gøymd (height: 0) når dei utvida behandlingsdetaljane er på. Snarvegen
-  // syter difor for å vise detaljane att – på same måte som «E» – og utvide lista før fokus blir
-  // flytta. Sidan DOM-en oppdaterast asynkront etter desse statusbyta, armerer me eit ynske om
-  // fokus og prøver på nytt over nokre animasjonsrammer til radene faktisk finst.
+  const behandlingsvelgerRef = useRef<BehandlingVelgerHandle>(null);
   const snarveger = useSnarvegerContextValgfri();
-  const velgerErSynleg = !visUtvidetBehandlingDetaljer && showAll;
-  const skalFokuserVelgerRef = useRef(false);
-
-  useEffect(() => {
-    if (!skalFokuserVelgerRef.current || !velgerErSynleg) {
-      return;
-    }
-    let gjenståandeForsøk = 20;
-    let rammeId = 0;
-    const prøvFokuser = () => {
-      if (fokuserBehandlingsvelger() || gjenståandeForsøk <= 0) {
-        skalFokuserVelgerRef.current = false;
-        return;
-      }
-      gjenståandeForsøk -= 1;
-      rammeId = requestAnimationFrame(prøvFokuser);
-    };
-    rammeId = requestAnimationFrame(prøvFokuser);
-    return () => cancelAnimationFrame(rammeId);
-  }, [velgerErSynleg, fokuserBehandlingsvelger]);
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
-    if (velgerErSynleg) {
-      fokuserBehandlingsvelger();
-      return;
-    }
-    skalFokuserVelgerRef.current = true;
     if (visUtvidetBehandlingDetaljer) {
       snarveger?.dispatch(BEHANDLING_SNARVEG_IDER.UTVID_DETALJER);
     }
-    if (!showAll) {
-      setShowAll(true);
-    }
+    behandlingsvelgerRef.current?.focusSelected();
   });
 
   const api = useFagsakApi();
@@ -144,6 +92,7 @@ export const FagsakProfileIndex = ({
   const initFetchQuery = useQuery(initFetchOptions());
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { sakLinks, innloggetBruker } = notEmpty(initFetchQuery.data);
   const arbeidstakerHref = sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href;
@@ -154,10 +103,10 @@ export const FagsakProfileIndex = ({
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;
 
-  const getBehandlingLocation = (valgtBehandlingUuid: string) =>
+  const getBehandlingLocation = (uuid: string) =>
     getLocationWithDefaultProsessStegAndFakta({
       ...location,
-      pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
+      pathname: pathToBehandling(fagsak.saksnummer, uuid),
     });
 
   return (
@@ -211,21 +160,19 @@ export const FagsakProfileIndex = ({
           }
         >
           {!shouldRedirectToBehandlinger && (
-            <div ref={behandlingsvelgerRef}>
+            <div>
               <ErrorBoundary
                 errorMessageCallback={addErrorMessage}
                 errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
               >
                 <BehandlingVelgerSakIndex
+                  ref={behandlingsvelgerRef}
                   behandlinger={fagsakData.getAlleBehandlinger()}
                   behandlingUuid={behandlingUuid}
                   skalViseAlleBehandlinger={showAll}
-                  toggleVisAlleBehandlinger={toggleShowAll}
-                  renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                    <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
-                      {behandlingInfoKomponent}
-                    </NavLink>
-                  )}
+                  onOpenChange={setShowAll}
+                  velgBehandling={uuid => navigate(getBehandlingLocation(uuid))}
+                  behandlingHref={uuid => createPath(getBehandlingLocation(uuid))}
                   alleKodeverk={notEmpty(alleFpSakKodeverk)}
                   alleKodeverkTilbakekreving={alleKodeverkFpTilbake}
                 />
