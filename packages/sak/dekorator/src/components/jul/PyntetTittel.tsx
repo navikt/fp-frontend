@@ -4,13 +4,16 @@ import styles from './pyntetTittel.module.css';
 
 const KULEFARGER = ['#d32f2f', '#e8b931', '#9ec9ec'];
 
+const HENGEBOKSTAVER = new Set(['g', 'p', 'j', 'y', 'q']);
+
+/** En julekule som henger i en tynn tråd fra halen på bokstaven. */
 const Julekule = ({ farge, indeks }: { farge: string; indeks: number }) => (
-  <svg className={styles['julekule']} style={{ animationDelay: `${indeks * -0.7}s` }} viewBox="0 0 20 26">
-    <circle cx="10" cy="2.6" r="1.6" fill="none" stroke="#d4af37" strokeWidth="1" />
-    <rect x="7" y="3.6" width="6" height="3.4" rx="0.8" fill="#d4af37" />
-    <circle cx="10" cy="16" r="9" fill={farge} />
-    <path d="M1.6 14 Q10 18 18.4 14" stroke="#fff" strokeOpacity="0.55" strokeWidth="1.2" fill="none" />
-    <ellipse cx="6.6" cy="11.8" rx="2.4" ry="1.6" fill="#fff" fillOpacity="0.7" transform="rotate(-30 6.6 11.8)" />
+  <svg className={styles['julekule']} style={{ animationDelay: `${indeks * -0.7}s` }} viewBox="0 0 20 36">
+    <line x1="10" y1="0" x2="10" y2="12" stroke="#d4af37" strokeWidth="1" />
+    <rect x="7" y="11.5" width="6" height="3.4" rx="0.8" fill="#d4af37" />
+    <circle cx="10" cy="24" r="9" fill={farge} />
+    <path d="M1.6 22 Q10 26 18.4 22" stroke="#fff" strokeOpacity="0.55" strokeWidth="1.2" fill="none" />
+    <ellipse cx="6.6" cy="19.8" rx="2.4" ry="1.6" fill="#fff" fillOpacity="0.7" transform="rotate(-30 6.6 19.8)" />
   </svg>
 );
 
@@ -21,7 +24,7 @@ const Stjerne = ({ indeks }: { indeks: number }) => (
 );
 
 /**
- * Viser tittelen med julepynt: alle o-er blir til julekuler, og det glitrer en stjerne over hvert ord.
+ * Viser tittelen med julepynt: julekuler henger i tråder fra halene på g, p og j, og det glitrer en stjerne over hvert ord.
  * Skjermlesere får den vanlige tittelen.
  */
 export const PyntetTittel = ({ tittel }: { tittel: string }) => {
@@ -37,11 +40,16 @@ export const PyntetTittel = ({ tittel }: { tittel: string }) => {
           <span key={ordindeks} className={styles['ord']}>
             <Stjerne indeks={ordindeks} />
             {[...etOrd].map((tegn, tegnindeks): ReactNode => {
-              if (tegn === 'o' || tegn === 'O') {
+              if (HENGEBOKSTAVER.has(tegn)) {
                 const farge = KULEFARGER[kuleindeks % KULEFARGER.length] ?? '#d32f2f';
                 kuleindeks++;
-                // eslint-disable-next-line @eslint-react/no-array-index-key -- tegnene er faste og kan gjentas
-                return <Julekule key={tegnindeks} farge={farge} indeks={kuleindeks} />;
+                return (
+                  // eslint-disable-next-line @eslint-react/no-array-index-key -- tegnene er faste og kan gjentas
+                  <span key={tegnindeks} className={styles['krok']}>
+                    {tegn}
+                    <Julekule farge={farge} indeks={kuleindeks} />
+                  </span>
+                );
               }
               return tegn;
             })}

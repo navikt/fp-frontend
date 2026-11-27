@@ -7,15 +7,21 @@
   white-space: pre;
 }
 
+.krok {
+  position: relative;
+}
+
 .julekule {
   animation: dingle 3s ease-in-out infinite;
-  display: inline-block;
   filter: drop-shadow(0 0 2px rgb(255 255 255 / 0.25));
   height: 0.8em;
-  margin: 0 0.02em;
+  left: 50%;
+  margin-left: -0.22em;
+  pointer-events: none;
+  position: absolute;
+  top: 0.78em;
   transform-origin: 50% 0;
-  vertical-align: -0.06em;
-  width: 0.62em;
+  width: 0.44em;
 }
 
 .stjerne {
