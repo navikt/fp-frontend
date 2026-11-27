@@ -1,0 +1,61 @@
+.tittel {
+  white-space: nowrap;
+}
+
+.ord {
+  position: relative;
+  white-space: pre;
+}
+
+.julekule {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.8em;
+  margin: 0 0.02em;
+  vertical-align: -0.06em;
+  transform-origin: 50% 0;
+  filter: drop-shadow(0 0 2px rgb(255 255 255 / 0.25));
+  animation: dingle 3s ease-in-out infinite;
+}
+
+.stjerne {
+  position: absolute;
+  top: -0.35em;
+  left: -0.3em;
+  width: 0.55em;
+  height: 0.55em;
+  pointer-events: none;
+  filter: drop-shadow(0 0 3px #ffd54f);
+  animation: glitre 1.8s ease-in-out infinite;
+}
+
+@keyframes dingle {
+  0%,
+  100% {
+    transform: rotate(-7deg);
+  }
+
+  50% {
+    transform: rotate(7deg);
+  }
+}
+
+@keyframes glitre {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.6) rotate(45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .julekule,
+  .stjerne {
+    animation: none;
+  }
+}

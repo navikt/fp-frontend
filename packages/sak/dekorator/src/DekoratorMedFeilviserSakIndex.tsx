@@ -1,11 +1,15 @@
-import React, { type ComponentProps, useEffect, useRef } from 'react';
+import React, { type ComponentProps, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ExternalLinkIcon, KeyboardIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
 import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
+import { Adventslys } from './components/Adventslys';
+import { erJuletid } from './components/adventUtils';
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
+import { Julekrans } from './components/Julekrans';
+import { PyntetTittel } from './components/PyntetTittel';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
 
@@ -26,6 +30,8 @@ interface Props {
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
   visTastatursnarveier?: () => void;
+  /** Overstyrer dagens dato, f.eks. for å vise juledekoren i Storybook */
+  dato?: Date;
 }
 
 /**
@@ -48,7 +54,12 @@ export const DekoratorMedFeilviserSakIndex = ({
   theme,
   setTheme,
   visTastatursnarveier,
+  dato,
 }: Props) => {
+  const [idag] = useState(() => new Date());
+  const dagensDato = dato ?? idag;
+  const visJuledekor = erJuletid(dagensDato);
+
   const fixedHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (fixedHeaderRef.current) {
@@ -67,8 +78,9 @@ export const DekoratorMedFeilviserSakIndex = ({
             onClick={tittelCallback}
             onContextMenu={tittelCallback}
           >
-            {tittel}
+            {visJuledekor ? <PyntetTittel tittel={tittel} /> : tittel}
           </InternalHeader.Title>
+          <Adventslys dato={dagensDato} />
           <Spacer />
           <Dropdown>
             <InternalHeader.Button as={Dropdown.Toggle}>
@@ -133,6 +145,7 @@ export const DekoratorMedFeilviserSakIndex = ({
             )}
           </InternalHeader.Button>
         </InternalHeader>
+        {visJuledekor && <Julekrans />}
         <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
     </div>

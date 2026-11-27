@@ -136,3 +136,17 @@ export const MedReellFeilmeldingMedStacktrace: Story = {
     ],
   },
 };
+
+export const Juledekor: Story = {
+  args: {
+    feilmeldinger: [],
+    dato: new Date(2026, 11, 6),
+  },
+  argTypes: {
+    dato: { control: 'date' },
+  },
+  // Dato-kontrollen i Storybook gir et tidsstempel, ikke et Date-objekt
+  render: function Render({ dato, ...args }) {
+    return <DekoratorMedFeilviserSakIndex {...args} dato={dato ? new Date(dato) : undefined} />;
+  },
+};
