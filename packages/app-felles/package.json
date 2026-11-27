@@ -19,11 +19,11 @@
   },
   "dependencies": {
     "@nais/apm": "0.7.3",
-    "@navikt/ds-react": "8.23.0",
+    "@navikt/ds-react": "8.23.2",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
-    "@navikt/ft-utils": "8.0.4",
+    "@navikt/ft-utils": "8.0.5",
     "@tanstack/react-query": "5.108.2",
     "@tanstack/react-query-devtools": "5.108.2",
     "dayjs": "1.11.23",

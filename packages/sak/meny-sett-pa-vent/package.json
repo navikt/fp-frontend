@@ -21,7 +21,7 @@
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-utils": "8.0.4",
+    "@navikt/ft-utils": "8.0.5",
     "dayjs": "1.11.23",
     "react": "19.3.1",
     "react-dom": "19.3.1",
