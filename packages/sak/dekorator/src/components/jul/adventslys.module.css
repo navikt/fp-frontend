@@ -1,0 +1,55 @@
+.adventslys {
+  align-items: center;
+  display: inline-flex;
+  padding-inline: var(--ax-space-12);
+}
+
+.holder {
+  fill: #4f7a5a;
+}
+
+.lys {
+  fill: #f1e9dc;
+}
+
+.veke {
+  stroke: #9a8f7c;
+  stroke-linecap: round;
+  stroke-width: 0.8;
+}
+
+.flamme {
+  animation: flakk 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 2px rgb(255 184 77 / 80%));
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.flammeYtre {
+  fill: #ffb547;
+}
+
+.flammeIndre {
+  fill: #fff3c4;
+}
+
+@keyframes flakk {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(0deg);
+  }
+
+  30% {
+    transform: scale(0.95, 1.06) rotate(-2deg);
+  }
+
+  60% {
+    transform: scale(1.03, 0.96) rotate(1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flamme {
+    animation: none;
+  }
+}

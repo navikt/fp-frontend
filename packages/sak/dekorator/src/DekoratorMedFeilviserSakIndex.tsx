@@ -1,4 +1,4 @@
-import React, { type ComponentProps, useEffect, useRef } from 'react';
+import React, { type ComponentProps, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ExternalLinkIcon, KeyboardIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
@@ -6,8 +6,15 @@ import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react'
 import { createIntl } from '@navikt/ft-utils';
 
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
+import { Adventslys } from './components/jul/Adventslys';
+import { erJuletid } from './components/jul/adventUtils';
+import { Julekrans } from './components/jul/Julekrans';
+import { NisseNavn } from './components/jul/NisseNavn';
+import { PyntetTittel } from './components/jul/PyntetTittel';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
+
+import julekransStyles from './components/jul/julekrans.module.css';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -26,6 +33,8 @@ interface Props {
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
   visTastatursnarveier?: () => void;
+  /** Overstyrer dagens dato, f.eks. for å vise juledekoren i Storybook */
+  dato?: Date;
 }
 
 /**
@@ -48,7 +57,12 @@ export const DekoratorMedFeilviserSakIndex = ({
   theme,
   setTheme,
   visTastatursnarveier,
+  dato,
 }: Props) => {
+  const [idag] = useState(() => new Date());
+  const dagensDato = dato ?? idag;
+  const visJuledekor = erJuletid(dagensDato);
+
   const fixedHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (fixedHeaderRef.current) {
@@ -60,15 +74,16 @@ export const DekoratorMedFeilviserSakIndex = ({
   return (
     <div ref={fixedHeaderRef} className="fixed top-0 z-[101] w-full">
       <RawIntlProvider value={intl}>
-        <InternalHeader>
+        <InternalHeader className={visJuledekor ? julekransStyles['julehode'] : undefined}>
           <InternalHeader.Title
             className="text-xl"
             href={tittelLenke}
             onClick={tittelCallback}
             onContextMenu={tittelCallback}
           >
-            {tittel}
+            {visJuledekor ? <PyntetTittel tittel={tittel} /> : tittel}
           </InternalHeader.Title>
+          <Adventslys dato={dagensDato} />
           <Spacer />
           <Dropdown>
             <InternalHeader.Button as={Dropdown.Toggle}>
@@ -105,7 +120,7 @@ export const DekoratorMedFeilviserSakIndex = ({
               </Dropdown.Menu>
             </Theme>
           </Dropdown>
-          <InternalHeader.User name={navAnsattNavn} />
+          <InternalHeader.User name={visJuledekor ? <NisseNavn navn={navAnsattNavn} /> : navAnsattNavn} />
           {location.hostname.includes('localhost') && (
             <InternalHeader.Button href={`${location.origin}/oauth2/login?redirect=${location.pathname}`} as={Link}>
               <FormattedMessage id="DekoratorMedFeilviserSakIndex.ByttBruker" />
@@ -133,6 +148,7 @@ export const DekoratorMedFeilviserSakIndex = ({
             )}
           </InternalHeader.Button>
         </InternalHeader>
+        {visJuledekor && <Julekrans />}
         <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
     </div>

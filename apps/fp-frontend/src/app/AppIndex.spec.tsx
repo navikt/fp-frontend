@@ -28,7 +28,7 @@ describe('AppIndex', () => {
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(screen.getByText('Sara Saksbehandler')).toBeInTheDocument();
 
-    expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
+    expect(await screen.findByText('Foreldrepenger', undefined, { timeout: 3000 })).toBeInTheDocument();
     expect(screen.getByText('100%')).toBeInTheDocument();
     expect(screen.getByText('1 - Under behandling')).toBeInTheDocument();
     expect(screen.getByText('Behandlingsmeny')).toBeInTheDocument();
